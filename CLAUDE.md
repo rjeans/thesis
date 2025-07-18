@@ -1,1 +1,3 @@
 - Do not use emojis or icons and just use plain ascii characters
+- NEVER NEVER use emojis or non standard characters
+- NEVER use non standard characters and emojis in git commit messages

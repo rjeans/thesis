@@ -40,8 +40,8 @@ This project converts a scanned PDF thesis into clean, readable Markdown format 
 
 ## Status
 
-- ✅ Text extraction workflow established
-- ✅ Math equation formatting solved
-- ✅ Validation tools created
-- 🚧 Figure extraction approach finalized
-- ⏳ Batch processing of full thesis
+- [x] Text extraction workflow established
+- [x] Math equation formatting solved
+- [x] Validation tools created
+- [ ] Figure extraction approach finalized
+- [ ] Batch processing of full thesis

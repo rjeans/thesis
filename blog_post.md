@@ -7,7 +7,7 @@ I recently decided to convert my 1992 PhD thesis from its original scanned PDF f
 The thesis exists as a scanned PDF - a 200+ page document with:
 - Complex mathematical equations in 1990s LaTeX formatting
 - Technical diagrams and figures
-- High-resolution scans (17089×25139 pixels per page)
+- High-resolution scans (17089x25139 pixels per page)
 - Varying scan quality and typography quirks
 
 Traditional OCR tools struggle with mathematical notation and fail to preserve the semantic structure of academic documents.

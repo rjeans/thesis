@@ -128,7 +128,7 @@ def extract_figure_with_percentages(image_path, percentage_box, output_path):
     
     # Warn if aspect ratio seems wrong
     if 0.9 <= aspect_ratio <= 1.1:
-        print("⚠️  WARNING: Result is nearly square - technical diagrams are usually rectangular")
+        print("WARNING: Result is nearly square - technical diagrams are usually rectangular")
     
     # Extract the figure
     crop_spec = f"{width}x{height}+{left}+{top}"
@@ -136,10 +136,10 @@ def extract_figure_with_percentages(image_path, percentage_box, output_path):
     result = subprocess.run(cmd, capture_output=True, text=True)
     
     if result.returncode == 0:
-        print(f"✓ Figure extracted to: {output_path}")
+        print(f"Figure extracted to: {output_path}")
         return True
     else:
-        print(f"✗ Extraction failed: {result.stderr}")
+        print(f"Extraction failed: {result.stderr}")
         return False
 
 def main():
@@ -164,7 +164,7 @@ def main():
     result = locate_figure_by_caption_percentage(image_path, caption, api_key)
     
     if result.get("found"):
-        print(f"✓ Found with {result.get('confidence')} confidence")
+        print(f"Found with {result.get('confidence')} confidence")
         print(f"Description: {result.get('description')}")
         
         output_dir = Path("../images")
@@ -175,7 +175,7 @@ def main():
             print(f"Markdown: ![{caption}](images/{output_name}.png)")
         
     else:
-        print("✗ Figure not found")
+        print("Figure not found")
         if "error" in result:
             print(f"Error: {result['error']}")
 
