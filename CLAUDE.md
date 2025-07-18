@@ -1,0 +1,1 @@
+- Do not use emojis or icons and just use plain ascii characters
