@@ -1,0 +1,62 @@
+{
+  "processing_summary": {
+    "total_pages": 1,
+    "processing_method": "single_page_with_text_guidance",
+    "successful_pages": 1,
+    "failed_pages": 0,
+    "text_guidance_enabled": true,
+    "mathematical_formatting_enabled": true
+  },
+  "page_diagnostics": [
+    {
+      "page_number": 17,
+      "page_index": 1,
+      "total_pages": 1,
+      "extraction_success": true,
+      "text_extraction_success": true,
+      "api_success": true,
+      "yaml_parsing_success": true,
+      "tables_extracted": 10,
+      "raw_response_length": 2076,
+      "cleaned_response_length": 2064,
+      "text_guidance_length": 1442,
+      "error_details": null,
+      "images_created": 1,
+      "max_tokens_used": 1000,
+      "debug_file_created": null
+    }
+  ],
+  "merge_diagnostics": {
+    "total_pages_processed": 1,
+    "successful_pages": 1,
+    "failed_pages": 0,
+    "page_details": [
+      {
+        "page_number": 17,
+        "page_index": 1,
+        "total_pages": 1,
+        "extraction_success": true,
+        "text_extraction_success": true,
+        "api_success": true,
+        "yaml_parsing_success": true,
+        "tables_extracted": 10,
+        "raw_response_length": 2076,
+        "cleaned_response_length": 2064,
+        "text_guidance_length": 1442,
+        "error_details": null,
+        "images_created": 1,
+        "max_tokens_used": 1000,
+        "debug_file_created": null
+      }
+    ],
+    "pages_processed": [
+      17
+    ],
+    "tables_by_page": {
+      "17": {
+        "count": 10,
+        "page": 17
+      }
+    }
+  }
+}

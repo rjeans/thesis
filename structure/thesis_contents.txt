@@ -1,0 +1,158 @@
+============================================================
+TABLE OF CONTENTS - SIMPLE TEXT FORMAT
+============================================================
+
+TITLE ..................................... 1
+
+ABSTRACT ..................................... 2
+
+ACKNOWLEDGEMENTS ..................................... 3
+
+NOTATION ..................................... 5
+
+CONTENTS ..................................... 9
+
+FIGURES ..................................... 13
+
+TABLES ..................................... 17
+
+CHAPTER 1. Introduction ..................................... 18
+
+    1.1 Background ................................ 18
+    1.2 Motivation of Present Thesis .............. 23
+
+CHAPTER 2. Acoustic Problem ..................................... 25
+
+    2.1 Fundamental Equations ..................... 25
+        2.1.1 Linear Approximation ................ 25
+        2.1.2 Wave Equation ....................... 26
+        2.1.3 Neumann boundary condition .......... 27
+        2.1.4 Sommerfeld’s radiation condition ..... 27
+    2.2 Integral Operators ........................ 28
+        2.2.1 Greens Function ..................... 28
+        2.2.2 Discontinuities ..................... 29
+    2.3 Helmholtz’ Integral Equations ............. 32
+        2.3.1 Surface Helmholtz Integral Equation ..... 32
+        2.3.2 Differentiated Surface Helmholtz’ Integral Equation ..... 35
+        2.3.3 Boundary Layer Formulations ......... 35
+    2.4 Uniqueness of Boundary Integral Formulations ..... 36
+        2.4.1 SHIE and DSHIE formulations ......... 36
+        2.4.2 The CHIEF method .................... 37
+        2.4.3 Burton and Miller’s Formulation ..... 38
+        2.4.4 Boundary layer formulations ......... 38
+        2.4.5 Hybrid boundary layer formulation ..... 39
+    2.5 Thin shell formulation .................... 39
+        2.5.1 Boundary integral formulation ....... 40
+        2.5.2 Edge conditions ..................... 43
+
+CHAPTER 3. Collocation Method ..................................... 45
+
+    3.1 Introduction .............................. 45
+    3.2 Discretization ............................ 45
+        3.2.1 Interpolation ....................... 45
+        3.2.2 Local and Curvilinear Axes .......... 46
+    3.3 Integration of Weak Singularity ........... 47
+    3.4 Integral Operators ........................ 49
+        3.4.1 $L_{k}$ Operator .................... 49
+        3.4.2 $M_{k}$ Operator .................... 51
+        3.4.3 $N_{k}$ Operator .................... 53
+        3.4.4 Matrix formulation .................. 56
+        3.4.5 Exterior pressure distribution ...... 57
+    3.5 The computer code ......................... 58
+    3.6 Numerical results ......................... 58
+        3.6.1 Radiation from submerged spheres ..... 58
+        3.6.2 Acoustic scattering from a submerged sphere ..... 59
+        3.6.3 Acoustic scattering from a submerged spheroid ..... 60
+        3.6.4 Acoustic scattering from a submerged finite cylinder ..... 60
+
+CHAPTER 4. Variational Method ..................................... 78
+
+    4.1 Introduction .............................. 78
+    4.2 Weighted Residue Techniques and the Variational Method ..... 78
+        4.2.1 Weighted Residual-Galerkin Method ..... 78
+        4.2.2 Variational Method .................. 79
+    4.3 Variational Boundary Integral Formulation ..... 80
+    4.4 Numerical Implementation .................. 81
+    4.5 Uniqueness of the Numerical Formulation ..... 83
+    4.6 Edge Boundary Conditions .................. 84
+    4.7 Computer Code ............................. 85
+    4.8 Numerical Results ......................... 86
+        4.8.1 Spheroids ........................... 86
+        4.8.2 Flat Disk ........................... 87
+        4.8.3 Flat Square Plate ................... 91
+        4.8.4 Terai's Problem ..................... 91
+
+CHAPTER 5. The Superposition Method ..................................... 110
+
+    5.1 Introduction .............................. 110
+    5.2 The Superposition Integral ................ 111
+    5.3 Uniqueness ................................ 113
+    5.4 Numerical Formulation ..................... 115
+        5.4.1 Matrix Condition Number ............. 118
+        5.4.2 Velocity Reconstruction Error Norm ..... 119
+    5.5 Numerical Results ......................... 120
+    5.6 Conclusion ................................ 122
+
+CHAPTER 6. Elasto-Acoustic Problem ..................................... 131
+
+    6.1 Introduction .............................. 131
+    6.2 Structural Problem ........................ 131
+    6.3 Fluid-Structure Interaction Force ......... 135
+    6.4 Coupled Equation Set ...................... 136
+        6.4.1 Fluid Filled and Non Closed Shell Problems ..... 136
+        6.4.2 Evacuated Closed Shell Problems ..... 137
+    6.5 Solution of Coupled Equation Set .......... 138
+        6.5.1 Structure Variable Methodology ...... 138
+        6.5.2 Fluid Variable Methodology .......... 139
+    6.6 Eigenvector Reduction of the Elastic Formulation ..... 140
+    6.7 Interpolation ............................. 142
+    6.8 Uniqueness and the Coupled Problem ........ 143
+    6.9 Elastic Thin Plate Problems ............... 147
+    6.10 Numerical Results ........................ 149
+        6.10.1 Cantilever Plate ................... 149
+        6.10.2 Spherical Shell .................... 150
+
+CHAPTER 7. Lanczos vectors in elasto-acoustic analysis ..................................... 167
+
+    7.1 Introduction .............................. 167
+    7.2 Lanczos Vectors ........................... 168
+    7.3 Fluid Variable Methodology ................ 171
+    7.4 Added Fluid Mass Methodology .............. 172
+    7.5 Results ................................... 173
+
+CHAPTER 8. Conclusions and Recomendations ..................................... 191
+
+    8.1 Conclusions ............................... 191
+    8.2 Recomendations ............................ 193
+
+REFERENCES ..................................... 195
+
+APPENDIX 1 Symmetry and Half Space Problems ..................................... 200
+
+    A1.1 Image Sources ............................ 200
+    A1.2 Geometric Symmetries ..................... 201
+
+APPENDIX 2 Analytical Solutions ..................................... 205
+
+    A2.1 Rigid Sphere ............................. 205
+    A2.2 Asymptotic Solutions ..................... 210
+    A2.3 Elastic Sphere ........................... 213
+
+
+============================================================
+SUMMARY
+============================================================
+Front Matter: 4
+Toc: 3
+Chapter: 8
+Back Matter: 1
+Appendix: 2
+Total subsections: 90
+Total entries: 18
+
+EXTRACTION INFO:
+Pages processed: 4
+Processing method: single_page_with_text_guidance
+Extracted: 2025-07-23T11:04:49.038855
+
+============================================================

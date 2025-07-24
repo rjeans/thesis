@@ -1,0 +1,202 @@
+thesis_title: PhD Thesis - Richard Jeans 1992
+total_pages: 215
+figures:
+- figure_number: '2.1'
+  title: Geometry for evaluating the discontinuity of the integral operator
+  page: 31
+  chapter_name: Chapter 2
+  chapter_id: '2'
+- figure_number: '2.2'
+  title: Geometry for evaluating the surface Helmholtz' integral equations
+  page: 33
+  chapter_name: Chapter 2
+  chapter_id: '2'
+- figure_number: '2.3'
+  title: Non-uniqueness of single layer distribution
+  page: 40
+  chapter_name: Chapter 2
+  chapter_id: '2'
+- figure_number: '2.4'
+  title: Non-uniqueness of double layer distribution
+  page: 41
+  chapter_name: Chapter 2
+  chapter_id: '2'
+- figure_number: '2.5'
+  title: The thin shell geometry
+  page: 42
+  chapter_name: Chapter 2
+  chapter_id: '2'
+- figure_number: 3.5-6
+  title: Normalized modal impedance for the rigid sphere, 6 elements
+  page: 63
+  chapter_name: Chapter 3
+  chapter_id: '3'
+- figure_number: '3.1'
+  title: Geometry of the 9-noded isoparametric element
+  page: 47
+  chapter_name: Chapter 3
+  chapter_id: '3'
+- figure_number: '3.2'
+  title: Element sub-division for singular integration
+  page: 49
+  chapter_name: Chapter 3
+  chapter_id: '3'
+- figure_number: '3.3'
+  title: Geometry for evaluating the far field pressure distribution
+  page: 58
+  chapter_name: Chapter 3
+  chapter_id: '3'
+- figure_number: '3.4'
+  title: The different mesh geometries for the spherical problem
+  page: 62
+  chapter_name: Chapter 3
+  chapter_id: '3'
+- figure_number: 4.7-8
+  title: Radial pressure amplitude on a circular disk using the variational method
+  page: 96-97
+  chapter_name: Chapter 4
+  chapter_id: '4'
+- figure_number: 4.9-10
+  title: Radial pressure amplitude on a circular disk using the collocation method
+  page: 98-99
+  chapter_name: Chapter 4
+  chapter_id: '4'
+- figure_number: 4.11-12
+  title: Radial pressure phase on a circular disk using the variational method
+  page: 100-101
+  chapter_name: Chapter 4
+  chapter_id: '4'
+- figure_number: 4.13-14
+  title: Radial pressure phase on a circular disk using the collocation method
+  page: 102-103
+  chapter_name: Chapter 4
+  chapter_id: '4'
+- figure_number: 4.15-16
+  title: Radiation impedance of a circular disk vs frequency
+  page: 104-105
+  chapter_name: Chapter 4
+  chapter_id: '4'
+- figure_number: '4.3'
+  title: Convergence of backscattered form function for the rigid sphere
+  page: 92
+  chapter_name: Chapter 4
+  chapter_id: '4'
+- figure_number: '4.4'
+  title: Convergence of backscattered form function for the rigid prolate spheroid
+  page: 93
+  chapter_name: Chapter 4
+  chapter_id: '4'
+- figure_number: '4.5'
+  title: Convergence of backscattered form function for the rigid oblate spheroid
+  page: 94
+  chapter_name: Chapter 4
+  chapter_id: '4'
+- figure_number: '4.6'
+  title: Open plate mesh geometries
+  page: 95
+  chapter_name: Chapter 4
+  chapter_id: '4'
+- figure_number: 6.11-12
+  title: Far field radiated pressure from point excited fluid filled elastic sphere
+    using the collocation method and frequency interpolation
+  page: 163
+  chapter_name: Chapter 6
+  chapter_id: '6'
+- figure_number: 6.13-14
+  title: Far field radiated pressure from point excited fluid filled elastic sphere
+    using the variational method and frequency interpolation
+  page: 165
+  chapter_name: Chapter 6
+  chapter_id: '6'
+- figure_number: '6.5'
+  title: Far field backscattered form function for a fluid filled elastic sphere using
+    the variational method
+  page: 157
+  chapter_name: Chapter 6
+  chapter_id: '6'
+- figure_number: '6.6'
+  title: Far field backscattered form function for a fluid filled elastic sphere using
+    the collocation method
+  page: 158
+  chapter_name: Chapter 6
+  chapter_id: '6'
+- figure_number: '6.7'
+  title: Far field backscattered form function for a fluid filled elastic sphere using
+    the collocation Burton and Miller formulation
+  page: 159
+  chapter_name: Chapter 6
+  chapter_id: '6'
+- figure_number: '6.8'
+  title: The surface pressure and velocity distributions at the first Dirichlet frequency
+    for the evacuated sphere
+  page: 160
+  chapter_name: Chapter 6
+  chapter_id: '6'
+- figure_number: '6.9'
+  title: The surface pressure and velocity distributions at the first Neumann frequency
+    for the evacuated sphere
+  page: 161
+  chapter_name: Chapter 6
+  chapter_id: '6'
+- figure_number: '6.10'
+  title: The surface pressure and velocity distributions at the first Neumann frequency
+    for the fluid filled sphere
+  page: 162
+  chapter_name: Chapter 6
+  chapter_id: '6'
+- figure_number: 7.1-4
+  title: Velocity response for $n = 0, 1, 2$ and 3 excitation of a submerged spherical
+    shell using Lanczos vector reduction of the 'dry' structural response, and the
+    collocation Burton and Miller formulation
+  page: 180
+  chapter_name: Chapter 7
+  chapter_id: '7'
+- figure_number: 7.5-8
+  title: Velocity response for $n = 0, 1, 2$ and 3 excitation of a submerged spherical
+    shell using eigenvector reduction of the 'dry' structural response, and the collocation
+    Burton and Miller formulation
+  page: 184
+  chapter_name: Chapter 7
+  chapter_id: '7'
+- figure_number: '7.9'
+  title: Fluid added mass methodology with Lanczos reduction applied to the far field
+    radiated pressure of a point excited fluid filled spherical shell
+  page: 188
+  chapter_name: Chapter 7
+  chapter_id: '7'
+- figure_number: '7.10'
+  title: Far field backscattered form function for an evacuated spherical shell with
+    different hysteretic damping
+  page: 189
+  chapter_name: Chapter 7
+  chapter_id: '7'
+- figure_number: A1.1
+  title: Image source construction to model infinite rigid plane
+  page: 200
+  chapter_name: Appendix 1
+  chapter_id: A1
+- figure_number: A1.2
+  title: Summary of image source for the acoustic problem
+  page: 204
+  chapter_name: Appendix 1
+  chapter_id: A1
+- figure_number: A2.1
+  title: Plot of the first four spherical Bessel's functions and their derivatives
+  page: 208
+  chapter_name: Appendix 2
+  chapter_id: A2
+- figure_number: A2.2
+  title: Geometry for the spheroidal Kirchoff problem
+  page: 212
+  chapter_name: Appendix 2
+  chapter_id: A2
+extraction_metadata:
+  pages_processed: 4
+  total_figures_extracted: 35
+  pages_covered:
+  - 13
+  - 14
+  - 15
+  - 16
+  extraction_date: '2025-07-22T21:37:57.650455'
+  processing_method: single_page_with_text_guidance

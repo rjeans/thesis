@@ -1,0 +1,179 @@
+{
+  "processing_summary": {
+    "total_pages": 4,
+    "processing_method": "single_page_with_text_guidance",
+    "successful_pages": 4,
+    "failed_pages": 0,
+    "text_guidance_enabled": true,
+    "mathematical_formatting_enabled": true
+  },
+  "page_diagnostics": [
+    {
+      "page_number": 13,
+      "page_index": 1,
+      "total_pages": 4,
+      "extraction_success": true,
+      "text_extraction_success": true,
+      "api_success": true,
+      "yaml_parsing_success": true,
+      "figures_extracted": 10,
+      "raw_response_length": 1550,
+      "cleaned_response_length": 1538,
+      "text_guidance_length": 2161,
+      "error_details": null,
+      "images_created": 1,
+      "max_tokens_used": 1500,
+      "debug_file_created": null
+    },
+    {
+      "page_number": 14,
+      "page_index": 2,
+      "total_pages": 4,
+      "extraction_success": true,
+      "text_extraction_success": true,
+      "api_success": true,
+      "yaml_parsing_success": true,
+      "figures_extracted": 9,
+      "raw_response_length": 1550,
+      "cleaned_response_length": 1538,
+      "text_guidance_length": 2494,
+      "error_details": null,
+      "images_created": 1,
+      "max_tokens_used": 1500,
+      "debug_file_created": null
+    },
+    {
+      "page_number": 15,
+      "page_index": 3,
+      "total_pages": 4,
+      "extraction_success": true,
+      "text_extraction_success": true,
+      "api_success": true,
+      "yaml_parsing_success": true,
+      "figures_extracted": 14,
+      "raw_response_length": 3128,
+      "cleaned_response_length": 3116,
+      "text_guidance_length": 2550,
+      "error_details": null,
+      "images_created": 1,
+      "max_tokens_used": 1500,
+      "debug_file_created": null
+    },
+    {
+      "page_number": 16,
+      "page_index": 4,
+      "total_pages": 4,
+      "extraction_success": true,
+      "text_extraction_success": true,
+      "api_success": true,
+      "yaml_parsing_success": true,
+      "figures_extracted": 2,
+      "raw_response_length": 354,
+      "cleaned_response_length": 342,
+      "text_guidance_length": 211,
+      "error_details": null,
+      "images_created": 1,
+      "max_tokens_used": 1500,
+      "debug_file_created": null
+    }
+  ],
+  "merge_diagnostics": {
+    "total_pages_processed": 4,
+    "successful_pages": 4,
+    "failed_pages": 0,
+    "page_details": [
+      {
+        "page_number": 13,
+        "page_index": 1,
+        "total_pages": 4,
+        "extraction_success": true,
+        "text_extraction_success": true,
+        "api_success": true,
+        "yaml_parsing_success": true,
+        "figures_extracted": 10,
+        "raw_response_length": 1550,
+        "cleaned_response_length": 1538,
+        "text_guidance_length": 2161,
+        "error_details": null,
+        "images_created": 1,
+        "max_tokens_used": 1500,
+        "debug_file_created": null
+      },
+      {
+        "page_number": 14,
+        "page_index": 2,
+        "total_pages": 4,
+        "extraction_success": true,
+        "text_extraction_success": true,
+        "api_success": true,
+        "yaml_parsing_success": true,
+        "figures_extracted": 9,
+        "raw_response_length": 1550,
+        "cleaned_response_length": 1538,
+        "text_guidance_length": 2494,
+        "error_details": null,
+        "images_created": 1,
+        "max_tokens_used": 1500,
+        "debug_file_created": null
+      },
+      {
+        "page_number": 15,
+        "page_index": 3,
+        "total_pages": 4,
+        "extraction_success": true,
+        "text_extraction_success": true,
+        "api_success": true,
+        "yaml_parsing_success": true,
+        "figures_extracted": 14,
+        "raw_response_length": 3128,
+        "cleaned_response_length": 3116,
+        "text_guidance_length": 2550,
+        "error_details": null,
+        "images_created": 1,
+        "max_tokens_used": 1500,
+        "debug_file_created": null
+      },
+      {
+        "page_number": 16,
+        "page_index": 4,
+        "total_pages": 4,
+        "extraction_success": true,
+        "text_extraction_success": true,
+        "api_success": true,
+        "yaml_parsing_success": true,
+        "figures_extracted": 2,
+        "raw_response_length": 354,
+        "cleaned_response_length": 342,
+        "text_guidance_length": 211,
+        "error_details": null,
+        "images_created": 1,
+        "max_tokens_used": 1500,
+        "debug_file_created": null
+      }
+    ],
+    "pages_processed": [
+      13,
+      14,
+      15,
+      16
+    ],
+    "figures_by_page": {
+      "13": {
+        "count": 10,
+        "page": 13
+      },
+      "14": {
+        "count": 9,
+        "page": 14
+      },
+      "15": {
+        "count": 14,
+        "page": 15
+      },
+      "16": {
+        "count": 2,
+        "page": 16
+      }
+    }
+  }
+}
