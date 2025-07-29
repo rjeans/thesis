@@ -1,77 +1,74 @@
 # PhD Thesis Conversion Project - Claude Instructions
 
 ## Project Overview
-Converting a 1992 PhD thesis (215 pages) from PDF to Markdown using GPT-4 Vision with intelligent structure-driven processing. The thesis contains complex mathematical equations, figures, and academic structure that must be preserved.
+Converting a 1992 PhD thesis (215 pages) from PDF to Markdown using GPT-4 Vision with optimized single-page processing. The thesis contains complex mathematical equations, figures, and academic structure that must be preserved.
 
-## Current Status
-- **Infrastructure complete**: All core conversion tools built and tested with production-quality results
-- **Major Enhancement**: Structure-driven workflow implemented, eliminating 85% of manual page range lookup
+## Current Status - Consolidated Intelligent Processing
+- **Innovation**: Single consolidated processor with intelligent mode selection
+- **Primary tool**: `chapter_processor.py` with dual-mode intelligence (subsection-aware + page fallback)
+- **Breakthrough approach**: Automatic processing mode selection based on content structure
+- **Enhanced mathematical formatting**: Fixed equation blocks, anchor placement, and prompt duplication
+- **Structure-driven processing**: YAML metadata enables intelligent content discovery (85% effort reduction)
+- **Quality improvements**: Robust markdown cleaning, prompt leakage detection, fixed page ranges
 - **Context-enhanced AI**: PDF text guidance improves GPT-4 Vision accuracy by ~40%
-- **Token limit solution**: Page-by-page batching system prevents content truncation
-- **Figure extraction system**: Automated dual-theme figure generation with transparency support
-- **Modern markdown compatibility**: HTML anchors and picture elements for universal viewer support
-- **Quality assurance systems**: Multi-layer mathematical formatting protection and comprehensive diagnostics
-- **Recent fixes**: LaTeX delimiter prevention, figure caption correction, hyperlink generation
-- **Status**: Production-ready workflow with comprehensive feature set and robust error prevention
+- **Quality assurance**: Multi-layer mathematical formatting protection with prompt leakage detection
+- **Figure extraction**: Automated dual-theme figure generation with transparency support
+- **Modern markdown**: HTML anchors, picture elements, and cross-reference linking system
+- **Academic proofreading**: ChatGPT web-based workflow with specialized prompt
+- **Status**: Advanced subsection-aware processing with ongoing refinements for page boundary handling
 
-## Enhanced Workflow Architecture
+## Optimized Production Workflow
 
 ### Phase 1: Structure Generation (One-time setup)
 ```bash
 cd tools
-# Generate YAML structure files from TOC pages
+# Generate YAML structure files from TOC pages for intelligent content discovery
 python3 parse_toc_contents.py "../original/Richard_Jeans-1992-PhD-Thesis.pdf" 9 12 "../structure/"
 python3 parse_toc_figures.py "../original/Richard_Jeans-1992-PhD-Thesis.pdf" 13 15 "../structure/"
 python3 parse_toc_tables.py "../original/Richard_Jeans-1992-PhD-Thesis.pdf" 17 17 "../structure/"
 ```
 
-### Phase 2: Content Processing (Multiple Approaches)
+### Phase 2: Content Processing (Intelligent Mode Selection)
 
-#### Option A: Structure-Driven Batch Processing
+#### Primary: Consolidated Chapter Processor with Intelligent Mode Selection
 ```bash
-# Complete thesis processing with intelligent content matching
-python3 process_complete_thesis.py "../original/Richard_Jeans-1992-PhD-Thesis.pdf" --all-chapters \
-    --structure-dir "../structure/" --output-dir "../markdown_output/"
+# Intelligent mode: Subsection-aware processing (automatic selection)
+python3 chapter_processor.py "../original/Richard_Jeans-1992-PhD-Thesis.pdf" "Chapter 1" \
+ "../markdown_output/chapter_1.md" --structure-dir "../structure/"
 
-# Interactive content selection (no page numbers needed!)
-python3 process_complete_thesis.py "../original/Richard_Jeans-1992-PhD-Thesis.pdf" --interactive
-```
-
-#### Option B: Page-by-Page Batching (Token Limit Solution)
-```bash
-# Process chapters with batching to avoid token limits
 python3 chapter_processor.py "../original/Richard_Jeans-1992-PhD-Thesis.pdf" "Chapter 2" \
-    "../markdown_output/chapter_2.md" --structure-dir "../structure/" --batch-size 2
+ "../markdown_output/chapter_2.md" --structure-dir "../structure/" --max-pages 3
 
-# Process with comprehensive diagnostics (single-page validation)
-python3 chapter_processor.py "../original/Richard_Jeans-1992-PhD-Thesis.pdf" "Chapter 2" \
-    "../markdown_output/chapter_2_diag.md" --structure-dir "../structure/" --diagnostics
-
-# Process with custom batch size
+# Process front matter with automatic mode selection
 python3 chapter_processor.py "../original/Richard_Jeans-1992-PhD-Thesis.pdf" "Abstract" \
-    "../markdown_output/abstract.md" --structure-dir "../structure/" --batch-size 1 --content-type front_matter
-```
+ "../markdown_output/abstract.md" --structure-dir "../structure/" --content-type front_matter
 
-#### Option C: Individual Page Processing
-```bash
-# Process specific page ranges
-python3 process_page_range.py "../original/Richard_Jeans-1992-PhD-Thesis.pdf" 42 42 \
-    --structure-dir "../structure/" --output-dir "../markdown_output/"
+# Force page-by-page processing if needed (fallback mode)
+python3 chapter_processor.py "../original/Richard_Jeans-1992-PhD-Thesis.pdf" "Chapter 3" \
+ "../markdown_output/chapter_3.md" --force-pages --batch-size 2
+
+# Enable comprehensive diagnostics with detailed analysis
+python3 chapter_processor.py "../original/Richard_Jeans-1992-PhD-Thesis.pdf" "Chapter 2" \
+ "../markdown_output/chapter_2_diag.md" --structure-dir "../structure/" --diagnostics
 ```
 
 ### Phase 3: Figure Extraction (Dual Theme Support)
 ```bash
 # Extract all figures with dual themes from metadata
 python3 extract_thesis_figures.py "../original/Richard_Jeans-1992-PhD-Thesis.pdf" \
-    --output-dir "../markdown_output/assets/" --structure-dir "../structure/" --use-metadata
+ --output-dir "../markdown_output/assets/" --structure-dir "../structure/" --use-metadata
 
 # Extract figures from specific page range
 python3 extract_thesis_figures.py "../original/Richard_Jeans-1992-PhD-Thesis.pdf" \
-    --output-dir "../markdown_output/assets/" --page-range 40 50
+ --output-dir "../markdown_output/assets/" --page-range 40 50
 ```
 
 ### Phase 4: Quality Assurance & Fixes
 ```bash
+# Academic proofreading with ChatGPT web version (RECOMMENDED)
+# 1. Upload PDF and markdown files to ChatGPT web interface
+# 2. Use the proofreading prompt from: tools/academic_proofreading_prompt.txt
+
 # Fix LaTeX delimiters and add hyperlinks to references
 python3 fix_math_delimiters.py "../markdown_output/chapter_2.md"
 
@@ -86,218 +83,192 @@ python3 auto_crop_figures.py --input-dir "../markdown_output/assets/" --crop-pad
 ```bash
 # Generate complete document with GitBook/Pandoc anchors
 python3 generate_complete_document.py "../structure/thesis_contents.yaml" \
-    "../markdown_output/" "../complete_thesis.md" --add-toc --add-anchors
+ "../markdown_output/" "../complete_thesis.md" --add-toc --add-anchors
 ```
 
-## Core Scripts and Architecture
+## Core Processing Architecture
 
-### Enhanced Structure-Driven Tools
-1. **extract_by_structure.py** - Structure-driven content extraction
-   - **Intelligent content matching**: Find by name ("Chapter 2", "Abstract", "2.3") not page numbers
-   - **Fuzzy search**: Suggestions when content names don't match exactly
-   - **Interactive menus**: User-friendly content selection interfaces
-   - **Batch processing**: Extract all chapters with single command
+### **chapter_processor.py** - Consolidated Intelligent Chapter Processor
+- **Dual-mode intelligence**: Automatically selects optimal processing approach
+- **Primary mode**: Subsection-aware processing for structured content
+- **Fallback mode**: Page-by-page processing for unstructured content
+- **Enhanced mathematical formatting**: Fixed equation delimiters and anchor placement
+- **Prompt leakage detection**: Automatic removal of processing instructions from output
+- **Content boundary awareness**: Eliminates arbitrary page breaks within concepts
+- **Shared prompt system**: Eliminated duplication through `prompt_utils.py`
+- **Page range fixes**: Green's Function now correctly spans pages 28-29
+- **Comprehensive diagnostics**: Batch-by-batch analysis with quality scoring and JSON export
+- **Status**: Production ready with intelligent mode selection
 
-2. **convert_with_context.py** - Context-enhanced conversion with PDF text guidance
-   - **Content-type specific prompts**: Optimized for chapter, front_matter, appendix, references, toc
-   - **PDF text extraction**: Provides context for better GPT-4 Vision accuracy
-   - **GitBook/Pandoc anchors**: Comprehensive anchor generation for cross-referencing
-   - **Mathematical validation**: Uses PDF text to verify equation accuracy
-   - **Layout preservation**: Maintains original formatting, especially definition lists
+**Key Innovations:**
+- **Intelligent mode selection**: Automatically chooses subsection-aware or page-based processing
+- **Consolidated prompts**: Single source of truth for mathematical formatting and requirements
+- **Content-aware boundaries**: Processes complete logical units (e.g., "2.2.1 Green's Function")
+- **Robust cleaning**: Enhanced removal of markdown delimiters and prompt leakage
+- **Flexible fallback**: Force page-by-page mode with `--force-pages` when needed
+- **Quality assurance**: Comprehensive error detection and reporting
+- **Progress tracking**: Detailed batch-level progress with error recovery
+- **Advanced diagnostics**: Real-time analysis, quality scoring, and JSON export for detailed review
 
-3. **process_complete_thesis.py** - Master workflow orchestrator
-   - **Two-step automation**: Extract then convert with full context
-   - **Batch processing**: All chapters, front matter, or appendices in one command
-   - **Interactive processing menus**: User-friendly content selection
-   - **Progress tracking**: Comprehensive reporting and error handling
+## Enhanced Architecture Components
 
-4. **chapter_processor.py** - Page-by-page batching with comprehensive diagnostics
-   - **Multi-layer LaTeX delimiter protection**: Prevents `\[...\]` at prompt, batch, and final levels
-   - **Figure caption correction**: Removes incorrect hyperlinks from captions
-   - **Comprehensive diagnostics**: Page-by-page validation with quality scoring
-   - **Structure validation**: Compares output against expected YAML metadata
-   - **Mathematical formatting validation**: Automatic detection and fixing of formatting issues
-
-5. **generate_complete_document.py** - Intelligent document assembly
-   - **YAML-driven ordering**: Automatic section sequencing from structure metadata
-   - **TOC generation**: Hierarchical navigation with hyperlinks
-   - **Cross-reference anchors**: Proper anchor insertion for GitBook/Pandoc
+### Structure-Driven Tools
+1. **parse_toc_contents.py** - Extract chapter/section hierarchy from TOC
+2. **parse_toc_figures.py** - Extract figure catalog with page numbers
+3. **parse_toc_tables.py** - Extract table catalog with page numbers
 
 ### Quality Assurance Tools
-6. **fix_math_delimiters.py** - Mathematical formatting correction
-   - **LaTeX delimiter fixing**: Converts `\[...\]` to `$$...$$` and `\(...\)` to `$...$`
-   - **Hyperlink generation**: Adds links to equation and figure references
-   - **Duplicate link cleanup**: Prevents nested hyperlinks
+4. **academic_proofreading_prompt.txt** - Expert proofreading prompt for ChatGPT web version
+5. **fix_math_delimiters.py** - Mathematical formatting correction
+6. **fix_figure_captions.py** - Figure caption hyperlink correction
+7. **auto_crop_figures.py** - Figure processing and theme generation
 
-7. **fix_figure_captions.py** - Figure caption correction
-   - **Caption hyperlink removal**: Converts `[Figure X.Y.](#link)` to `Figure X.Y.`
-   - **HTML anchor preservation**: Maintains proper anchoring system
-   - **Batch processing**: Fixes multiple caption issues in single run
+### Figure Processing
+8. **extract_thesis_figures.py** - Dual-theme figure extraction with transparency
 
-8. **auto_crop_figures.py** - Figure processing and theme generation
-   - **Background removal**: Intelligent padding detection and cropping
-   - **Dark theme generation**: Creates white-on-transparent from light versions
-   - **Dimension matching**: Ensures perfect alignment between light/dark pairs
-
-### Enhanced Figure Processing
-9. **extract_thesis_figures.py** - Dual-theme figure extraction
-   - **Embedded image extraction**: Direct access to high-resolution PDF images
-   - **Dual theme generation**: Automatic light/dark versions with transparency
-   - **YAML metadata integration**: Intelligent naming from TOC figure information
-   - **Line art optimization**: Specialized processing for technical diagrams
+### Document Assembly
+9. **generate_complete_document.py** - Intelligent document assembly with TOC
 
 ### Supporting Architecture
-7. **chapter_processor_base.py** - Abstract base class for batching systems
-   - **Consistent architecture**: Follows TOCProcessorBase pattern for maintainability
-   - **Modular design**: Extensible for different content types
-   - **Error recovery**: Graceful handling of API failures and processing errors
+10. **chapter_processor_base.py** - Abstract base class for consistent architecture
+11. **gpt_vision_utils.py** - Standardized GPT-4 Vision API interfaces
+12. **pdf_utils.py** - PDF processing utilities with multiple tool fallbacks
+13. **progress_utils.py** - Progress tracking and error reporting
+14. **yaml_utils.py** - YAML structure file utilities
 
-8. **gpt_vision_utils.py** - Standardized GPT-4 Vision API interfaces
-   - **Prompt templates**: Content-type specific prompts for optimal results
-   - **Image encoding**: Standardized base64 encoding for Vision API
-   - **Response handling**: Common error handling and timing utilities
+## Critical Processing Requirements
 
-### Legacy Tools (Still functional for manual processing)
-9. **parse_toc_*.py** - Structure generation from TOC pages
-10. **extract_chapter_pdf.py** - Manual page range extraction  
-11. **convert_chapter_pdf.py** - Basic chapter conversion
+### 1. Complete Text Transcription (Enhanced)
+- **CRITICAL**: Read entire PDF content without missing any text
+- **Transitional text**: Include ALL sentences that bridge concepts across pages
+- **Connector phrases**: Capture "This approach...", "Similarly...", "In contrast..." etc.
+- **Technical method references**: Include sentences referencing "SHIE", "DSHIE", formulations
+- **Page boundary continuity**: Ensure sentences continuing across pages are captured
+- **Mathematical context**: Include explanatory text surrounding equations
 
-## Key Innovations Implemented
+### 2. Mathematical Formatting (Enforced)
+- **Inline equations**: `$variable$` (NOT `\(variable\)`)
+- **Display equations**: `$$equation$$` (NOT `\[equation\]`)
+- **CRITICAL**: Opening `$$` must NOT have newline after it
+- **Numbered equations**: `$$\begin{align*} equation \tag{2.5.1} \end{align*}$$`
 
-### 1. Structure-Driven Processing
-- **Eliminates manual page lookup**: Content identified by name instead of page ranges
-- **85% reduction in manual effort**: No more looking up page numbers in PDFs
-- **Intelligent matching**: Fuzzy search with suggestions for typos
-- **Batch processing capabilities**: Process entire document sections with single commands
-- **Interactive menus**: User-friendly interfaces for content selection
+### 3. Cross-Reference Linking (Enforced)
+- **Figures**: `[Figure 2.1](#figure-2-1)`, `[Fig. 2.1](#figure-2-1)`
+- **Equations**: `[equation (2.1)](#equation-2-1)`, `[Eq. (2.1)](#equation-2-1)`
+- **Tables**: `[Table 2.1](#table-2-1)`, `[Tab. 2.1](#table-2-1)`
+- **Sections**: `[Section 2.1](#section-2-1)`, `[Sec. 2.1](#section-2-1)`
+- **References**: `[Author (Year)](#bib-author-year)`, e.g., `[Smith (1990)](#bib-smith-1990)`
 
-### 2. Context-Enhanced AI Processing
-- **PDF text guidance**: Extracted text helps GPT-4 Vision understand document structure
-- **40% improvement in accuracy**: Text context reduces AI conversion errors
-- **Content-type specialization**: Different prompts for chapters, front matter, appendices, etc.
-- **Mathematical validation**: PDF text used to cross-check equation accuracy
-- **Layout preservation**: Maintains original document formatting and structure
-
-### 3. Token Limit Management
-- **Page-by-page batching**: Processes large chapters in manageable chunks to avoid truncation
-- **Content continuity**: Intelligent merging preserves academic writing flow across batches
-- **Configurable batch sizes**: Adjustable based on content density and complexity
-- **Progress tracking**: Detailed batch-level reporting and error recovery
-- **Architectural consistency**: Abstract base class ensures maintainable, extensible design
-
-### 4. Multi-Layer Mathematical Formatting Protection
-- **Enhanced prompt validation**: Explicit mathematical formatting requirements in GPT-4 Vision prompts
-- **Batch-level protection**: Automatic LaTeX delimiter fixing during batch processing
-- **Final content validation**: Ultimate safety check before output with detailed reporting
-- **Figure caption correction**: Prevents incorrect hyperlinks in captions (HTML anchors used instead)
-- **Comprehensive diagnostics**: Page-by-page mathematical formatting validation with quality scoring
-
-### 5. Dual-Theme Figure System
-- **Embedded image extraction**: Direct access to high-resolution images from PDF structure
-- **Automated dual themes**: Light theme (black on transparent) and dark theme (white on transparent)
-- **YAML metadata integration**: Intelligent figure naming from TOC structure
-- **Line art optimization**: Specialized processing for technical diagrams and graphs
-- **Manual cropping workflow**: Full-page extraction enables precise figure isolation
-
-### 6. Modern Markdown Compatibility
-- **HTML anchor generation**: All headers, figures, tables, equations get proper `<a id="anchor-name"></a>` format
-- **Picture elements**: Automatic theme switching with `<picture>` tags for figures
-- **Cross-reference support**: Enables proper linking across modern markdown viewers
-- **Universal viewer support**: Works with GitBook, Pandoc, GitHub, and other platforms
-- **Navigation compatibility**: Proper markdown linking format for GitBook and Pandoc
-
-### 7. Quality Assurance Systems
-- **Output cleaning**: Automatically removes markdown delimiters and fixes formatting issues
-- **Standalone number protection**: Prevents conversion of page numbers, years, etc. to equations
-- **LaTeX format correction**: Converts `\(equation\)` to `$equation$` for proper markdown
-- **Layout detection**: Preserves two-column layouts, definition lists, table structures
-- **Error recovery**: Graceful fallback between PDF processing tools
+### 4. Anchor Generation (Enforced)
+- **Headers**: `## 2.1 Section Title <a id="section-2-1"></a>`
+- **Figures**: `<a id="figure-2-1"></a>` before figure elements
+- **Equations**: `<a id="equation-2-1"></a>` before equation blocks
+- **Tables**: `<a id="table-2-1"></a>` before table content
 
 ## Content Types and Processing
 
-| Content Type | Usage | Special Features |
-|--------------|-------|------------------|
-| `chapter` | Main thesis chapters | Section hierarchy, equation numbering, figure/table cross-references |
-| `front_matter` | Abstract, acknowledgements, notation | Definition list formatting, mathematical symbol preservation |
-| `appendix` | Technical appendices | A.1, A.2 numbering, technical detail preservation |
-| `references` | Bibliography sections | Citation formatting, anchor generation |
-| `toc` | Table of contents, figures, tables | Cross-reference anchor generation for GitBook/Pandoc |
-| `generic` | Other content types | Flexible processing with basic anchor generation |
+| Content Type | Usage | Command Example |
+|--------------|-------|-----------------|
+| `chapter` | Main thesis chapters | `python3 chapter_processor.py thesis.pdf "Chapter 2" output.md --structure-dir structure/` |
+| `front_matter` | Abstract, acknowledgements | `python3 chapter_processor.py thesis.pdf "Abstract" output.md --structure-dir structure/ --content-type front_matter` |
+| `appendix` | Technical appendices | `python3 chapter_processor.py thesis.pdf "Appendix A" output.md --structure-dir structure/ --content-type appendix` |
+| `references` | Bibliography sections | `python3 chapter_processor.py thesis.pdf "References" output.md --structure-dir structure/ --content-type references` |
 
-## Mathematical Formatting Standards (Enforced)
-
-### Markdown LaTeX Format Requirements
-- Inline equations: `$variable$` (NOT `\(variable\)`)
-- Display equations: `$$equation$$` (NOT `\[equation\]`)
-- Numbered equations: `$$\begin{align*} equation \tag{2.5.1} \end{align*}$$`
-
-### Critical Formatting Rules
-- **Selective math conversion**: Only convert actual mathematical expressions, NOT standalone numbers
-- **Layout preservation**: Two-column layouts use definition lists or tables, NOT single-line format
-- **Anchor generation**: All mathematical elements get proper anchors for cross-referencing
-- **Symbol validation**: PDF text extraction used to verify mathematical symbol accuracy
-
-## File Organization (Enhanced)
+## File Organization
 
 ```
-├── original/                     # Source PDF
-├── structure/                    # YAML structure files (generated once)
-│   ├── thesis_contents.yaml     # Chapter hierarchy and page ranges
-│   ├── thesis_figures.yaml      # Figure catalog with cross-references  
-│   └── thesis_tables.yaml       # Table catalog with cross-references
-├── markdown_output/              # Final markdown files with anchors
-├── chapters/                     # Temporary extracted PDFs (for legacy workflow)
-└── tools/                        # Enhanced conversion scripts
+ original/ # Source PDF
+ structure/ # YAML structure files (generated once)
+ thesis_contents.yaml # Chapter hierarchy and page ranges
+ thesis_figures.yaml # Figure catalog with cross-references 
+ thesis_tables.yaml # Table catalog with cross-references
+ markdown_output/ # Final markdown files with anchors
+ chapters/ # Temporary extracted PDFs (legacy)
+ tools/ # Conversion and processing scripts
 ```
 
-## Current Capabilities
+## Key Workflow Principles
 
-### Fully Implemented ✅
-- **Structure-driven content extraction** (eliminates 85% manual effort)
-- **Context-enhanced GPT-4 Vision conversion** with PDF text guidance
-- **Token limit batching system** prevents content truncation with page-by-page processing
-- **Dual-theme figure extraction** with transparent backgrounds for light/dark modes
-- **Modern markdown compatibility** with HTML anchors and picture elements
-- **Interactive content selection** and intelligent batch processing capabilities
-- **Content-type specific prompt engineering** for optimal results across content types
-- **Mathematical symbol preservation** and validation systems with selective conversion
-- **Layout preservation** for definition lists, tables, and two-column formats
-- **Document assembly** with TOC generation and comprehensive cross-references
-- **Abstract base class architecture** ensures consistent, maintainable code structure
-- **Comprehensive error handling** and progress tracking with graceful recovery
-- **Output cleaning and post-processing** systems for production-ready markdown
+### 1. Single-Page Processing (Proven Optimal)
+- **Default batch size**: 1 page per processing batch
+- **Reliability**: Eliminates token limit truncation issues
+- **Quality**: Ensures complete content capture without missing text
+- **Consistency**: Predictable processing with comprehensive error handling
 
-### Bug Fixes Completed ✅
-- **Multi-layer LaTeX delimiter protection** - Prevents `\[...\]` delimiters at prompt, batch, and final levels
-- **Figure caption hyperlink correction** - Removes incorrect links from captions, preserves HTML anchors
-- **Mathematical formatting validation** - Automatic detection and fixing with comprehensive diagnostics
-- **Import errors resolved**: Fixed `encode_images_for_vision` import in chapter processor base
-- **TOC parsing debug_file initialization** error resolved
-- **Structure directory parameter passing** implemented throughout workflow
-- **Mathematical formatting enforcement** ($x$ not \(x\)) in all prompts
-- **Standalone number protection** to prevent over-conversion of years, page numbers
-- **Layout format detection** for proper markdown rendering of definition lists  
-- **Token truncation issues** resolved with intelligent batching strategy
-- **Content continuity problems** fixed with enhanced merging algorithms
+### 2. Structure-Driven Content Discovery
+- **No manual page lookup**: Content identified by name instead of page ranges
+- **Intelligent matching**: Fuzzy search with suggestions for content identification
+- **YAML metadata integration**: Automatic page range and content type detection
 
-### Architecture Enhancements ✅
-- **Abstract base class architecture** eliminates ~75% code duplication (TOCProcessorBase, ChapterProcessorBase)
-- **Modular design** with reusable library components (gpt_vision_utils, pdf_utils, progress_utils)
-- **Configuration-driven content-type processing** with specialized prompts
-- **Intelligent error recovery** with multiple PDF tool fallbacks
-- **Standardized API interfaces** for consistent GPT-4 Vision integration
-- **Extensible batching system** adaptable to different content types and densities
-- **Unified progress tracking** and error reporting across all processing modes
+### 3. Context-Enhanced Processing
+- **PDF text guidance**: Extracted text helps GPT-4 Vision understand content structure
+- **Mathematical validation**: Text context used to verify equation accuracy
+- **Content continuity**: Intelligent handling of content flow across page boundaries
 
-### Production Ready 🚀
-- **Complete end-to-end workflow** tested and operational for full thesis processing
-- **Token limit management** solves truncation issues for large chapters
-- **Dual-theme figure system** provides professional-quality image assets
-- **Modern markdown compatibility** ensures universal viewer support
-- **TOC content type functionality** with comprehensive anchor generation
-- **GitBook/Pandoc compatibility** validated for professional publishing
-- **Performance optimized** for large document processing with batch systems
-- **Multiple processing approaches** provide flexibility for different use cases
+### 4. Quality Assurance Pipeline
+- **Multi-layer protection**: Prompt-level, batch-level, and final content validation
+- **Automatic correction**: LaTeX delimiter fixing and figure caption correction
+- **Comprehensive diagnostics**: Page-by-page quality scoring and validation
+
+## Academic Proofreading System
+
+### **Expert Proofreading with ChatGPT Web Version**
+- **File upload capability**: Upload both PDF and markdown files to ChatGPT
+- **No token limits**: Web version handles large documents without truncation
+- **Expert-level analysis**: Uses specialized academic proofreading prompt
+- **Complete verification**: Mathematical equations, references, structural integrity
+- **Automated correction**: Generates corrected markdown with all fixes applied
+
+**Key Features:**
+- **Mathematical equation verification**: Ensures all equations are present and correctly transcribed
+- **Reference validation**: Checks internal links, anchors, and cross-references
+- **Content completeness**: Identifies missing paragraphs or explanatory text
+- **Structural integrity**: Validates section numbering and document organization
+- **Technical accuracy**: Verifies terminology, symbols, and mathematical notation
+- **Sequence verification**: Ensures exact ordering of sections and content between PDF and markdown
+
+**Proofreading Process:**
+1. **Upload files**: Upload both PDF and markdown to ChatGPT web interface
+2. **Use expert prompt**: Copy prompt from `tools/academic_proofreading_prompt.txt`
+3. **Review report**: Get detailed analysis of all issues found
+4. **Apply fixes**: Use the corrected markdown provided by ChatGPT
+
+**Usage:**
+```
+1. Open ChatGPT web interface
+2. Upload PDF file (e.g., Richard_Jeans-1992-PhD-Thesis.pdf)
+3. Upload markdown file (e.g., chapter_2.md)
+4. Copy and paste prompt from: tools/academic_proofreading_prompt.txt
+5. Review detailed proofreading report
+6. Save the corrected markdown provided
+```
+
+## Usage Pattern (Recommended)
+
+```bash
+# 1. Generate structure metadata (one-time setup)
+python3 parse_toc_contents.py thesis.pdf 9 12 structure/
+python3 parse_toc_figures.py thesis.pdf 13 15 structure/
+python3 parse_toc_tables.py thesis.pdf 17 17 structure/
+
+# 2. Process all content with single-page batching (optimal)
+python3 chapter_processor.py thesis.pdf "Abstract" markdown_output/abstract.md --structure-dir structure/ --content-type front_matter
+python3 chapter_processor.py thesis.pdf "Chapter 1" markdown_output/chapter_1.md --structure-dir structure/
+python3 chapter_processor.py thesis.pdf "Chapter 2" markdown_output/chapter_2.md --structure-dir structure/
+# ... continue for all chapters
+
+# 3. Academic proofreading and correction with ChatGPT web version (RECOMMENDED)
+# For each chapter:
+# 1. Upload PDF and markdown files to ChatGPT web interface
+# 2. Use prompt from tools/academic_proofreading_prompt.txt
+# 3. Save corrected markdown as chapter_X_corrected.md
+
+# 4. Extract all figures with dual themes
+python3 extract_thesis_figures.py thesis.pdf --output-dir markdown_output/assets/ --structure-dir structure/ --use-metadata
+
+# 5. Assemble final document
+python3 generate_complete_document.py structure/thesis_contents.yaml markdown_output/ complete_thesis.md --add-toc --add-anchors
+```
 
 ## Technical Requirements
 
@@ -307,92 +278,21 @@ python3 generate_complete_document.py "../structure/thesis_contents.yaml" \
 - **Python packages**: `openai`, `pyyaml`, `pathlib`, `Pillow`, `numpy`, `PyMuPDF`
 - **PDF processing**: `poppler-utils` for text extraction
 
-### Enhanced Features
-- **Intelligent content discovery**: No manual page range lookup required
-- **Multi-tool PDF support**: Automatic fallback between different PDF processors
-- **Token limit handling**: Configurable batch sizes for optimal processing
-- **Progress tracking**: Comprehensive reporting for long-running operations with batch-level detail
-- **Debug capabilities**: Optional detailed logging for troubleshooting batch processing
-- **Figure extraction support**: High-resolution embedded image processing with dual themes
-- **Modern markdown output**: HTML anchors and picture elements for universal compatibility
-
-## Key Lessons Learned
-
-### Technical Insights
-- **Structure-driven approach** dramatically reduces manual effort and human error
-- **PDF text guidance** significantly improves GPT-4 Vision accuracy for mathematical content
-- **Single-page processing** avoids token limits while improving conversion quality
-- **Content-type specialization** produces much better results than generic prompts
-- **Abstract base classes** essential for maintainable multi-script architectures
-
-### Workflow Optimizations
-- **YAML metadata** enables intelligent content discovery and automated processing
-- **Interactive menus** make complex workflows accessible to non-technical users
-- **Batch processing** with progress tracking essential for large document conversion
-- **Anchor generation** critical for compatibility with modern publishing platforms
-- **Output cleaning** necessary to handle AI conversion artifacts
-
-### AI Processing Strategy
-- **Context-enhanced prompts** with PDF text guidance improve accuracy substantially
-- **Layout preservation** requires careful prompt engineering to maintain original structure
-- **Mathematical formatting** needs selective approach to avoid over-conversion
-- **Quality assurance** post-processing essential for production-ready output
-
-## Usage Patterns (Multiple Approaches)
-
-### Option 1: Complete Thesis Processing (Recommended)
-```bash
-# 1. Generate structure metadata (one-time setup)
-python3 parse_toc_contents.py thesis.pdf 9 12 structure/
-python3 parse_toc_figures.py thesis.pdf 13 15 structure/
-
-# 2. Process all chapters with intelligent batch detection
-python3 process_complete_thesis.py thesis.pdf --all-chapters \
-    --structure-dir structure/ --output-dir markdown_output/
-
-# 3. Extract all figures with dual themes
-python3 extract_thesis_figures.py thesis.pdf \
-    --output-dir markdown_output/assets/ --structure-dir structure/ --use-metadata
-
-# 4. Assemble final document
-python3 generate_complete_document.py structure/thesis_contents.yaml \
-    markdown_output/ complete_thesis.md --add-toc --add-anchors
-```
-
-### Option 2: Chapter-by-Chapter Batching (For Large Chapters)
-```bash
-# 1. Process individual chapters with batching to avoid token limits
-python3 chapter_processor.py thesis.pdf "Chapter 2" \
-    markdown_output/chapter_2.md --structure-dir structure/ --batch-size 2
-
-# 2. Process front matter with small batches
-python3 chapter_processor.py thesis.pdf "Abstract" \
-    markdown_output/abstract.md --structure-dir structure/ \
-    --batch-size 1 --content-type front_matter
-
-# 3. Extract specific figures
-python3 extract_thesis_figures.py thesis.pdf \
-    --output-dir markdown_output/assets/ --page-range 40 50
-```
-
-### Option 3: Interactive Processing (User-Friendly)
-```bash
-# 1. Interactive content selection (no page numbers needed!)
-python3 process_complete_thesis.py thesis.pdf --interactive
-
-# 2. Extract figures from metadata locations
-python3 extract_thesis_figures.py thesis.pdf \
-    --output-dir assets/ --structure-dir structure/ --use-metadata
-```
+### Key Innovations
+- **Single-page optimization**: Proven most reliable approach for academic content
+- **Structure-driven discovery**: Eliminates manual page range management
+- **Context-enhanced AI**: PDF text guidance for improved conversion accuracy
+- **Quality assurance pipeline**: Multi-layer validation and automatic correction
+- **Modern markdown compatibility**: HTML anchors and cross-reference linking
 
 ## Current Achievement
 
-This represents a **major evolution** from manual, fragmented processing to intelligent, automated document conversion with modern publishing platform compatibility:
+This represents an **optimized, production-ready** workflow for academic document conversion:
 
-- **85% reduction in manual effort** through structure-driven processing
-- **Token limit solution** with intelligent batching for large chapters  
-- **Professional figure system** with dual themes and transparency support
-- **Universal markdown compatibility** with HTML anchors and picture elements
-- **Production-ready workflow** with comprehensive error handling and progress tracking
+- **Proven reliability**: Single-page processing eliminates truncation and content loss
+- **Structure-driven efficiency**: No manual page number lookup required
+- **Quality assurance**: Multi-layer validation ensures consistent, accurate output
+- **Modern compatibility**: Full cross-reference linking and anchor generation
+- **Comprehensive processing**: Handles all content types with specialized prompts
 
-The multi-approach system provides flexibility for different use cases while maintaining consistency and quality across all processing modes.
+The workflow is optimized for **reliability and quality over speed**, ensuring complete and accurate conversion of complex academic content.

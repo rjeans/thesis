@@ -6,7 +6,7 @@ to markdown format using GPT-4 Vision API.
 
 Main modules:
 - pdf_utils: PDF extraction and image conversion
-- progress_utils: Progress tracking and reporting  
+- progress_utils: Progress tracking and reporting 
 - gpt_vision_utils: GPT-4 Vision API interfaces
 - yaml_utils: YAML processing and validation
 

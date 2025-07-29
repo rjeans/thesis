@@ -24,13 +24,13 @@ def extract_pages_to_pdf(input_pdf, output_pdf, start_page, end_page):
     3. ghostscript (universal fallback)
     
     Args:
-        input_pdf (str): Path to source PDF file
-        output_pdf (str): Path for output PDF file
-        start_page (int): First page to extract (1-based)
-        end_page (int): Last page to extract (1-based)
-        
+    input_pdf (str): Path to source PDF file
+    output_pdf (str): Path for output PDF file
+    start_page (int): First page to extract (1-based)
+    end_page (int): Last page to extract (1-based)
+    
     Returns:
-        bool: True if extraction succeeded, False otherwise
+    bool: True if extraction succeeded, False otherwise
     """
     input_path = Path(input_pdf).resolve()
     output_path = Path(output_pdf).resolve()
@@ -45,48 +45,48 @@ def extract_pages_to_pdf(input_pdf, output_pdf, start_page, end_page):
     if _try_pdftk_extract(input_path, output_path, start_page, end_page):
         return True
     
-    # Fallback to qpdf
+        # Fallback to qpdf
     if _try_qpdf_extract(input_path, output_path, start_page, end_page):
         return True
     
-    # Fallback to ghostscript
+        # Fallback to ghostscript
     if _try_ghostscript_extract(input_path, output_path, start_page, end_page):
         return True
     
-    print_progress("- No PDF extraction tool found (tried pdftk, qpdf, ghostscript)")
-    return False
+        print_progress("- No PDF extraction tool found (tried pdftk, qpdf, ghostscript)")
+        return False
 
 
 def pdf_to_images(pdf_path, temp_dir="/tmp/chapter_conversion", dpi=200, page_prefix="page"):
     """
     Convert PDF pages to PNG images for GPT-4 Vision processing.
-    
+ 
     Uses pdftoppm to create high-quality PNG images from PDF pages.
     Each page becomes a separate PNG file with sequential numbering.
-    
+ 
     Args:
-        pdf_path (str): Path to input PDF file
-        temp_dir (str): Directory for temporary image files
-        dpi (int): Resolution for image conversion (default 200)
-        page_prefix (str): Prefix for generated image filenames
-        
+    pdf_path (str): Path to input PDF file
+    temp_dir (str): Directory for temporary image files
+    dpi (int): Resolution for image conversion (default 200)
+    page_prefix (str): Prefix for generated image filenames
+ 
     Returns:
-        list: Sorted list of Path objects for generated PNG files
+    list: Sorted list of Path objects for generated PNG files
     """
     print_progress(f"Converting PDF to images (DPI: {dpi})...")
-    
+ 
     temp_path = Path(temp_dir)
     temp_path.mkdir(parents=True, exist_ok=True)
-    
+ 
     # Build pdftoppm command
     cmd = [
-        'pdftoppm',
-        '-png',              # Output format
-        '-r', str(dpi),      # Resolution
-        str(pdf_path),       # Input PDF
-        str(temp_path / page_prefix)  # Output prefix
+    'pdftoppm',
+    '-png', # Output format
+    '-r', str(dpi), # Resolution
+    str(pdf_path), # Input PDF
+    str(temp_path / page_prefix) # Output prefix
     ]
-    
+ 
     try:
         start_time = time.time()
         subprocess.run(cmd, check=True, capture_output=True)
@@ -108,36 +108,36 @@ def pdf_to_images(pdf_path, temp_dir="/tmp/chapter_conversion", dpi=200, page_pr
 def extract_pages_to_images(pdf_path, start_page, end_page, temp_dir, dpi=200, page_prefix="page"):
     """
     Extract specific page range from PDF and convert to images.
-    
+ 
     Combines page extraction with image conversion for TOC parsing workflows.
-    
+ 
     Args:
-        pdf_path (str): Path to source PDF file
-        start_page (int): First page to extract (1-based)
-        end_page (int): Last page to extract (1-based)
-        temp_dir (str): Directory for temporary image files
-        dpi (int): Image resolution (default 200)
-        page_prefix (str): Prefix for generated image filenames
-        
+    pdf_path (str): Path to source PDF file
+    start_page (int): First page to extract (1-based)
+    end_page (int): Last page to extract (1-based)
+    temp_dir (str): Directory for temporary image files
+    dpi (int): Image resolution (default 200)
+    page_prefix (str): Prefix for generated image filenames
+ 
     Returns:
-        list: Sorted list of Path objects for generated PNG files
+    list: Sorted list of Path objects for generated PNG files
     """
     print_progress(f"Extracting pages {start_page}-{end_page} from PDF...")
-    
+ 
     temp_path = Path(temp_dir)
     temp_path.mkdir(parents=True, exist_ok=True)
-    
+ 
     # Build pdftoppm command with page range
     cmd = [
-        'pdftoppm',
-        '-png',
-        '-r', str(dpi),
-        '-f', str(start_page),  # First page
-        '-l', str(end_page),    # Last page
-        str(pdf_path),
-        str(temp_path / page_prefix)
+    'pdftoppm',
+    '-png',
+    '-r', str(dpi),
+    '-f', str(start_page), # First page
+    '-l', str(end_page), # Last page
+    str(pdf_path),
+    str(temp_path / page_prefix)
     ]
-    
+ 
     try:
         start_time = time.time()
         subprocess.run(cmd, check=True, capture_output=True)
@@ -178,9 +178,9 @@ def _try_ghostscript_extract(input_path, output_path, start_page, end_page):
     """Try extracting pages using ghostscript."""
     try:
         cmd = [
-            'gs', '-sDEVICE=pdfwrite', '-dNOPAUSE', '-dBATCH', '-dSAFER',
-            f'-dFirstPage={start_page}', f'-dLastPage={end_page}',
-            f'-sOutputFile={output_path}', str(input_path)
+        'gs', '-sDEVICE=pdfwrite', '-dNOPAUSE', '-dBATCH', '-dSAFER',
+        f'-dFirstPage={start_page}', f'-dLastPage={end_page}',
+        f'-sOutputFile={output_path}', str(input_path)
         ]
         subprocess.run(cmd, check=True, capture_output=True)
         print_progress("+ Pages extracted using ghostscript")
@@ -192,41 +192,41 @@ def _try_ghostscript_extract(input_path, output_path, start_page, end_page):
 def extract_text_from_pdf_page(pdf_path, page_num):
     """
     Extract text from a single PDF page for guidance and validation.
-    
+ 
     Uses multiple PDF text extraction libraries as fallbacks:
     1. PyMuPDF (fitz) - fastest and most accurate
     2. pdfplumber - good fallback with table support
     3. pypdf - universal fallback
-    
+ 
     Args:
-        pdf_path (str): Path to PDF file
-        page_num (int): Page number (1-based)
-        
+    pdf_path (str): Path to PDF file
+    page_num (int): Page number (1-based)
+ 
     Returns:
-        str: Extracted text from the page, or empty string if failed
+    str: Extracted text from the page, or empty string if failed
     """
     try:
-        import fitz  # PyMuPDF
+        import fitz # PyMuPDF
         doc = fitz.open(pdf_path)
         if page_num - 1 < len(doc):
-            page = doc.load_page(page_num - 1)  # Convert to 0-based
+            page = doc.load_page(page_num - 1) # Convert to 0-based
             text = page.get_text()
             doc.close()
             return text.strip()
         doc.close()
     except ImportError:
         pass
-    
+ 
     try:
         import pdfplumber
         with pdfplumber.open(pdf_path) as pdf:
             if page_num - 1 < len(pdf.pages):
-                page = pdf.pages[page_num - 1]  # Convert to 0-based
+                page = pdf.pages[page_num - 1] # Convert to 0-based
                 text = page.extract_text() or ""
                 return text.strip()
     except ImportError:
         pass
-    
+ 
     try:
         import pypdf
         with open(pdf_path, 'rb') as file:
@@ -237,5 +237,5 @@ def extract_text_from_pdf_page(pdf_path, page_num):
                 return text.strip()
     except ImportError:
         pass
-    
+ 
     return ""
