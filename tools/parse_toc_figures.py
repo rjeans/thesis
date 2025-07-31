@@ -15,7 +15,8 @@ import os
 # Add tools directory to path for imports
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 
-from gpt_vision_utils import call_gpt_vision_api, encode_images_for_vision, create_toc_parsing_prompt
+from gpt_vision_utils import call_gpt_vision_api, encode_images_for_vision
+from prompt_utils import create_toc_parsing_prompt
 from pdf_utils import extract_pages_to_pdf, pdf_to_images, extract_text_from_pdf_page
 from progress_utils import print_progress, print_completion_summary, print_section_header
 
