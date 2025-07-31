@@ -165,11 +165,27 @@ def load_individual_section(structure_dir, section_identifier):
                 # Sort subsections by start_page
                 section_subsections.sort(key=lambda x: x.get('start_page', x.get('page', 0)))
                 
-                # Calculate overall section range from the subsections
-                if section_subsections:
-                    overall_start = min(s.get('start_page', s.get('page', 999)) for s in section_subsections)
-                    overall_end = max(s.get('end_page', s.get('start_page', s.get('page', 0))) for s in section_subsections)
-                else:
+                # Calculate section range based on whether it's a parent or leaf section
+                # For token efficiency, parent sections only process their direct content
+                child_subsections = [s for s in section_subsections if s.get('section_number', '') != section_identifier]
+                
+                if len(child_subsections) > 0:  # Parent section with subsections
+                    # For parent sections, only process from start until first subsection starts
+                    overall_start = target_section.get('start_page', target_section.get('page', 0))
+                    
+                    # Find first child subsection
+                    child_subsections.sort(key=lambda x: x.get('start_page', x.get('page', 0)))
+                    first_child_start = child_subsections[0].get('start_page', child_subsections[0].get('page', overall_start))
+                    
+                    # If first child starts on same page as parent, process only that page
+                    # If first child starts on later page, process up to (but not including) that page
+                    if first_child_start == overall_start:
+                        overall_end = overall_start  # Same page - process only parent content on that page
+                    else:
+                        overall_end = first_child_start - 1  # Different page - process up to child start
+                        
+                    print_progress(f"+ Parent section detected - processing only parent content")
+                else:  # Leaf section - use full range
                     overall_start = target_section.get('start_page', target_section.get('page', 0))
                     overall_end = target_section.get('end_page', overall_start)
                 

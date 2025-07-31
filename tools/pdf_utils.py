@@ -189,9 +189,9 @@ def _try_ghostscript_extract(input_path, output_path, start_page, end_page):
         return False
 
 
-def extract_text_from_pdf_page(pdf_path, page_num):
+def extract_text_from_pdf_page(pdf_path, start_page_num, end_page_num):
     """
-    Extract text from a single PDF page for guidance and validation.
+    Extract text from a page range in a pdf document.
  
     Uses multiple PDF text extraction libraries as fallbacks:
     1. PyMuPDF (fitz) - fastest and most accurate
@@ -200,42 +200,22 @@ def extract_text_from_pdf_page(pdf_path, page_num):
  
     Args:
     pdf_path (str): Path to PDF file
-    page_num (int): Page number (1-based)
+    start_page_num (int): Page number
+    end_page_num (int): Page number
  
     Returns:
     str: Extracted text from the page, or empty string if failed
     """
-    try:
-        import fitz # PyMuPDF
-        doc = fitz.open(pdf_path)
-        if page_num - 1 < len(doc):
-            page = doc.load_page(page_num - 1) # Convert to 0-based
-            text = page.get_text()
-            doc.close()
-            return text.strip()
-        doc.close()
-    except ImportError:
-        pass
- 
-    try:
-        import pdfplumber
-        with pdfplumber.open(pdf_path) as pdf:
-            if page_num - 1 < len(pdf.pages):
-                page = pdf.pages[page_num - 1] # Convert to 0-based
-                text = page.extract_text() or ""
-                return text.strip()
-    except ImportError:
-        pass
- 
-    try:
-        import pypdf
-        with open(pdf_path, 'rb') as file:
-            pdf_reader = pypdf.PdfReader(file)
-            if page_num - 1 < len(pdf_reader.pages):
-                page = pdf_reader.pages[page_num - 1]
-                text = page.extract_text()
-                return text.strip()
-    except ImportError:
-        pass
- 
-    return ""
+
+    import fitz
+    doc= fitz.open(pdf_path)
+    text = ""
+    for page_num in range(start_page_num - 1, end_page_num):  # Convert to 0-based index
+        if page_num < len(doc):
+            page = doc.load_page(page_num)
+            text += page.get_text() + "\n"
+            text += f"\n--- Page {page_num+1} ---\n\n"
+    doc.close()
+    return text.strip()
+
+  
