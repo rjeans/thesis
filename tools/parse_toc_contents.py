@@ -55,7 +55,7 @@ def calculate_section_page_ranges(structure_data):
             next_section_start_page = valid_sections[i+1].get('page_start')
         
         if next_section_start_page is not None:
-            section['page_end'] = next_section_start_page - 1
+            section['page_end'] = next_section_start_page
         else:
             section['page_end'] = total_pages
         
@@ -103,7 +103,7 @@ def calculate_section_page_ranges(structure_data):
                         break
                 
                 if next_section_start is not None:
-                    subsection['end_page'] = next_section_start - 1
+                    subsection['end_page'] = next_section_start
                 else:
                     # If no next subsection, it ends at the chapter's end page
                     subsection['end_page'] = section.get('page_end', current_start)
