@@ -16,7 +16,7 @@ This project converts a scanned 215-page PDF thesis into clean, readable Markdow
 - `structure/` - YAML structure files generated from TOC parsing
 - `markdown_output/` - Final markdown files with modern HTML anchors
  - `assets/` - Dual-theme figure assets (light/dark with transparency)
-- `tools/` - Conversion scripts and utilities with abstract base class architecture
+- `tools/` - Conversion scripts with unified prompt architecture
 
 ## The TOC Parsing Solution: A Hybrid Approach
 

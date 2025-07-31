@@ -31,3 +31,7 @@ The final, successful solution is a multi-stage process that intelligently divid
 This hybrid approach has proven to be extremely effective. It produces a complete and accurate `thesis_contents.yaml` file that serves as the foundation for the rest of the conversion process. By using the right tool for the right job—AI for visual extraction, and code for logic and calculation—I've been able to create a solution that is both robust and reliable.
 
 This experience has been a powerful reminder that the most effective AI-powered workflows are often those that don't try to do everything with a single prompt. By breaking down the problem into smaller, more manageable steps, and by using code to handle the deterministic parts of the process, we can build solutions that are far more powerful and reliable than what either AI or code could achieve on their own.
+
+## Technical Architecture: Lessons Learned
+
+Building this workflow taught me the importance of maintainable code architecture. Initially, I had prompts scattered across multiple files, which led to inconsistencies and made updates difficult. The solution was to consolidate all prompts into a single `prompt_utils.py` file, creating a unified source of truth for all AI instructions. This architectural improvement eliminated prompt duplication and made the system much more maintainable—a crucial lesson for any AI-powered workflow.

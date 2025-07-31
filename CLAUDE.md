@@ -95,15 +95,16 @@ python3 generate_complete_document.py "../structure/thesis_contents.yaml" \
 - **Enhanced mathematical formatting**: Fixed equation delimiters and anchor placement
 - **Prompt leakage detection**: Automatic removal of processing instructions from output
 - **Content boundary awareness**: Eliminates arbitrary page breaks within concepts
-- **Shared prompt system**: Eliminated duplication through `prompt_utils.py`
+- **Consolidated prompt system**: All prompts unified in `prompt_utils.py` for consistency
 - **Page range fixes**: Green's Function now correctly spans pages 28-29
 - **Comprehensive diagnostics**: Batch-by-batch analysis with quality scoring and JSON export
 - **Status**: Production ready with intelligent mode selection
 
 **Key Innovations:**
 - **Intelligent mode selection**: Automatically chooses subsection-aware or page-based processing
-- **Consolidated prompts**: Single source of truth for mathematical formatting and requirements
+- **Unified prompt architecture**: All prompts consolidated in `prompt_utils.py` eliminating duplication
 - **Content-aware boundaries**: Processes complete logical units (e.g., "2.2.1 Green's Function")
+- **Enhanced equation formatting**: Fixed `\tag{}` format within `$$` blocks for numbered equations
 - **Robust cleaning**: Enhanced removal of markdown delimiters and prompt leakage
 - **Flexible fallback**: Force page-by-page mode with `--force-pages` when needed
 - **Quality assurance**: Comprehensive error detection and reporting
@@ -130,8 +131,8 @@ python3 generate_complete_document.py "../structure/thesis_contents.yaml" \
 9. **generate_complete_document.py** - Intelligent document assembly with TOC
 
 ### Supporting Architecture
-10. **chapter_processor_base.py** - Abstract base class for consistent architecture
-11. **gpt_vision_utils.py** - Standardized GPT-4 Vision API interfaces
+10. **prompt_utils.py** - Unified prompt system with all templates and formatting requirements
+11. **gpt_vision_utils.py** - GPT-4 Vision API calls and image processing utilities
 12. **pdf_utils.py** - PDF processing utilities with multiple tool fallbacks
 13. **progress_utils.py** - Progress tracking and error reporting
 14. **yaml_utils.py** - YAML structure file utilities
@@ -146,11 +147,14 @@ python3 generate_complete_document.py "../structure/thesis_contents.yaml" \
 - **Page boundary continuity**: Ensure sentences continuing across pages are captured
 - **Mathematical context**: Include explanatory text surrounding equations
 
-### 2. Mathematical Formatting (Enforced)
+### 2. Mathematical Formatting (Enhanced)
 - **Inline equations**: `$variable$` (NOT `\(variable\)`)
-- **Display equations**: `$$equation$$` (NOT `\[equation\]`)
+- **Display equations (unnumbered)**: `$$equation$$` (NOT `\[equation\]`)
+- **Display equations (numbered)**: `$$equation \tag{2.5.1}$$` or `$$\begin{align*} equation \tag{2.5.1} \end{align*}$$`
+- **CRITICAL**: ALL numbered equations MUST use `\tag{}` inside the `$$` block
+- **CRITICAL**: NEVER put equation numbers outside `$$` like: `$$equation$$ (2.5.1)`
 - **CRITICAL**: Opening `$$` must NOT have newline after it
-- **Numbered equations**: `$$\begin{align*} equation \tag{2.5.1} \end{align*}$$`
+- **CRITICAL**: Closing `$$` must NOT have newline before it
 
 ### 3. Cross-Reference Linking (Enforced)
 - **Figures**: `[Figure 2.1](#figure-2-1)`, `[Fig. 2.1](#figure-2-1)`
