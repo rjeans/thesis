@@ -14,9 +14,9 @@ This project converts a scanned 215-page PDF thesis into clean, readable Markdow
 
 - `original/` - Original PDF thesis (Richard_Jeans-1992-PhD-Thesis.pdf)
 - `structure/` - YAML structure files generated from TOC parsing
-- `markdown_output/` - Final markdown files with modern HTML anchors
+- `markdown_output/` - Final markdown files with modern HTML anchors and incremental section processing
  - `assets/` - Dual-theme figure assets (light/dark with transparency)
-- `tools/` - Conversion scripts with unified prompt architecture
+- `tools/` - Conversion scripts with unified prompt architecture and section-aware processing
 
 ## The TOC Parsing Solution: A Hybrid Approach
 
@@ -89,14 +89,20 @@ python3 parse_toc_tables.py "../original/Richard_Jeans-1992-PhD-Thesis.pdf" 17 1
 
 ### Phase 2: Content Processing
 
-Process all content using the generated structure files:
+Process sections using the new section-aware processor with incremental output:
 
 ```bash
-# Process main chapters
-python3 chapter_processor.py "../original/Richard_Jeans-1992-PhD-Thesis.pdf" "Chapter 1" \
- "../markdown_output/chapter_1.md" --structure-dir "../structure/"
+# Process complete section with all subsections (creates individual files)
+python3 chapter_processor.py --input "../original/Richard_Jeans-1992-PhD-Thesis.pdf" \
+ --section "2.1" --output "../markdown_output/" --structure-dir "../structure/"
 
-# ... and so on for all chapters, appendices, etc.
+# Process individual subsection only
+python3 chapter_processor.py --input "../original/Richard_Jeans-1992-PhD-Thesis.pdf" \
+ --section "2.1.1" --output "../markdown_output/" --structure-dir "../structure/"
+
+# Process entire chapter
+python3 chapter_processor.py --input "../original/Richard_Jeans-1992-PhD-Thesis.pdf" \
+ --section "2" --output "../markdown_output/" --structure-dir "../structure/"
 ```
 
 ## Conclusion

@@ -34,4 +34,18 @@ This experience has been a powerful reminder that the most effective AI-powered 
 
 ## Technical Architecture: Lessons Learned
 
-Building this workflow taught me the importance of maintainable code architecture. Initially, I had prompts scattered across multiple files, which led to inconsistencies and made updates difficult. The solution was to consolidate all prompts into a single `prompt_utils.py` file, creating a unified source of truth for all AI instructions. This architectural improvement eliminated prompt duplication and made the system much more maintainable—a crucial lesson for any AI-powered workflow.
+Building this workflow taught me several crucial lessons about maintainable AI-powered systems:
+
+### Unified Prompt Architecture
+Initially, I had prompts scattered across multiple files, which led to inconsistencies and made updates difficult. The solution was to consolidate all prompts into a single `prompt_utils.py` file, creating a unified source of truth for all AI instructions. This architectural improvement eliminated prompt duplication and made the system much more maintainable.
+
+### Section-Aware Processing
+The breakthrough came with implementing hierarchical section processing. Instead of processing entire chapters at once (which hit token limits), I developed a system that intelligently handles any section level (2.1, 2.1.1, etc.) with automatic parent-child discovery. Parent sections process their intro content, then automatically continue with all subsections.
+
+### Incremental Output for Real-Time Feedback
+A key improvement was implementing incremental file writing. As each section completes processing, its output is immediately written to disk. This provides real-time progress feedback and allows you to see results without waiting for the entire run to finish—crucial for long-running AI processing tasks.
+
+### Token Optimization
+By processing sections in logical chunks rather than arbitrary page ranges, I achieved much better token efficiency. Each section uses only the pages it actually needs, avoiding the token capacity issues that plagued earlier approaches.
+
+These architectural decisions transformed a brittle, hard-to-debug system into a robust, maintainable workflow that handles complex hierarchical content intelligently.

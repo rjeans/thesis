@@ -30,26 +30,23 @@ python3 parse_toc_tables.py "../original/Richard_Jeans-1992-PhD-Thesis.pdf" 17 1
 
 ### Phase 2: Content Processing (Intelligent Mode Selection)
 
-#### Primary: Consolidated Chapter Processor with Intelligent Mode Selection
+#### Primary: Section-Aware Chapter Processor with Incremental Output
 ```bash
-# Intelligent mode: Subsection-aware processing (automatic selection)
-python3 chapter_processor.py "../original/Richard_Jeans-1992-PhD-Thesis.pdf" "Chapter 1" \
- "../markdown_output/chapter_1.md" --structure-dir "../structure/"
+# Process complete section with all subsections (creates multiple files incrementally)
+python3 chapter_processor.py --input "../original/Richard_Jeans-1992-PhD-Thesis.pdf" \
+ --section "2.1" --output "../markdown_output/" --structure-dir "../structure/"
 
-python3 chapter_processor.py "../original/Richard_Jeans-1992-PhD-Thesis.pdf" "Chapter 2" \
- "../markdown_output/chapter_2.md" --structure-dir "../structure/" --max-pages 3
+# Process individual subsection only
+python3 chapter_processor.py --input "../original/Richard_Jeans-1992-PhD-Thesis.pdf" \
+ --section "2.1.1" --output "../markdown_output/" --structure-dir "../structure/"
 
-# Process front matter with automatic mode selection
-python3 chapter_processor.py "../original/Richard_Jeans-1992-PhD-Thesis.pdf" "Abstract" \
- "../markdown_output/abstract.md" --structure-dir "../structure/" --content-type front_matter
+# Process entire chapter (all main sections)
+python3 chapter_processor.py --input "../original/Richard_Jeans-1992-PhD-Thesis.pdf" \
+ --section "2" --output "../markdown_output/" --structure-dir "../structure/"
 
-# Force page-by-page processing if needed (fallback mode)
-python3 chapter_processor.py "../original/Richard_Jeans-1992-PhD-Thesis.pdf" "Chapter 3" \
- "../markdown_output/chapter_3.md" --force-pages --batch-size 2
-
-# Enable comprehensive diagnostics with detailed analysis
-python3 chapter_processor.py "../original/Richard_Jeans-1992-PhD-Thesis.pdf" "Chapter 2" \
- "../markdown_output/chapter_2_diag.md" --structure-dir "../structure/" --diagnostics
+# Custom batch size for token management
+python3 chapter_processor.py --input "../original/Richard_Jeans-1992-PhD-Thesis.pdf" \
+ --section "2.1" --output "../markdown_output/" --structure-dir "../structure/" --max-pages 2
 ```
 
 ### Phase 3: Figure Extraction (Dual Theme Support)
@@ -88,28 +85,26 @@ python3 generate_complete_document.py "../structure/thesis_contents.yaml" \
 
 ## Core Processing Architecture
 
-### **chapter_processor.py** - Consolidated Intelligent Chapter Processor
-- **Dual-mode intelligence**: Automatically selects optimal processing approach
-- **Primary mode**: Subsection-aware processing for structured content
-- **Fallback mode**: Page-by-page processing for unstructured content
+### **chapter_processor.py** - Simplified Section-Aware Processor
+- **Section-aware processing**: Intelligent handling of hierarchical content (2.1, 2.1.1, etc.)
+- **Incremental file writing**: Real-time output as each section is processed
+- **Parent-child processing**: Automatically processes parent sections and all subsections
+- **Token-efficient batching**: Processes only necessary pages per section
 - **Enhanced mathematical formatting**: Fixed equation delimiters and anchor placement
 - **Prompt leakage detection**: Automatic removal of processing instructions from output
-- **Content boundary awareness**: Eliminates arbitrary page breaks within concepts
 - **Consolidated prompt system**: All prompts unified in `prompt_utils.py` for consistency
-- **Page range fixes**: Green's Function now correctly spans pages 28-29
-- **Comprehensive diagnostics**: Batch-by-batch analysis with quality scoring and JSON export
-- **Status**: Production ready with intelligent mode selection
+- **Debug output**: Saves prompts and text context for each section processed
+- **Status**: Production ready with rationalized architecture
 
 **Key Innovations:**
-- **Intelligent mode selection**: Automatically chooses subsection-aware or page-based processing
-- **Unified prompt architecture**: All prompts consolidated in `prompt_utils.py` eliminating duplication
-- **Content-aware boundaries**: Processes complete logical units (e.g., "2.2.1 Green's Function")
+- **Hierarchical section processing**: Handles any section level (2.1, 2.1.1, 2.1.2.1) intelligently
+- **Incremental output**: Files are written as each section completes for real-time feedback
+- **Automatic subsection discovery**: Parent sections automatically include all child sections
+- **Token-optimized processing**: Each section uses minimal page ranges to avoid API limits
 - **Enhanced equation formatting**: Fixed `\tag{}` format within `$$` blocks for numbered equations
-- **Robust cleaning**: Enhanced removal of markdown delimiters and prompt leakage
-- **Flexible fallback**: Force page-by-page mode with `--force-pages` when needed
-- **Quality assurance**: Comprehensive error detection and reporting
-- **Progress tracking**: Detailed batch-level progress with error recovery
-- **Advanced diagnostics**: Real-time analysis, quality scoring, and JSON export for detailed review
+- **Debug transparency**: Saves prompts, text context, and individual outputs for inspection
+- **Unified prompt architecture**: All prompts consolidated in `prompt_utils.py` eliminating duplication
+- **Clean architecture**: Rationalized codebase with simplified, focused functionality
 
 ## Enhanced Architecture Components
 

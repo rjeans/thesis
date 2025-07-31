@@ -4,7 +4,7 @@ This project converts a 1992 PhD thesis from PDF to Markdown. The core of the pr
 
 ## Current Status
 
-The project is in a mature state. The most critical and complex part of the workflow—parsing the table of contents (TOC) to create a structural representation of the document—is complete and robust. The system can now accurately extract the full hierarchy of the thesis, including chapters, sections, and subsections, and correctly calculate the page ranges for each entry.
+The project is in a mature state with significant recent improvements. The most critical part—parsing the table of contents (TOC)—is complete and robust. The system now features an advanced section-aware processor that can handle any hierarchical level (2.1, 2.1.1, etc.) with intelligent parent-child processing and incremental file output for real-time feedback.
 
 ## Key Technical Solution: TOC Parsing
 
@@ -16,11 +16,13 @@ The successful TOC parsing solution is a hybrid, multi-stage approach that combi
 
 This approach has proven to be highly reliable and accurate.
 
-## Next Steps
+## Recent Improvements
 
-With the document structure now accurately parsed, the next steps will focus on:
+The system now includes several major enhancements:
 
-*   **Content Extraction:** Using the generated `thesis_contents.yaml` file to extract the content of each chapter and section.
-*   **Markdown Conversion:** Converting the extracted content into clean, well-formatted Markdown.
-*   **Figure and Table Extraction:** Extracting all figures and tables and inserting them into the Markdown files.
-*   **Final Assembly:** Assembling the complete thesis in Markdown, with all cross-references and links correctly resolved.
+*   **Section-Aware Processing:** Intelligent handling of hierarchical content at any level (2.1, 2.1.1, 2.1.2.1)
+*   **Incremental Output:** Files are written as each section completes, providing real-time progress feedback
+*   **Token Optimization:** Each section uses minimal page ranges to avoid API limits and improve efficiency
+*   **Automatic Subsection Discovery:** Parent sections automatically process all child sections
+*   **Debug Transparency:** Saves prompts, text context, and individual outputs for inspection
+*   **Rationalized Architecture:** Clean, simplified codebase with focused functionality

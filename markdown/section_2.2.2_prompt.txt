@@ -1,0 +1,98 @@
+Convert this individual section from a 1992 LaTeX academic thesis PDF to markdown format.
+
+INDIVIDUAL SECTION INFORMATION:
+- Chapter Context: CHAPTER 2. Acoustic Problem
+- Section: 2.2.2 Discontinuities
+- Processing: Individual subsection (pages 29-32)
+- Content Type: Complete subsection with logical boundaries
+
+EXPECTED SECTION STRUCTURE:
+2.2.2 Discontinuities
+
+CRITICAL CONTENT REQUIREMENTS:
+1. **COMPLETE TEXT TRANSCRIPTION**: Read entire PDF content without missing any text
+   - Include ALL sentences and paragraphs, especially transitional text between sections
+   - Pay attention to continuation text that may appear before section headers
+   - Do NOT skip connector sentences that provide context or bridge between topics
+   - SPECIFICALLY INCLUDE: Any sentences that reference technical methods, formulations, or comparisons
+   - Look for partial sentences or paragraphs that continue from the previous page
+
+2. **INDIVIDUAL SECTION PROCESSING** (COMPLETE_SECTION):
+   - This is a single subsection from a larger chapter
+   - **CRITICAL HEADING LEVEL**: Use ### for the main section header
+   - Start with: ### 2.2.2 Discontinuities <a id="section-2-2-2"></a>
+   - **PROCESSING SCOPE**: Process the complete section including ALL content from pages 29-32
+   - Process complete logical flow from section introduction through conclusion
+   - Ensure comprehensive coverage of all section content
+
+3. **MATHEMATICAL FORMATTING**:
+   - Inline equations: $variable$ (NOT \(variable\))
+   - Display equations (unnumbered): $$equation$$ (NOT \[equation\])
+   - Display equations (numbered): $$equation \tag{2.5.1}$$ or $$\begin{align*} equation \tag{2.5.1} \end{align*}$$
+   - **CRITICAL**: ALL numbered equations MUST use \tag{} inside the $$ block
+   - **CRITICAL**: NEVER put equation numbers outside $$ like: $$equation$$ (2.5.1)
+   - **CRITICAL**: Opening $$ must NOT have newline after it
+   - **CRITICAL**: Closing $$ must NOT have newline before it
+
+4. **FIGURE FORMATTING**: Use HTML picture element format for dual theme support:
+
+<a id="figure-x-y"></a>
+
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="assets/figure-x-y-dark.png">
+  <source media="(prefers-color-scheme: light)" srcset="assets/figure-x-y.png">
+  <img alt="Figure X.Y. Caption text here." src="assets/figure-x-y.png">
+</picture>
+Figure X.Y. Caption text here.
+
+**Requirements**: Anchor BEFORE picture element, both themes, full alt text, plain caption below
+
+5. **ANCHOR GENERATION AND HEADING HIERARCHY**:
+   - **Chapter headers (level 1)**: # Chapter Title <a id="chapter-X"></a>
+   - **Main sections (level 1)**: ## 2.1 Section Title <a id="section-2-1"></a>
+   - **Subsections (level 2)**: ### 2.1.1 Subsection Title <a id="section-2-1-1"></a>
+   - **Sub-subsections (level 3)**: #### 2.1.1.1 Sub-subsection Title <a id="section-2-1-1-1"></a>
+   - **CRITICAL**: Use correct heading depth based on section numbering depth
+   - Figures: <a id="figure-2-1"></a> before figure elements
+   - Equations: <a id="equation-2-1"></a> before equation blocks
+   - Tables: <a id="table-2-1"></a> before table content
+
+6. **CROSS-REFERENCES**:
+   - Figures: [Figure 2.1](#figure-2-1), [Fig. 2.1](#figure-2-1)
+   - Equations: [equation (2.1)](#equation-2-1), [Eq. (2.1)](#equation-2-1)
+   - Tables: [Table 2.1](#table-2-1), [Tab. 2.1](#table-2-1)
+   - Sections: [Section 2.1](#section-2-1), [Sec. 2.1](#section-2-1)
+   - References: [Author (Year)](#bib-author-year)
+
+7. **PDF TEXT GUIDANCE**: Use this extracted text to verify accuracy and completeness:
+
+Acoustic Problem.
+to its derivatives; ie values at neighbouring points, but also to its values at the boundary. The
+boundary conditions are built into an integral equation through the form of its ernel, but for
+a differential equation the boundary conditions are imposed at the final stage of solution. This
+kernel is the Green's function for the problem.
+For the acoustic problem, the Green's function is the fundamental solution of the inhomo
+geneous Helmholtz' equation.
+where S(P, Q) is the delta-dirac function. Also the Green's function must satisfy Sommerfeld's
+radiation condition, Eq. (1.1.13). The appropriate solution in three dimensions is given by,
+In this equation r is the Euclidean distance between the field points P and Q.
+2.2.2 Discontinuities
+The integral operators that are of interest are defined by.
+The function & is assumed to be a continuous function over S. For completeness there is also
+the identity operator,
+An important property of these operators defined in Eq. (2.2....
+
+This text should help you understand the content structure and ensure nothing is missed.
+
+8. **SECTION PROCESSING GUIDELINES**:
+   - Focus on this specific section's content only
+   - Ensure the heading level matches the section numbering depth
+   - Include complete mathematical derivations with explanatory context
+   - Maintain academic writing conventions and technical precision
+   - Preserve figure and table references within section context
+
+**OUTPUT REQUIREMENTS**:
+- Provide clean markdown without code block markers
+- Focus on creating complete, coherent content
+- Skip page headers, footers, or page numbers
+- Maintain academic writing conventions and technical precision
