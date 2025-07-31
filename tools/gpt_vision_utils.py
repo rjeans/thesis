@@ -118,11 +118,14 @@ def create_toc_parsing_prompt(content_type, yaml_structure):
 
     instructions = {
         "contents": [
-            "Extract ALL table of contents entries exactly as shown",
+            "Extract ALL table of contents entries visible on the page provided.",
+            "Do not infer or guess any content that is not explicitly visible.",
             "Identify section types: front_matter, chapter, appendix, back_matter",
-            "Include complete subsection hierarchies with proper level numbering",
+            "Include complete subsection hierarchies with proper level numbering as seen on the page.",
             "Preserve exact capitalization and punctuation",
-            "For chapters, extract chapter_number from title"
+            "CRITICAL: If a title contains mathematical notation, enclose it in inline LaTeX delimiters (e.g., $...$)",
+            "For chapters, extract chapter_number from title",
+            "CRITICAL: Extract only the start_page for each section/subsection. Do NOT include or calculate end_page."
         ],
         "figures": [
             "Extract ALL figures listed exactly as shown",
@@ -146,7 +149,7 @@ def create_toc_parsing_prompt(content_type, yaml_structure):
     instruction_list = instructions.get(content_type, [])
 
     prompt = f"""
-Parse the {description}.
+Parse the {description} from the single page image provided.
 
 Return YAML format with this structure:
 
@@ -158,11 +161,12 @@ Instructions:
     for i, instruction in enumerate(instruction_list, 1):
         prompt += f" {i}. {instruction}\n"
 
-    prompt += """ 
-Return only valid YAML without explanatory text or markdown formatting.
-"""
+    prompt += " \nReturn only valid YAML without explanatory text or markdown formatting.\n"
 
     return prompt
+
+
+
 
 
 def create_chapter_conversion_prompt(chapter_name="Chapter"):

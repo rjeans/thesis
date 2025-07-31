@@ -8,6 +8,82 @@ from pathlib import Path
 from progress_utils import print_progress
 
 
+def find_leaf_sections(structure_dir, chapter_identifier=None):
+    """
+    Find all leaf sections (lowest-level sections without subsections) for processing.
+    
+    Args:
+        structure_dir (str): Directory containing YAML structure files
+        chapter_identifier (str, optional): Specific chapter to analyze, or None for all chapters
+    
+    Returns:
+        list: List of leaf section identifiers suitable for individual processing
+    """
+    structure_file = Path(structure_dir) / "thesis_contents.yaml"
+    
+    if not structure_file.exists():
+        print_progress(f"- Structure file not found: {structure_file}")
+        return []
+    
+    try:
+        with open(structure_file, 'r', encoding='utf-8') as f:
+            structure_data = yaml.safe_load(f)
+        
+        if 'sections' not in structure_data:
+            return []
+        
+        leaf_sections = []
+        
+        # Look through all chapters or specific chapter
+        for chapter in structure_data['sections']:
+            if chapter.get('type') != 'chapter':
+                continue
+                
+            # Skip if looking for specific chapter and this isn't it
+            if chapter_identifier and str(chapter.get('chapter_number', '')) != str(chapter_identifier):
+                continue
+                
+            subsections = chapter.get('subsections', [])
+            
+            # Build hierarchy map to identify leaf nodes
+            section_hierarchy = {}
+            for subsection in subsections:
+                section_number = str(subsection.get('section_number', ''))
+                if section_number:
+                    section_hierarchy[section_number] = subsection
+            
+            # Find leaf sections (sections that don't have any subsections under them)
+            for section_number, section_data in section_hierarchy.items():
+                is_leaf = True
+                
+                # Check if any other section starts with this section number + "."
+                for other_section in section_hierarchy.keys():
+                    if (other_section != section_number and 
+                        other_section.startswith(section_number + '.') and
+                        len(other_section.split('.')) == len(section_number.split('.')) + 1):
+                        is_leaf = False
+                        break
+                
+                if is_leaf:
+                    leaf_sections.append({
+                        'section_number': section_number,
+                        'title': section_data.get('title', ''),
+                        'chapter_title': chapter.get('title', ''),
+                        'start_page': section_data.get('start_page', section_data.get('page')),
+                        'end_page': section_data.get('end_page'),
+                        'level': section_data.get('level', 0)
+                    })
+        
+        # Sort by section number for consistent processing order
+        leaf_sections.sort(key=lambda x: [int(n) for n in x['section_number'].split('.')])
+        
+        return leaf_sections
+        
+    except Exception as e:
+        print_progress(f"- Error loading structure file: {e}")
+        return []
+
+
 def load_chapter_subsections(structure_dir, chapter_identifier):
     """Load chapter subsections from YAML structure files."""
     structure_file = Path(structure_dir) / "thesis_contents.yaml"
@@ -38,31 +114,116 @@ def load_chapter_subsections(structure_dir, chapter_identifier):
         return None
 
 
+def load_individual_section(structure_dir, section_identifier):
+    """
+    Load a specific section (e.g., 2.1, 2.1.1) from YAML structure files.
+    
+    Args:
+        structure_dir (str): Directory containing YAML structure files
+        section_identifier (str): Section identifier (e.g., "2.1", "2.1.1")
+    
+    Returns:
+        dict: Section data with parent chapter context and all subsections, or None if not found
+    """
+    structure_file = Path(structure_dir) / "thesis_contents.yaml"
+    
+    if not structure_file.exists():
+        print_progress(f"- Structure file not found: {structure_file}")
+        return None
+    
+    try:
+        with open(structure_file, 'r', encoding='utf-8') as f:
+            structure_data = yaml.safe_load(f)
+        
+        if 'sections' not in structure_data:
+            return None
+        
+        # Look for the section within all chapters
+        for chapter in structure_data['sections']:
+            if chapter.get('type') != 'chapter':
+                continue
+                
+            subsections = chapter.get('subsections', [])
+            
+            # Find the target section and collect all its subsections
+            target_section = None
+            section_subsections = []
+            
+            for subsection in subsections:
+                section_number = str(subsection.get('section_number', ''))
+                
+                # Found the main section (e.g., "2.1")
+                if section_number == section_identifier:
+                    target_section = subsection
+                    section_subsections.append(subsection)
+                # Found a subsection that belongs to this section (e.g., "2.1.1", "2.1.2")
+                elif section_number.startswith(section_identifier + '.') and len(section_number.split('.')) == len(section_identifier.split('.')) + 1:
+                    section_subsections.append(subsection)
+            
+            if target_section:
+                # Enhanced YAML structure already has start_page and end_page calculated
+                # Sort subsections by start_page
+                section_subsections.sort(key=lambda x: x.get('start_page', x.get('page', 0)))
+                
+                # Calculate overall section range from the subsections
+                if section_subsections:
+                    overall_start = min(s.get('start_page', s.get('page', 999)) for s in section_subsections)
+                    overall_end = max(s.get('end_page', s.get('start_page', s.get('page', 0))) for s in section_subsections)
+                else:
+                    overall_start = target_section.get('start_page', target_section.get('page', 0))
+                    overall_end = target_section.get('end_page', overall_start)
+                
+                print_progress(f"+ Section {section_identifier} spans pages {overall_start}-{overall_end}")
+                print_progress(f"+ Found {len(section_subsections)} subsections:")
+                for subsection in section_subsections:
+                    start_p = subsection.get('start_page', subsection.get('page', 'Unknown'))
+                    end_p = subsection.get('end_page', start_p)
+                    print_progress(f"  - {subsection.get('section_number')}: {start_p}-{end_p}")
+                
+                # Return section with complete context
+                return {
+                    'type': 'individual_section',
+                    'title': f"Section {section_identifier}: {target_section.get('title', '')}",
+                    'chapter_number': chapter.get('chapter_number'),
+                    'chapter_title': chapter.get('title', ''),
+                    'section_data': target_section,
+                    'parent_chapter': chapter,
+                    'all_subsections': section_subsections,
+                    'calculated_page_range': {
+                        'start_page': overall_start,
+                        'end_page': overall_end
+                    }
+                }
+        
+        print_progress(f"- Section '{section_identifier}' not found in structure")
+        return None
+        
+    except Exception as e:
+        print_progress(f"- Error loading structure file: {e}")
+        return None
+
+
 def calculate_subsection_page_ranges(chapter_data):
-    """Calculate page ranges for each subsection."""
+    """Calculate page ranges for each subsection using enhanced YAML structure."""
     if not chapter_data or 'subsections' not in chapter_data:
         return []
     
     subsections = chapter_data['subsections']
     ranges = []
     
-    for i, subsection in enumerate(subsections):
+    for subsection in subsections:
+        # Enhanced structure should already have start_page and end_page
         start_page = subsection.get('start_page') or subsection.get('page')
+        end_page = subsection.get('end_page', start_page)
+        
         if start_page is None:
             continue
-            
-        # End page is either the next subsection's start page - 1, or chapter end
-        if i + 1 < len(subsections):
-            next_start = subsections[i + 1].get('start_page') or subsections[i + 1].get('page')
-            end_page = next_start - 1 if next_start else start_page
-        else:
-            end_page = chapter_data.get('page_end') or chapter_data.get('end_page', start_page)
         
         ranges.append({
             **subsection,
             'start_page': start_page,
             'end_page': end_page,
-            'page_count': end_page - start_page + 1
+            'page_count': max(1, end_page - start_page + 1)  # Ensure at least 1 page
         })
     
     return ranges

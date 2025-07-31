@@ -42,8 +42,12 @@ Figure X.Y. Caption text here.
 
 def get_anchor_generation_section():
     """Get anchor generation requirements section."""
-    return """**ANCHOR GENERATION**:
-   - Headers: ## 2.1 Section Title <a id="section-2-1"></a>
+    return """**ANCHOR GENERATION AND HEADING HIERARCHY**:
+   - **Chapter headers (level 1)**: # Chapter Title <a id="chapter-X"></a>
+   - **Main sections (level 1)**: ## 2.1 Section Title <a id="section-2-1"></a>
+   - **Subsections (level 2)**: ### 2.1.1 Subsection Title <a id="section-2-1-1"></a>
+   - **Sub-subsections (level 3)**: #### 2.1.1.1 Sub-subsection Title <a id="section-2-1-1-1"></a>
+   - **CRITICAL**: Use correct heading depth based on section numbering depth
    - Figures: <a id="figure-2-1"></a> before figure elements
    - Equations: <a id="equation-2-1"></a> before equation blocks
    - Tables: <a id="table-2-1"></a> before table content"""

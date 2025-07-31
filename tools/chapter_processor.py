@@ -29,6 +29,7 @@ from prompt_utils import (
 )
 from subsection_utils import (
     load_chapter_subsections, 
+    load_individual_section,
     calculate_subsection_page_ranges,
     group_subsections_by_hierarchy,
     create_batch_info,
@@ -74,26 +75,38 @@ class ChapterProcessor:
 
     def process_chapter(self, chapter_identifier, output_path):
         """
-        Process a chapter using subsection-aware processing.
+        Process a chapter or individual section using subsection-aware processing.
         
         Args:
-            chapter_identifier (str): Chapter identifier (e.g., "2", "Chapter 2")
+            chapter_identifier (str): Chapter identifier (e.g., "2", "Chapter 2") or section (e.g., "2.1", "2.1.1")
             output_path (str): Output markdown file path
         
         Returns:
             bool: True if processing succeeded, False otherwise
         """
-        print_progress(f"Processing chapter: {chapter_identifier}")
+        print_progress(f"Processing identifier: {chapter_identifier}")
         
-        # Load chapter subsections
+        # Check if structure directory exists
         if not self.structure_dir or not self.structure_dir.exists():
             print_progress("- No structure directory provided or found")
             return False
-            
+        
+        # Try to load as individual section first (if contains dots)
+        if '.' in chapter_identifier and chapter_identifier.replace('.', '').isdigit():
+            print_progress(f"Attempting to load as individual section: {chapter_identifier}")
+            section_data = load_individual_section(str(self.structure_dir), chapter_identifier)
+            if section_data:
+                print_progress(f"+ Found individual section: {section_data['title']}")
+                return self.process_individual_section(section_data, output_path)
+        
+        # Try to load as full chapter
+        print_progress(f"Attempting to load as chapter: {chapter_identifier}")
         chapter_data = load_chapter_subsections(str(self.structure_dir), chapter_identifier)
         if not chapter_data:
-            print_progress(f"- Could not load chapter data for '{chapter_identifier}'")
+            print_progress(f"- Could not load data for '{chapter_identifier}' as chapter or section")
             return False
+        
+        print_progress(f"+ Found chapter: {chapter_data.get('title', 'Unknown')}")
 
         # Calculate subsection page ranges
         subsection_ranges = calculate_subsection_page_ranges(chapter_data)
@@ -139,12 +152,34 @@ class ChapterProcessor:
                     'content': cleaned_result,
                     'success': True
                 })
+                
+                # Store detailed diagnostics
+                if self.enable_diagnostics:
+                    self.diagnostics['batches'][f'batch_{batch_index}'] = {
+                        'batch_description': batch_info['batch_description'],
+                        'page_range': f"{batch_info['start_page']}-{batch_info['end_page']}",
+                        'page_count': batch_info['page_count'],
+                        'section_count': batch_info['subsection_count'],
+                        'success': True,
+                        'content': cleaned_result,
+                        'raw_content_length': len(result) if result else 0,
+                        'cleaned_content_length': len(cleaned_result)
+                    }
+                
                 print_progress(f"+ Successfully processed batch {batch_index}")
             else:
                 error_msg = f"Failed to process batch {batch_index}: {result}"
                 print_progress(f"- {error_msg}")
                 if self.enable_diagnostics:
                     self.diagnostics['processing_errors'].append(error_msg)
+                    self.diagnostics['batches'][f'batch_{batch_index}'] = {
+                        'batch_description': batch_info['batch_description'],
+                        'page_range': f"{batch_info['start_page']}-{batch_info['end_page']}",
+                        'page_count': batch_info['page_count'],
+                        'section_count': batch_info['subsection_count'],
+                        'success': False,
+                        'error': error_msg
+                    }
 
         # Merge batch results
         if batch_results:
@@ -163,6 +198,110 @@ class ChapterProcessor:
             return True
         
         return False
+
+    def process_individual_section(self, section_data, output_path):
+        """
+        Process an individual section (e.g., 2.1, 2.1.1) rather than a full chapter.
+        
+        Args:
+            section_data (dict): Section data with parent chapter context
+            output_path (str): Output markdown file path
+        
+        Returns:
+            bool: True if processing succeeded, False otherwise
+        """
+        section_info = section_data['section_data']
+        chapter_title = section_data['chapter_title']
+        section_number = section_info.get('section_number', '')
+        section_title = section_info.get('title', '')
+        
+        print_progress(f"Processing individual section: {section_number} {section_title}")
+        
+        # Get page range for this section - use calculated range if available
+        if 'calculated_page_range' in section_data:
+            start_page = section_data['calculated_page_range']['start_page']
+            end_page = section_data['calculated_page_range']['end_page']
+            print_progress(f"+ Using calculated page range: {start_page}-{end_page}")
+        else:
+            # Fallback to single page
+            start_page = section_info.get('start_page') or section_info.get('page')
+            if start_page is None:
+                print_progress(f"- No page information found for section {section_number}")
+                return False
+            end_page = section_info.get('end_page', start_page)
+        
+        print_progress(f"Section page range: {start_page}-{end_page}")
+        
+        # Create a simplified batch for this section
+        batch_info = {
+            'start_page': start_page,
+            'end_page': end_page,
+            'page_count': end_page - start_page + 1,
+            'section_titles': [f"{section_number} {section_title}"],
+            'batch_description': f"Section {section_number}",
+            'chapter_title': chapter_title,
+            'subsection_count': 1
+        }
+        
+        # Extract PDF text context
+        text_context = self._extract_batch_text_context(start_page, end_page)
+        
+        if self.enable_diagnostics:
+            print_progress(f"+ Diagnostic mode: Processing individual section")
+            print_progress(f"  Section: {section_number} - {section_title}")
+            print_progress(f"  Pages: {start_page}-{end_page} ({batch_info['page_count']} pages)")
+            print_progress(f"  Text context: {len(text_context)} characters")
+        
+        # Create section-specific prompt
+        prompt = self._create_individual_section_prompt(batch_info, text_context, section_data)
+        
+        # Process the section
+        result = self._process_batch(batch_info, prompt, 1)
+        
+        if result and not result.startswith("Error:"):
+            cleaned_result = self._clean_batch_result(result)
+            
+            # For individual sections, we don't need chapter headers
+            final_content = cleaned_result
+            
+            # Write to output file
+            with open(output_path, 'w', encoding='utf-8') as f:
+                f.write(final_content)
+            
+            # Save diagnostics if enabled
+            if self.enable_diagnostics:
+                diagnostics_path = Path(output_path).with_suffix('.diagnostics.json')
+                section_diagnostics = {
+                    'processing_mode': 'individual_section',
+                    'section_number': section_number,
+                    'section_title': section_title,
+                    'chapter_context': chapter_title,
+                    'page_range': f"{start_page}-{end_page}",
+                    'page_count': batch_info['page_count'],
+                    'success': True,
+                    'content_analysis': {
+                        'character_count': len(final_content),
+                        'line_count': len(final_content.split('\n')),
+                        'equation_count': final_content.count('$$'),
+                        'figure_references': final_content.count('[Figure ') + final_content.count('[Fig. '),
+                        'section_headers': final_content.count('##') + final_content.count('###') + final_content.count('####'),
+                        'anchor_count': final_content.count('<a id='),
+                        'heading_level_used': '###' if len(section_number.split('.')) == 3 else '##'
+                    },
+                    'processing_details': {
+                        'text_context_length': len(text_context),
+                        'raw_result_length': len(result) if result else 0,
+                        'cleaned_result_length': len(cleaned_result),
+                        'prompt_used': 'individual_section_prompt'
+                    }
+                }
+                self._save_section_diagnostics(diagnostics_path, section_diagnostics)
+            
+            print_completion_summary(output_path, 1, f"individual section processed")
+            return True
+        else:
+            print_progress(f"- Failed to process individual section: {result}")
+            return False
 
     def _extract_batch_text_context(self, start_page, end_page):
         """Extract text context from a page range for guidance."""
@@ -217,6 +356,94 @@ CRITICAL CONTENT REQUIREMENTS:
    - Include complete mathematical derivations with their explanatory context
    - Maintain academic writing conventions and technical precision
    - Preserve figure and table references within subsection context
+
+{get_output_requirements_section()}
+"""
+        
+        return prompt
+
+    def _create_individual_section_prompt(self, batch_info, text_context, section_data):
+        """
+        Create a prompt for processing an individual section.
+        
+        Args:
+            batch_info (dict): Information about the section batch
+            text_context (str): Extracted PDF text for guidance
+            section_data (dict): Section data with chapter context
+        
+        Returns:
+            str: Formatted prompt for GPT-4 Vision API
+        """
+        section_info = section_data['section_data']
+        section_number = section_info.get('section_number', '')
+        section_title = section_info.get('title', '')
+        chapter_title = section_data['chapter_title']
+        all_subsections = section_data.get('all_subsections', [])
+        
+        # Determine correct heading level based on section numbering
+        section_parts = section_number.split('.')
+        if len(section_parts) == 2:  # e.g., "2.1"
+            heading_level = "##"
+            heading_type = "main section"
+        elif len(section_parts) == 3:  # e.g., "2.1.1"
+            heading_level = "###"
+            heading_type = "subsection"
+        elif len(section_parts) == 4:  # e.g., "2.1.1.1"
+            heading_level = "####"
+            heading_type = "sub-subsection"
+        else:
+            heading_level = "##"
+            heading_type = "section"
+        
+        # Create expected subsection structure list
+        expected_subsections = []
+        for subsection in all_subsections:
+            sub_number = subsection.get('section_number', '')
+            sub_title = subsection.get('title', '')
+            if sub_number and sub_title:
+                expected_subsections.append(f"{sub_number} {sub_title}")
+        
+        expected_structure = "\n".join(expected_subsections) if expected_subsections else f"{section_number} {section_title}"
+        
+        prompt = f"""Convert this individual section from a 1992 LaTeX academic thesis PDF to markdown format.
+
+INDIVIDUAL SECTION INFORMATION:
+- Chapter Context: {chapter_title}
+- Section: {section_number} {section_title}
+- Processing: Individual {heading_type} (pages {batch_info['start_page']}-{batch_info['end_page']})
+- Content Type: Complete {heading_type} with logical boundaries
+
+EXPECTED SECTION STRUCTURE:
+{expected_structure}
+
+CRITICAL CONTENT REQUIREMENTS:
+1. {get_content_transcription_requirements()}
+
+2. **INDIVIDUAL SECTION PROCESSING**:
+   - This is a single {heading_type} from a larger chapter
+   - **CRITICAL HEADING LEVEL**: Use {heading_level} for the main section header
+   - Start with: {heading_level} {section_number} {section_title} <a id="section-{section_number.replace('.', '-')}"></a>
+   - **INCLUDE ALL SUBSECTIONS**: Process the complete section including ALL subsections listed above
+   - **COMPLETE COVERAGE**: Include ALL content from pages {batch_info['start_page']}-{batch_info['end_page']}
+   - Process complete logical flow from section introduction through all subsections to conclusion
+   - Ensure every subsection listed in the expected structure is included
+
+3. {get_mathematical_formatting_section()}
+
+4. {get_figure_formatting_section()}
+
+5. {get_anchor_generation_section()}
+
+6. {get_cross_reference_section()}
+
+7. {get_pdf_text_guidance_section(text_context)}
+
+8. **SECTION PROCESSING GUIDELINES**:
+   - Focus on this specific section's content only
+   - Ensure the heading level matches the section numbering depth
+   - Include complete mathematical derivations with explanatory context
+   - Maintain academic writing conventions and technical precision
+   - Preserve figure and table references within section context
 
 {get_output_requirements_section()}
 """
@@ -332,31 +559,78 @@ CRITICAL CONTENT REQUIREMENTS:
         if not self.enable_diagnostics:
             return
         
+        # Calculate comprehensive metrics
+        total_batches = len(self.diagnostics.get('batches', {}))
+        successful_batches = sum(1 for batch in self.diagnostics.get('batches', {}).values() 
+                               if batch.get('success', False))
+        total_errors = len(self.diagnostics.get('processing_errors', []))
+        
+        # Add summary metrics
+        self.diagnostics['summary'] = {
+            'total_batches_processed': total_batches,
+            'successful_batches': successful_batches,
+            'failed_batches': total_batches - successful_batches,
+            'success_rate': (successful_batches / total_batches * 100) if total_batches > 0 else 0,
+            'total_processing_errors': total_errors,
+            'processing_mode': 'subsection-aware',
+            'timestamp': str(Path(diagnostics_path).stem)
+        }
+        
+        # Add batch-by-batch analysis
+        if 'batches' in self.diagnostics:
+            for batch_id, batch_data in self.diagnostics['batches'].items():
+                if 'content' in batch_data:
+                    content = batch_data['content']
+                    batch_data['content_analysis'] = {
+                        'character_count': len(content),
+                        'line_count': len(content.split('\n')),
+                        'equation_count': content.count('$$'),
+                        'figure_references': content.count('[Figure ') + content.count('[Fig. '),
+                        'section_headers': content.count('##') + content.count('###') + content.count('####'),
+                        'anchor_count': content.count('<a id=')
+                    }
+        
         try:
             with open(diagnostics_path, 'w', encoding='utf-8') as f:
                 json.dump(self.diagnostics, f, indent=2, ensure_ascii=False)
-            print_progress(f"+ Diagnostics saved to: {diagnostics_path}")
+            print_progress(f"+ Comprehensive diagnostics saved to: {diagnostics_path}")
+            print_progress(f"  Summary: {successful_batches}/{total_batches} batches successful ({self.diagnostics['summary']['success_rate']:.1f}%)")
         except Exception as e:
             print_progress(f"- Failed to save diagnostics: {e}")
+
+    def _save_section_diagnostics(self, diagnostics_path, section_diagnostics):
+        """Save diagnostics for individual section processing."""
+        try:
+            with open(diagnostics_path, 'w', encoding='utf-8') as f:
+                json.dump(section_diagnostics, f, indent=2, ensure_ascii=False)
+            print_progress(f"+ Section diagnostics saved to: {diagnostics_path}")
+        except Exception as e:
+            print_progress(f"- Failed to save section diagnostics: {e}")
 
 
 def main():
     """Main function for simplified chapter processing."""
     parser = argparse.ArgumentParser(
-        description='Process thesis chapters with section-based processing',
+        description='Process thesis chapters or individual sections with section-based processing',
         formatter_class=argparse.RawDescriptionHelpFormatter,
         epilog="""
 Examples:
-  # Process chapter 2 with section-aware batching
+  # Process full chapter 2 with section-aware batching
   python chapter_processor.py thesis.pdf "2" chapter_2.md --structure-dir structure/
   
-  # Enable diagnostics for detailed analysis
-  python chapter_processor.py thesis.pdf "Chapter 2" chapter_2.md --structure-dir structure/ --diagnostics
+  # Process individual section 2.1 (main section)
+  python chapter_processor.py thesis.pdf "2.1" section_2_1.md --structure-dir structure/
+  
+  # Process individual subsection 2.1.1 (subsection level)
+  python chapter_processor.py thesis.pdf "2.1.1" section_2_1_1.md --structure-dir structure/
+  
+  # Enable comprehensive diagnostics for detailed analysis
+  python chapter_processor.py thesis.pdf "2" chapter_2.md --structure-dir structure/ --diagnostics
   
   # Custom batch size (pages per subsection batch)
   python chapter_processor.py thesis.pdf "2" chapter_2.md --structure-dir structure/ --max-pages 2
 
-This processor focuses on subsection-aware processing for optimal content quality.
+This processor supports both full chapters and individual sections with proper heading levels.
 """
     )
     
