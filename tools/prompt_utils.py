@@ -72,7 +72,7 @@ def get_pdf_text_guidance_section(text_context):
     
     return f"""**PDF TEXT GUIDANCE**: Use this extracted text to verify accuracy and completeness:
 
-{text_context[:1000]}{'...' if len(text_context) > 1000 else ''}
+{text_context}
 
 This text should help you understand the content structure and ensure nothing is missed."""
 
@@ -109,13 +109,18 @@ def create_toc_parsing_prompt(content_type, yaml_structure):
     instructions = {
         "contents": [
             "Extract ALL table of contents entries visible on the page provided.",
+            "CRITICAL: Look for BOTH complete chapters AND individual sections/subsections that may be continuations from previous pages.",
+            "CRITICAL: If you see sections numbered like '2.5', '2.6' etc. without a chapter header, create a chapter entry for the parent chapter (e.g., for '2.5' create 'CHAPTER 2' entry with chapter_number: 2).",
+            "CRITICAL: For orphaned sections like '2.5 Thin shell formulation', determine the parent chapter number from the section number and create a chapter entry.",
             "Do not infer or guess any content that is not explicitly visible.",
             "Identify section types: front_matter, chapter, appendix, back_matter",
             "Include complete subsection hierarchies with proper level numbering as seen on the page.",
             "Preserve exact capitalization and punctuation",
             "CRITICAL: If a title contains mathematical notation, enclose it in inline LaTeX delimiters (e.g., $...$)",
-            "For chapters, extract chapter_number from title",
-            "CRITICAL: Extract only the start_page for each section/subsection. Do NOT include or calculate end_page."
+            "For chapters, extract chapter_number from title (e.g., 'CHAPTER 3' -> chapter_number: 3)",
+            "CRITICAL: Extract only the start_page for each section/subsection. Do NOT include or calculate end_page.",
+            "IMPORTANT: If this page shows sections from multiple chapters, create separate chapter entries for each.",
+            "EXAMPLE: If you see '2.5 Thin shell formulation' without 'CHAPTER 2' header, create an entry: type: chapter, title: 'CHAPTER 2 (continued)', chapter_number: 2, subsections: [{section_number: '2.5', title: 'Thin shell formulation', ...}]"
         ],
         "figures": [
             "Extract ALL figures listed exactly as shown",

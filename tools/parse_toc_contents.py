@@ -149,6 +149,155 @@ extraction_metadata:
 """
 
 
+def merge_sections_across_pages(all_pages_data):
+    """
+    Intelligently merge sections across multiple TOC pages.
+    
+    This function handles the case where a chapter's subsections continue
+    on the next page by merging subsections into their parent chapters
+    and avoiding duplicate chapter entries.
+    
+    Args:
+        all_pages_data (list): List of page data dictionaries from GPT-4 Vision
+        
+    Returns:
+        list: Merged list of sections with proper chapter-subsection relationships
+    """
+    if not all_pages_data:
+        return []
+    
+    # Track chapters and their subsections across pages
+    chapter_registry = {}  # chapter_number -> chapter_data
+    standalone_sections = []  # front_matter, back_matter, appendix
+    orphaned_subsections = []  # subsections without parent chapters
+    
+    print_progress("  Analyzing sections across pages...")
+    
+    for page_idx, page_data in enumerate(all_pages_data):
+        source_page = page_idx + 9  # Assuming TOC starts at page 9
+        sections = page_data.get('sections', [])
+        
+        print_progress(f"  Page {source_page}: Found {len(sections)} sections")
+        
+        for section in sections:
+            section_type = section.get('type', 'unknown')
+            section_title = section.get('title', 'Unknown')
+            
+            if section_type == 'chapter':
+                chapter_number = section.get('chapter_number')
+                
+                if chapter_number is None:
+                    print_progress(f"    [WARNING] Chapter missing chapter_number: {section_title}")
+                    standalone_sections.append(section)
+                    continue
+                
+                if chapter_number in chapter_registry:
+                    # This is a continuation of an existing chapter on a new page
+                    print_progress(f"    [MERGE] Chapter {chapter_number} continued from previous page")
+                    existing_chapter = chapter_registry[chapter_number]
+                    
+                    # Merge subsections from this page into the existing chapter
+                    existing_subsections = existing_chapter.get('subsections', [])
+                    new_subsections = section.get('subsections', [])
+                    
+                    if new_subsections:
+                        existing_subsections.extend(new_subsections)
+                        existing_chapter['subsections'] = existing_subsections
+                        print_progress(f"      Added {len(new_subsections)} subsections to Chapter {chapter_number}")
+                    
+                    # Update the chapter's end page if this page extends it
+                    section_end_page = section.get('page_end') or 0
+                    existing_end_page = existing_chapter.get('page_end') or 0
+                    if section_end_page > existing_end_page:
+                        existing_chapter['page_end'] = section_end_page
+                        
+                else:
+                    # This is a new chapter
+                    print_progress(f"    [NEW] Chapter {chapter_number}: {section_title}")
+                    chapter_registry[chapter_number] = section
+                    
+            else:
+                # Handle front_matter, back_matter, appendix sections
+                print_progress(f"    [STANDALONE] {section_type}: {section_title}")
+                standalone_sections.append(section)
+    
+    # Second pass: Look for orphaned subsections that should belong to existing chapters
+    print_progress("  Looking for orphaned subsections to merge...")
+    adopted_subsections = set()  # Track which subsections have been adopted
+    
+    for page_idx, page_data in enumerate(all_pages_data):
+        source_page = page_idx + 9
+        sections = page_data.get('sections', [])
+        
+        for section in sections:
+            # Check if any section has subsections that might be orphaned
+            subsections = section.get('subsections', [])
+            for subsection in subsections:
+                section_num = subsection.get('section_number', '')
+                if section_num and '.' in section_num:
+                    # Extract potential parent chapter number (e.g., "2.5" -> 2)
+                    try:
+                        parent_chapter = int(section_num.split('.')[0])
+                        current_chapter = section.get('chapter_number')
+                        
+                        # Only adopt if the subsection is in the wrong chapter
+                        if (parent_chapter in chapter_registry and 
+                            current_chapter != parent_chapter):
+                            
+                            existing_chapter = chapter_registry[parent_chapter]
+                            existing_subsections = existing_chapter.get('subsections', [])
+                            
+                            # Check if this subsection is already in the parent chapter
+                            existing_section_nums = [s.get('section_number') for s in existing_subsections]
+                            if section_num not in existing_section_nums:
+                                print_progress(f"    [ADOPT] Found orphaned subsection {section_num}, moving from Chapter {current_chapter} to Chapter {parent_chapter}")
+                                existing_subsections.append(subsection)
+                                existing_chapter['subsections'] = existing_subsections
+                                adopted_subsections.add(section_num)
+                    except (ValueError, IndexError):
+                        continue
+    
+    # Third pass: Remove adopted subsections from their original chapters
+    if adopted_subsections:
+        print_progress(f"  Removing {len(adopted_subsections)} adopted subsections from original locations...")
+        for chapter_num, chapter in chapter_registry.items():
+            original_subsections = chapter.get('subsections', [])
+            filtered_subsections = []
+            
+            for subsection in original_subsections:
+                section_num = subsection.get('section_number', '')
+                if section_num not in adopted_subsections:
+                    filtered_subsections.append(subsection)
+                else:
+                    print_progress(f"    [REMOVE] Removed {section_num} from Chapter {chapter_num}")
+            
+            chapter['subsections'] = filtered_subsections
+    
+    # Reconstruct the final sections list in the correct order
+    print_progress("  Reconstructing merged section list...")
+    final_sections = []
+    
+    # Add non-chapter sections (front_matter, etc.) in original order
+    for section in standalone_sections:
+        if section.get('type') in ['front_matter']:
+            final_sections.append(section)
+    
+    # Add chapters in numerical order
+    chapter_numbers = sorted([num for num in chapter_registry.keys() if isinstance(num, int)])
+    for chapter_num in chapter_numbers:
+        chapter = chapter_registry[chapter_num]
+        print_progress(f"  Final Chapter {chapter_num}: {len(chapter.get('subsections', []))} subsections")
+        final_sections.append(chapter)
+    
+    # Add remaining non-chapter sections (back_matter, appendix)
+    for section in standalone_sections:
+        if section.get('type') not in ['front_matter']:
+            final_sections.append(section)
+    
+    print_progress(f"  Merge complete: {len(final_sections)} total sections")
+    return final_sections
+
+
 def parse_toc_contents(pdf_path, start_page, end_page, output_dir):
     """
     Parse table of contents from PDF pages to extract chapter structure.
@@ -211,15 +360,14 @@ def parse_toc_contents(pdf_path, start_page, end_page, output_dir):
         print_progress("- No sections were extracted from any page.")
         return False
 
-    # Intelligent merging of sections
-    all_sections = []
-    for page_data in all_pages_data:
-        all_sections.extend(page_data.get('sections', []))
+    # Intelligent merging of sections across pages
+    print_progress("\nIntelligently merging sections across pages...")
+    merged_sections = merge_sections_across_pages(all_pages_data)
 
     final_structure = {
         'thesis_title': 'PhD Thesis Title',
         'total_pages': 215,
-        'sections': all_sections
+        'sections': merged_sections
     }
     
     print_progress("\nConsolidating all extracted sections...")

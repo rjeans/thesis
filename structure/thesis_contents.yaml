@@ -70,7 +70,7 @@ sections:
 - type: chapter
   title: CHAPTER 2. Acoustic Problem
   page_start: 25
-  page_end: 45
+  page_end: 44
   chapter_number: 2
   subsections:
   - section_number: '2.1'
@@ -136,7 +136,7 @@ sections:
   - section_number: '2.4'
     title: Uniqueness of Boundary Integral Formulations
     start_page: 36
-    end_page: 45
+    end_page: 39
     level: 1
   - section_number: 2.4.1
     title: SHIE and DSHIE formulations
@@ -161,7 +161,22 @@ sections:
   - section_number: 2.4.5
     title: Hybrid boundary layer formulation
     start_page: 39
-    end_page: 45
+    end_page: 42
+    level: 2
+  - section_number: '2.5'
+    title: Thin shell formulaiton
+    start_page: 42
+    end_page: 42
+    level: 1
+  - section_number: 2.5.1
+    title: Boundary Integral Formulation
+    start_page: 42
+    end_page: 43
+    level: 2
+  - section_number: 2.5.2
+    title: Edge conditions
+    start_page: 43
+    end_page: 44
     level: 2
   source_page: 9
 - type: chapter
@@ -201,17 +216,17 @@ sections:
     end_page: 58
     level: 1
   - section_number: 3.4.1
-    title: $L_k$ Operator
+    title: $L_{k}$ Operator
     start_page: 49
     end_page: 51
     level: 2
   - section_number: 3.4.2
-    title: $M_k$ Operator
+    title: $M_{k}$ Operator
     start_page: 51
     end_page: 53
     level: 2
   - section_number: 3.4.3
-    title: $N_k$ Operator
+    title: $N_{k}$ Operator
     start_page: 53
     end_page: 56
     level: 2
@@ -305,8 +320,33 @@ sections:
   - section_number: '4.7'
     title: Computer Code
     start_page: 85
+    end_page: 86
+    level: 1
+  - section_number: '4.8'
+    title: Numerical Results
+    start_page: 86
     end_page: 110
     level: 1
+  - section_number: 4.8.1
+    title: Spheroids
+    start_page: 86
+    end_page: 87
+    level: 2
+  - section_number: 4.8.2
+    title: Flat Disk
+    start_page: 87
+    end_page: 91
+    level: 2
+  - section_number: 4.8.3
+    title: Flat Square Plate
+    start_page: 91
+    end_page: 91
+    level: 2
+  - section_number: 4.8.4
+    title: Terai's Problem
+    start_page: 91
+    end_page: 110
+    level: 2
   source_page: 10
 - type: chapter
   title: CHAPTER 5. The Superposition Method

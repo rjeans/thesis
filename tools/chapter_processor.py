@@ -13,6 +13,7 @@ from pathlib import Path
 import tempfile
 import openai
 import os
+from enum import Enum
 
 # Import utilities
 from progress_utils import print_progress, print_completion_summary, print_section_header
@@ -35,6 +36,10 @@ from subsection_utils import (
     create_batch_info,
     print_subsection_batching_plan
 )
+
+class ProcessingMode(Enum):
+    PARENT_SECTION_ONLY = "PARENT_SECTION_ONLY"
+    COMPLETE_SECTION = "COMPLETE_SECTION"
 
 
 class ChapterProcessor:
@@ -99,62 +104,38 @@ class ChapterProcessor:
         Returns:
             bool: True if processing succeeded, False otherwise
         """
-    
         section_info = section_data['section_data']
         chapter_title = section_data['chapter_title']
-        section_number = section_data['section_data'].get('section_number')
+        section_number = section_info.get('section_number')
         section_title = section_info.get('title', '')
-        chapter_title = section_data.get('chapter_title')
+        result=False
 
         print_progress(f"Processing individual section: {section_number} {section_title}")
         print_progress(f"Chapter: {chapter_title}")
 
-        # Get page range for this section - use calculated range if available
-        if 'calculated_page_range' in section_data:
-            start_page = section_data['calculated_page_range']['start_page']
-            end_page = section_data['calculated_page_range']['end_page']
-            print_progress(f"+ Using calculated page range: {start_page}-{end_page}")
-        else:
-            # Fallback to single page
-            start_page = section_info.get('start_page') or section_info.get('page')
-            if start_page is None:
-                print_progress(f"- No page information found for section {section_number}")
-                return False
-            end_page = section_info.get('end_page', start_page)
-        
-        print_progress(f"Section page range: {start_page}-{end_page}")
-        
-        # Create a simplified batch for this section
-        batch_info = {
-            'start_page': start_page,
-            'end_page': end_page,
-            'page_count': end_page - start_page + 1,
-            'section_titles': [f"{section_number} {section_title}"],
-            'batch_description': f"Section {section_number}",
-            'chapter_title': chapter_title,
-            'subsection_count': 1
-        }
-        
-        # Extract PDF text context
-        text_context = self._extract_batch_text_context(start_page, end_page,section_info,output_path)
+        # Get page range and batch info
+        start_page, end_page = self._get_page_range(section_info)
+        batch_info = self._create_batch_info(section_info, start_page, end_page)
 
-    
-        
-       
+        print_progress(f"Section page range: {start_page}-{end_page}")
+
+        # Extract PDF text context
+        text_context = self._extract_batch_text_context(start_page, end_page, section_info, output_path)
+
         print_progress(f"+ Diagnostic mode: Processing individual section")
         print_progress(f"  Section: {section_number} - {section_title}")
         print_progress(f"  Pages: {start_page}-{end_page} ({batch_info['page_count']} pages)")
         print_progress(f"  Text context: {len(text_context)} characters")
-        
+
         # Create section-specific prompt
         prompt = self._create_individual_section_prompt(batch_info, text_context, section_data, output_path)
- 
+
         # Process the section
         result = self._process_batch(batch_info, prompt, 1)
-        
+
         if result and not result.startswith("Error:"):
             cleaned_result = self._clean_batch_result(result)
-            
+
             # Start with parent section content
             section_content = cleaned_result
 
@@ -165,16 +146,16 @@ class ChapterProcessor:
             # Check if this is a parent section with child subsections
             all_subsections = section_data.get('all_subsections', [])
             child_subsections = [s for s in all_subsections if s.get('section_number', '') != section_number and s.get('section_number', '').startswith(section_number + '.')]
-            
+
             if child_subsections:
                 print_progress(f"+ Parent section processed, continuing with {len(child_subsections)} child subsections...")
-                
+
                 # Process each child subsection
                 for child in child_subsections:
                     child_number = child.get('section_number', '')
                     child_title = child.get('title', '')
                     print_progress(f"  Processing child subsection: {child_number} {child_title}")
-                    
+
                     # Create child section data structure
                     child_section_data = {
                         'type': 'individual_section',
@@ -189,25 +170,22 @@ class ChapterProcessor:
                             'end_page': child.get('end_page', child.get('start_page', child.get('page', 0)))
                         }
                     }
-                    
+
                     # Process the child subsection
-                    child_result = self._process_child_subsection(child_section_data,output_path)
+                    child_result = self._process_child_subsection(child_section_data, output_path)
                     if child_result:
                         print_progress(f"  + Child subsection {child_number} processed successfully")
                     else:
                         print_progress(f"  - Failed to process child subsection {child_number}")
-            
-   
-            
- 
-            
-            print_completion_summary(output_path, 1, f"individual section processed")
-            return True
-        else:
-            print_progress(f"- Failed to process individual section: {result}")
-            return False
 
-    def _extract_batch_text_context(self, start_page, end_page, section_data,output_path):
+            print_completion_summary(output_path, 1, f"individual section processed")
+            result=True
+        else:
+            print_progress(f"- Failed to process individual section")
+            result=False
+        return result
+
+    def _extract_batch_text_context(self, start_page, end_page, section_data, output_path):
         """Extract text context from a page range for guidance."""
         section_number = section_data.get('section_number')
  
@@ -222,64 +200,32 @@ class ChapterProcessor:
  
         return text_context
 
-   
-
-        
-        return prompt
-
-    def _create_individual_section_prompt(self, batch_info, text_context, section_data, output_path):
-        """
-        Create a prompt for processing an individual section.
-        
-        Args:
-            batch_info (dict): Information about the section batch
-            text_context (str): Extracted PDF text for guidance
-            section_data (dict): Section data with chapter context
-        
-        Returns:
-            str: Formatted prompt for GPT-4 Vision API
-        """
-        section_info = section_data['section_data']
-        section_number = section_info.get('section_number')
-        section_title = section_info.get('title', '')
-        chapter_title = section_data['chapter_title']
-        all_subsections = section_data.get('all_subsections', [])
-        
-        # Determine correct heading level based on section numbering
+    def _determine_heading_level(self, section_number: str) -> tuple[str, str]:
+        """Determine the heading level and type based on section numbering."""
         section_parts = section_number.split('.')
-        if len(section_parts) == 2:  # e.g., "2.1"
-            heading_level = "##"
-            heading_type = "main section"
-        elif len(section_parts) == 3:  # e.g., "2.1.1"
-            heading_level = "###"
-            heading_type = "subsection"
-        elif len(section_parts) == 4:  # e.g., "2.1.1.1"
-            heading_level = "####"
-            heading_type = "sub-subsection"
-        else:
-            heading_level = "##"
-            heading_type = "section"
-        
-        # Determine if this is a parent section with child subsections
-        child_subsections = [s for s in all_subsections if s.get('section_number', '') != section_number and s.get('section_number', '').startswith(section_number + '.')]
-        is_parent_section = len(child_subsections) > 0
-        
-        if is_parent_section:
+        if len(section_parts) == 2:
+            return "##", "main section"
+        elif len(section_parts) == 3:
+            return "###", "subsection"
+        elif len(section_parts) == 4:
+            return "####", "sub-subsection"
+        return "##", "section"
+
+    def _determine_processing_mode_and_structure(self, section_number: str, section_title: str, all_subsections: list) -> tuple[str, str]:
+        """Determine the processing mode and expected structure for the section."""
+        child_subsections = [s for s in all_subsections if s.get('section_number', '').startswith(section_number + '.')]
+        if child_subsections:
             expected_structure = f"{section_number} {section_title} (parent section content only)"
-            processing_mode = "PARENT_SECTION_ONLY"
+            return ProcessingMode.PARENT_SECTION_ONLY.value, expected_structure
         else:
-            # Create expected subsection structure list for leaf sections
-            expected_subsections = []
-            for subsection in all_subsections:
-                sub_number = subsection.get('section_number', '')
-                sub_title = subsection.get('title', '')
-                if sub_number and sub_title:
-                    expected_subsections.append(f"{sub_number} {sub_title}")
-            
-            expected_structure = "\n".join(expected_subsections) if expected_subsections else f"{section_number} {section_title}"
-            processing_mode = "COMPLETE_SECTION"
-        
-        prompt = f"""Convert this individual section from a 1992 LaTeX academic thesis PDF to markdown format.
+            expected_structure = "\n".join(
+                f"{s.get('section_number', '')} {s.get('title', '')}" for s in all_subsections
+            ) or f"{section_number} {section_title}"
+            return ProcessingMode.COMPLETE_SECTION.value, expected_structure
+
+    def _build_prompt(self, batch_info: dict, text_context: str, section_number: str, section_title: str, chapter_title: str, heading_level: str, heading_type: str, processing_mode: str, expected_structure: str) -> str:
+        """Build the prompt string for the section."""
+        return f"""Convert this individual section from a 1992 LaTeX academic thesis PDF to markdown format.
 
 INDIVIDUAL SECTION INFORMATION:
 - Chapter Context: {chapter_title}
@@ -296,10 +242,8 @@ CRITICAL CONTENT REQUIREMENTS:
 2. **INDIVIDUAL SECTION PROCESSING** ({processing_mode}):
    - This is a single {heading_type} from a larger chapter
    - **CRITICAL HEADING LEVEL**: Use {heading_level} for the main section header
-   - Start with: {heading_level} {section_number} {section_title} <a id="section-{section_number.replace('.', '-')}"></a>
-   - **PROCESSING SCOPE**: {"Process ONLY the parent section content - extract the section heading and any introductory text that belongs directly to " + section_number + " but do NOT include any subsection content" if is_parent_section else "Process the complete section including ALL content from pages " + str(batch_info['start_page']) + "-" + str(batch_info['end_page'])}
-   - {"CRITICAL: Stop processing when you encounter the first subsection heading (e.g., " + child_subsections[0].get('section_number', '') + ")" if is_parent_section and child_subsections else "Process complete logical flow from section introduction through conclusion"}
-   - {"Focus on introductory material that sets up the overall section before diving into specific subsections" if is_parent_section else "Ensure comprehensive coverage of all section content"}
+   - Start with: {heading_level} {section_number} {section_title} <a id=\"section-{section_number.replace('.', '-')}\"></a>
+   - {"Process ONLY the parent section content" if processing_mode == ProcessingMode.PARENT_SECTION_ONLY.value else "Process the complete section"}
 
 3. {get_mathematical_formatting_section()}
 
@@ -320,7 +264,39 @@ CRITICAL CONTENT REQUIREMENTS:
 
 {get_output_requirements_section()}
 """
+
+    def _create_individual_section_prompt(self, batch_info: dict, text_context: str, section_data: dict, output_path: str) -> str:
+        """
+        Create a prompt for processing an individual section.
         
+        Args:
+            batch_info (dict): Information about the section batch
+            text_context (str): Extracted PDF text for guidance
+            section_data (dict): Section data with chapter context
+            output_path (str): Path to save the generated prompt
+    
+        Returns:
+            str: Formatted prompt for GPT-4 Vision API
+        """
+        section_info = section_data['section_data']
+        section_number = section_info.get('section_number')
+        section_title = section_info.get('title', '')
+        chapter_title = section_data['chapter_title']
+        all_subsections = section_data.get('all_subsections', [])
+
+        # Determine heading level and type
+        heading_level, heading_type = self._determine_heading_level(section_number)
+
+        # Determine processing mode and expected structure
+        processing_mode, expected_structure = self._determine_processing_mode_and_structure(section_number, section_title, all_subsections)
+
+        # Build the prompt
+        prompt = self._build_prompt(
+            batch_info, text_context, section_number, section_title, chapter_title,
+            heading_level, heading_type, processing_mode, expected_structure
+        )
+
+        # Save the prompt to a file
         prompt_path = Path(output_path) / f"section_{section_number}_prompt.txt"
         with open(prompt_path, 'w', encoding='utf-8') as f:
             f.write(prompt)
@@ -466,8 +442,27 @@ CRITICAL CONTENT REQUIREMENTS:
         
         return cleaned_result
 
+    def _get_page_range(self, section_data: dict) -> tuple[int, int]:
+        """Get the start and end page for a section."""
+        if 'calculated_page_range' in section_data:
+            return section_data['calculated_page_range']['start_page'], section_data['calculated_page_range']['end_page']
+        start_page = section_data.get('start_page') or section_data.get('page')
+        end_page = section_data.get('end_page', start_page)
+        return start_page, end_page
 
-
+    def _create_batch_info(self, section_data: dict, start_page: int, end_page: int) -> dict:
+        """Create batch info for a section."""
+        section_number = section_data.get('section_number', '')
+        section_title = section_data.get('title', '')
+        return {
+            'start_page': start_page,
+            'end_page': end_page,
+            'page_count': end_page - start_page + 1,
+            'section_titles': [f"{section_number} {section_title}"],
+            'batch_description': f"Section {section_number}",
+            'chapter_title': section_data.get('chapter_title', ''),
+            'subsection_count': 1
+        }
 
 
 def main():
