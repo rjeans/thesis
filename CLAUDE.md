@@ -5,7 +5,7 @@ Converting a 1992 PhD thesis (215 pages) from PDF to Markdown using GPT-4 Vision
 
 ## Current Status - Consolidated Intelligent Processing
 - **Innovation**: Single consolidated processor with intelligent mode selection
-- **Primary tool**: `chapter_processor.py` with dual-mode intelligence (subsection-aware + page fallback)
+- **Primary tool**: `section_processor.py` - simplified architecture processing individual sections
 - **Breakthrough approach**: Automatic processing mode selection based on content structure
 - **Enhanced mathematical formatting**: Fixed equation blocks, anchor placement, and prompt duplication
 - **Structure-driven processing**: YAML metadata enables intelligent content discovery (85% effort reduction)
@@ -33,19 +33,19 @@ python3 parse_toc_tables.py "../original/Richard_Jeans-1992-PhD-Thesis.pdf" 17 1
 #### Primary: Section-Aware Chapter Processor with Incremental Output
 ```bash
 # Process complete section with all subsections (creates multiple files incrementally)
-python3 chapter_processor.py --input "../original/Richard_Jeans-1992-PhD-Thesis.pdf" \
+python3 section_processor.py --input "../original/Richard_Jeans-1992-PhD-Thesis.pdf" \
  --section "2.1" --output "../markdown_output/" --structure-dir "../structure/"
 
 # Process individual subsection only
-python3 chapter_processor.py --input "../original/Richard_Jeans-1992-PhD-Thesis.pdf" \
+python3 section_processor.py --input "../original/Richard_Jeans-1992-PhD-Thesis.pdf" \
  --section "2.1.1" --output "../markdown_output/" --structure-dir "../structure/"
 
 # Process entire chapter (all main sections)
-python3 chapter_processor.py --input "../original/Richard_Jeans-1992-PhD-Thesis.pdf" \
+python3 section_processor.py --input "../original/Richard_Jeans-1992-PhD-Thesis.pdf" \
  --section "2" --output "../markdown_output/" --structure-dir "../structure/"
 
 # Custom batch size for token management
-python3 chapter_processor.py --input "../original/Richard_Jeans-1992-PhD-Thesis.pdf" \
+python3 section_processor.py --input "../original/Richard_Jeans-1992-PhD-Thesis.pdf" \
  --section "2.1" --output "../markdown_output/" --structure-dir "../structure/" --max-pages 2
 ```
 
@@ -85,11 +85,11 @@ python3 generate_complete_document.py "../structure/thesis_contents.yaml" \
 
 ## Core Processing Architecture
 
-### **chapter_processor.py** - Simplified Section-Aware Processor
-- **Section-aware processing**: Intelligent handling of hierarchical content (2.1, 2.1.1, etc.)
-- **Incremental file writing**: Real-time output as each section is processed
-- **Parent-child processing**: Automatically processes parent sections and all subsections
-- **Token-efficient batching**: Processes only necessary pages per section
+### **section_processor.py** - Simplified Single-Section Processor
+- **Single responsibility**: Processes exactly one section per invocation (no iteration)
+- **Clean architecture**: Focused on individual section processing without complex orchestration
+- **External orchestration**: Multiple sections handled by external scripts/batch processing
+- **Clear separation**: One section input → one markdown output file
 - **Enhanced mathematical formatting**: Fixed equation delimiters and anchor placement
 - **Prompt leakage detection**: Automatic removal of processing instructions from output
 - **Consolidated prompt system**: All prompts unified in `prompt_utils.py` for consistency
@@ -168,10 +168,10 @@ python3 generate_complete_document.py "../structure/thesis_contents.yaml" \
 
 | Content Type | Usage | Command Example |
 |--------------|-------|-----------------|
-| `chapter` | Main thesis chapters | `python3 chapter_processor.py thesis.pdf "Chapter 2" output.md --structure-dir structure/` |
-| `front_matter` | Abstract, acknowledgements | `python3 chapter_processor.py thesis.pdf "Abstract" output.md --structure-dir structure/ --content-type front_matter` |
-| `appendix` | Technical appendices | `python3 chapter_processor.py thesis.pdf "Appendix A" output.md --structure-dir structure/ --content-type appendix` |
-| `references` | Bibliography sections | `python3 chapter_processor.py thesis.pdf "References" output.md --structure-dir structure/ --content-type references` |
+| `chapter` | Main thesis chapters | `python3 section_processor.py thesis.pdf "Chapter 2" output.md --structure-dir structure/` |
+| `front_matter` | Abstract, acknowledgements | `python3 section_processor.py thesis.pdf "Abstract" output.md --structure-dir structure/ --content-type front_matter` |
+| `appendix` | Technical appendices | `python3 section_processor.py thesis.pdf "Appendix A" output.md --structure-dir structure/ --content-type appendix` |
+| `references` | Bibliography sections | `python3 section_processor.py thesis.pdf "References" output.md --structure-dir structure/ --content-type references` |
 
 ## File Organization
 
@@ -251,9 +251,9 @@ python3 parse_toc_figures.py thesis.pdf 13 15 structure/
 python3 parse_toc_tables.py thesis.pdf 17 17 structure/
 
 # 2. Process all content with single-page batching (optimal)
-python3 chapter_processor.py thesis.pdf "Abstract" markdown_output/abstract.md --structure-dir structure/ --content-type front_matter
-python3 chapter_processor.py thesis.pdf "Chapter 1" markdown_output/chapter_1.md --structure-dir structure/
-python3 chapter_processor.py thesis.pdf "Chapter 2" markdown_output/chapter_2.md --structure-dir structure/
+python3 section_processor.py thesis.pdf "Abstract" markdown_output/abstract.md --structure-dir structure/ --content-type front_matter
+python3 section_processor.py thesis.pdf "Chapter 1" markdown_output/chapter_1.md --structure-dir structure/
+python3 section_processor.py thesis.pdf "Chapter 2" markdown_output/chapter_2.md --structure-dir structure/
 # ... continue for all chapters
 
 # 3. Academic proofreading and correction with ChatGPT web version (RECOMMENDED)

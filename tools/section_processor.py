@@ -42,9 +42,9 @@ class ProcessingMode(Enum):
     COMPLETE_SECTION = "COMPLETE_SECTION"
 
 
-class ChapterProcessor:
+class SectionProcessor:
     """
-    Simplified chapter processor focused on section-based processing.
+    Simplified section processor focused on section-based processing.
     
     This processor uses subsection-aware processing to handle complete logical
     content units rather than arbitrary page breaks.
@@ -52,8 +52,8 @@ class ChapterProcessor:
 
     def __init__(self, pdf_path, structure_dir=None, max_pages_per_batch=3):
         """
-        Initialize the chapter processor.
-        
+        Initialize the section processor.
+
         Args:
             pdf_path (str): Path to source PDF file
             structure_dir (str): Directory containing YAML structure files
@@ -71,7 +71,7 @@ class ChapterProcessor:
      
     def process_section(self, section_identifier, output_path):
         """
-        Process a chapter or individual section using subsection-aware processing.
+        Process a section or individual section using subsection-aware processing.
         
         Args:
             section_identifier (str): Section identifier (e.g., "2.1", "2.1.1")
@@ -143,40 +143,7 @@ class ChapterProcessor:
             with open(section_output_path, 'w', encoding='utf-8') as f:
                 f.write(section_content)
 
-            # Check if this is a parent section with child subsections
-            all_subsections = section_data.get('all_subsections', [])
-            child_subsections = [s for s in all_subsections if s.get('section_number', '') != section_number and s.get('section_number', '').startswith(section_number + '.')]
-
-            if child_subsections:
-                print_progress(f"+ Parent section processed, continuing with {len(child_subsections)} child subsections...")
-
-                # Process each child subsection
-                for child in child_subsections:
-                    child_number = child.get('section_number', '')
-                    child_title = child.get('title', '')
-                    print_progress(f"  Processing child subsection: {child_number} {child_title}")
-
-                    # Create child section data structure
-                    child_section_data = {
-                        'type': 'individual_section',
-                        'title': f"Section {child_number}: {child_title}",
-                        'chapter_number': section_data.get('chapter_number'),
-                        'chapter_title': section_data.get('chapter_title'),
-                        'section_data': child,
-                        'parent_chapter': section_data.get('parent_chapter'),
-                        'all_subsections': [child],  # Only this child for processing
-                        'calculated_page_range': {
-                            'start_page': child.get('start_page', child.get('page', 0)),
-                            'end_page': child.get('end_page', child.get('start_page', child.get('page', 0)))
-                        }
-                    }
-
-                    # Process the child subsection
-                    child_result = self._process_child_subsection(child_section_data, output_path)
-                    if child_result:
-                        print_progress(f"  + Child subsection {child_number} processed successfully")
-                    else:
-                        print_progress(f"  - Failed to process child subsection {child_number}")
+ 
 
             print_completion_summary(output_path, 1, f"individual section processed")
             result=True
@@ -303,66 +270,7 @@ CRITICAL CONTENT REQUIREMENTS:
         print_progress(f"  Prompt saved to: {prompt_path}")
         return prompt
 
-    def _process_child_subsection(self, child_section_data,output_path):
-        """
-        Process a child subsection as part of parent section processing.
-        
-        Args:
-            child_section_data (dict): Child section data structure
-            
-        Returns:
-            str: Processed markdown content or None if failed
-        """
-        section_info = child_section_data['section_data']
-        section_number = section_info.get('section_number', '')
-        section_title = section_info.get('title', '')
-        
-        # Get page range for this child section
-        if 'calculated_page_range' in child_section_data:
-            start_page = child_section_data['calculated_page_range']['start_page']
-            end_page = child_section_data['calculated_page_range']['end_page']
-        else:
-            start_page = section_info.get('start_page') or section_info.get('page')
-            end_page = section_info.get('end_page', start_page)
-        
-        if start_page is None:
-            return None
-        
-        # Create batch info for child
-        batch_info = {
-            'start_page': start_page,
-            'end_page': end_page,
-            'page_count': end_page - start_page + 1,
-            'section_titles': [f"{section_number} {section_title}"],
-            'batch_description': f"Child Section {section_number}",
-            'chapter_title': child_section_data['chapter_title'],
-            'subsection_count': 1
-        }
-        
-        # Extract PDF text context
-        text_context = self._extract_batch_text_context(start_page, end_page,section_info,output_path)
-    
-        
- 
-        print_progress(f"    Pages: {start_page}-{end_page} ({batch_info['page_count']} pages)")
-        print_progress(f"    Text context: {len(text_context)} characters")
-        
-        # Create child section prompt
-        prompt = self._create_individual_section_prompt(batch_info, text_context, child_section_data, output_path)
 
-        # Process the child section
-        result = self._process_batch(batch_info, prompt, 1)
-        
-        if result and not result.startswith("Error:"):
-            output =  self._clean_batch_result(result)
-            result_output_path = Path(output_path) / f"{section_number}_{section_title.replace(' ', '_')}.md"
-            with open(result_output_path, 'w', encoding='utf-8') as f:
-                f.write(output)
-            print_progress(f"    - Child section processed successfully: {result_output_path}")
-            return output
-        else:
-            print_progress(f"    - Error processing child section: {result}")
-            return None
 
     def _process_batch(self, batch_info, prompt, batch_index):
         """Process a single batch of pages."""
@@ -517,7 +425,7 @@ This processor supports both full chapters and individual sections with proper h
     print(f"Max pages per batch: {args.max_pages}")
     print("=" * 60)
     
-    processor = ChapterProcessor(
+    processor = SectionProcessor(
         pdf_path=args.input,
         structure_dir=args.structure_dir,
         max_pages_per_batch=args.max_pages,

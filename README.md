@@ -89,19 +89,19 @@ python3 parse_toc_tables.py "../original/Richard_Jeans-1992-PhD-Thesis.pdf" 17 1
 
 ### Phase 2: Content Processing
 
-Process sections using the new section-aware processor with incremental output:
+Process sections using the simplified section processor (one section per invocation):
 
 ```bash
-# Process complete section with all subsections (creates individual files)
-python3 chapter_processor.py --input "../original/Richard_Jeans-1992-PhD-Thesis.pdf" \
+# Process individual section (one section per invocation)
+python3 section_processor.py --input "../original/Richard_Jeans-1992-PhD-Thesis.pdf" \
  --section "2.1" --output "../markdown_output/" --structure-dir "../structure/"
 
 # Process individual subsection only
-python3 chapter_processor.py --input "../original/Richard_Jeans-1992-PhD-Thesis.pdf" \
+python3 section_processor.py --input "../original/Richard_Jeans-1992-PhD-Thesis.pdf" \
  --section "2.1.1" --output "../markdown_output/" --structure-dir "../structure/"
 
 # Process entire chapter
-python3 chapter_processor.py --input "../original/Richard_Jeans-1992-PhD-Thesis.pdf" \
+python3 section_processor.py --input "../original/Richard_Jeans-1992-PhD-Thesis.pdf" \
  --section "2" --output "../markdown_output/" --structure-dir "../structure/"
 ```
 
