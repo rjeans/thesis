@@ -1,0 +1,24 @@
+{
+  "processing_mode": "individual_section",
+  "section_number": "2.1",
+  "section_title": "Fundamental Equations",
+  "chapter_context": "CHAPTER 2. Acoustic Problem",
+  "page_range": "25-25",
+  "page_count": 1,
+  "success": true,
+  "content_analysis": {
+    "character_count": 473,
+    "line_count": 3,
+    "equation_count": 0,
+    "figure_references": 0,
+    "section_headers": 1,
+    "anchor_count": 1,
+    "heading_level_used": "##"
+  },
+  "processing_details": {
+    "text_context_length": 1878,
+    "raw_result_length": 473,
+    "cleaned_result_length": 473,
+    "prompt_used": "individual_section_prompt"
+  }
+}
