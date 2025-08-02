@@ -8,7 +8,7 @@ This project converts a scanned 215-page PDF thesis into clean, readable Markdow
 
 **Key Innovation**: A hybrid approach that uses GPT-4 Vision for what it excels at—visual pattern recognition—and robust Python code for what it does best: deterministic logic and calculation. This ensures a complete and accurate TOC structure, which is the foundation of the entire conversion process.
 
-**Production Status**: The entire thesis conversion workflow is now production-ready with comprehensive automation. The system includes automated post-processing to fix common GPT-4 formatting issues, making it fully autonomous and reliable.
+**Production Status**: The entire thesis conversion workflow is now production-ready with comprehensive automation. The system includes automated post-processing to fix common GPT-4 formatting issues (multi-line equations, inline delimiters, LaTeX syntax), making it fully autonomous and reliable.
 
 ## Project Structure
 

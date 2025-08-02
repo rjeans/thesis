@@ -30,6 +30,7 @@ CRITICAL CONTENT REQUIREMENTS:
    - **CRITICAL**: ALL numbered equations MUST use \tag{} inside the $$ block
    - **CRITICAL**: NEVER put equation numbers outside $$ like: $$equation$$ (2.5.1)
    - **CRITICAL**: NEVER use \(variable\) or \[equation\] - these are forbidden
+   - **CRITICAL**: Complex superscripts/subscripts must use braces: $\lambda_N^{{e_p}}$ NOT $\lambda_N^e_p$
    - Use proper LaTeX notation for mathematical symbols and operators
 
 **EXAMPLES:**
@@ -37,6 +38,8 @@ CRITICAL CONTENT REQUIREMENTS:
 - Wrong inline: The \(N_i^k\) operator can be...
 - Correct display: $$equation content \tag{4.4.1}$$
 - Wrong display: \[equation content\]
+- Correct complex subscript/superscript: $\lambda_N^{{e_p}}$
+- Wrong complex subscript/superscript: $\lambda_N^e_p$
 
 4. **FIGURE FORMATTING**: Use HTML picture element format for dual theme support:
 

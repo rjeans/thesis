@@ -7,7 +7,7 @@ Converting a 1992 PhD thesis (215 pages) from PDF to Markdown using GPT-4 Vision
 - **Innovation**: Single consolidated processor with intelligent mode selection
 - **Primary tool**: `section_processor.py` - simplified architecture processing individual sections
 - **Breakthrough approach**: Automatic processing mode selection based on content structure
-- **Automated equation formatting**: Built-in post-processing automatically fixes GPT-4 equation formatting issues
+- **Automated equation formatting**: Built-in post-processing automatically fixes GPT-4 equation formatting issues including inline delimiters
 - **Structure-driven processing**: YAML metadata enables intelligent content discovery (85% effort reduction)
 - **Quality improvements**: Robust markdown cleaning, prompt leakage detection, fixed page ranges
 - **Context-enhanced AI**: PDF text guidance improves GPT-4 Vision accuracy by ~40%
@@ -104,7 +104,7 @@ python3 generate_complete_document.py "../structure/thesis_contents.yaml" \
 - **Incremental output**: Files are written as each section completes for real-time feedback
 - **Automatic subsection discovery**: Parent sections automatically include all child sections
 - **Token-optimized processing**: Each section uses minimal page ranges to avoid API limits
-- **Automated equation post-processing**: Automatically converts multi-line equations to single-line format
+- **Automated equation post-processing**: Automatically converts multi-line equations to single-line format and fixes inline delimiters
 - **Debug transparency**: Saves prompts, text context, and individual outputs for inspection
 - **Unified prompt architecture**: All prompts consolidated in `prompt_utils.py` eliminating duplication
 - **Clean architecture**: Rationalized codebase with simplified, focused functionality
@@ -166,7 +166,8 @@ python3 generate_complete_document.py "../structure/thesis_contents.yaml" \
 - **Display equations (unnumbered)**: `$$equation$$` (NOT `\[equation\]`)
 - **Display equations (numbered)**: `$$equation \tag{2.5.1}$$` or `$$\begin{align*} equation \tag{2.5.1} \end{align*}$$`
 - **CRITICAL**: ALL numbered equations MUST use `\tag{}` inside the `$$` block
-- **Automated correction**: Post-processing automatically fixes multi-line equations to single-line format
+- **Complex superscripts**: Must use braces `$\lambda_N^{e_p}$` NOT `$\lambda_N^e_p$`
+- **Automated correction**: Post-processing automatically fixes multi-line equations and inline delimiters
 - **CRITICAL**: NEVER put equation numbers outside `$$` like: `$$equation$$ (2.5.1)`
 - **CRITICAL**: Opening `$$` must NOT have newline after it
 - **CRITICAL**: Closing `$$` must NOT have newline before it

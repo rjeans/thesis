@@ -52,13 +52,15 @@ By processing sections in logical chunks rather than arbitrary page ranges, I ac
 The last critical breakthrough was implementing automated post-processing within the conversion pipeline. Despite extremely detailed prompts, GPT-4 Vision would occasionally generate equations with line breaks inside `$$` blocks, violating LaTeX formatting requirements. Rather than fighting this inconsistency, I implemented intelligent post-processing that automatically detects and fixes these issues during the conversion process.
 
 The system now includes:
-- Real-time equation formatting correction
-- Multi-line equation detection and single-line conversion
-- Quality assurance reporting with fix statistics
+- Real-time equation formatting correction (multi-line → single-line)
+- Inline equation delimiter standardization (\(...\) → $...$)
+- LaTeX bracket notation conversion (\[...\] → $$...$$)
+- Enhanced LaTeX syntax guidance (complex superscripts with braces)
+- Quality assurance reporting with detailed fix statistics
 - Comprehensive formatting validation
 
 This automated correction layer makes the entire workflow truly autonomous—no manual cleanup required.
 
 ## The Bottom Line
 
-These architectural decisions transformed a brittle, hard-to-debug system into a robust, production-ready workflow that handles complex hierarchical content intelligently. The key lesson: successful AI workflows combine the strengths of AI (visual pattern recognition, content understanding) with the reliability of deterministic code (logic, validation, post-processing). The result is a system that's both powerful and predictable.
+These architectural decisions transformed a brittle, hard-to-debug system into a robust, production-ready workflow that handles complex hierarchical content intelligently. The key lesson: successful AI workflows combine the strengths of AI (visual pattern recognition, content understanding) with the reliability of deterministic code (logic, validation, post-processing). The automated post-processing layer handles common GPT-4 formatting inconsistencies (equation delimiters, LaTeX syntax) while enhanced prompts guide proper mathematical notation. The result is a system that's both powerful and predictable.
