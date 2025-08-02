@@ -392,7 +392,8 @@ CRITICAL CONTENT REQUIREMENTS:
 
     def _fix_equation_formatting(self, content):
         """
-        Fix equation formatting by converting multi-line $$ blocks to single-line format.
+        Fix equation formatting by converting multi-line $$ blocks to single-line format
+        and fixing inline equation delimiters.
         
         Args:
             content (str): Markdown content to fix
@@ -403,12 +404,15 @@ CRITICAL CONTENT REQUIREMENTS:
         import re
         
         # Count issues before fixing
-        issues_found = self._count_equation_issues(content)
-        if issues_found > 0:
-            print_progress(f"- Post-processing: Fixing {issues_found} malformed equation block(s)")
+        display_issues = self._count_equation_issues(content)
+        inline_issues = self._count_inline_equation_issues(content)
+        total_issues = display_issues + inline_issues
         
-        # Pattern to match multi-line equation blocks
-        # This matches: $$ (content with potential newlines) $$
+        if total_issues > 0:
+            print_progress(f"- Post-processing: Fixing {display_issues} display + {inline_issues} inline equation issue(s)")
+        
+        # Fix 1: Convert multi-line equation blocks to single-line format
+        # Pattern to match multi-line equation blocks: $$ (content with potential newlines) $$
         pattern = r'\$\$\s*\n*(.*?)\n*\s*\$\$'
         
         def fix_equation_block(match):
@@ -425,16 +429,42 @@ CRITICAL CONTENT REQUIREMENTS:
             # Return as single-line equation
             return f'$${fixed_equation}$$'
         
-        # Apply the fix to all equation blocks
+        # Apply the display equation fix
         fixed_content = re.sub(pattern, fix_equation_block, content, flags=re.DOTALL)
         
-        # Verify the fix worked
-        remaining_issues = self._count_equation_issues(fixed_content)
-        if issues_found > 0:
-            fixed_count = issues_found - remaining_issues
-            print_progress(f"- Post-processing: Fixed {fixed_count} equation formatting issue(s)")
-            if remaining_issues > 0:
-                print_progress(f"- Post-processing: {remaining_issues} issues remain (may need manual review)")
+        # Fix 2: Convert \(...\) inline equations to $...$ format
+        inline_pattern = r'\\?\\\((.*?)\\?\\\)'
+        
+        def fix_inline_equation(match):
+            equation_content = match.group(1)
+            return f'${equation_content}$'
+        
+        # Apply the inline equation fix
+        fixed_content = re.sub(inline_pattern, fix_inline_equation, fixed_content)
+        
+        # Fix 3: Convert \[...\] display equations to $$...$$ format (just in case)
+        display_bracket_pattern = r'\\?\\\[(.*?)\\?\\\]'
+        
+        def fix_display_bracket_equation(match):
+            equation_content = match.group(1)
+            return f'$${equation_content}$$'
+        
+        # Apply the display bracket equation fix
+        fixed_content = re.sub(display_bracket_pattern, fix_display_bracket_equation, fixed_content, flags=re.DOTALL)
+        
+        # Verify the fixes worked
+        remaining_display_issues = self._count_equation_issues(fixed_content)
+        remaining_inline_issues = self._count_inline_equation_issues(fixed_content)
+        
+        if total_issues > 0:
+            display_fixed = display_issues - remaining_display_issues
+            inline_fixed = inline_issues - remaining_inline_issues
+            total_fixed = display_fixed + inline_fixed
+            print_progress(f"- Post-processing: Fixed {total_fixed} equation formatting issue(s) ({display_fixed} display, {inline_fixed} inline)")
+            
+            remaining_total = remaining_display_issues + remaining_inline_issues
+            if remaining_total > 0:
+                print_progress(f"- Post-processing: {remaining_total} issues remain (may need manual review)")
         
         return fixed_content
     
@@ -453,6 +483,23 @@ CRITICAL CONTENT REQUIREMENTS:
         pattern = r'\$\$\s*\n.*?\n.*?\$\$'
         matches = re.findall(pattern, content, re.DOTALL)
         return len(matches)
+    
+    def _count_inline_equation_issues(self, content):
+        """
+        Count the number of \(...\) inline equations that should be $...$.
+        
+        Args:
+            content (str): Markdown content to analyze
+            
+        Returns:
+            int: Number of inline equation issues found
+        """
+        import re
+        # Find \(...\) patterns
+        pattern = r'\\?\\\((.*?)\\?\\\)'
+        matches = re.findall(pattern, content)
+        return len(matches)
+    
 
     def _get_page_range(self, section_data: dict) -> tuple[int, int]:
         """Get the start and end page for a section."""

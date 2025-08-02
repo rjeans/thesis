@@ -24,59 +24,19 @@ CRITICAL CONTENT REQUIREMENTS:
    - Process the complete section including all content
 
 3. **MATHEMATICAL FORMATTING**:
-
-**!!!!! ABSOLUTELY CRITICAL - EQUATION LINE BREAK PROHIBITION !!!!!**
-
-**RULE #1**: NO LINE BREAKS ALLOWED ANYWHERE INSIDE $$ ... $$ BLOCKS
-**RULE #2**: ENTIRE equation content MUST be on ONE CONTINUOUS LINE
-**RULE #3**: NO newlines after opening $$ or before closing $$
-
-**TEMPLATE FOR ALL EQUATIONS:**
-$$ENTIRE_EQUATION_CONTENT_ON_ONE_LINE \tag{number}$$
-
-   - Inline equations: $variable$ (NOT \(variable\))
-   - Display equations (unnumbered): $$equation$$ (NOT \[equation\])
-   - Display equations (numbered): $$equation \tag{2.5.1}$$ or $$\begin{align*} equation \tag{2.5.1} \end{align*}$$
+   - **CRITICAL**: Inline equations: $variable$ (NOT \(variable\))
+   - **CRITICAL**: Display equations (unnumbered): $$equation$$ (NOT \[equation\])
+   - **CRITICAL**: Display equations (numbered): $$equation \tag{2.5.1}$$ or $$\begin{align*} equation \tag{2.5.1} \end{align*}$$
    - **CRITICAL**: ALL numbered equations MUST use \tag{} inside the $$ block
    - **CRITICAL**: NEVER put equation numbers outside $$ like: $$equation$$ (2.5.1)
+   - **CRITICAL**: NEVER use \(variable\) or \[equation\] - these are forbidden
+   - Use proper LaTeX notation for mathematical symbols and operators
 
-**CRITICAL - EQUATION FORMATTING EXAMPLES:**
-
-**CORRECT FORMAT (MANDATORY):**
-<a id="equation-2-1"></a>
-$$\nabla^2 \phi + k^2 \phi = 0 \tag{2.1}$$
-
-<a id="equation-2-5"></a>  
-$$\begin{align*} \tilde{u} = \nabla \phi, \quad \tilde{p} = i \omega \rho \phi \tag{2.5} \end{align*}$$
-
-**EXAMPLES OF COMPLETELY FORBIDDEN FORMATS (NEVER USE):**
-
-**WRONG - LINE BREAKS IN EQUATION:**
-$$
-\nabla^2 \phi + k^2 \phi = 0 \tag{2.1}
-$$
-
-**WRONG - TAG ON SEPARATE LINE:**
-$$\nabla^2 \phi + k^2 \phi = 0
-\tag{2.1}$$
-
-**WRONG - ANY INTERNAL LINE BREAKS:**
-$$equation 
-content here$$ 
-
-**WRONG - NEWLINE AFTER OPENING:**
-$$
-equation content \tag{2.1}$$
-
-**WRONG - NEWLINE BEFORE CLOSING:**
-$$equation content \tag{2.1}
-$$
-
-**!!!!! MANDATORY COMPLIANCE !!!!!**
-Every single equation MUST follow this pattern EXACTLY:
-$$[complete equation content including tag] \tag{number}$$
-
-**NO EXCEPTIONS - NO LINE BREAKS - ONE CONTINUOUS LINE ONLY**
+**EXAMPLES:**
+- Correct inline: The $N_i^k$ operator can be...
+- Wrong inline: The \(N_i^k\) operator can be...
+- Correct display: $$equation content \tag{4.4.1}$$
+- Wrong display: \[equation content\]
 
 4. **FIGURE FORMATTING**: Use HTML picture element format for dual theme support:
 

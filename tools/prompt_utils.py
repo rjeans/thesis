@@ -17,12 +17,22 @@ def get_content_transcription_requirements():
 def get_mathematical_formatting_section():
     """Get mathematical formatting requirements section."""
     return """**MATHEMATICAL FORMATTING**:
-   - Inline equations: $variable$ (NOT \\(variable\\))
-   - Display equations (unnumbered): $$equation$$ (NOT \\[equation\\])
-   - Display equations (numbered): $$equation \\tag{2.5.1}$$ or $$\\begin{align*} equation \\tag{2.5.1} \\end{align*}$$
+   - **CRITICAL**: Inline equations: $variable$ (NOT \\(variable\\))
+   - **CRITICAL**: Display equations (unnumbered): $$equation$$ (NOT \\[equation\\])
+   - **CRITICAL**: Display equations (numbered): $$equation \\tag{2.5.1}$$ or $$\\begin{align*} equation \\tag{2.5.1} \\end{align*}$$
    - **CRITICAL**: ALL numbered equations MUST use \\tag{} inside the $$ block
    - **CRITICAL**: NEVER put equation numbers outside $$ like: $$equation$$ (2.5.1)
-   - Use proper LaTeX notation for mathematical symbols and operators"""
+   - **CRITICAL**: NEVER use \\(variable\\) or \\[equation\\] - these are forbidden
+   - **CRITICAL**: Complex superscripts/subscripts must use braces: $\\lambda_N^{{e_p}}$ NOT $\\lambda_N^e_p$
+   - Use proper LaTeX notation for mathematical symbols and operators
+
+**EXAMPLES:**
+- Correct inline: The $N_i^k$ operator can be...
+- Wrong inline: The \\(N_i^k\\) operator can be...
+- Correct display: $$equation content \\tag{4.4.1}$$
+- Wrong display: \\[equation content\\]
+- Correct complex subscript/superscript: $\\lambda_N^{{e_p}}$
+- Wrong complex subscript/superscript: $\\lambda_N^e_p$"""
 
 
 def get_figure_formatting_section():

@@ -13,7 +13,8 @@ import sys
 
 def fix_equation_formatting(content):
     """
-    Fix equation formatting by converting multi-line $$ blocks to single-line format.
+    Fix equation formatting by converting multi-line $$ blocks to single-line format
+    and fixing inline equation delimiters.
     
     Args:
         content (str): Markdown content to fix
@@ -21,8 +22,8 @@ def fix_equation_formatting(content):
     Returns:
         str: Fixed markdown content
     """
-    # Pattern to match multi-line equation blocks
-    # This matches: $$ (content with potential newlines) $$
+    # Fix 1: Convert multi-line equation blocks to single-line format
+    # Pattern to match multi-line equation blocks: $$ (content with potential newlines) $$
     pattern = r'\$\$\s*\n*(.*?)\n*\s*\$\$'
     
     def fix_equation_block(match):
@@ -39,25 +40,54 @@ def fix_equation_formatting(content):
         # Return as single-line equation
         return f'$${fixed_equation}$$'
     
-    # Apply the fix to all equation blocks
+    # Apply the display equation fix
     fixed_content = re.sub(pattern, fix_equation_block, content, flags=re.DOTALL)
+    
+    # Fix 2: Convert \(...\) inline equations to $...$ format
+    inline_pattern = r'\\?\\\((.*?)\\?\\\)'
+    
+    def fix_inline_equation(match):
+        equation_content = match.group(1)
+        return f'${equation_content}$'
+    
+    # Apply the inline equation fix
+    fixed_content = re.sub(inline_pattern, fix_inline_equation, fixed_content)
+    
+    # Fix 3: Convert \[...\] display equations to $$...$$ format (just in case)
+    display_bracket_pattern = r'\\?\\\[(.*?)\\?\\\]'
+    
+    def fix_display_bracket_equation(match):
+        equation_content = match.group(1)
+        return f'$${equation_content}$$'
+    
+    # Apply the display bracket equation fix
+    fixed_content = re.sub(display_bracket_pattern, fix_display_bracket_equation, fixed_content, flags=re.DOTALL)
     
     return fixed_content
 
 def count_equation_issues(content):
     """
-    Count the number of malformed equation blocks in the content.
+    Count the number of malformed equation blocks and inline equations in the content.
     
     Args:
         content (str): Markdown content to analyze
         
     Returns:
-        int: Number of malformed equation blocks found
+        int: Total number of equation formatting issues found
     """
     # Find equation blocks that span multiple lines
-    pattern = r'\$\$\s*\n.*?\n.*?\$\$'
-    matches = re.findall(pattern, content, re.DOTALL)
-    return len(matches)
+    display_pattern = r'\$\$\s*\n.*?\n.*?\$\$'
+    display_matches = re.findall(display_pattern, content, re.DOTALL)
+    
+    # Find \(...\) inline equations
+    inline_pattern = r'\\?\\\((.*?)\\?\\\)'
+    inline_matches = re.findall(inline_pattern, content)
+    
+    # Find \[...\] display equations
+    bracket_pattern = r'\\?\\\[(.*?)\\?\\\]'
+    bracket_matches = re.findall(bracket_pattern, content, re.DOTALL)
+    
+    return len(display_matches) + len(inline_matches) + len(bracket_matches)
 
 def fix_markdown_file(file_path, dry_run=False):
     """
