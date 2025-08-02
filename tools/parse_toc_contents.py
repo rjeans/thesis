@@ -298,7 +298,110 @@ def merge_sections_across_pages(all_pages_data):
     return final_sections
 
 
-def parse_toc_contents(pdf_path, start_page, end_page, output_dir):
+def assign_universal_section_numbers(structure_data):
+    """
+    Assign universal section numbers to all top-level sections.
+    
+    Args:
+        structure_data (dict): Structure data with sections
+        
+    Returns:
+        dict: Structure data with section_number fields added
+    """
+    if 'sections' not in structure_data:
+        return structure_data
+    
+    # Counters for different section types
+    front_matter_count = 1
+    chapter_count = 1
+    back_matter_count = 1
+    appendix_count = 1
+    
+    print_progress("  Adding section numbers to all sections...")
+    
+    for section in structure_data['sections']:
+        section_type = section.get('type', 'unknown')
+        title = section.get('title', 'Unknown')
+        
+        if section_type == 'front_matter':
+            section_number = f"F{front_matter_count}"
+            front_matter_count += 1
+            
+        elif section_type == 'chapter':
+            # Use existing chapter_number or sequence
+            chapter_num = section.get('chapter_number', chapter_count) 
+            section_number = str(chapter_num)
+            chapter_count = max(chapter_count, chapter_num) + 1
+            
+        elif section_type == 'back_matter':
+            section_number = f"B{back_matter_count}"
+            back_matter_count += 1
+            
+        elif section_type == 'appendix':
+            section_number = f"A{appendix_count}"
+            appendix_count += 1
+            
+        else:
+            print_progress(f"    [WARNING] Unknown section type '{section_type}' for {title}")
+            section_number = f"U{section_type[:1].upper()}{len(structure_data['sections'])}"
+        
+        # Add the section_number field
+        section['section_number'] = section_number
+        print_progress(f"    {section_number}: {title}")
+    
+    # Summary
+    total_front = front_matter_count - 1
+    total_chapters = chapter_count - 1  
+    total_back = back_matter_count - 1
+    total_appendix = appendix_count - 1
+    
+    print_progress(f"  Section numbering complete:")
+    print_progress(f"    Front matter: {total_front} sections (F1-F{total_front})")
+    print_progress(f"    Chapters: {total_chapters} sections (1-{total_chapters})")
+    print_progress(f"    Back matter: {total_back} sections (B1-B{total_back})")
+    print_progress(f"    Appendices: {total_appendix} sections (A1-A{total_appendix})")
+    
+    return structure_data
+
+
+def fix_top_level_page_ranges(structure_data):
+    """
+    Fix page ranges for all top-level sections so each section ends at the page before the next section starts.
+    
+    Args:
+        structure_data (dict): Structure data with sections
+        
+    Returns:
+        dict: Structure data with corrected page ranges
+    """
+    if 'sections' not in structure_data:
+        return structure_data
+    
+    sections = structure_data['sections']
+    print_progress("  Fixing page ranges for top-level sections...")
+    
+    # Fix page ranges: each section ends at (next_section_start - 1)
+    for i, section in enumerate(sections):
+        section_title = section.get('title', 'Unknown')
+        start_page = section.get('page_start', 1)
+        
+        # Calculate correct end page
+        if i < len(sections) - 1:  # Not the last section
+            next_section_start = sections[i + 1].get('page_start', start_page + 1)
+            correct_end_page = next_section_start - 1
+        else:  # Last section - use total pages
+            correct_end_page = structure_data.get('total_pages', 215)
+        
+        # Update the end page
+        old_end_page = section.get('page_end', start_page)
+        section['page_end'] = correct_end_page
+        
+        print_progress(f"    {section.get('section_number', '?')}: {section_title} (pages {start_page}-{correct_end_page})")
+    
+    return structure_data
+
+
+def parse_toc_contents(pdf_path, start_page, end_page, output_dir, debug=False, diagnostics=False):
     """
     Parse table of contents from PDF pages to extract chapter structure.
     
@@ -307,6 +410,8 @@ def parse_toc_contents(pdf_path, start_page, end_page, output_dir):
         start_page (int): Starting page number (1-based)
         end_page (int): Ending page number (1-based)
         output_dir (str): Directory to save output files
+        debug (bool): Whether to write debug files (prompt and text context)
+        diagnostics (bool): Whether to write detailed diagnostics and analysis files
     
     Returns:
         bool: True if parsing succeeded, False otherwise
@@ -339,11 +444,42 @@ def parse_toc_contents(pdf_path, start_page, end_page, output_dir):
             yaml_structure = create_contents_yaml_structure()
             prompt = create_toc_parsing_prompt("contents", yaml_structure)
 
+            # Debug output for prompt and text context
+            if debug:
+                # Save prompt
+                prompt_path = output_path / f"toc_page_{page_num}_prompt.txt"
+                with open(prompt_path, 'w', encoding='utf-8') as f:
+                    f.write(prompt)
+                print_progress(f"  Prompt saved to: {prompt_path}")
+                
+                # Extract and save text context
+                text_context = extract_text_from_pdf_page(pdf_path, page_num, page_num)
+                text_context_path = output_path / f"toc_page_{page_num}_text_context.txt"
+                with open(text_context_path, 'w', encoding='utf-8') as f:
+                    f.write(text_context)
+                print_progress(f"  Text context saved to: {text_context_path}")
+
             print_progress("  Sending to GPT-4 Vision API for structure extraction...")
             result = call_gpt_vision_api(prompt, image_contents)
             
             if result and not result.startswith("Error:"):
+                # Debug output for raw and cleaned results
+                if debug:
+                    # Save raw GPT output
+                    raw_output_path = output_path / f"toc_page_{page_num}_raw_output.txt"
+                    with open(raw_output_path, 'w', encoding='utf-8') as f:
+                        f.write(result)
+                    print_progress(f"  Raw GPT output saved to: {raw_output_path}")
+                
                 cleaned_result = result.strip().removeprefix('```yaml').removeprefix('```').removesuffix('```')
+                
+                if debug:
+                    # Save cleaned output
+                    cleaned_output_path = output_path / f"toc_page_{page_num}_cleaned_output.txt"
+                    with open(cleaned_output_path, 'w', encoding='utf-8') as f:
+                        f.write(cleaned_result)
+                    print_progress(f"  Cleaned output saved to: {cleaned_output_path}")
+                
                 try:
                     page_data = yaml.safe_load(cleaned_result.strip())
                     if page_data and 'sections' in page_data:
@@ -373,7 +509,43 @@ def parse_toc_contents(pdf_path, start_page, end_page, output_dir):
     print_progress("\nConsolidating all extracted sections...")
     enhanced_structure = calculate_section_page_ranges(final_structure)
     
-    enhanced_yaml = yaml.dump(enhanced_structure, default_flow_style=False, sort_keys=False)
+    print_progress("Assigning universal section numbers...")
+    numbered_structure = assign_universal_section_numbers(enhanced_structure)
+    
+    print_progress("Fixing top-level section page ranges...")
+    final_structure = fix_top_level_page_ranges(numbered_structure)
+    
+    # Generate diagnostics if requested
+    if diagnostics:
+        diagnostics_data = {
+            'processing_summary': {
+                'pages_processed': end_page - start_page + 1,
+                'total_sections': len(final_structure.get('sections', [])),
+                'front_matter_sections': len([s for s in final_structure.get('sections', []) if s.get('type') == 'front_matter']),
+                'chapters': len([s for s in final_structure.get('sections', []) if s.get('type') == 'chapter']),
+                'back_matter_sections': len([s for s in final_structure.get('sections', []) if s.get('type') == 'back_matter']),
+                'appendices': len([s for s in final_structure.get('sections', []) if s.get('type') == 'appendix']),
+            },
+            'page_processing_results': all_pages_data,
+            'section_analysis': [
+                {
+                    'section_number': section.get('section_number'),
+                    'title': section.get('title'),
+                    'type': section.get('type'),
+                    'page_range': f"{section.get('page_start')}-{section.get('page_end')}",
+                    'subsection_count': len(section.get('subsections', []))
+                }
+                for section in final_structure.get('sections', [])
+            ]
+        }
+        
+        diagnostics_path = output_path / "toc_extraction_diagnostics.json"
+        import json
+        with open(diagnostics_path, 'w', encoding='utf-8') as f:
+            json.dump(diagnostics_data, f, indent=2, ensure_ascii=False)
+        print_progress(f"Diagnostics saved to: {diagnostics_path}")
+    
+    enhanced_yaml = yaml.dump(final_structure, default_flow_style=False, sort_keys=False)
     
     yaml_output_path = output_path / "thesis_contents.yaml"
     with open(yaml_output_path, 'w', encoding='utf-8') as f:
@@ -387,35 +559,43 @@ def parse_toc_contents(pdf_path, start_page, end_page, output_dir):
 
 def main():
     """Main function for TOC contents parsing."""
+    # Use backward-compatible approach due to complex processing requirements
+    import argparse
+    from pathlib import Path
+    
     parser = argparse.ArgumentParser(
         description='Parse table of contents to extract chapter structure',
         formatter_class=argparse.RawDescriptionHelpFormatter,
         epilog="""
 Example:
-  python parse_toc_contents.py thesis.pdf 9 12 structure/
+  python parse_toc_contents.py --input thesis.pdf --start-page 9 --end-page 12 --output structure/
   
 This will extract the chapter/section structure from pages 9-12 and save it to structure/thesis_contents.yaml
 """
     )
     
-    parser.add_argument('pdf_path', help='Path to source PDF file')
-    parser.add_argument('start_page', type=int, help='Starting page number (1-based)')
-    parser.add_argument('end_page', type=int, help='Ending page number (1-based)')
-    parser.add_argument('output_dir', help='Output directory for structure files')
+    parser.add_argument('--input', required=True, help='Path to source PDF file')
+    parser.add_argument('--start-page', type=int, required=True, help='Starting page number (1-based)')
+    parser.add_argument('--end-page', type=int, required=True, help='Ending page number (1-based)')
+    parser.add_argument('--output', required=True, help='Output directory for structure files')
+    parser.add_argument('--debug', action='store_true', help='Write prompt and text context files for debugging')
+    parser.add_argument('--diagnostics', action='store_true', help='Write detailed diagnostics and analysis files')
     
     args = parser.parse_args()
     
     # Validate input file
-    if not Path(args.pdf_path).exists():
-        print(f"ERROR: PDF file not found: {args.pdf_path}")
+    if not Path(args.input).exists():
+        print(f"ERROR: PDF file not found: {args.input}")
         return 1
     
     # Parse TOC contents
     success = parse_toc_contents(
-        args.pdf_path,
+        args.input,
         args.start_page,
         args.end_page,
-        args.output_dir
+        args.output,
+        debug=args.debug,
+        diagnostics=args.diagnostics
     )
     
     return 0 if success else 1

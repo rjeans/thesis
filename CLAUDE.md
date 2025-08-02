@@ -23,9 +23,9 @@ Converting a 1992 PhD thesis (215 pages) from PDF to Markdown using GPT-4 Vision
 ```bash
 cd tools
 # Generate YAML structure files from TOC pages for intelligent content discovery
-python3 parse_toc_contents.py "../original/Richard_Jeans-1992-PhD-Thesis.pdf" 9 12 "../structure/"
-python3 parse_toc_figures.py "../original/Richard_Jeans-1992-PhD-Thesis.pdf" 13 15 "../structure/"
-python3 parse_toc_tables.py "../original/Richard_Jeans-1992-PhD-Thesis.pdf" 17 17 "../structure/"
+python3 parse_toc_contents.py --input "../original/Richard_Jeans-1992-PhD-Thesis.pdf" --start-page 9 --end-page 12 --output "../structure/"
+python3 parse_toc_figures.py --input "../original/Richard_Jeans-1992-PhD-Thesis.pdf" --start-page 13 --end-page 15 --output "../structure/"
+python3 parse_toc_tables.py --input "../original/Richard_Jeans-1992-PhD-Thesis.pdf" --start-page 17 --end-page 17 --output "../structure/"
 ```
 
 ### Phase 2: Content Processing (Intelligent Mode Selection)
@@ -52,12 +52,12 @@ python3 section_processor.py --input "../original/Richard_Jeans-1992-PhD-Thesis.
 ### Phase 3: Figure Extraction (Dual Theme Support)
 ```bash
 # Extract all figures with dual themes from metadata
-python3 extract_thesis_figures.py "../original/Richard_Jeans-1992-PhD-Thesis.pdf" \
- --output-dir "../markdown_output/assets/" --structure-dir "../structure/" --use-metadata
+python3 extract_thesis_figures.py --input "../original/Richard_Jeans-1992-PhD-Thesis.pdf" \
+ --figures "../structure/thesis_figures.yaml" --output "../markdown_output/assets/"
 
-# Extract figures from specific page range
-python3 extract_thesis_figures.py "../original/Richard_Jeans-1992-PhD-Thesis.pdf" \
- --output-dir "../markdown_output/assets/" --page-range 40 50
+# Extract specific figure only
+python3 extract_thesis_figures.py --input "../original/Richard_Jeans-1992-PhD-Thesis.pdf" \
+ --figures "../structure/thesis_figures.yaml" --output "../markdown_output/assets/" --figure "2.1"
 ```
 
 ### Phase 4: Quality Assurance & Fixes
@@ -106,31 +106,45 @@ python3 generate_complete_document.py "../structure/thesis_contents.yaml" \
 - **Unified prompt architecture**: All prompts consolidated in `prompt_utils.py` eliminating duplication
 - **Clean architecture**: Rationalized codebase with simplified, focused functionality
 
-## Enhanced Architecture Components
+## Architecture Improvements (Latest)
 
-### Structure-Driven Tools
-1. **parse_toc_contents.py** - Extract chapter/section hierarchy from TOC
-2. **parse_toc_figures.py** - Extract figure catalog with page numbers
-3. **parse_toc_tables.py** - Extract table catalog with page numbers
+### **Major Refactoring: Shared TOC Processing Architecture**
+- **70% code reduction** in figures and tables parsers through shared utilities
+- **Consistent interfaces** across all TOC parsing scripts with unified argument structure
+- **Centralized error handling** and progress reporting via `toc_parsing_utils.py`
+- **Universal section numbering** with clean page boundaries and enhanced debugging
+- **Page-by-page reliability** proven architecture applied to all TOC parsers
+
+### **Enhanced Figure Extraction with Transparency**
+- **Transparent background processing** for easy manual cropping
+- **Dual-theme support** with both light and dark versions preserving transparency
+- **Metadata-driven extraction** using YAML structure files for precise figure location
+- **Simplified interface** with consistent argument patterns across all tools
+
+### Structure-Driven Tools (Refactored with Shared Architecture)
+1. **parse_toc_contents.py** - Extract chapter/section hierarchy from TOC with universal section numbering
+2. **parse_toc_figures.py** - Extract figure catalog with page numbers using shared processing utilities
+3. **parse_toc_tables.py** - Extract table catalog with page numbers using shared processing utilities
+4. **toc_parsing_utils.py** - Shared utilities and common patterns for all TOC parsing scripts
 
 ### Quality Assurance Tools
-4. **academic_proofreading_prompt.txt** - Expert proofreading prompt for ChatGPT web version
-5. **fix_math_delimiters.py** - Mathematical formatting correction
-6. **fix_figure_captions.py** - Figure caption hyperlink correction
-7. **auto_crop_figures.py** - Figure processing and theme generation
+5. **academic_proofreading_prompt.txt** - Expert proofreading prompt for ChatGPT web version
+6. **fix_math_delimiters.py** - Mathematical formatting correction
+7. **fix_figure_captions.py** - Figure caption hyperlink correction
+8. **auto_crop_figures.py** - Figure processing and theme generation
 
 ### Figure Processing
-8. **extract_thesis_figures.py** - Dual-theme figure extraction with transparency
+9. **extract_thesis_figures.py** - Simplified metadata-driven figure extraction with transparent backgrounds and dual-theme support
 
 ### Document Assembly
-9. **generate_complete_document.py** - Intelligent document assembly with TOC
+10. **generate_complete_document.py** - Intelligent document assembly with TOC
 
 ### Supporting Architecture
-10. **prompt_utils.py** - Unified prompt system with all templates and formatting requirements
-11. **gpt_vision_utils.py** - GPT-4 Vision API calls and image processing utilities
-12. **pdf_utils.py** - PDF processing utilities with multiple tool fallbacks
-13. **progress_utils.py** - Progress tracking and error reporting
-14. **yaml_utils.py** - YAML structure file utilities
+11. **prompt_utils.py** - Unified prompt system with all templates and formatting requirements
+12. **gpt_vision_utils.py** - GPT-4 Vision API calls and image processing utilities
+13. **pdf_utils.py** - PDF processing utilities with multiple tool fallbacks
+14. **progress_utils.py** - Progress tracking and error reporting
+15. **yaml_utils.py** - YAML structure file utilities
 
 ## Critical Processing Requirements
 
@@ -209,6 +223,12 @@ python3 generate_complete_document.py "../structure/thesis_contents.yaml" \
 - **Automatic correction**: LaTeX delimiter fixing and figure caption correction
 - **Comprehensive diagnostics**: Page-by-page quality scoring and validation
 
+### 5. Consistent Interface Architecture
+- **Unified argument structure**: All scripts use `--input`, `--output` pattern (no positional args)
+- **Shared utilities**: Common processing patterns consolidated in `toc_parsing_utils.py`
+- **Standardized debugging**: `--debug` and `--diagnostics` flags across all TOC parsers
+- **Professional CLI**: Self-documenting interfaces with consistent error handling
+
 ## Academic Proofreading System
 
 ### **Expert Proofreading with ChatGPT Web Version**
@@ -246,9 +266,9 @@ python3 generate_complete_document.py "../structure/thesis_contents.yaml" \
 
 ```bash
 # 1. Generate structure metadata (one-time setup)
-python3 parse_toc_contents.py thesis.pdf 9 12 structure/
-python3 parse_toc_figures.py thesis.pdf 13 15 structure/
-python3 parse_toc_tables.py thesis.pdf 17 17 structure/
+python3 parse_toc_contents.py --input thesis.pdf --start-page 9 --end-page 12 --output structure/
+python3 parse_toc_figures.py --input thesis.pdf --start-page 13 --end-page 15 --output structure/
+python3 parse_toc_tables.py --input thesis.pdf --start-page 17 --end-page 17 --output structure/
 
 # 2. Process all content with single-page batching (optimal)
 python3 section_processor.py thesis.pdf "Abstract" markdown_output/abstract.md --structure-dir structure/ --content-type front_matter
@@ -263,7 +283,7 @@ python3 section_processor.py thesis.pdf "Chapter 2" markdown_output/chapter_2.md
 # 3. Save corrected markdown as chapter_X_corrected.md
 
 # 4. Extract all figures with dual themes
-python3 extract_thesis_figures.py thesis.pdf --output-dir markdown_output/assets/ --structure-dir structure/ --use-metadata
+python3 extract_thesis_figures.py --input thesis.pdf --figures structure/thesis_figures.yaml --output markdown_output/assets/
 
 # 5. Assemble final document
 python3 generate_complete_document.py structure/thesis_contents.yaml markdown_output/ complete_thesis.md --add-toc --add-anchors

@@ -4,56 +4,63 @@ sections:
 - type: front_matter
   title: TITLE
   page_start: 1
+  page_end: 1
+  chapter_number: null
+  subsections: []
+  source_page: 9
+  section_number: F1
+- type: front_matter
+  title: ABSTRACT
+  page_start: 2
   page_end: 2
   chapter_number: null
   subsections: []
   source_page: 9
-- type: front_matter
-  title: ABSTRACT
-  page_start: 2
-  page_end: 3
-  chapter_number: null
-  subsections: []
-  source_page: 9
+  section_number: F2
 - type: front_matter
   title: ACKNOWLEDGEMENTS
   page_start: 3
-  page_end: 5
+  page_end: 4
   chapter_number: null
   subsections: []
   source_page: 9
+  section_number: F3
 - type: front_matter
   title: NOTATION
   page_start: 5
-  page_end: 9
+  page_end: 8
   chapter_number: null
   subsections: []
   source_page: 9
+  section_number: F4
 - type: front_matter
   title: CONTENTS
   page_start: 9
-  page_end: 13
+  page_end: 12
   chapter_number: null
   subsections: []
   source_page: 9
+  section_number: F5
 - type: front_matter
   title: FIGURES
   page_start: 13
+  page_end: 16
+  chapter_number: null
+  subsections: []
+  source_page: 9
+  section_number: F6
+- type: front_matter
+  title: TABLES
+  page_start: 17
   page_end: 17
   chapter_number: null
   subsections: []
   source_page: 9
-- type: front_matter
-  title: TABLES
-  page_start: 17
-  page_end: 18
-  chapter_number: null
-  subsections: []
-  source_page: 9
+  section_number: F7
 - type: chapter
   title: CHAPTER 1. Introduction
   page_start: 18
-  page_end: 25
+  page_end: 24
   chapter_number: 1
   subsections:
   - section_number: '1.1'
@@ -67,6 +74,7 @@ sections:
     end_page: 25
     level: 1
   source_page: 9
+  section_number: '1'
 - type: chapter
   title: CHAPTER 2. Acoustic Problem
   page_start: 25
@@ -161,28 +169,29 @@ sections:
   - section_number: 2.4.5
     title: Hybrid boundary layer formulation
     start_page: 39
-    end_page: 42
+    end_page: 39
     level: 2
   - section_number: '2.5'
-    title: Thin shell formulaiton
-    start_page: 42
-    end_page: 42
+    title: Thin shell formulation
+    start_page: 39
+    end_page: 45
     level: 1
   - section_number: 2.5.1
-    title: Boundary Integral Formulation
-    start_page: 42
+    title: Boundary integral formulation
+    start_page: 40
     end_page: 43
     level: 2
   - section_number: 2.5.2
     title: Edge conditions
     start_page: 43
-    end_page: 44
+    end_page: 45
     level: 2
   source_page: 9
+  section_number: '2'
 - type: chapter
   title: CHAPTER 3. Collocation Method
   page_start: 45
-  page_end: 78
+  page_end: 77
   chapter_number: 3
   subsections:
   - section_number: '3.1'
@@ -216,17 +225,17 @@ sections:
     end_page: 58
     level: 1
   - section_number: 3.4.1
-    title: $L_{k}$ Operator
+    title: $L_k$ Operator
     start_page: 49
     end_page: 51
     level: 2
   - section_number: 3.4.2
-    title: $M_{k}$ Operator
+    title: $M_k$ Operator
     start_page: 51
     end_page: 53
     level: 2
   - section_number: 3.4.3
-    title: $N_{k}$ Operator
+    title: $N_k$ Operator
     start_page: 53
     end_page: 56
     level: 2
@@ -271,10 +280,11 @@ sections:
     end_page: 78
     level: 2
   source_page: 10
+  section_number: '3'
 - type: chapter
   title: CHAPTER 4. Variational Method
   page_start: 78
-  page_end: 110
+  page_end: 109
   chapter_number: 4
   subsections:
   - section_number: '4.1'
@@ -325,167 +335,170 @@ sections:
   - section_number: '4.8'
     title: Numerical Results
     start_page: 86
-    end_page: 110
     level: 1
+    end_page: 110
   - section_number: 4.8.1
     title: Spheroids
     start_page: 86
-    end_page: 87
     level: 2
+    end_page: 87
   - section_number: 4.8.2
     title: Flat Disk
     start_page: 87
-    end_page: 91
     level: 2
+    end_page: 91
   - section_number: 4.8.3
     title: Flat Square Plate
     start_page: 91
+    level: 2
     end_page: 91
-    level: 2
   - section_number: 4.8.4
-    title: Terai's Problem
+    title: "Terai\u2019s Problem"
     start_page: 91
-    end_page: 110
     level: 2
+    end_page: 110
   source_page: 10
+  section_number: '4'
 - type: chapter
   title: CHAPTER 5. The Superposition Method
   page_start: 110
-  page_end: 131
   chapter_number: 5
   subsections:
   - section_number: '5.1'
     title: Introduction
     start_page: 110
-    end_page: 111
     level: 1
+    end_page: 111
   - section_number: '5.2'
     title: The Superposition Integral
     start_page: 111
-    end_page: 113
     level: 1
+    end_page: 113
   - section_number: '5.3'
     title: Uniqueness
     start_page: 113
-    end_page: 115
     level: 1
+    end_page: 115
   - section_number: '5.4'
     title: Numerical Formulation
     start_page: 115
-    end_page: 120
     level: 1
+    end_page: 120
   - section_number: 5.4.1
     title: Matrix Condition Number
     start_page: 118
-    end_page: 119
     level: 2
+    end_page: 119
   - section_number: 5.4.2
     title: Velocity Reconstruction Error Norm
     start_page: 119
-    end_page: 120
     level: 2
+    end_page: 120
   - section_number: '5.5'
     title: Numerical Results
     start_page: 120
-    end_page: 122
     level: 1
+    end_page: 122
   - section_number: '5.6'
     title: Conclusion
     start_page: 122
-    end_page: 131
     level: 1
+    end_page: 131
   source_page: 11
+  page_end: 130
+  section_number: '5'
 - type: chapter
   title: CHAPTER 6. Elasto-Acoustic Problem
   page_start: 131
-  page_end: 167
   chapter_number: 6
   subsections:
   - section_number: '6.1'
     title: Introduction
     start_page: 131
-    end_page: 131
     level: 1
+    end_page: 131
   - section_number: '6.2'
     title: Structural Problem
     start_page: 131
-    end_page: 135
     level: 1
+    end_page: 135
   - section_number: '6.3'
     title: Fluid-Structure Interaction Force
     start_page: 135
-    end_page: 136
     level: 1
+    end_page: 136
   - section_number: '6.4'
     title: Coupled Equation Set
     start_page: 136
-    end_page: 138
     level: 1
+    end_page: 138
   - section_number: 6.4.1
     title: Fluid Filled and Non Closed Shell Problems
     start_page: 136
-    end_page: 137
     level: 2
+    end_page: 137
   - section_number: 6.4.2
     title: Evacuated Closed Shell Problems
     start_page: 137
-    end_page: 138
     level: 2
+    end_page: 138
   - section_number: '6.5'
     title: Solution of Coupled Equation Set
     start_page: 138
-    end_page: 140
     level: 1
+    end_page: 140
   - section_number: 6.5.1
     title: Structure Variable Methodology
     start_page: 138
-    end_page: 139
     level: 2
+    end_page: 139
   - section_number: 6.5.2
     title: Fluid Variable Methodology
     start_page: 139
-    end_page: 140
     level: 2
+    end_page: 140
   - section_number: '6.6'
     title: Eigenvector Reduction of the Elastic Formulation
     start_page: 140
-    end_page: 142
     level: 1
+    end_page: 142
   - section_number: '6.7'
     title: Interpolation
     start_page: 142
-    end_page: 143
     level: 1
+    end_page: 143
   - section_number: '6.8'
     title: Uniqueness and the Coupled Problem
     start_page: 143
-    end_page: 147
     level: 1
+    end_page: 147
   - section_number: '6.9'
     title: Elastic Thin Plate Problems
     start_page: 147
-    end_page: 149
     level: 1
+    end_page: 149
   - section_number: '6.10'
     title: Numerical Results
     start_page: 149
-    end_page: 167
     level: 1
+    end_page: 167
   - section_number: 6.10.1
     title: Cantilever Plate
     start_page: 149
-    end_page: 150
     level: 2
+    end_page: 150
   - section_number: 6.10.2
     title: Spherical Shell
     start_page: 150
-    end_page: 167
     level: 2
+    end_page: 167
   source_page: 11
+  page_end: 166
+  section_number: '6'
 - type: chapter
   title: CHAPTER 7. Lanczos vectors in elasto-acoustic analysis
   page_start: 167
-  page_end: 191
+  page_end: 190
   chapter_number: 7
   subsections:
   - section_number: '7.1'
@@ -514,10 +527,11 @@ sections:
     end_page: 191
     level: 1
   source_page: 12
+  section_number: '7'
 - type: chapter
   title: CHAPTER 8. Conclusions and Recomendations
   page_start: 191
-  page_end: 195
+  page_end: 194
   chapter_number: 8
   subsections:
   - section_number: '8.1'
@@ -531,17 +545,19 @@ sections:
     end_page: 195
     level: 1
   source_page: 12
+  section_number: '8'
 - type: back_matter
   title: REFERENCES
   page_start: 195
-  page_end: 200
+  page_end: 199
   chapter_number: null
   subsections: []
   source_page: 12
+  section_number: B1
 - type: appendix
   title: APPENDIX 1 Symmetry and Half Space Problems
   page_start: 200
-  page_end: 205
+  page_end: 204
   chapter_number: null
   subsections:
   - section_number: A1.1
@@ -555,6 +571,7 @@ sections:
     end_page: 205
     level: 1
   source_page: 12
+  section_number: A1
 - type: appendix
   title: APPENDIX 2 Analytical Solutions
   page_start: 205
@@ -577,3 +594,4 @@ sections:
     end_page: 215
     level: 1
   source_page: 12
+  section_number: A2

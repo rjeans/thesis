@@ -123,18 +123,22 @@ def create_toc_parsing_prompt(content_type, yaml_structure):
             "EXAMPLE: If you see '2.5 Thin shell formulation' without 'CHAPTER 2' header, create an entry: type: chapter, title: 'CHAPTER 2 (continued)', chapter_number: 2, subsections: [{section_number: '2.5', title: 'Thin shell formulation', ...}]"
         ],
         "figures": [
-            "Extract ALL figures listed exactly as shown",
-            "Include complete figure titles/captions",
-            "Extract page numbers accurately",
+            "**CRITICAL: Process ALL pages provided - examine every single page image for figures**",
+            "Extract ALL figures listed exactly as shown across ALL pages",
+            "Include complete figure titles/captions from ALL pages",
+            "Extract page numbers accurately from ALL pages",
             "Determine chapter number from figure numbering (e.g., \"2.1\" = chapter 2)",
             "Preserve exact capitalization and punctuation in titles",
-            "Include figures with complex numbering like \"3.5.6\""
+            "Include figures with complex numbering like \"3.5.6\"",
+            "**CRITICAL: Do not stop after the first page - continue through all provided pages**"
         ],
         "tables": [
-            "Extract ALL tables listed exactly as shown",
-            "Include complete table titles/captions",
-            "Extract page numbers accurately",
+            "**CRITICAL: Process ALL pages provided - examine every single page image for tables**",
+            "Extract ALL tables listed exactly as shown across ALL pages",
+            "Include complete table titles/captions from ALL pages",
+            "Extract page numbers accurately from ALL pages",
             "Determine chapter number from table numbering (e.g., \"4.1\" = chapter 4)",
+            "**CRITICAL: Do not stop after the first page - continue through all provided pages**",
             "Preserve exact capitalization and punctuation in titles",
             "If no tables are found, return an empty tables list"
         ]
@@ -143,8 +147,14 @@ def create_toc_parsing_prompt(content_type, yaml_structure):
     description = content_descriptions.get(content_type, f"{content_type} from this document")
     instruction_list = instructions.get(content_type, [])
 
+    # Adjust the prompt based on content type
+    if content_type in ["figures", "tables"]:
+        page_description = "from ALL page images provided (process every page completely)"
+    else:
+        page_description = "from the single page image provided"
+    
     prompt = f"""
-Parse the {description} from the single page image provided.
+Parse the {description} {page_description}.
 
 Return YAML format with this structure:
 

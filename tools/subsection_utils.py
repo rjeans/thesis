@@ -138,7 +138,47 @@ def load_individual_section(structure_dir, section_identifier):
         if 'sections' not in structure_data:
             return None
         
-        # Look for the section within all chapters
+        # First, check if this is a top-level section by universal section number
+        for section in structure_data['sections']:
+            section_number = section.get('section_number', '')
+            if section_number == section_identifier:
+                print_progress(f"+ Found top-level section by universal number: {section_number}")
+                
+                # Calculate optimal page range based on subsections
+                subsections = section.get('subsections', [])
+                start_page = section.get('page_start', 1)
+                
+                if subsections:
+                    # Has subsections - process only the parent section page (usually just the section heading)
+                    # For parent sections, we only want the section heading, not subsection content
+                    end_page = start_page  # Process only the page where the section starts
+                    
+                    print_progress(f"+ Parent section with {len(subsections)} subsections - processing only section heading (page {start_page})")
+                else:
+                    # No subsections - process full range
+                    end_page = section.get('page_end', start_page)
+                    print_progress(f"+ Leaf section with no subsections - processing full range (pages {start_page}-{end_page})")
+                
+                # Create enhanced section data with proper field mapping
+                enhanced_section = section.copy()
+                enhanced_section['start_page'] = start_page
+                enhanced_section['end_page'] = end_page
+                
+                return {
+                    'type': 'top_level_section',
+                    'title': section.get('title', ''),
+                    'section_type': section.get('type', 'unknown'),
+                    'section_number': section_number,
+                    'section_data': enhanced_section,
+                    'parent_chapter': None,
+                    'all_subsections': subsections,
+                    'calculated_page_range': {
+                        'start_page': start_page,
+                        'end_page': end_page
+                    }
+                }
+        
+        # Look for the section within all chapters (existing logic for subsections)
         for chapter in structure_data['sections']:
             if chapter.get('type') != 'chapter':
                 continue

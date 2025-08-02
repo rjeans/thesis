@@ -1,68 +1,49 @@
-thesis_title: PhD Thesis - Richard Jeans 1992
-total_pages: 215
 tables:
 - table_number: '4.1'
   title: Order of Gauss integration
   page: 83
-  chapter_name: Chapter 4
-  chapter_id: '4'
+  chapter: 4
 - table_number: '4.2'
   title: Comparison of accuracy with different orders of integration
   page: 87
-  chapter_name: Chapter 4
-  chapter_id: '4'
+  chapter: 4
 - table_number: '4.3'
   title: Comparison of matrix assembly and factorization times
   page: 88
-  chapter_name: Chapter 4
-  chapter_id: '4'
+  chapter: 4
 - table_number: '6.1'
-  title: Comparison of submerged and *in vacuo* quantities for the cantilever plate
+  title: Comparison of submerged and in vacuo quantities for the cantilever plate
   page: 153
-  chapter_name: Chapter 6
-  chapter_id: '6'
+  chapter: 6
 - table_number: '6.2'
-  title: Comparison of submerged and *in vacuo* quantities for the evacuated spherical
+  title: Comparison of submerged and in vacuo quantities for the evacuated spherical
     shell
   page: 154
-  chapter_name: Chapter 6
-  chapter_id: '6'
+  chapter: 6
 - table_number: '7.1'
   title: The percentage accuracy of the modal surface velocity for the fluid variable
     methodology with 6 elements and Lanczos reduction of the dynamic structural matrix
   page: 176
-  chapter_name: Chapter 7
-  chapter_id: '7'
+  chapter: 7
 - table_number: '7.2'
   title: The percentage accuracy of the modal surface velocity for the fluid variable
     methodology with 24 elements and Lanczos reduction of the dynamic structural matrix
   page: 177
-  chapter_name: Chapter 7
-  chapter_id: '7'
+  chapter: 7
 - table_number: '7.3'
   title: The percentage accuracy of the modal surface velocity for the fluid variable
     methodology with 6 elements and eigenvector reduction of the dynamic structural
     matrix
   page: 178
-  chapter_name: Chapter 7
-  chapter_id: '7'
+  chapter: 7
 - table_number: '7.4'
   title: The percentage accuracy of the modal surface velocity for the fluid variable
     methodology with 24 elements and eigenvector reduction of the dynamic structural
     matrix
   page: 179
-  chapter_name: Chapter 7
-  chapter_id: '7'
+  chapter: 7
 - table_number: A2.1
   title: The resonant frequencies for the interior spherical Dirichlet and Neumann
     acoustic problems
   page: 209
-  chapter_name: Appendix 2
-  chapter_id: A2
-extraction_metadata:
-  pages_processed: 1
-  total_tables_extracted: 10
-  pages_covered:
-  - 17
-  extraction_date: '2025-07-22T21:41:42.829608'
-  processing_method: single_page_with_text_guidance
+  chapter: 2
