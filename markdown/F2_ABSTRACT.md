@@ -1,0 +1,13 @@
+## F2 ABSTRACT <a id="section-F2"></a>
+
+This study is concerned with innovative methods for the solution of three-dimensional fluid-structure interaction problems. Solution methodologies are presented to evaluate the interaction between submerged three-dimensional thin shells, of arbitrary geometry, and acoustic radiation in the unbounded surrounding fluid medium.
+
+A variational boundary element formulation of the acoustic problem based on the work of Mariem and Hamdi, [J. B. Mariem and M. A. Hamdi, Int. J. Num. Methods. Eng. 24, 1251-1267 (1987)], is presented. The formulation is implemented using high order isoparametric elements. The advantages in using this variational formulation are, first, the manner in which a highly singular integral operator is made amenable to numerical approximation, second, its application to non-closed thin shells, and, third, its numerical implementation leads to the formulation of a symmetrical fluid matrix.
+
+A collocational boundary element formulation of the acoustic problem is also presented along with a novel solution to numerically approximate the highly singular integral operator. The collocation method is implemented using high order isoparametric elements and a Burton and Miller approach is used to overcome the problem of non-uniqueness for closed shells at interior resonant frequencies. This formulation allows implementation of the full set of surface Helmholtz' integral equations for the closed shell problems.
+
+A method of formulating the acoustic problem based on the principle of wave superposition is examined. It has been suggested that this method offers significant advantages over boundary element methods. This study implements such a method to test this supposition, and it is compared to the implemented boundary element methods.
+
+Methods of accelerating the boundary element methods are tested including the use of structural symmetry to reduce the problem size, and the use of frequency interpolation when the acoustic solution is required over a range of frequencies.
+
+The elastic problem is formulated using a finite element approach and is coupled to both boundary element formulations of the acoustic problem. The structural equation set is reduced in terms of eigenvectors and Lanczos vectors in order to reduce the size of the structural problem. These two methods of reduction are compared and the application of Lanczos vectors to elasto-acoustic problems is discussed in detail.

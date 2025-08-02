@@ -385,7 +385,74 @@ CRITICAL CONTENT REQUIREMENTS:
                     print_progress(f"- Removed prompt leakage: {line[:60]}...")
             cleaned_result = '\n'.join(cleaned_lines)
         
+        # Fix equation formatting - convert multi-line equations to single-line format
+        cleaned_result = self._fix_equation_formatting(cleaned_result)
+        
         return cleaned_result
+
+    def _fix_equation_formatting(self, content):
+        """
+        Fix equation formatting by converting multi-line $$ blocks to single-line format.
+        
+        Args:
+            content (str): Markdown content to fix
+            
+        Returns:
+            str: Fixed markdown content
+        """
+        import re
+        
+        # Count issues before fixing
+        issues_found = self._count_equation_issues(content)
+        if issues_found > 0:
+            print_progress(f"- Post-processing: Fixing {issues_found} malformed equation block(s)")
+        
+        # Pattern to match multi-line equation blocks
+        # This matches: $$ (content with potential newlines) $$
+        pattern = r'\$\$\s*\n*(.*?)\n*\s*\$\$'
+        
+        def fix_equation_block(match):
+            equation_content = match.group(1)
+            
+            # Remove internal newlines and excessive whitespace
+            # But preserve single spaces between elements
+            fixed_equation = re.sub(r'\s*\n\s*', ' ', equation_content)
+            # Clean up multiple spaces
+            fixed_equation = re.sub(r'\s+', ' ', fixed_equation)
+            # Remove leading/trailing whitespace
+            fixed_equation = fixed_equation.strip()
+            
+            # Return as single-line equation
+            return f'$${fixed_equation}$$'
+        
+        # Apply the fix to all equation blocks
+        fixed_content = re.sub(pattern, fix_equation_block, content, flags=re.DOTALL)
+        
+        # Verify the fix worked
+        remaining_issues = self._count_equation_issues(fixed_content)
+        if issues_found > 0:
+            fixed_count = issues_found - remaining_issues
+            print_progress(f"- Post-processing: Fixed {fixed_count} equation formatting issue(s)")
+            if remaining_issues > 0:
+                print_progress(f"- Post-processing: {remaining_issues} issues remain (may need manual review)")
+        
+        return fixed_content
+    
+    def _count_equation_issues(self, content):
+        """
+        Count the number of malformed equation blocks in the content.
+        
+        Args:
+            content (str): Markdown content to analyze
+            
+        Returns:
+            int: Number of malformed equation blocks found
+        """
+        import re
+        # Find equation blocks that span multiple lines
+        pattern = r'\$\$\s*\n.*?\n.*?\$\$'
+        matches = re.findall(pattern, content, re.DOTALL)
+        return len(matches)
 
     def _get_page_range(self, section_data: dict) -> tuple[int, int]:
         """Get the start and end page for a section."""

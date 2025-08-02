@@ -22,24 +22,7 @@ def get_mathematical_formatting_section():
    - Display equations (numbered): $$equation \\tag{2.5.1}$$ or $$\\begin{align*} equation \\tag{2.5.1} \\end{align*}$$
    - **CRITICAL**: ALL numbered equations MUST use \\tag{} inside the $$ block
    - **CRITICAL**: NEVER put equation numbers outside $$ like: $$equation$$ (2.5.1)
-   - **CRITICAL**: Opening $$ must NOT have newline after it
-   - **CRITICAL**: Closing $$ must NOT have newline before it
-   - **CRITICAL**: NO line breaks anywhere within $$...$$ blocks
-
-**CORRECT EQUATION EXAMPLES:**
-<a id="equation-2-1"></a>
-$$\\nabla^2 \\phi + k^2 \\phi = 0 \\tag{2.1}$$
-
-<a id="equation-2-5"></a>  
-$$\\begin{align*} \\tilde{u} = \\nabla \\phi, \\quad \\tilde{p} = i \\omega \\rho \\phi \\tag{2.5} \\end{align*}$$
-
-**WRONG FORMATS (DO NOT USE):**
-$$
-\\nabla^2 \\phi + k^2 \\phi = 0
-$$ (2.1)
-OR
-$$\\nabla^2 \\phi + k^2 \\phi = 0
-\\tag{2.1}$$"""
+   - Use proper LaTeX notation for mathematical symbols and operators"""
 
 
 def get_figure_formatting_section():

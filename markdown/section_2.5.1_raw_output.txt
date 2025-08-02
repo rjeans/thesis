@@ -3,7 +3,11 @@
 The geometry of the thin shell is illustrated in [Figure 2.5](#figure-2-5). On such a shell, three closely associated points may be defined. The points are $p$, $p^-$, and $p^+$, where $p$ represents a point midway through the thickness of the shell, $p^+$ is a point on one surface, and $p^-$ is the corresponding point on the other surface. The normal $n_p$ is defined to be in the direction from $p^-$ to $p^+$. The Green's function and the normal derivative of Green's function at these points will have the following simple relationships:
 
 <a id="equation-2-5-1"></a>
-$$\frac{\partial \phi(q^+)}{\partial n_q} = \frac{\partial \phi(q^-)}{\partial n_q}, \quad G_k(P, q^+) = G_k(P, q), \quad \frac{\partial G_k(P, q^+)}{\partial n_{q^+}} = \pm \frac{\partial G_k(P, q)}{\partial n_q} \tag{2.5.1}$$
+$$
+\frac{\partial \phi(q^+)}{\partial n_q} = \frac{\partial \phi(q^-)}{\partial n_q}, \quad 
+G_k(P, q^+) = G_k(P, q), \quad
+\frac{\partial G_k(P, q^+)}{\partial n_{q^+}} = \pm \frac{\partial G_k(P, q)}{\partial n_q} \tag{2.5.1}
+$$
 
 <a id="figure-2-5"></a>
 
@@ -17,18 +21,28 @@ Figure 2.5. The thin shell geometry.
 Using these relationships, the SHIE formulation for the thin shell problem may be written as
 
 <a id="equation-2-5-2"></a>
-$$\phi(P) = \phi_i(P) + \int_{S^+} \left( \phi(q^+) \frac{\partial G_k(P, q^+)}{\partial n_{q^+}} - \frac{\partial \phi(q^+)}{\partial n_{q^+}} G_k(P, q^+) \right) ds_{q^+} + \int_{S^-} \left( \phi(q^-) \frac{\partial G_k(P, q^-)}{\partial n_{q^-}} - \frac{\partial \phi(q^-)}{\partial n_{q^-}} G_k(P, q^+) \right) ds_{q^-} \tag{2.5.2}$$
+$$
+\phi(P) = \phi_i(P) + \int_{S^+} \left( \phi(q^+) \frac{\partial G_k(P, q^+)}{\partial n_{q^+}} - \frac{\partial \phi(q^+)}{\partial n_{q^+}} G_k(P, q^+) \right) ds_{q^+} + \int_{S^-} \left( \phi(q^-) \frac{\partial G_k(P, q^-)}{\partial n_{q^-}} - \frac{\partial \phi(q^-)}{\partial n_{q^-}} G_k(P, q^+) \right) ds_{q^-} \tag{2.5.2}
+$$
 
 By using the relationships in [equation (2.5.1)](#equation-2-5-1) and by setting $\Phi(p) = \phi(p^+) - \phi(p^-)$, the SHIE and DSHIE formulations for the thin shell become,
 
 <a id="equation-2-5-3"></a>
-$$\phi(P) = M_k[\Phi](P) + \phi_i(P), \quad P \in E, \tag{2.5.3}$$
+$$
+\phi(P) = M_k[\Phi](P) + \phi_i(P), \quad P \in E, \tag{2.5.3}
+$$
 <a id="equation-2-5-4"></a>
-$$\frac{\partial \phi(P)}{\partial n} = N_k[\Phi](P) + \frac{\partial \phi_i(P)}{\partial n}, \quad P \in E. \tag{2.5.4}$$
+$$
+\frac{\partial \phi(P)}{\partial n} = N_k[\Phi](P) + \frac{\partial \phi_i(P)}{\partial n}, \quad P \in E. \tag{2.5.4}
+$$
 
 The surface domain $S$ is now the surface of one side of the thin shell. Since $S$ has been redefined, the domains $D$ and $E$ need also to be redefined. The domain $D$ becomes the domain whose interface with $S$ contains the points $p^-$, and $E$ becomes the domain whose interface with $S$ contains the points $p^+$. Both $D$ and $E$ are sub-domains of the exterior domain surrounding $S$. Taking the limit of $P$ to $p$ in [equation (2.5.3)](#equation-2-5-3) and [equation (2.5.4)](#equation-2-5-4);
 
 <a id="equation-2-5-5"></a>
-$$c(p)\phi_+(p) + (1 - c(p))\phi_-(p) = M_k[\Phi](p) + \phi_i(p), \quad P \in S, \tag{2.5.5}$$
+$$
+c(p)\phi_+(p) + (1 - c(p))\phi_-(p) = M_k[\Phi](p) + \phi_i(p), \quad P \in S, \tag{2.5.5}
+$$
 <a id="equation-2-5-6"></a>
-$$\frac{\partial \phi(p)}{\partial n} = N_k[\Phi](p) + \frac{\partial \phi_i(p)}{\partial n_p}, \quad P \in S. \tag{2.5.6}$$
+$$
+\frac{\partial \phi(p)}{\partial n} = N_k[\Phi](p) + \frac{\partial \phi_i(p)}{\partial n_p}, \quad P \in S. \tag{2.5.6}
+$$

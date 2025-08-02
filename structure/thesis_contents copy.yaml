@@ -1,481 +1,597 @@
-thesis_title: PhD Thesis - Richard Jeans 1992
+thesis_title: PhD Thesis Title
 total_pages: 215
 sections:
 - type: front_matter
   title: TITLE
   page_start: 1
+  page_end: 1
   chapter_number: null
   subsections: []
-  page_end: 1
+  source_page: 9
+  section_number: F1
 - type: front_matter
   title: ABSTRACT
   page_start: 2
+  page_end: 2
   chapter_number: null
   subsections: []
-  page_end: 2
+  source_page: 9
+  section_number: F2
 - type: front_matter
   title: ACKNOWLEDGEMENTS
   page_start: 3
+  page_end: 4
   chapter_number: null
   subsections: []
-  page_end: 4
+  source_page: 9
+  section_number: F3
 - type: front_matter
   title: NOTATION
   page_start: 5
+  page_end: 8
   chapter_number: null
   subsections: []
-  page_end: 8
-- type: toc
+  source_page: 9
+  section_number: F4
+- type: front_matter
   title: CONTENTS
   page_start: 9
+  page_end: 12
   chapter_number: null
   subsections: []
-  page_end: 12
-- type: toc
+  source_page: 9
+  section_number: F5
+- type: front_matter
   title: FIGURES
   page_start: 13
+  page_end: 16
   chapter_number: null
   subsections: []
-  page_end: 16
-- type: toc
+  source_page: 9
+  section_number: F6
+- type: front_matter
   title: TABLES
   page_start: 17
+  page_end: 17
   chapter_number: null
   subsections: []
-  page_end: 17
+  source_page: 9
+  section_number: F7
 - type: chapter
   title: CHAPTER 1. Introduction
   page_start: 18
+  page_end: 24
   chapter_number: 1
   subsections:
   - section_number: '1.1'
     title: Background
-    page: 18
+    start_page: 18
+    end_page: 23
     level: 1
   - section_number: '1.2'
     title: Motivation of Present Thesis
-    page: 23
+    start_page: 23
+    end_page: 25
     level: 1
-  page_end: 24
+  source_page: 9
+  section_number: '1'
 - type: chapter
   title: CHAPTER 2. Acoustic Problem
   page_start: 25
+  page_end: 44
   chapter_number: 2
   subsections:
   - section_number: '2.1'
     title: Fundamental Equations
-    page: 25
+    start_page: 25
+    end_page: 28
     level: 1
   - section_number: 2.1.1
     title: Linear Approximation
-    page: 25
+    start_page: 25
+    end_page: 26
     level: 2
   - section_number: 2.1.2
     title: Wave Equation
-    page: 26
+    start_page: 26
+    end_page: 27
     level: 2
   - section_number: 2.1.3
     title: Neumann boundary condition
-    page: 27
+    start_page: 27
+    end_page: 27
     level: 2
   - section_number: 2.1.4
-    title: Sommerfeld’s radiation condition
-    page: 27
+    title: "Sommerfeld\u2019s radiation condition"
+    start_page: 27
+    end_page: 28
     level: 2
   - section_number: '2.2'
     title: Integral Operators
-    page: 28
+    start_page: 28
+    end_page: 32
     level: 1
   - section_number: 2.2.1
     title: Greens Function
-    page: 28
+    start_page: 28
+    end_page: 29
     level: 2
   - section_number: 2.2.2
     title: Discontinuities
-    page: 29
+    start_page: 29
+    end_page: 32
     level: 2
   - section_number: '2.3'
-    title: Helmholtz’ Integral Equations
-    page: 32
+    title: "Helmholtz\u2019 Integral Equations"
+    start_page: 32
+    end_page: 36
     level: 1
   - section_number: 2.3.1
     title: Surface Helmholtz Integral Equation
-    page: 32
+    start_page: 32
+    end_page: 35
     level: 2
   - section_number: 2.3.2
-    title: Differentiated Surface Helmholtz’ Integral Equation
-    page: 35
+    title: "Differentiated Surface Helmholtz\u2019 Integral Equation"
+    start_page: 35
+    end_page: 35
     level: 2
   - section_number: 2.3.3
     title: Boundary Layer Formulations
-    page: 35
+    start_page: 35
+    end_page: 36
     level: 2
   - section_number: '2.4'
     title: Uniqueness of Boundary Integral Formulations
-    page: 36
+    start_page: 36
+    end_page: 39
     level: 1
   - section_number: 2.4.1
     title: SHIE and DSHIE formulations
-    page: 36
+    start_page: 36
+    end_page: 37
     level: 2
   - section_number: 2.4.2
     title: The CHIEF method
-    page: 37
+    start_page: 37
+    end_page: 38
     level: 2
   - section_number: 2.4.3
-    title: Burton and Miller’s Formulation
-    page: 38
+    title: "Burton and Miller\u2019s Formulation"
+    start_page: 38
+    end_page: 38
     level: 2
   - section_number: 2.4.4
     title: Boundary layer formulations
-    page: 38
+    start_page: 38
+    end_page: 39
     level: 2
   - section_number: 2.4.5
     title: Hybrid boundary layer formulation
-    page: 39
+    start_page: 39
+    end_page: 42
     level: 2
   - section_number: '2.5'
-    title: Thin shell formulation
-    page: 39
+    title: Thin shell formulaiton
+    start_page: 42
+    end_page: 42
     level: 1
   - section_number: 2.5.1
-    title: Boundary integral formulation
-    page: 40
+    title: Boundary Integral Formulation
+    start_page: 42
+    end_page: 43
     level: 2
   - section_number: 2.5.2
     title: Edge conditions
-    page: 43
+    start_page: 43
+    end_page: 44
     level: 2
-  page_end: 44
+  source_page: 9
+  section_number: '2'
 - type: chapter
   title: CHAPTER 3. Collocation Method
   page_start: 45
+  page_end: 77
   chapter_number: 3
   subsections:
   - section_number: '3.1'
     title: Introduction
-    page: 45
+    start_page: 45
+    end_page: 45
     level: 1
   - section_number: '3.2'
     title: Discretization
-    page: 45
+    start_page: 45
+    end_page: 47
     level: 1
   - section_number: 3.2.1
     title: Interpolation
-    page: 45
+    start_page: 45
+    end_page: 46
     level: 2
   - section_number: 3.2.2
     title: Local and Curvilinear Axes
-    page: 46
+    start_page: 46
+    end_page: 47
     level: 2
   - section_number: '3.3'
     title: Integration of Weak Singularity
-    page: 47
+    start_page: 47
+    end_page: 49
     level: 1
   - section_number: '3.4'
     title: Integral Operators
-    page: 49
+    start_page: 49
+    end_page: 58
     level: 1
   - section_number: 3.4.1
     title: $L_{k}$ Operator
-    page: 49
+    start_page: 49
+    end_page: 51
     level: 2
   - section_number: 3.4.2
     title: $M_{k}$ Operator
-    page: 51
+    start_page: 51
+    end_page: 53
     level: 2
   - section_number: 3.4.3
     title: $N_{k}$ Operator
-    page: 53
+    start_page: 53
+    end_page: 56
     level: 2
   - section_number: 3.4.4
     title: Matrix formulation
-    page: 56
+    start_page: 56
+    end_page: 57
     level: 2
   - section_number: 3.4.5
     title: Exterior pressure distribution
-    page: 57
+    start_page: 57
+    end_page: 58
     level: 2
   - section_number: '3.5'
     title: The computer code
-    page: 58
+    start_page: 58
+    end_page: 58
     level: 1
   - section_number: '3.6'
     title: Numerical results
-    page: 58
+    start_page: 58
+    end_page: 78
     level: 1
   - section_number: 3.6.1
     title: Radiation from submerged spheres
-    page: 58
+    start_page: 58
+    end_page: 59
     level: 2
   - section_number: 3.6.2
     title: Acoustic scattering from a submerged sphere
-    page: 59
+    start_page: 59
+    end_page: 60
     level: 2
   - section_number: 3.6.3
     title: Acoustic scattering from a submerged spheroid
-    page: 60
+    start_page: 60
+    end_page: 60
     level: 2
   - section_number: 3.6.4
     title: Acoustic scattering from a submerged finite cylinder
-    page: 60
+    start_page: 60
+    end_page: 78
     level: 2
-  page_end: 77
+  source_page: 10
+  section_number: '3'
 - type: chapter
   title: CHAPTER 4. Variational Method
   page_start: 78
+  page_end: 109
   chapter_number: 4
   subsections:
   - section_number: '4.1'
     title: Introduction
-    page: 78
+    start_page: 78
+    end_page: 78
     level: 1
   - section_number: '4.2'
     title: Weighted Residue Techniques and the Variational Method
-    page: 78
+    start_page: 78
+    end_page: 80
     level: 1
   - section_number: 4.2.1
     title: Weighted Residual-Galerkin Method
-    page: 78
+    start_page: 78
+    end_page: 79
     level: 2
   - section_number: 4.2.2
     title: Variational Method
-    page: 79
+    start_page: 79
+    end_page: 80
     level: 2
   - section_number: '4.3'
     title: Variational Boundary Integral Formulation
-    page: 80
+    start_page: 80
+    end_page: 81
     level: 1
   - section_number: '4.4'
     title: Numerical Implementation
-    page: 81
+    start_page: 81
+    end_page: 83
     level: 1
   - section_number: '4.5'
     title: Uniqueness of the Numerical Formulation
-    page: 83
+    start_page: 83
+    end_page: 84
     level: 1
   - section_number: '4.6'
     title: Edge Boundary Conditions
-    page: 84
+    start_page: 84
+    end_page: 85
     level: 1
   - section_number: '4.7'
     title: Computer Code
-    page: 85
+    start_page: 85
+    end_page: 86
     level: 1
   - section_number: '4.8'
     title: Numerical Results
-    page: 86
+    start_page: 86
+    end_page: 110
     level: 1
   - section_number: 4.8.1
     title: Spheroids
-    page: 86
+    start_page: 86
+    end_page: 87
     level: 2
   - section_number: 4.8.2
     title: Flat Disk
-    page: 87
+    start_page: 87
+    end_page: 91
     level: 2
   - section_number: 4.8.3
     title: Flat Square Plate
-    page: 91
+    start_page: 91
+    end_page: 91
     level: 2
   - section_number: 4.8.4
     title: Terai's Problem
-    page: 91
+    start_page: 91
+    end_page: 110
     level: 2
-  page_end: 109
+  source_page: 10
+  section_number: '4'
 - type: chapter
   title: CHAPTER 5. The Superposition Method
   page_start: 110
+  page_end: 130
   chapter_number: 5
   subsections:
   - section_number: '5.1'
     title: Introduction
-    page: 110
+    start_page: 110
+    end_page: 111
     level: 1
   - section_number: '5.2'
     title: The Superposition Integral
-    page: 111
+    start_page: 111
+    end_page: 113
     level: 1
   - section_number: '5.3'
     title: Uniqueness
-    page: 113
+    start_page: 113
+    end_page: 115
     level: 1
   - section_number: '5.4'
     title: Numerical Formulation
-    page: 115
+    start_page: 115
+    end_page: 120
     level: 1
   - section_number: 5.4.1
     title: Matrix Condition Number
-    page: 118
+    start_page: 118
+    end_page: 119
     level: 2
   - section_number: 5.4.2
     title: Velocity Reconstruction Error Norm
-    page: 119
+    start_page: 119
+    end_page: 120
     level: 2
   - section_number: '5.5'
     title: Numerical Results
-    page: 120
+    start_page: 120
+    end_page: 122
     level: 1
   - section_number: '5.6'
     title: Conclusion
-    page: 122
+    start_page: 122
+    end_page: 131
     level: 1
-  page_end: 130
+  source_page: 11
+  section_number: '5'
 - type: chapter
   title: CHAPTER 6. Elasto-Acoustic Problem
   page_start: 131
+  page_end: 166
   chapter_number: 6
   subsections:
   - section_number: '6.1'
     title: Introduction
-    page: 131
+    start_page: 131
+    end_page: 131
     level: 1
   - section_number: '6.2'
     title: Structural Problem
-    page: 131
+    start_page: 131
+    end_page: 135
     level: 1
   - section_number: '6.3'
     title: Fluid-Structure Interaction Force
-    page: 135
+    start_page: 135
+    end_page: 136
     level: 1
   - section_number: '6.4'
     title: Coupled Equation Set
-    page: 136
+    start_page: 136
+    end_page: 138
     level: 1
   - section_number: 6.4.1
     title: Fluid Filled and Non Closed Shell Problems
-    page: 136
+    start_page: 136
+    end_page: 137
     level: 2
   - section_number: 6.4.2
     title: Evacuated Closed Shell Problems
-    page: 137
+    start_page: 137
+    end_page: 138
     level: 2
   - section_number: '6.5'
     title: Solution of Coupled Equation Set
-    page: 138
+    start_page: 138
+    end_page: 140
     level: 1
   - section_number: 6.5.1
     title: Structure Variable Methodology
-    page: 138
+    start_page: 138
+    end_page: 139
     level: 2
   - section_number: 6.5.2
     title: Fluid Variable Methodology
-    page: 139
+    start_page: 139
+    end_page: 140
     level: 2
   - section_number: '6.6'
     title: Eigenvector Reduction of the Elastic Formulation
-    page: 140
+    start_page: 140
+    end_page: 142
     level: 1
   - section_number: '6.7'
     title: Interpolation
-    page: 142
+    start_page: 142
+    end_page: 143
     level: 1
   - section_number: '6.8'
     title: Uniqueness and the Coupled Problem
-    page: 143
+    start_page: 143
+    end_page: 147
     level: 1
   - section_number: '6.9'
     title: Elastic Thin Plate Problems
-    page: 147
+    start_page: 147
+    end_page: 149
     level: 1
   - section_number: '6.10'
     title: Numerical Results
-    page: 149
+    start_page: 149
+    end_page: 167
     level: 1
   - section_number: 6.10.1
     title: Cantilever Plate
-    page: 149
+    start_page: 149
+    end_page: 150
     level: 2
   - section_number: 6.10.2
     title: Spherical Shell
-    page: 150
+    start_page: 150
+    end_page: 167
     level: 2
-  page_end: 166
+  source_page: 11
+  section_number: '6'
 - type: chapter
   title: CHAPTER 7. Lanczos vectors in elasto-acoustic analysis
   page_start: 167
+  page_end: 190
   chapter_number: 7
   subsections:
   - section_number: '7.1'
     title: Introduction
-    page: 167
+    start_page: 167
+    end_page: 168
     level: 1
   - section_number: '7.2'
     title: Lanczos Vectors
-    page: 168
+    start_page: 168
+    end_page: 171
     level: 1
   - section_number: '7.3'
     title: Fluid Variable Methodology
-    page: 171
+    start_page: 171
+    end_page: 172
     level: 1
   - section_number: '7.4'
     title: Added Fluid Mass Methodology
-    page: 172
+    start_page: 172
+    end_page: 173
     level: 1
   - section_number: '7.5'
     title: Results
-    page: 173
+    start_page: 173
+    end_page: 191
     level: 1
-  page_end: 190
+  source_page: 12
+  section_number: '7'
 - type: chapter
   title: CHAPTER 8. Conclusions and Recomendations
   page_start: 191
+  page_end: 194
   chapter_number: 8
   subsections:
   - section_number: '8.1'
     title: Conclusions
-    page: 191
+    start_page: 191
+    end_page: 193
     level: 1
   - section_number: '8.2'
     title: Recomendations
-    page: 193
+    start_page: 193
+    end_page: 195
     level: 1
-  page_end: 194
+  source_page: 12
+  section_number: '8'
 - type: back_matter
   title: REFERENCES
   page_start: 195
+  page_end: 199
   chapter_number: null
   subsections: []
-  page_end: 199
+  source_page: 12
+  section_number: B1
 - type: appendix
   title: APPENDIX 1 Symmetry and Half Space Problems
   page_start: 200
+  page_end: 204
   chapter_number: null
   subsections:
   - section_number: A1.1
     title: Image Sources
-    page: 200
+    start_page: 200
+    end_page: 201
     level: 1
   - section_number: A1.2
     title: Geometric Symmetries
-    page: 201
+    start_page: 201
+    end_page: 205
     level: 1
-  page_end: 204
+  source_page: 12
+  section_number: A1
 - type: appendix
   title: APPENDIX 2 Analytical Solutions
   page_start: 205
+  page_end: 215
   chapter_number: null
   subsections:
   - section_number: A2.1
     title: Rigid Sphere
-    page: 205
+    start_page: 205
+    end_page: 210
     level: 1
   - section_number: A2.2
     title: Asymptotic Solutions
-    page: 210
+    start_page: 210
+    end_page: 213
     level: 1
   - section_number: A2.3
     title: Elastic Sphere
-    page: 213
+    start_page: 213
+    end_page: 215
     level: 1
-  page_end: 225
-extraction_metadata:
-  pages_processed: 4
-  total_entries_extracted: 18
-  pages_covered:
-  - 9
-  - 10
-  - 11
-  - 12
-  extraction_date: '2025-07-23T11:04:49.038855'
-  processing_method: single_page_with_text_guidance
+  source_page: 12
+  section_number: A2

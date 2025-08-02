@@ -1,4 +1,91 @@
 Acoustic Problem.
+Single layer distribution
+Jump relationships:
+an
+Boundary condition:
+Uniqueness of exterior problem.
+From (1) and (4).
+At eigenvalues of interior Dirichlet problem:
+=
+Not unique solution
+Not at eigenvalues of interior Dirichlet problem:
+=
+Unique solution
+Figure (2.3). Mathematical illustration of the non-uniqueness of the single layer
+distribution at eigenvalues of the interior Dirichlet problem
+page 40
+ф+-b = 0,
+дф+ ₴ф-==-н.
+(1)
+(2)
+дф+
+2 = 0.
+d+ = 0,
+→ =0,
+(3)
+(4)
+(5)
+→ =0,
+др-- # 0.
+11 #0,
+From (2), (3) and (6).
+(6)
+(7)
+=
+→ =0,
+H=0,
+25=0.
+From (2), (3) and (8).
+(8)
+(9)
+
+
+--- Page 40 ---
+
+Acoustic Problem.
+Double layer distribution
+Jump relationships:
+Boundary condition:
+And
+- = 0.
+Uniqueness of exterior problem.
+From (2) and (3).
+At eigenvalues of interior Neumann problem:
+Not unique solution
+Not at eigenvalues of interior Neumann problem:
+Unique solution
+Figure (2.4). Mathematical illustration of the non-uniqueness of the double layer
+distribution at eigenvalues of the interior Neumann problem
+page 41
+ф+-ф=0,
+дф+ 2р-
+-- ^ = 0.
+(1)
+(2)
+ф+ = 0,
+др-
+an =0,
+(3)
+(4)
+(5)
+=
+an = 0,
+→ #0.
+0 #0,
+From (1),(4) and (6).
+(6)
+(7)
+дф-
+0 = 0,
+∞ = 0.
+From (1), (4) and (8).
+(8)
+(9)
+
+
+--- Page 41 ---
+
+Acoustic Problem.
 As the boundary layer formulation are related to the SHIE and the DSHIE, this hybrid
 formulation is analogous to the Burton and Miller formulation described above.
 2.5 Thin shell formulation

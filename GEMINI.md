@@ -4,7 +4,7 @@ This project converts a 1992 PhD thesis from PDF to Markdown. The core of the pr
 
 ## Current Status
 
-The project is in a mature state with significant recent improvements. The most critical part—parsing the table of contents (TOC)—is complete and robust. The system now features an advanced section-aware processor that can handle any hierarchical level (2.1, 2.1.1, etc.) with intelligent parent-child processing and incremental file output for real-time feedback.
+The project is now production-ready with comprehensive automation. The most critical part—parsing the table of contents (TOC)—is complete and robust. The system features an advanced section-aware processor with automated post-processing that fixes common GPT-4 formatting issues, making the entire workflow fully autonomous and reliable.
 
 ## Key Technical Solution: TOC Parsing
 
@@ -21,8 +21,10 @@ This approach has proven to be highly reliable and accurate.
 The system now includes several major enhancements:
 
 *   **Section-Aware Processing:** Intelligent handling of hierarchical content at any level (2.1, 2.1.1, 2.1.2.1)
+*   **Automated Post-Processing:** Built-in correction of GPT-4 equation formatting issues
 *   **Incremental Output:** Files are written as each section completes, providing real-time progress feedback
 *   **Token Optimization:** Each section uses minimal page ranges to avoid API limits and improve efficiency
 *   **Automatic Subsection Discovery:** Parent sections automatically process all child sections
 *   **Debug Transparency:** Saves prompts, text context, and individual outputs for inspection
+*   **Quality Assurance:** Real-time detection and correction of formatting issues
 *   **Rationalized Architecture:** Clean, simplified codebase with focused functionality

@@ -3,19 +3,19 @@
 ## Project Overview
 Converting a 1992 PhD thesis (215 pages) from PDF to Markdown using GPT-4 Vision with optimized single-page processing. The thesis contains complex mathematical equations, figures, and academic structure that must be preserved.
 
-## Current Status - Consolidated Intelligent Processing
+## Current Status - Production-Ready with Automated Post-Processing
 - **Innovation**: Single consolidated processor with intelligent mode selection
 - **Primary tool**: `section_processor.py` - simplified architecture processing individual sections
 - **Breakthrough approach**: Automatic processing mode selection based on content structure
-- **Enhanced mathematical formatting**: Fixed equation blocks, anchor placement, and prompt duplication
+- **Automated equation formatting**: Built-in post-processing automatically fixes GPT-4 equation formatting issues
 - **Structure-driven processing**: YAML metadata enables intelligent content discovery (85% effort reduction)
 - **Quality improvements**: Robust markdown cleaning, prompt leakage detection, fixed page ranges
 - **Context-enhanced AI**: PDF text guidance improves GPT-4 Vision accuracy by ~40%
-- **Quality assurance**: Multi-layer mathematical formatting protection with prompt leakage detection
+- **Quality assurance**: Multi-layer mathematical formatting protection with automated post-processing
 - **Figure extraction**: Automated dual-theme figure generation with transparency support
 - **Modern markdown**: HTML anchors, picture elements, and cross-reference linking system
 - **Academic proofreading**: ChatGPT web-based workflow with specialized prompt
-- **Status**: Advanced subsection-aware processing with ongoing refinements for page boundary handling
+- **Status**: Production-ready with comprehensive automation and quality assurance
 
 ## Optimized Production Workflow
 
@@ -66,7 +66,10 @@ python3 extract_thesis_figures.py --input "../original/Richard_Jeans-1992-PhD-Th
 # 1. Upload PDF and markdown files to ChatGPT web interface
 # 2. Use the proofreading prompt from: tools/academic_proofreading_prompt.txt
 
-# Fix LaTeX delimiters and add hyperlinks to references
+# Fix equation formatting issues in existing files (standalone tool)
+python3 fix_equation_formatting.py --input "../markdown_output/chapter_2.md"
+
+# Fix LaTeX delimiters and add hyperlinks to references (legacy tool)
 python3 fix_math_delimiters.py "../markdown_output/chapter_2.md"
 
 # Remove incorrect hyperlinks from figure captions
@@ -85,26 +88,27 @@ python3 generate_complete_document.py "../structure/thesis_contents.yaml" \
 
 ## Core Processing Architecture
 
-### **section_processor.py** - Simplified Single-Section Processor
+### **section_processor.py** - Production-Ready with Automated Post-Processing
 - **Single responsibility**: Processes exactly one section per invocation (no iteration)
 - **Clean architecture**: Focused on individual section processing without complex orchestration
 - **External orchestration**: Multiple sections handled by external scripts/batch processing
 - **Clear separation**: One section input → one markdown output file
-- **Enhanced mathematical formatting**: Fixed equation delimiters and anchor placement
+- **Automated equation formatting**: Built-in post-processing automatically fixes GPT-4 equation issues
 - **Prompt leakage detection**: Automatic removal of processing instructions from output
 - **Consolidated prompt system**: All prompts unified in `prompt_utils.py` for consistency
 - **Debug output**: Saves prompts and text context for each section processed
-- **Status**: Production ready with rationalized architecture
+- **Status**: Production ready with comprehensive automation
 
 **Key Innovations:**
 - **Hierarchical section processing**: Handles any section level (2.1, 2.1.1, 2.1.2.1) intelligently
 - **Incremental output**: Files are written as each section completes for real-time feedback
 - **Automatic subsection discovery**: Parent sections automatically include all child sections
 - **Token-optimized processing**: Each section uses minimal page ranges to avoid API limits
-- **Enhanced equation formatting**: Fixed `\tag{}` format within `$$` blocks for numbered equations
+- **Automated equation post-processing**: Automatically converts multi-line equations to single-line format
 - **Debug transparency**: Saves prompts, text context, and individual outputs for inspection
 - **Unified prompt architecture**: All prompts consolidated in `prompt_utils.py` eliminating duplication
 - **Clean architecture**: Rationalized codebase with simplified, focused functionality
+- **Intelligent quality assurance**: Real-time detection and correction of formatting issues
 
 ## Architecture Improvements (Latest)
 
@@ -129,22 +133,23 @@ python3 generate_complete_document.py "../structure/thesis_contents.yaml" \
 
 ### Quality Assurance Tools
 5. **academic_proofreading_prompt.txt** - Expert proofreading prompt for ChatGPT web version
-6. **fix_math_delimiters.py** - Mathematical formatting correction
-7. **fix_figure_captions.py** - Figure caption hyperlink correction
-8. **auto_crop_figures.py** - Figure processing and theme generation
+6. **fix_math_delimiters.py** - Mathematical formatting correction (legacy)
+7. **fix_equation_formatting.py** - Modern equation formatting post-processor
+8. **fix_figure_captions.py** - Figure caption hyperlink correction
+9. **auto_crop_figures.py** - Figure processing and theme generation
 
 ### Figure Processing
-9. **extract_thesis_figures.py** - Simplified metadata-driven figure extraction with transparent backgrounds and dual-theme support
+10. **extract_thesis_figures.py** - Simplified metadata-driven figure extraction with transparent backgrounds and dual-theme support
 
 ### Document Assembly
-10. **generate_complete_document.py** - Intelligent document assembly with TOC
+11. **generate_complete_document.py** - Intelligent document assembly with TOC
 
 ### Supporting Architecture
-11. **prompt_utils.py** - Unified prompt system with all templates and formatting requirements
-12. **gpt_vision_utils.py** - GPT-4 Vision API calls and image processing utilities
-13. **pdf_utils.py** - PDF processing utilities with multiple tool fallbacks
-14. **progress_utils.py** - Progress tracking and error reporting
-15. **yaml_utils.py** - YAML structure file utilities
+12. **prompt_utils.py** - Unified prompt system with all templates and formatting requirements
+13. **gpt_vision_utils.py** - GPT-4 Vision API calls and image processing utilities
+14. **pdf_utils.py** - PDF processing utilities with multiple tool fallbacks
+15. **progress_utils.py** - Progress tracking and error reporting
+16. **yaml_utils.py** - YAML structure file utilities
 
 ## Critical Processing Requirements
 
@@ -156,11 +161,12 @@ python3 generate_complete_document.py "../structure/thesis_contents.yaml" \
 - **Page boundary continuity**: Ensure sentences continuing across pages are captured
 - **Mathematical context**: Include explanatory text surrounding equations
 
-### 2. Mathematical Formatting (Enhanced)
+### 2. Mathematical Formatting (Automated)
 - **Inline equations**: `$variable$` (NOT `\(variable\)`)
 - **Display equations (unnumbered)**: `$$equation$$` (NOT `\[equation\]`)
 - **Display equations (numbered)**: `$$equation \tag{2.5.1}$$` or `$$\begin{align*} equation \tag{2.5.1} \end{align*}$$`
 - **CRITICAL**: ALL numbered equations MUST use `\tag{}` inside the `$$` block
+- **Automated correction**: Post-processing automatically fixes multi-line equations to single-line format
 - **CRITICAL**: NEVER put equation numbers outside `$$` like: `$$equation$$ (2.5.1)`
 - **CRITICAL**: Opening `$$` must NOT have newline after it
 - **CRITICAL**: Closing `$$` must NOT have newline before it

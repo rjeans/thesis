@@ -48,4 +48,17 @@ A key improvement was implementing incremental file writing. As each section com
 ### Token Optimization
 By processing sections in logical chunks rather than arbitrary page ranges, I achieved much better token efficiency. Each section uses only the pages it actually needs, avoiding the token capacity issues that plagued earlier approaches.
 
-These architectural decisions transformed a brittle, hard-to-debug system into a robust, maintainable workflow that handles complex hierarchical content intelligently.
+### Automated Post-Processing: The Final Piece
+The last critical breakthrough was implementing automated post-processing within the conversion pipeline. Despite extremely detailed prompts, GPT-4 Vision would occasionally generate equations with line breaks inside `$$` blocks, violating LaTeX formatting requirements. Rather than fighting this inconsistency, I implemented intelligent post-processing that automatically detects and fixes these issues during the conversion process.
+
+The system now includes:
+- Real-time equation formatting correction
+- Multi-line equation detection and single-line conversion
+- Quality assurance reporting with fix statistics
+- Comprehensive formatting validation
+
+This automated correction layer makes the entire workflow truly autonomous—no manual cleanup required.
+
+## The Bottom Line
+
+These architectural decisions transformed a brittle, hard-to-debug system into a robust, production-ready workflow that handles complex hierarchical content intelligently. The key lesson: successful AI workflows combine the strengths of AI (visual pattern recognition, content understanding) with the reliability of deterministic code (logic, validation, post-processing). The result is a system that's both powerful and predictable.
