@@ -23,7 +23,23 @@ def get_mathematical_formatting_section():
    - **CRITICAL**: ALL numbered equations MUST use \\tag{} inside the $$ block
    - **CRITICAL**: NEVER put equation numbers outside $$ like: $$equation$$ (2.5.1)
    - **CRITICAL**: Opening $$ must NOT have newline after it
-   - **CRITICAL**: Closing $$ must NOT have newline before it"""
+   - **CRITICAL**: Closing $$ must NOT have newline before it
+   - **CRITICAL**: NO line breaks anywhere within $$...$$ blocks
+
+**CORRECT EQUATION EXAMPLES:**
+<a id="equation-2-1"></a>
+$$\\nabla^2 \\phi + k^2 \\phi = 0 \\tag{2.1}$$
+
+<a id="equation-2-5"></a>  
+$$\\begin{align*} \\tilde{u} = \\nabla \\phi, \\quad \\tilde{p} = i \\omega \\rho \\phi \\tag{2.5} \\end{align*}$$
+
+**WRONG FORMATS (DO NOT USE):**
+$$
+\\nabla^2 \\phi + k^2 \\phi = 0
+$$ (2.1)
+OR
+$$\\nabla^2 \\phi + k^2 \\phi = 0
+\\tag{2.1}$$"""
 
 
 def get_figure_formatting_section():
@@ -62,7 +78,11 @@ def get_cross_reference_section():
    - Equations: [equation (2.1)](#equation-2-1), [Eq. (2.1)](#equation-2-1)
    - Tables: [Table 2.1](#table-2-1), [Tab. 2.1](#table-2-1)
    - Sections: [Section 2.1](#section-2-1), [Sec. 2.1](#section-2-1)
-   - References: [Author (Year)](#bib-author-year)"""
+   - **Literature References**: Convert ALL citation patterns to markdown links:
+     * "Author [Year]" → [Author [Year]](#bib-author-year) e.g., [Jennings [1977]](#bib-jennings-1977)
+     * "Author (Year)" → [Author (Year)](#bib-author-year) e.g., [Smith (1990)](#bib-smith-1990)
+     * "Author et al. [Year]" → [Author et al. [Year]](#bib-author-et-al-year) e.g., [Jones et al. [1985]](#bib-jones-et-al-1985)
+     * "Author and Author [Year]" → [Author and Author [Year]](#bib-author-author-year) e.g., [Burton and Miller [1971]](#bib-burton-miller-1971)"""
 
 
 def get_pdf_text_guidance_section(text_context):
@@ -263,8 +283,10 @@ Skip any page headers, footers, or page numbers. Focus only on the main academic
 - Create links to equations: [equation (2.1)](#equation-2-1), [Eq. (2.1)](#equation-2-1)
 - Create links to tables: [Table 2.1](#table-2-1), [Tab. 2.1](#table-2-1)
 - Create links to sections: [Section 2.1](#section-2-1), [Sec. 2.1](#section-2-1)
-- Bibliographic references: [Author (Year)](#bib-author-year), e.g., [Smith (1990)](#bib-smith-1990)
-- Reference format: [Burton and Miller (1971)](#bib-burton-miller-1971)
-- Multiple authors: [Jones et al. (1985)](#bib-jones-et-al-1985)
+- **CRITICAL - Literature References**: Convert ALL citation patterns to markdown links:
+  * "Author [Year]" → [Author [Year]](#bib-author-year) e.g., [Jennings [1977]](#bib-jennings-1977)
+  * "Author (Year)" → [Author (Year)](#bib-author-year) e.g., [Smith (1990)](#bib-smith-1990)
+  * "Author et al. [Year]" → [Author et al. [Year]](#bib-author-et-al-year) e.g., [Jones et al. [1985]](#bib-jones-et-al-1985)
+  * "Author and Author [Year]" → [Author and Author [Year]](#bib-author-author-year) e.g., [Burton and Miller [1971]](#bib-burton-miller-1971)
 - Use lowercase, hyphenated anchor references matching the anchor IDs
 """
