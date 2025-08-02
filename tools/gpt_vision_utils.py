@@ -52,7 +52,7 @@ def encode_images_for_vision(image_paths, show_progress=True):
     return image_contents
 
 
-def call_gpt_vision_api(prompt, image_contents, model="gpt-4o", max_tokens=3000, api_key=None):
+def call_gpt_vision_api(prompt, image_contents, model="gpt-4o", max_tokens=16000, api_key=None):
     """
     Make a GPT-4 Vision API call with proper error handling and timing.
 
@@ -63,7 +63,7 @@ def call_gpt_vision_api(prompt, image_contents, model="gpt-4o", max_tokens=3000,
         prompt (str): Text prompt for the Vision API
         image_contents (list): List of encoded image dictionaries
         model (str): OpenAI model to use (default "gpt-4o")
-        max_tokens (int): Maximum tokens in response (default 3000)
+        max_tokens (int): Maximum tokens in response (default 16000)
         api_key (str, optional): OpenAI API key (uses openai.api_key if None)
 
     Returns:

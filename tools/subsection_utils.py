@@ -114,18 +114,18 @@ def load_chapter_subsections(structure_dir, chapter_identifier):
         return None
 
 
-def load_individual_section(structure_dir, section_identifier):
+def load_individual_section(structure_file_path, section_identifier):
     """
-    Load a specific section (e.g., 2.1, 2.1.1) from YAML structure files.
+    Load a specific section (e.g., 2.1, 2.1.1) from YAML structure file.
     
     Args:
-        structure_dir (str): Directory containing YAML structure files
+        structure_file_path (str): Path to thesis structure YAML file
         section_identifier (str): Section identifier (e.g., "2.1", "2.1.1")
     
     Returns:
         dict: Section data with parent chapter context and all subsections, or None if not found
     """
-    structure_file = Path(structure_dir) / "thesis_contents.yaml"
+    structure_file = Path(structure_file_path)
     
     if not structure_file.exists():
         print_progress(f"- Structure file not found: {structure_file}")
@@ -149,11 +149,11 @@ def load_individual_section(structure_dir, section_identifier):
                 start_page = section.get('page_start', 1)
                 
                 if subsections:
-                    # Has subsections - process only the parent section page (usually just the section heading)
-                    # For parent sections, we only want the section heading, not subsection content
-                    end_page = start_page  # Process only the page where the section starts
+                    # Has subsections - process only the parent section page but with strict instructions
+                    # to extract only the parent heading and stop before subsection content
+                    end_page = start_page  # Process only the first page but with strict filtering
                     
-                    print_progress(f"+ Parent section with {len(subsections)} subsections - processing only section heading (page {start_page})")
+                    print_progress(f"+ Parent section with {len(subsections)} subsections - processing parent heading only (page {start_page})")
                 else:
                     # No subsections - process full range
                     end_page = section.get('page_end', start_page)
@@ -178,9 +178,10 @@ def load_individual_section(structure_dir, section_identifier):
                     }
                 }
         
-        # Look for the section within all chapters (existing logic for subsections)
+        # Look for the section within all sections (chapters, appendices, etc.)
         for chapter in structure_data['sections']:
-            if chapter.get('type') != 'chapter':
+            # Skip sections that don't have subsections (front_matter, back_matter without subsections)
+            if not chapter.get('subsections'):
                 continue
                 
             subsections = chapter.get('subsections', [])
@@ -205,26 +206,15 @@ def load_individual_section(structure_dir, section_identifier):
                 # Sort subsections by start_page
                 section_subsections.sort(key=lambda x: x.get('start_page', x.get('page', 0)))
                 
-                # Calculate section range based on whether it's a parent or leaf section
-                # For token efficiency, parent sections only process their direct content
+                # Calculate section range to include all subsections
                 child_subsections = [s for s in section_subsections if s.get('section_number', '') != section_identifier]
                 
                 if len(child_subsections) > 0:  # Parent section with subsections
-                    # For parent sections, only process from start until first subsection starts
+                    # Process only the parent section page with strict instructions to extract heading only
                     overall_start = target_section.get('start_page', target_section.get('page', 0))
-                    
-                    # Find first child subsection
-                    child_subsections.sort(key=lambda x: x.get('start_page', x.get('page', 0)))
-                    first_child_start = child_subsections[0].get('start_page', child_subsections[0].get('page', overall_start))
-                    
-                    # If first child starts on same page as parent, process only that page
-                    # If first child starts on later page, process up to (but not including) that page
-                    if first_child_start == overall_start:
-                        overall_end = overall_start  # Same page - process only parent content on that page
-                    else:
-                        overall_end = first_child_start - 1  # Different page - process up to child start
+                    overall_end = overall_start  # Process only the first page but filter content carefully
                         
-                    print_progress(f"+ Parent section detected - processing only parent content")
+                    print_progress(f"+ Parent section with subsections - processing parent heading only (page {overall_start})")
                 else:  # Leaf section - use full range
                     overall_start = target_section.get('start_page', target_section.get('page', 0))
                     overall_end = target_section.get('end_page', overall_start)

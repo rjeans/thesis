@@ -1,0 +1,32 @@
+Analytical Series Solution for the Sphere.
+APPENDIX 2.
+Analytical Series Solution for the Sphere
+A2.1 Rigid sphere
+Throughout this study the spherical radiator is used to validate the acoustic numerical
+methods since an analytical solution for the spherical problem is easily available. These results
+are covered in great depth by Junger and Feit [1986], and they are summarized in this appendix.
+The SHIE for the exterior problem is given by,
+where w is the radial displacement. If the coordinate system of the problem allows variable
+separation of the Greens free space function, then an analytical solution is available. In spherical
+polar coordinates the Greens free space function can be written in terms of spherical Bessel
+functions and Legendre polynomials,
+The coordinate system (T, 0,Ф) describes the exterior domain and (ro, Go, do) describes the
+surface of the sphere. For coordinate systems where an analytical solution exists, the Green's
+function in Eq. (A2.1.1) can be written as,
+where l' is a solution to the homogeneous Helmholtz' equation and the normal derivative of I'
+cancels the normal derivative of Ge on S. Consequently Eg. (A2.1.1) can be rewritten as,
+page 205
+TEE,
+(A2.1.1)
+Gk (7, 0, Ф/то, До,Фо) = -ік Г (п - т).
+n=0m=-n (7 + m) (2n + 1) CO5 m(ф-40)
+Pm (cost) Pm (cost.)in(kro)hn(kr),
+(A2.1.2)
+raro
+9(T, ro) = Gk (T, ro) + I (т, ro),
+(A2.1.3)
+т ≥ то.
+(A2.1.4)
+
+
+--- Page 205 ---

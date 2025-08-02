@@ -51,6 +51,28 @@ Figure X.Y. Caption text here.
 **Requirements**: Anchor BEFORE picture element, both themes, full alt text, plain caption below"""
 
 
+def get_table_formatting_section():
+    """Get table formatting requirements section."""
+    return """**TABLE FORMATTING**:
+   - **CRITICAL**: Convert ALL tables to proper Markdown table format
+   - Add anchor before table: `<a id="table-a2-1"></a>`
+   - Use pipe-separated format with proper alignment:
+     ```
+     <a id="table-2-1"></a>
+     
+     | Column 1 | Column 2 | Column 3 |
+     |----------|----------|----------|
+     | Value 1  | Value 2  | Value 3  |
+     | Value 4  | Value 5  | Value 6  |
+     
+     **Table 2.1**: Caption text describing the table contents
+     ```
+   - Preserve all table data accurately, including numerical values and units
+   - Maintain proper column alignment (left, center, right as appropriate)
+   - Include complete table captions below the table
+   - **DO NOT SKIP TABLES** - they contain important data that must be preserved"""
+
+
 def get_anchor_generation_section():
     """Get anchor generation requirements section."""
     return """**ANCHOR GENERATION AND HEADING HIERARCHY**:
@@ -116,7 +138,8 @@ def create_toc_parsing_prompt(content_type, yaml_structure):
     content_descriptions = {
         "contents": "table of contents from this 1992 PhD thesis and extract the chapter/section structure",
         "figures": "figures list from this 1992 PhD thesis and extract all figure information",
-        "tables": "tables list from this 1992 PhD thesis and extract all table information"
+        "tables": "tables list from this 1992 PhD thesis and extract all table information",
+        "references": "academic references from this 1992 PhD thesis and convert them to BibTeX format"
     }
 
     instructions = {
@@ -154,6 +177,18 @@ def create_toc_parsing_prompt(content_type, yaml_structure):
             "**CRITICAL: Do not stop after the first page - continue through all provided pages**",
             "Preserve exact capitalization and punctuation in titles",
             "If no tables are found, return an empty tables list"
+        ],
+        "references": [
+            "**CRITICAL: Process ALL pages provided - examine every single page image for references**",
+            "Extract ALL academic references exactly as they appear across ALL pages",
+            "Parse each reference into proper BibTeX format with correct field identification",
+            "Generate unique BibTeX keys using format: first-author-lastname-year (lowercase, hyphenated)",
+            "Identify reference types: article, book, inproceedings, incollection, techreport, phdthesis, mastersthesis, misc",
+            "Extract complete bibliographic data: authors, titles, journals/books, years, volumes, pages",
+            "Handle various 1992 citation formats and incomplete references appropriately",
+            "Include original_text field with exact reference as it appears in PDF",
+            "**CRITICAL: Do not stop after the first page - continue through all provided pages**",
+            "Preserve author name formatting and handle 'et al.' appropriately"
         ]
     }
 
@@ -161,7 +196,7 @@ def create_toc_parsing_prompt(content_type, yaml_structure):
     instruction_list = instructions.get(content_type, [])
 
     # Adjust the prompt based on content type
-    if content_type in ["figures", "tables"]:
+    if content_type in ["figures", "tables", "references"]:
         page_description = "from ALL page images provided (process every page completely)"
     else:
         page_description = "from the single page image provided"

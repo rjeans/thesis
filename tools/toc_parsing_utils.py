@@ -176,6 +176,11 @@ def process_pages_batch(
             )
             
             if page_data:
+                # Check if page_data is a dictionary (successful parsing)
+                if not isinstance(page_data, dict):
+                    print_progress(f"- Invalid page data format on page {page_num}: {type(page_data)}")
+                    continue
+                
                 # Apply custom processing if provided
                 if page_processor:
                     page_data = page_processor(page_data, page_num)
@@ -189,6 +194,8 @@ def process_pages_batch(
                     print_progress(f"+ Successfully parsed {len(page_data['figures'])} figures from page {page_num}")
                 elif content_type == "tables" and 'tables' in page_data:
                     print_progress(f"+ Successfully parsed {len(page_data['tables'])} tables from page {page_num}")
+                elif content_type == "references" and 'references' in page_data:
+                    print_progress(f"+ Successfully parsed {len(page_data['references'])} references from page {page_num}")
                 else:
                     print_progress(f"+ No {content_type} found on page {page_num}")
     
@@ -275,6 +282,26 @@ def save_diagnostics(
             ]
         }
         filename = "tables_extraction_diagnostics.json"
+        
+    elif content_type == "references":
+        diagnostics_data = {
+            'processing_summary': {
+                'pages_processed': end_page - start_page + 1,
+                'total_references': len(final_structure.get('references', [])),
+                'page_range': f"{start_page}-{end_page}",
+            },
+            'references_analysis': [
+                {
+                    'id': ref.get('id'),
+                    'type': ref.get('type'),
+                    'author': ref.get('author'),
+                    'title': ref.get('title'),
+                    'year': ref.get('year')
+                }
+                for ref in final_structure.get('references', [])
+            ]
+        }
+        filename = "references_extraction_diagnostics.json"
     
     else:
         print_progress(f"- Unknown content type for diagnostics: {content_type}")
@@ -316,6 +343,8 @@ def save_yaml_output(
         filename = "thesis_figures.yaml"
     elif content_type == "tables":
         filename = "thesis_tables.yaml"
+    elif content_type == "references":
+        filename = "thesis_references.yaml"
     else:
         filename = f"thesis_{content_type}.yaml"
     

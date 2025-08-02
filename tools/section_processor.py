@@ -1,9 +1,9 @@
 #!/usr/bin/env python3
 """
-Simplified chapter processor focused on section-based processing.
+Simplified section processor for complete section processing.
 
-This processor focuses on the subsection-aware approach which is the way forward
-for the workflow, processing complete logical content units rather than arbitrary pages.
+This processor processes complete sections as single units for optimal quality,
+focusing on logical content boundaries rather than arbitrary page batches.
 """
 
 import sys
@@ -26,15 +26,12 @@ from prompt_utils import (
     get_output_requirements_section,
     get_pdf_text_guidance_section,
     get_content_transcription_requirements,
-    get_figure_formatting_section
+    get_figure_formatting_section,
+    get_table_formatting_section
 )
 from subsection_utils import (
     load_chapter_subsections, 
-    load_individual_section,
-    calculate_subsection_page_ranges,
-    group_subsections_by_hierarchy,
-    create_batch_info,
-    print_subsection_batching_plan
+    load_individual_section
 )
 
 class ProcessingMode(Enum):
@@ -50,58 +47,53 @@ class SectionProcessor:
     content units rather than arbitrary page breaks.
     """
 
-    def __init__(self, pdf_path, structure_dir=None, max_pages_per_batch=3, debug=False):
+    def __init__(self, pdf_path, structure_file=None, debug=False):
         """
         Initialize the section processor.
 
         Args:
             pdf_path (str): Path to source PDF file
-            structure_dir (str): Directory containing YAML structure files
-            max_pages_per_batch (int): Maximum pages per subsection batch
+            structure_file (str): Path to thesis structure YAML file
             debug (bool): Whether to write debug files (prompt and text context)
 
         """
         self.pdf_path = Path(pdf_path)
-        self.structure_dir = Path(structure_dir) if structure_dir else None
-        self.max_pages_per_batch = max_pages_per_batch
+        self.structure_file = Path(structure_file) if structure_file else None
         self.debug = debug
-   
         
-    
-        
-        print_progress(f"Processor initialized with max {max_pages_per_batch} pages per batch")
+        print_progress(f"Processor initialized")
      
-    def process_section(self, section_identifier, output_path):
+    def process_section(self, section_identifier, output_file_path):
         """
         Process a section or individual section using subsection-aware processing.
         
         Args:
             section_identifier (str): Section identifier (e.g., "2.1", "2.1.1")
-            output_path (str): Output markdown file path
+            output_file_path (str): Complete path to output markdown file (including filename)
         
         Returns:
             bool: True if processing succeeded, False otherwise
         """
         print_progress(f"Processing identifier: {section_identifier}")
 
-        # Check if structure directory exists
-        if not self.structure_dir or not self.structure_dir.exists():
-            print_progress("- No structure directory provided or found")
+        # Check if structure file exists
+        if not self.structure_file or not self.structure_file.exists():
+            print_progress("- No structure file provided or found")
             return False
-        section_data = load_individual_section(str(self.structure_dir), section_identifier)
+        section_data = load_individual_section(str(self.structure_file), section_identifier)
         if section_data:
             print_progress(f"+ Found individual section: {section_data['title']}")
-            return self.process_individual_section(section_data, output_path)
+            return self.process_individual_section(section_data, output_file_path)
         
     
 
-    def process_individual_section(self, section_data, output_path):
+    def process_individual_section(self, section_data, output_file_path):
         """
         Process an individual section (e.g., 2.1, 2.1.1) rather than a full chapter.
         
         Args:
             section_data (dict): Section data with parent chapter context
-            output_path (str): Output markdown file path
+            output_file_path (str): Complete path to output markdown file (including filename)
         
         Returns:
             bool: True if processing succeeded, False otherwise
@@ -110,7 +102,6 @@ class SectionProcessor:
         chapter_title = section_data.get('chapter_title', '')
         section_number = section_info.get('section_number')
         section_title = section_info.get('title', '')
-        result=False
 
         print_progress(f"Processing individual section: {section_number} {section_title}")
         if chapter_title:
@@ -118,74 +109,91 @@ class SectionProcessor:
         else:
             print_progress(f"Section type: {section_data.get('section_type', 'unknown')}")
 
-        # Get page range and batch info
-        start_page, end_page = self._get_page_range(section_info)
-        batch_info = self._create_batch_info(section_info, start_page, end_page)
+        # Get page range (use full section_data which contains calculated_page_range)
+        start_page, end_page = self._get_page_range(section_data)
+        total_pages = end_page - start_page + 1
 
-        print_progress(f"Section page range: {start_page}-{end_page}")
+        print_progress(f"Section page range: {start_page}-{end_page} ({total_pages} pages)")
 
-        # Extract PDF text context
-        text_context = self._extract_batch_text_context(start_page, end_page, section_info, output_path)
+        # Get output directory for debug files
+        output_dir = Path(output_file_path).parent
+        
+        # Extract section text context
+        text_context = self._extract_section_text_context(
+            start_page, end_page, section_info, output_dir, output_file_path
+        )
+        
+        print_progress(f"Processing section as single unit with {len(text_context)} characters text context")
 
-        print_progress(f"+ Diagnostic mode: Processing individual section")
-        print_progress(f"  Section: {section_number} - {section_title}")
-        print_progress(f"  Pages: {start_page}-{end_page} ({batch_info['page_count']} pages)")
-        print_progress(f"  Text context: {len(text_context)} characters")
+        # Create section prompt
+        prompt = self._create_individual_section_prompt(section_data, text_context, output_dir, output_file_path)
 
-        # Create section-specific prompt
-        prompt = self._create_individual_section_prompt(batch_info, text_context, section_data, output_path)
-
-        # Process the section
-        result = self._process_batch(batch_info, prompt, 1)
-
+        # Process the entire section
+        result = self._process_section(start_page, end_page, prompt, output_dir, output_file_path)
+        
         if result and not result.startswith("Error:"):
-            # Save raw GPT output if debug mode is enabled
-            if self.debug:
-                raw_output_path = Path(output_path) / f"section_{section_number}_raw_output.txt"
-                with open(raw_output_path, 'w', encoding='utf-8') as f:
-                    f.write(result)
-                print_progress(f"  Raw GPT output saved to: {raw_output_path}")
+            # Clean the result
+            cleaned_result = self._clean_section_result(result)
             
-            cleaned_result = self._clean_batch_result(result)
-            
-            # Save cleaned output if debug mode is enabled
+            # Save debug output if debug mode is enabled
             if self.debug:
-                cleaned_output_path = Path(output_path) / f"section_{section_number}_cleaned_output.txt"
-                with open(cleaned_output_path, 'w', encoding='utf-8') as f:
+                base_name = Path(output_file_path).stem
+                debug_output_path = output_dir / f"{base_name}_output.txt"
+                with open(debug_output_path, 'w', encoding='utf-8') as f:
                     f.write(cleaned_result)
-                print_progress(f"  Cleaned output saved to: {cleaned_output_path}")
-
-            # Start with parent section content
-            section_content = cleaned_result
-
-            section_output_path = Path(output_path) / f"{section_number}_{section_title.replace(' ', '_')}.md"
-            with open(section_output_path, 'w', encoding='utf-8') as f:
-                f.write(section_content)
-
- 
-
-            print_completion_summary(output_path, 1, f"individual section processed")
-            result=True
+                print_progress(f"  Debug output saved to: {debug_output_path}")
         else:
-            print_progress(f"- Failed to process individual section")
-            result=False
-        return result
+            print_progress(f"  ✗ Section processing failed: {result}")
+            return False
 
-    def _extract_batch_text_context(self, start_page, end_page, section_data, output_path):
-        """Extract text context from a page range for guidance."""
+        # Write the section content to the specified output file
+        output_file = Path(output_file_path)
+        
+        # Ensure the output directory exists
+        output_file.parent.mkdir(parents=True, exist_ok=True)
+        
+        with open(output_file, 'w', encoding='utf-8') as f:
+            f.write(cleaned_result)
+
+        print_completion_summary(str(output_file), total_pages, f"pages processed")
+        return True
+
+
+    def _extract_section_text_context(self, start_page, end_page, section_data, output_path, output_file_path=None):
+        """Extract text context from the section for guidance."""
         section_number = section_data.get('section_number')
  
-        text_context = ""
-
         text_context = extract_text_from_pdf_page(str(self.pdf_path), start_page, end_page)
 
+        # Save debug file if debug mode enabled
         if self.debug:
-            text_context_path = Path(output_path) / f"section_{section_number}_text_context.txt"
+            # Use output filename stem for debug files
+            if output_file_path:
+                base_name = Path(output_file_path).stem
+            else:
+                base_name = f"section_{section_number}"
+                
+            text_context_path = Path(output_path) / f"{base_name}_text_context.txt"
             with open(text_context_path, 'w', encoding='utf-8') as f:
                 f.write(text_context)
             print_progress(f"  Text context saved to: {text_context_path}")
  
         return text_context
+
+    def _save_debug_images(self, image_paths, output_dir, output_file_path):
+        """Save page images in debug mode for inspection."""
+        import shutil
+        
+        base_name = Path(output_file_path).stem
+        
+        for i, image_path in enumerate(image_paths, 1):
+            # Create descriptive filename for the debug image
+            debug_image_name = f"{base_name}_page_{i}.png"
+            debug_image_path = Path(output_dir) / debug_image_name
+            
+            # Copy the image from temp directory to output directory
+            shutil.copy2(image_path, debug_image_path)
+            print_progress(f"  Debug image saved: {debug_image_name}")
 
     def _determine_heading_level(self, section_number: str) -> tuple[str, str]:
         """Determine the heading level and type based on section numbering."""
@@ -224,16 +232,18 @@ class SectionProcessor:
             ) or f"{section_number} {section_title}"
             return ProcessingMode.COMPLETE_SECTION.value, expected_structure
 
-    def _build_prompt(self, batch_info: dict, text_context: str, section_number: str, section_title: str, chapter_title: str, heading_level: str, heading_type: str, processing_mode: str, expected_structure: str) -> str:
+    def _build_prompt(self, section_data: dict, text_context: str, section_number: str, section_title: str, chapter_title: str, heading_level: str, heading_type: str, processing_mode: str, expected_structure: str, start_page: int, end_page: int) -> str:
         """Build the prompt string for the section."""
         formatted_heading = self._format_section_heading(section_number, section_title, heading_level)
         
+        processing_info = f"individual {heading_type} (pages {start_page}-{end_page})"
+
         return f"""Convert this individual section from a 1992 LaTeX academic thesis PDF to markdown format.
 
 INDIVIDUAL SECTION INFORMATION:
 - Context: {chapter_title if chapter_title else f"Top-level {heading_type}"}
 - Section: {section_number} {section_title}
-- Processing: Individual {heading_type} (pages {batch_info['start_page']}-{batch_info['end_page']})
+- Processing: {processing_info}
 - Content Type: Complete {heading_type} with logical boundaries
 
 EXPECTED SECTION STRUCTURE:
@@ -243,40 +253,43 @@ CRITICAL CONTENT REQUIREMENTS:
 1. {get_content_transcription_requirements()}
 
 2. **INDIVIDUAL SECTION PROCESSING** ({processing_mode}):
-   - This is a single {heading_type} from a larger chapter
+   - This is a complete {heading_type} from a larger chapter
    - **CRITICAL HEADING LEVEL**: Use {heading_level} for the main section header
    - Start with: {formatted_heading}
-   - {"**PARENT SECTION ONLY**: Extract ONLY the section heading. Do NOT include any content from subsections that follow. Stop immediately after the section heading." if processing_mode == ProcessingMode.PARENT_SECTION_ONLY.value else "Process the complete section including all content"}
+   - {"**PARENT SECTION CONTENT**: Extract only the main section heading (e.g., # APPENDIX 2 Analytical Solutions <a id=\"section-a2\"></a>), and do not include any surrounding or subsequent paragraph text, unless it clearly precedes any subsection heading. If the very next content after the heading is a subsection (e.g., A2.1), then treat the parent section as heading only, with no body content." if processing_mode == ProcessingMode.PARENT_SECTION_ONLY.value else "Process the complete section content"}
 
 3. {get_mathematical_formatting_section()}
 
 4. {get_figure_formatting_section()}
 
-5. {get_anchor_generation_section()}
+5. {get_table_formatting_section()}
 
-6. {get_cross_reference_section()}
+6. {get_anchor_generation_section()}
 
-7. {get_pdf_text_guidance_section(text_context)}
+7. {get_cross_reference_section()}
 
-8. **SECTION PROCESSING GUIDELINES**:
+8. {get_pdf_text_guidance_section(text_context)}
+
+9. **SECTION PROCESSING GUIDELINES**:
    - Focus on this specific section's content only
    - Ensure the heading level matches the section numbering depth
    - Include complete mathematical derivations with explanatory context
    - Maintain academic writing conventions and technical precision
    - Preserve figure and table references within section context
+   - **FOR PARENT SECTIONS ONLY**: Include introductory text that applies to the whole section, but stop before subsection headings or equations/content tagged with subsection numbers (e.g., stop before equations tagged A2.1.1, A2.1.2, or headings like "A2.1 Rigid Sphere")
 
 {get_output_requirements_section()}
 """
 
-    def _create_individual_section_prompt(self, batch_info: dict, text_context: str, section_data: dict, output_path: str) -> str:
+    def _create_individual_section_prompt(self, section_data: dict, text_context: str, output_path: str, output_file_path: str = None) -> str:
         """
         Create a prompt for processing an individual section.
         
         Args:
-            batch_info (dict): Information about the section batch
-            text_context (str): Extracted PDF text for guidance
             section_data (dict): Section data with chapter context
+            text_context (str): Extracted PDF text for guidance
             output_path (str): Path to save the generated prompt
+            output_file_path (str): Path to output markdown file
     
         Returns:
             str: Formatted prompt for GPT-4 Vision API
@@ -286,6 +299,9 @@ CRITICAL CONTENT REQUIREMENTS:
         section_title = section_info.get('title', '')
         chapter_title = section_data.get('chapter_title', '')
         all_subsections = section_data.get('all_subsections', [])
+        
+        # Get page range
+        start_page, end_page = self._get_page_range(section_data)
 
         # Determine heading level and type
         heading_level, heading_type = self._determine_heading_level(section_number)
@@ -295,13 +311,19 @@ CRITICAL CONTENT REQUIREMENTS:
 
         # Build the prompt
         prompt = self._build_prompt(
-            batch_info, text_context, section_number, section_title, chapter_title,
-            heading_level, heading_type, processing_mode, expected_structure
+            section_data, text_context, section_number, section_title, chapter_title,
+            heading_level, heading_type, processing_mode, expected_structure, start_page, end_page
         )
 
         # Save the prompt to a file (if debug mode is enabled)
         if self.debug:
-            prompt_path = Path(output_path) / f"section_{section_number}_prompt.txt"
+            # Use output filename stem for debug files
+            if output_file_path:
+                base_name = Path(output_file_path).stem
+            else:
+                base_name = f"section_{section_number}"
+                
+            prompt_path = Path(output_path) / f"{base_name}_prompt.txt"
             with open(prompt_path, 'w', encoding='utf-8') as f:
                 f.write(prompt)
             print_progress(f"  Prompt saved to: {prompt_path}")
@@ -309,26 +331,30 @@ CRITICAL CONTENT REQUIREMENTS:
 
 
 
-    def _process_batch(self, batch_info, prompt, batch_index):
-        """Process a single batch of pages."""
+    def _process_section(self, start_page, end_page, prompt, output_dir=None, output_file_path=None):
+        """Process a complete section as a single unit."""
         with tempfile.TemporaryDirectory() as temp_dir:
-            batch_pdf_path = Path(temp_dir) / f"batch_{batch_index}.pdf"
+            section_pdf_path = Path(temp_dir) / "section.pdf"
             
-            # Extract pages for this batch
+            # Extract pages for this section
             success = extract_pages_to_pdf(
                 str(self.pdf_path),
-                str(batch_pdf_path),
-                batch_info['start_page'],
-                batch_info['end_page']
+                str(section_pdf_path),
+                start_page,
+                end_page
             )
             
             if not success:
-                return f"Error: Failed to extract pages {batch_info['start_page']}-{batch_info['end_page']}"
+                return f"Error: Failed to extract pages {start_page}-{end_page}"
             
             # Convert to images
-            image_paths = pdf_to_images(str(batch_pdf_path), temp_dir)
+            image_paths = pdf_to_images(str(section_pdf_path), temp_dir)
             if not image_paths:
-                return "Error: Failed to convert batch to images"
+                return "Error: Failed to convert section to images"
+            
+            # Save page images in debug mode
+            if self.debug and output_dir and output_file_path:
+                self._save_debug_images(image_paths, output_dir, output_file_path)
             
             # Encode images
             image_contents = encode_images_for_vision(image_paths)
@@ -338,8 +364,8 @@ CRITICAL CONTENT REQUIREMENTS:
             
             return result
 
-    def _clean_batch_result(self, result):
-        """Clean and validate batch processing result."""
+    def _clean_section_result(self, result):
+        """Clean and validate section processing result."""
         if not result or result.startswith("Error:"):
             return result
         
@@ -387,6 +413,9 @@ CRITICAL CONTENT REQUIREMENTS:
         
         # Fix equation formatting - convert multi-line equations to single-line format
         cleaned_result = self._fix_equation_formatting(cleaned_result)
+        
+        # Fix inline equations that were incorrectly formatted as display equations
+        cleaned_result = self._fix_inline_display_equations(cleaned_result)
         
         return cleaned_result
 
@@ -486,7 +515,7 @@ CRITICAL CONTENT REQUIREMENTS:
     
     def _count_inline_equation_issues(self, content):
         """
-        Count the number of \(...\) inline equations that should be $...$.
+        Count the number of \\(...\\) inline equations that should be $...$.
         
         Args:
             content (str): Markdown content to analyze
@@ -499,60 +528,131 @@ CRITICAL CONTENT REQUIREMENTS:
         pattern = r'\\?\\\((.*?)\\?\\\)'
         matches = re.findall(pattern, content)
         return len(matches)
+
+    def _fix_inline_display_equations(self, content):
+        """
+        Fix inline equations that were incorrectly formatted as display equations.
+        
+        Converts patterns like: "text $$equation$$ text" to "text $equation$ text"
+        Only when it's clearly an inline context (text before and after on same line).
+        
+        Args:
+            content (str): Markdown content to fix
+            
+        Returns:
+            str: Fixed markdown content
+        """
+        import re
+        
+        # Count issues before fixing
+        inline_display_issues = self._count_inline_display_equation_issues(content)
+        
+        if inline_display_issues > 0:
+            print_progress(f"- Post-processing: Fixing {inline_display_issues} inline display equation issue(s)")
+        
+        # Pattern to match display equations that appear inline
+        # Look for: word/text $$equation$$ word/text (all on same line)
+        pattern = r'(\S.*?)\s*\$\$([^$\n]+?)\$\$\s*(\S.*?)(?=\n|$)'
+        
+        def fix_inline_display_equation(match):
+            before_text = match.group(1).strip()
+            equation_content = match.group(2).strip()
+            after_text = match.group(3).strip()
+            
+            # Safety checks - only convert if it looks like inline context
+            if (len(before_text) > 0 and len(after_text) > 0 and
+                not before_text.endswith('.') and  # Not end of sentence
+                not equation_content.startswith('\\begin') and  # Not complex equation
+                not equation_content.endswith('\\tag{') and  # Not numbered equation
+                len(equation_content) < 50):  # Not too long
+                
+                return f"{before_text} ${equation_content}$ {after_text}"
+            else:
+                # Keep as display equation
+                return match.group(0)
+        
+        # Apply the fix
+        fixed_content = re.sub(pattern, fix_inline_display_equation, content)
+        
+        # Verify the fixes worked
+        remaining_issues = self._count_inline_display_equation_issues(fixed_content)
+        
+        if inline_display_issues > 0:
+            fixed_count = inline_display_issues - remaining_issues
+            print_progress(f"- Post-processing: Fixed {fixed_count} inline display equation issue(s)")
+            
+            if remaining_issues > 0:
+                print_progress(f"- Post-processing: {remaining_issues} display equations remain (likely intentional)")
+        
+        return fixed_content
+    
+    def _count_inline_display_equation_issues(self, content):
+        """
+        Count potential inline display equation issues.
+        
+        Args:
+            content (str): Markdown content to analyze
+            
+        Returns:
+            int: Number of potential issues found
+        """
+        import re
+        # Find display equations that appear to be inline (text before and after on same line)
+        pattern = r'\S.*?\s*\$\$[^$\n]+?\$\$\s*\S.*?(?=\n|$)'
+        matches = re.findall(pattern, content)
+        return len(matches)
     
 
     def _get_page_range(self, section_data: dict) -> tuple[int, int]:
         """Get the start and end page for a section."""
+        # Check if calculated_page_range is at the top level (new format)
         if 'calculated_page_range' in section_data:
             return section_data['calculated_page_range']['start_page'], section_data['calculated_page_range']['end_page']
+        
+        # Check if we have section_data nested (old format)
+        if 'section_data' in section_data:
+            section_info = section_data['section_data']
+            if 'calculated_page_range' in section_info:
+                return section_info['calculated_page_range']['start_page'], section_info['calculated_page_range']['end_page']
+            start_page = section_info.get('start_page') or section_info.get('page')
+            end_page = section_info.get('end_page', start_page)
+            return start_page, end_page
+        
+        # Fallback to direct properties
         start_page = section_data.get('start_page') or section_data.get('page')
         end_page = section_data.get('end_page', start_page)
         return start_page, end_page
 
-    def _create_batch_info(self, section_data: dict, start_page: int, end_page: int) -> dict:
-        """Create batch info for a section."""
-        section_number = section_data.get('section_number', '')
-        section_title = section_data.get('title', '')
-        return {
-            'start_page': start_page,
-            'end_page': end_page,
-            'page_count': end_page - start_page + 1,
-            'section_titles': [f"{section_number} {section_title}"],
-            'batch_description': f"Section {section_number}",
-            'chapter_title': section_data.get('chapter_title', ''),
-            'subsection_count': 1
-        }
 
 
 def main():
-    """Main function for simplified chapter processing."""
+    """Main function for simplified section processing."""
     parser = argparse.ArgumentParser(
-        description='Process thesis chapters or individual sections with section-based processing',
+        description='Process thesis sections with single-unit processing',
         formatter_class=argparse.RawDescriptionHelpFormatter,
         epilog="""
 Examples:
-  # Process full chapter 2 with section-aware batching
-  python chapter_processor.py thesis.pdf "2" chapter_2.md --structure-dir structure/
+  # Process full chapter 2
+  python section_processor.py --input thesis.pdf --section "2" --output chapter_2.md --structure structure/thesis_contents.yaml
   
   # Process individual section 2.1 (main section)
-  python chapter_processor.py thesis.pdf "2.1" section_2_1.md --structure-dir structure/
+  python section_processor.py --input thesis.pdf --section "2.1" --output section_2_1.md --structure structure/thesis_contents.yaml
   
   # Process individual subsection 2.1.1 (subsection level)
-  python chapter_processor.py thesis.pdf "2.1.1" section_2_1_1.md --structure-dir structure/
+  python section_processor.py --input thesis.pdf --section "2.1.1" --output section_2_1_1.md --structure structure/thesis_contents.yaml
   
-  
-  # Custom batch size (pages per subsection batch)
-  python chapter_processor.py thesis.pdf "2" chapter_2.md --structure-dir structure/ --max-pages 2
+  # Process appendix section with custom filename
+  python section_processor.py --input thesis.pdf --section "A1" --output "Appendix_1.md" --structure structure/thesis_contents.yaml
 
 This processor supports both full chapters and individual sections with proper heading levels.
+Each section is processed as a complete unit for optimal quality.
 """
     )
 
     parser.add_argument('--input', required=True, help='Path to source PDF file')
     parser.add_argument('--section', required=True, help='Section identifier (e.g., "2", "2.1")')
-    parser.add_argument('--output', required=True, help='Output markdown directory')
-    parser.add_argument('--structure-dir', required=True, help='Directory containing YAML structure files')
-    parser.add_argument('--max-pages', type=int, default=3, help='Maximum pages per subsection batch (default: 3)')
+    parser.add_argument('--output', required=True, help='Complete path to output markdown file (including filename)')
+    parser.add_argument('--structure', required=True, help='Path to thesis structure YAML file (e.g., structure/thesis_contents.yaml)')
     parser.add_argument('--debug', action='store_true', help='Write prompt and text context files for debugging')
     
     args = parser.parse_args()
@@ -561,27 +661,36 @@ This processor supports both full chapters and individual sections with proper h
     if not Path(args.input).exists():
         print(f"ERROR: PDF file not found: {args.input}")
         return 1
-    if not Path(args.structure_dir).is_dir():
-        print(f"ERROR: Structure directory not found or is not a directory: {args.structure_dir}")
+    if not Path(args.structure).exists():
+        print(f"ERROR: Structure file not found: {args.structure}")
         return 1
-    if not Path(args.output).is_dir():
-        print(f"ERROR: Output directory does not exist or is not a directory: {Path(args.output)}")
+    
+    # Check if output is a directory (old interface) or file path (new interface)
+    output_path = Path(args.output)
+    if output_path.is_dir():
+        print(f"ERROR: --output must be a complete file path (including filename), not a directory.")
+        print(f"Example: --output ../markdown/section_A2_1.md")
+        print(f"You provided: {args.output} (which is a directory)")
+        return 1
+    
+    # Validate that output file's parent directory exists
+    output_dir = output_path.parent
+    if not output_dir.exists():
+        print(f"ERROR: Output directory does not exist: {output_dir}")
         return 1
 
     # Initialize processor
-    print_section_header("SECTION-AWARE CHAPTER PROCESSING")
+    print_section_header("SIMPLIFIED SECTION PROCESSING")
     print(f"PDF: {args.input}")
-    print(f"Chapter: {args.section}")
+    print(f"Section: {args.section}")
     print(f"Output: {args.output}")
-    print(f"Structure directory: {args.structure_dir}")
-    print(f"Max pages per batch: {args.max_pages}")
+    print(f"Structure file: {args.structure}")
     print(f"Debug mode: {'Enabled' if args.debug else 'Disabled'}")
     print("=" * 60)
     
     processor = SectionProcessor(
         pdf_path=args.input,
-        structure_dir=args.structure_dir,
-        max_pages_per_batch=args.max_pages,
+        structure_file=args.structure,
         debug=args.debug,
     )
     

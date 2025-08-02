@@ -1,0 +1,1247 @@
+references:
+- id: kellogg-1929
+  type: book
+  author: Kellogg, O.D.
+  title: Foundations of potential theory
+  publisher: Springer-Verlag
+  year: 1929
+  original_text: O. D. Kellogg. Foundations of potential theory. Springer-Verlag,
+    1929.
+- id: bouwkamp-1941
+  type: phdthesis
+  author: Bouwkamp, C. J.
+  title: Theoretische en numerieke behandeling van de buiging door ronde opening
+  school: University of Gronigen
+  address: Holland
+  year: 1941
+  original_text: C. J. Bouwkamp. Theoretische en numerieke behandeling van de buiging
+    door ronde opening. PhD thesis, University of Gronigen, Holland, 1941.
+- id: lamb-1945
+  type: book
+  author: Lamb, H.
+  title: Hydrodynamics
+  publisher: Dover
+  year: 1945
+  address: New York
+  original_text: H. Lamb. Hydrodynamics. Dover, New York, 1945.
+- id: leitner-1949
+  type: article
+  author: Leitner, A.
+  title: Diffraction of sound by a circular disk
+  journal: Journal of the Acoustical Society of America
+  year: 1949
+  volume: '21'
+  pages: 331-334
+  original_text: "A. Leitner. Diffraction of sound by a circular disk. Journal of\
+    \ the Acoustical Society of America, 21:331\u2013334, 1949."
+- id: maue-1949
+  type: article
+  author: Maue, A. W.
+  title: Zur formulierung eines allgemeinen beugungsproblems durch eine integralgleichung
+  journal: Z. Phys.
+  year: 1949
+  volume: '126'
+  pages: 601-618
+  original_text: "A. W. Maue. Zur formulierung eines allgemeinen beugungsproblems\
+    \ durch eine integralgleichung. Z. Phys., 126:601\u2013618, 1949."
+- id: spence-1951
+  type: article
+  author: Spence, R. D. and Granger, S.
+  title: The scattering of sound from a prolate spheroid
+  journal: Journal of the Acoustical Society of America
+  volume: '23'
+  number: '6'
+  pages: 701-706
+  month: November
+  year: 1951
+  original_text: R. D. Spence and S. Granger. The scattering of sound from a prolate
+    spheroid. Journal of the Acoustical Society of America. 23(6):701-706, November
+    1951.
+- id: wiener-1951
+  type: article
+  author: Wiener, F. M.
+  title: On the relationship between the sound fields radiated and diffracted by plane
+    obstacles
+  journal: Journal of the Acoustical Society of America
+  volume: '23'
+  number: '6'
+  pages: 697-700
+  year: 1951
+  original_text: F. M. Wiener. On the relationship between the sound fields radiated
+    and diffracted by plane obstacles. Journal of the Acoustical Society of America,
+    23(6):697-700, 1951.
+- id: morse-1953
+  type: book
+  author: Morse, P. M. and Feshbach, H.
+  title: Methods of theoretical physics
+  publisher: McGraw-Hill
+  year: 1953
+  edition: International student edition
+  address: New York
+  original_text: P. M. Morse and H. Feshbach. Methods of theoretical physics. McGraw-Hill
+    (New York). international student edition, 1953.
+- id: chen-1963
+  type: article
+  author: Chen, L. H. and Schweikert, D. G.
+  title: Sound radiation from an arbitrary body
+  journal: Journal of the Acoustical Society of America
+  year: 1963
+  volume: '35'
+  number: '10'
+  pages: 1626-1632
+  original_text: "L. H. Chen and D. G. Schweikert. Sound radiation from an arbitrary\
+    \ body. Journal of the Acoustical Society of America, 35(10):1626\u20131632, 1963."
+- id: chertock-1964
+  type: article
+  author: Chertock, G.
+  title: Sound radiation from vibrating surfaces
+  journal: Journal of the Acoustical Society of America
+  year: 1964
+  volume: '36'
+  number: '7'
+  pages: 1305-1313
+  original_text: "G. Chertock. Sound radiation from vibrating surfaces. Journal of\
+    \ the Acoustical Society of America, 36(7):1305\u20131313, 1964."
+- id: guyan-1965
+  type: article
+  author: Guyan, R.J.
+  title: Reduction of stiffness and mass matrices
+  journal: AIAA Journal
+  year: 1965
+  volume: '3'
+  number: '380'
+  original_text: R. J. Guyan. Reduction of stiffness and mass matrices. AIAA Journal,
+    3(380), 1965.
+- id: mitzner-1966
+  type: article
+  author: Mitzner, K. M.
+  title: Acoustic scattering from an interface between media of greatly different
+    density
+  journal: Journal of Maths and Physics
+  year: 1966
+  volume: '7'
+  number: '11'
+  pages: 2053-2060
+  original_text: "K. M. Mitzner. Acoustic scattering from an interface between media\
+    \ of greatly different density. Journal of Maths and Physics, 7(11):2053\u2013\
+    2060, 1966."
+- id: coply-1967
+  type: article
+  author: Coply, L. G.
+  title: Fundamental results concerning integral representations in acoustic radiation
+  journal: Journal of the Acoustical Society of America
+  year: 1967
+  volume: '44'
+  number: '1'
+  pages: 28-32
+  original_text: "L. G. Coply. Fundamental results concerning integral representations\
+    \ in acoustic radiation. Journal of the Acoustical Society of America, 44(1):28\u2013\
+    32, 1967."
+- id: stallybrass-1967
+  type: article
+  author: Stallybrass, M. P.
+  title: On a pointwise variational principle for the approximate solution of linear
+    boundary value problems
+  journal: Journal of Maths and Mechanics
+  volume: '16'
+  number: '11'
+  pages: 1247-1286
+  year: 1967
+  original_text: M. P. Stallybrass. On a pointwise variational principle for the approximate
+    solution of linear boundary value problems. Journal of Maths and Mechanics, 16(11):1247-1286,
+    1967.
+- id: stallybrass-1967-2
+  type: article
+  author: Stallybrass, M. P.
+  title: On a pointwise variational principle for the approximate solution of linear
+    boundary value problems
+  journal: Journal of Mathematics and Mechanics
+  volume: '16'
+  number: '11'
+  pages: 1247-1287
+  year: 1967
+  original_text: "M. P. Stallybrass. On a pointwise variational principle for the\
+    \ approximate solution of linear boundary value problems. Journal of Mathematics\
+    \ and Mechanics, 16(11):1247\u20131287, 1967."
+- id: schenck-1968
+  type: article
+  author: Schenck, H. A.
+  title: Improved integral formulation for acoustic radiation problems
+  journal: Journal of the Acoustical Society of America
+  volume: '44'
+  pages: 41-58
+  year: 1968
+  original_text: H. A. Schenck. Improved integral formulation for acoustic radiation
+    problems. Journal of the Acoustical Society of America, 44:41-58, 1968.
+- id: burton-1971
+  type: article
+  author: Burton, J. A. and Miller, G. F.
+  title: The application of integral equation methods to the numerical solution of
+    some exterior boundary value problems
+  journal: Proceedings of the Royal Society of London Series A
+  year: 1971
+  volume: '323'
+  pages: 201-210
+  original_text: "J. A. Burton and G. F. Miller. The application of integral equation\
+    \ methods to the numerical solution of some exterior boundary value problems.\
+    \ Proceedings of the Royal Society of London Series A, 323:201\u2013210, 1971."
+- id: kleinman-1974
+  type: article
+  author: Kleinman, R. E. and Roach, G. F.
+  title: Boundary integral equations for the three-dimensional helmholtz equations
+  journal: SIAM Review
+  year: 1974
+  volume: '16'
+  number: '2'
+  pages: 214-235
+  original_text: "R. E. Kleinman and G. F. Roach. Boundary integral equations for\
+    \ the three-dimensional helmholtz equations. SIAM Review, 16(2):214\u2013235,\
+    \ April 1974."
+- id: miller-1974
+  type: incollection
+  author: Miller, G. F.
+  title: Fredholm equations of the first kind
+  booktitle: Numerical solution of integral equations
+  editor: Delves, L. M. and Walsh, J.
+  chapter: '18'
+  pages: 175-188
+  publisher: Clarendon
+  year: 1974
+  address: Oxford
+  original_text: "G. F. Miller. Fredholm equations of the first kind. In L. M. Delves\
+    \ and J. Walsh, editors, Numerical solution of integral equations, chapter 18,\
+    \ pages 175\u2013188. Clarendon press, Oxford, 1974."
+- id: lachat-1976
+  type: article
+  author: Lachat, J. C. and Watson, J. O.
+  title: 'Effective numerical treatment of boundary integral equations: A formulation
+    for three-dimensional elastostatics'
+  journal: International Journal for Numerical Methods in Engineering
+  year: 1976
+  volume: '10'
+  pages: 991-1005
+  original_text: "J. C. Lachat and J. O. Watson. Effective numerical treatment of\
+    \ boundary integral equations: A formulation for three-dimensional elastostatics.\
+    \ International Journal for Numerical Methods in Engineering, 10:991\u20131005,\
+    \ 1976."
+- id: filippi-1977
+  type: article
+  author: Filippi, P.J.T.
+  title: Layer potentials and acoustic diffraction
+  journal: Journal of Sound and Vibration
+  year: 1977
+  volume: '54'
+  pages: 473-500
+  original_text: P. J. T. Filippi. Layer potentials and acoustic diffraction. Journal
+    of Sound and Vibration, 54:473-500, 1977.
+- id: jennings-1977
+  type: book
+  author: Jennings, A.
+  title: Matrix computation for engineers and scientists
+  publisher: Wiley
+  year: 1977
+  address: London
+  original_text: A. Jennings. Matrix computation for engineers and scientists. Wiley
+    (London), 1977.
+- id: zienkiewicz-1977
+  type: article
+  author: Zienkiewicz, O. C., Kelly, D., and Bettess, P.
+  title: The coupling of finite element and boundary solution procedures
+  journal: International Journal for Numerical Methods in Engineering
+  volume: '11'
+  pages: 355-375
+  year: 1977
+  original_text: O. C. Zienkiewicz, D. Kelly, and P. Bettess. The coupling of finite
+    element and boundary solution procedures. International Journal for Numerical
+    Methods in Engineering, 11:355-375, 1977.
+- id: wilton-1978
+  type: article
+  author: Wilton, D. T.
+  title: Acoustic radiation and scattering from elastic structures
+  journal: International Journal for Numerical Methods in Engineering
+  volume: '13'
+  pages: 123-138
+  year: 1978
+  original_text: D. T. Wilton. Acoustic radiation and scattering from elastic structures.
+    International Journal for Numerical Methods in Engineering, 13:123-138, 1978.
+- id: mathews-1979
+  type: phdthesis
+  author: Mathews, I. C.
+  title: Sound radiation from vibrating elastic structures of arbitrary shape
+  institution: Imperial College
+  year: 1979
+  school: Department of Aeronautics, Imperial College
+  address: London
+  original_text: I. C. Mathews. Sound radiation from vibrating elastic structures
+    of arbitrary shape. PhD thesis, Department of Aeronautics, Imperial College, London,
+    1979.
+- id: terai-1980
+  type: article
+  author: Terai, T.
+  title: On calculation of sound fields around three dimensional objects by integral
+    equation methods
+  journal: Journal of Sound and Vibration
+  volume: '69'
+  number: '1'
+  pages: 71-100
+  year: 1980
+  original_text: T. Terai. On calculation of sound fields around three dimensional
+    objects by integral equation methods. Journal of Sound and Vibration, 69(1):71-100,
+    1980.
+- id: simon-1982
+  type: techreport
+  author: Simon, H. D.
+  title: The lanczos algorithm for solving symmetric linear systems
+  institution: Center for Pure and Applied Mathematics, University of California
+  year: 1982
+  number: Technical Report PAM-74
+  original_text: H. D. Simon. The lanczos algorithm for solving symmetric linear systems.
+    Technical Report PAM-74, Center for Pure and Applied Mathematics, University of
+    California, 1982.
+- id: tullberg-1982
+  type: incollection
+  author: Tullberg, O. and Bolteus, S.
+  title: A critical study of different boundary element matrices
+  booktitle: Boundary Element Methods in Engineering, Proc. 4th Int. Seminar, Southampton
+  editor: Brebbia, C. A.
+  pages: 621-635
+  year: 1982
+  publisher: Springer-Verlag
+  address: Berlin Heidelberg New York
+  original_text: 'O. Tullberg and S. Bolteus. A critical study of different boundary
+    element matrices. In C. A. Brebbia, editor, Boundary Element Methods in Engineering,
+    Proc. 4th Int. Seminar, Southampton, pages 621-635. Berlin Heidelberg New York:
+    Springer-Verlag, 1982.'
+- id: varadan-1982
+  type: article
+  author: Varadan, V. K. and Varadan, V. V.
+  title: Computation of rigid body scattering by prolate spheroids using the t-matrix
+    approach
+  journal: Journal of the Acoustical Society of America
+  volume: '71'
+  number: '1'
+  pages: 22-25
+  year: 1982
+  original_text: V. K. Varadan and V. V. Varadan. V.V. Computation of rigid body scattering
+    by prolate spheroids using the t-matrix approach. Journal of the Acoustical Society
+    of America, 71(1):22-25, January 1982.
+- id: colton-1983
+  type: book
+  author: Colton, D. and Kress, R.
+  title: Integral Equation Methods in Scattering Theory
+  publisher: John Wiley and Sons
+  address: New York
+  year: 1983
+  original_text: D. Colton and R. Kress. Integral Equation Methods in Scattering Theory.
+    John Wiley and Sons, New York, 1983.
+- id: geers-1983
+  type: article
+  author: Geers, T.L. and Felippa, C.A.
+  title: Doubly asymptotic approximations for vibration analysis of submerged structures
+  journal: Journal of the Acoustical Society of America
+  year: 1983
+  volume: '73'
+  pages: 1152-1159
+  original_text: T. L. Geers and C. A. Felippa. Doubly asymptotic approximations for
+    vibration analysis of submerged structures. Journal of the Acoustical Society
+    of America, 73:1152-1159, 1983.
+- id: golub-1983
+  type: book
+  author: Golub, G.H. and Van Loan, C.F.
+  title: Matrix Computations
+  publisher: North Oxford Academic Publishing Co.
+  year: 1983
+  original_text: G. H. Golub and C. F. Van Loan. Matrix Computations. North Oxford
+    Academic Publishing Co., 1983.
+- id: bayo-1984
+  type: article
+  author: Bayo, E. P. and Wilson, E. L.
+  title: Finite element and ritz vector techniques for the solution to three-dimensional
+    soil structure interaction problems in the time domain
+  journal: Engineering with Computers
+  year: 1984
+  volume: '1'
+  note: December
+  original_text: E. P. Bayo and E. L. Wilson. Finite element and ritz vector techniques
+    for the solution to three-dimensional soil structure interaction problems in the
+    time domain. Engineering with Computers, 1, December 1984.
+- id: bayo-1984a
+  type: article
+  author: Bayo, E. P. and Wilson, E. L.
+  title: Use of ritz vectors in wave propagation and foundation response
+  journal: Earthquake Engineering and Structural Dynamics
+  year: 1984
+  volume: '12'
+  pages: 499-505
+  original_text: "E. P. Bayo and E.L. Wilson. Use of ritz vectors in wave propagation\
+    \ and foundation response. Earthquake Engineering and Structural Dynamics, 12:499\u2013\
+    505, 1984."
+- id: huang-1984
+  type: incollection
+  author: Huang, H.
+  title: Helmholtz integral equations for fluid structure interaction
+  booktitle: Advances in Fluid Structure Interaction AMD Vol 64
+  pages: 19-38
+  publisher: ASME
+  address: New York
+  year: 1984
+  original_text: "H. Huang. Helmholtz integral equations for fluid structure interaction.\
+    \ In Advances in Fluid Structure interaction AMD Vol 64, pages 19\u201338. ASME,\
+    \ New York, 1984."
+- id: nour-omid-1984
+  type: article
+  author: Nour-Omid, B. and Clough, R. W.
+  title: Dynamic analysis of structures using lanczos coordinates
+  journal: Earthquake Engineering and Structural Dynamics
+  volume: '12'
+  pages: 565-577
+  year: 1984
+  original_text: B. Nour-Omid and R. W. Clough. Dynamic analysis of structures using
+    lanczos coordinates. Earthquake Engineering and Structural Dynamics, 12:565-577.
+    1984.
+- id: arfken-1985
+  type: book
+  author: Arfken, G.
+  title: Mathematical Methods for Physicists
+  publisher: Academic Press inc.
+  year: 1985
+  edition: third
+  original_text: G. Arfken. Mathematical Methods for Physicists. Academic Press inc.,
+    third edition, 1985.
+- id: seybert-1985
+  type: article
+  author: Seybert, A. F. and Soenarko, B. and Rizzo, F. J. and Shippy, D. J.
+  title: An advanced computational method for radiation and scattering of acoustic
+    waves in three dimensions
+  journal: Journal of the Acoustical Society of America
+  volume: '77'
+  pages: 362-368
+  year: 1985
+  original_text: A. F. Seybert, B. Soenarko, F. J. Rizzo, and D. J. Shippy. An advanced
+    computational method for radiation and scattering of acoustic waves in three dimensions.
+    Journal of the Acoustical Society of America, 77:362-368, 1985.
+- id: amini-1986
+  type: article
+  author: Amini, S. and Wilton, D. T.
+  title: An investigation of the boundary element method for the exterior acoustic
+    problem
+  journal: Computer Methods in Applied Mechanical Engineering
+  year: 1986
+  volume: '54'
+  pages: 49-65
+  original_text: "S. Amini and D. T. Wilton. An investigation of the boundary element\
+    \ method for the exterior acoustic problem. Computer Methods in Applied Mechanical\
+    \ Engineering, 54:49\u201365, 1986."
+- id: james-1986
+  type: techreport
+  author: James, J.H.
+  title: Fortran program for vibration and sound radiation of spherical shell
+  institution: Admiralty Research Establishment
+  year: 1986
+  number: ARE TM N1 86501
+  original_text: J. H. James. Fortran program for vibration and sound radiation of
+    spherical shell. Technical Report ARE TM N1 86501, Admiralty Research Establishment,
+    1986.
+- id: junger-1986
+  type: book
+  author: Junger, M.C. and Feit, D.
+  title: Sound, structures and their interaction
+  publisher: MIT Press
+  year: 1986
+  edition: second
+  address: Cambridge
+  original_text: M. C. Junger and D. Feit. Sound, structures and their interaction.
+    MIT Press (Cambridge), second edition, 1986.
+- id: mathews-1986
+  type: article
+  author: Mathews, I. C.
+  title: Numerical techniques for three-dimensional steady-state fluid-structure interaction
+  journal: Journal of the Acoustical Society of America
+  year: 1986
+  volume: '79'
+  number: '5'
+  pages: 1317-1325
+  original_text: "I. C. Mathews. Numerical techniques for three-dimensional steady-state\
+    \ fluid-structure interaction. Journal of the Acoustical Society of America, 79(5):1317\u2013\
+    1325, 1986."
+- id: katz-1987
+  type: inproceedings
+  author: Katz, C.
+  title: "Murphy\u2019s law in boundary element implementations"
+  booktitle: Proceedings of the 9th international conference on boundary element methods
+  editor: In C. Brebbia
+  publisher: Springer-Verlag
+  year: 1987
+  original_text: "C. Katz. Murphy\u2019s law in boundary element implementations.\
+    \ In C. Brebbia, editor, Proceedings of the 9th international conference on boundary\
+    \ element methods. Springer-Verlag, 1987."
+- id: mariem-1987
+  type: article
+  author: Mariem, J. B. and Hamdi, M. A.
+  title: A new boundary finite element method for fluid-structure interaction problems
+  journal: International Journal for Numerical Methods in Engineering
+  year: 1987
+  volume: '24'
+  pages: 1251-1267
+  original_text: "J. B. Mariem and M. A. Hamdi. A new boundary finite element method\
+    \ for fluid-structure interaction problems. International Journal for Numerical\
+    \ Methods in Engineering, 24:1251\u20131267, 1987."
+- id: pierce-1987
+  type: article
+  author: Pierce, A. D.
+  title: Stationary variational expressions for radiated and scattered acoustic power
+    and related quantities
+  journal: IEEE Journal of Oceanic Engineering
+  volume: OE-12
+  number: '2'
+  pages: 404-411
+  year: 1987
+  original_text: A. D. Pierce. Stationary variational expressions for radiated and
+    scattered acoustic power and related quantities. IEEE Journal of Oceanic Engineering,
+    OE-12(2):404-411, 1987.
+- id: werby-1987
+  type: article
+  author: Werby, M. F. and Evans, R. B.
+  title: Scattering from objects submerged in unbounded and bounded oceans
+  journal: IEEE Journal of Oceanic Engineering
+  volume: OE-12
+  number: '2'
+  pages: 380-394
+  year: 1987
+  original_text: M. F. Werby and R. B. Evans. Scattering from objects submerged in
+    unbounded and bounded oceans. IEEE Journal of Oceanic Engineering, OE-12(2):380-394,
+    1987.
+- id: wu-1987
+  type: article
+  author: Wu, X. F., Pierce, A. D., and Ginsberg, J. H.
+  title: Variational method for computing surface acoustic pressure on vibrating bodies,
+    applied to transversely oscillating disks
+  journal: IEEE Journal of Oceanic Engineering
+  volume: OE-12
+  number: '2'
+  year: 1987
+  original_text: X. F. Wu, A. D. Pierce, and J. H. Ginsberg. Variational method for
+    computing surface acoustic pressure on vibrating bodies, applied to transversely
+    oscillating disks. IEEE Journal of Oceanic Engineering, OE-12(2), 1987.
+- id: strang-1988
+  type: book
+  author: Strang, G.
+  title: Linear Algebra and its Applications
+  publisher: Harcourt Brace Jovanovich
+  year: 1988
+  edition: third
+  original_text: G. Strang. Linear Algebra and its Applications. Harcourt Brace Jovanovich,
+    third edition, 1988.
+- id: warham-1988
+  type: techreport
+  author: Warham, A. G. P.
+  title: The helmholtz integral equation for a thin shell
+  institution: National Physical Laboratories
+  year: 1988
+  number: DITC 129/88
+  original_text: A. G. P. Warham. The helmholtz integral equation for a thin shell.
+    Technical Report DITC 129/88, National Physical Laboratories, 1988.
+- id: benthien-1989
+  type: techreport
+  author: Benthien, G. W.
+  title: Application of frequency interpolation to acoustic-structure interaction
+    problems
+  institution: Naval Ocean Systems Center
+  year: 1989
+  number: '1323'
+  original_text: G. W. Benthien. Application of frequency interpolation to acoustic-structure
+    interaction problems. Technical Report 1323, Naval Ocean Systems Center, 1989.
+- id: chen-1989
+  type: article
+  author: Chen, H. C. and Taylor, R. L.
+  title: Using lanczos vectors and ritz vectors for computing dynamic responses
+  journal: Engineering with Computers
+  year: 1989
+  volume: '6'
+  pages: 151-157
+  original_text: "H. C. Chen and R. L. Taylor. Using lanczos vectors and ritz vectors\
+    \ for computing dynamic responses. Engineering with Computers, 6:151\u2013157,\
+    \ 1989."
+- id: coyette-1989
+  type: inproceedings
+  author: Coyette, J. P.
+  title: Ritz vectors synthesis versus modal synthesis for fluid-structure interaction
+    modeling
+  booktitle: International congress on recent developments in air and structure borne
+    sound and vibration
+  address: Auburn University USA
+  year: 1989
+  month: March
+  original_text: J. P. Coyette. Ritz vectors synthesis versus modal synthesis for
+    fluid-structure interaction modeling. In International congress on recent developments
+    in air and structure borne sound and vibration, Auburn University USA, March 1989.
+- id: coyette-1989a
+  type: incollection
+  author: Coyette, J. P. and Fyfe, K. R.
+  title: Solution of elasto acoustic problems using variational finite element/boundary
+    element technique
+  booktitle: Numerical techniques in acoustic radiation NCA-Vol 6
+  editor: Bernhard, R. J. and Keltie, R. F.
+  publisher: ASME
+  address: New York
+  year: 1989
+  original_text: J. P. Coyette and K. R. Fyfe. Solution of elasto acoustic problems
+    using variational finite element/boundary element technique. In R. J. Bernhard
+    and R. F. Keltie, editors, Numerical techniques in acoustic radiation NCA-Vol
+    6. ASME, New York, 1989.
+- id: cunefare-1989
+  type: article
+  author: Cunefare, K. A., Koopmann, G. H., and Brod, K.
+  title: A boundary element method for acoustic radiation valid for all wavenumbers
+  journal: Journal of the Acoustical Society of America
+  year: 1989
+  volume: '85'
+  number: '1'
+  pages: 39-48
+  note: January
+  original_text: "K. A. Cunefare, G. H. Koopmann, and K. Brod. A boundary element\
+    \ method for acoustic radiation valid for all wavenumbers. Journal of the Acoustical\
+    \ Society of America, 85(1):39\u201348, January 1989."
+- id: hartmann-1989
+  type: book
+  author: Hartmann, F.
+  title: Introduction to Boundary Elements
+  publisher: Springer-Verlag
+  year: 1989
+  original_text: F. Hartmann. Introduction to Boundary Elements. Springer-Verlag,
+    1989.
+- id: james-1989
+  type: techreport
+  author: James, J.H.
+  title: Calculation of transient response from time harmonic spectrum
+  institution: Admiralty Research Establishment
+  year: 1989
+  number: ARE TR 89308
+  original_text: J. H. James. Calculation of transient response from time harmonic
+    spectrum. Technical Report ARE TR 89308, Admiralty Research Establishment, 1989.
+- id: kirkup-1989
+  type: inproceedings
+  author: Kirkup, S. M. and Henwood, D. J.
+  title: Techniques for speeding up the boundary element solution of acoustic radiation
+    problems
+  booktitle: Proceedings of the ASME winter meeting
+  year: 1989
+  address: San Fransisco
+  original_text: S. M. Kirkup and D. J. Henwood. Techniques for speeding up the boundary
+    element solution of acoustic radiation problems. In Proceedings of the ASME winter
+    meeting, San Fransisco, 1989.
+- id: koopmann-1989
+  type: article
+  author: Koopmann, G. H., Song, L. and Fahnline, J. B.
+  title: A method for computing acoustic fields based on the principle of wave superposition
+  journal: Journal of the Acoustical Society of America
+  year: 1989
+  volume: '86'
+  number: '6'
+  pages: 2433-2438
+  original_text: "G. H. Koopmann, Limin Song, and J. B. Fahnline. A method for computing\
+    \ acoustic fields based on the principle of wave superposition. Journal of the\
+    \ Acoustical Society of America, 86(6):2433\u20132438, December 1989."
+- id: miller-1989
+  type: inproceedings
+  author: Miller, R. D., Huang, H., Moyer Jr., E. T., and Uberall, H.
+  title: The analysis of the radiated and scattered acoustic fields from submerged
+    shell structures using a modal finite element/boundary element formulation
+  booktitle: Proceedings of the ASME Winter Annual Meeting
+  year: 1989
+  publisher: ASME
+  address: New York
+  original_text: R. D. Miller, H. Huang, E. T. Moyer Jr., and H. Uberall. The analysis
+    of the radiated and scattered acoustic fields from submerged shell structures
+    using a modal finite element/boundary element formulation. In Proceedings of the
+    ASME Winter Annual Meeting. ASME, New York, 1989.
+- id: nour-omid-1989
+  type: article
+  author: Nour-Omid, B. and Regelbrugge, M. E.
+  title: Lanczos methods for dynamic analysis of damped structural systems
+  journal: Earthquake Engineering and Structural Dynamics
+  volume: '18'
+  pages: 1091-1104
+  year: 1989
+  original_text: B. Nour-Omid and M. E. Regelbrugge. Lanczos methods for dynamic analysis
+    of damped structural systems. Earthquake Engineering and Structural Dynamics,
+    18:1091-1104, 1989.
+- id: photiadis-1989
+  type: article
+  author: Photiadis, D. M.
+  title: The scattering of sound from fluid loaded plates
+  journal: Journal of the Acoustical Society of America
+  volume: '85'
+  number: '6'
+  pages: 2440-2451
+  month: June
+  year: 1989
+  original_text: D. M. Photiadis. The scattering of sound from fluid loaded plates.
+    Journal of the Acoustical Society of America, 85(6):2440-2451, June 1989.
+- id: pierce-1989
+  type: book
+  author: Pierce, A. D.
+  title: Acoustics
+  publisher: Acoustical Society of America
+  year: 1989
+  original_text: A. D. Pierce. Acoustics. Acoustical Society of America, 1989.
+- id: schenck-1989
+  type: incollection
+  author: Schenck, H. A. and Benthien, G. W.
+  title: The application of a coupled finite-element boundary-element technique to
+    large scale structural acoustic problems
+  booktitle: Advances in boundary elements
+  editor: Brebbia, C. A. and Connor, editors
+  publisher: Springer
+  address: New York
+  year: 1989
+  original_text: H. A. Schenck and G. W. Benthien. The application of a coupled finite-element
+    boundary-element technique to large scale structural acoustic problems. In C.
+    A. Brebbia and J. Connor, editors, Advances in boundary elements. Springer, New
+    York, 1989.
+- id: schenck-1989-2
+  type: techreport
+  author: Schenck, H. A. and Benthien, G. W.
+  title: Numerical solution of acoustic-structure interaction problems
+  institution: Naval Ocean Systems Center
+  year: 1989
+  number: Technical Report 1263
+  original_text: H. A. Schenck and G. W. Benthien. Numerical solution of acoustic-structure
+    interaction problems. Technical Report 1263, Naval Ocean Systems Center, 1989.
+- id: wu-1989
+  type: article
+  author: Wu, X. F.
+  title: Faster calculations of sound radiation from vibrating cylinders using variational
+    formulations
+  journal: Journal of Vibration, Acoustics, Stress and Reliability in Design
+  volume: '111'
+  pages: 101-107
+  year: 1989
+  original_text: X. F. Wu. Faster calculations of sound radiation from vibrating cylinders
+    using variational formulations. Journal of Vibration, Acoustics, Stress and Reliability
+    in Design, 111:101-107, January 1989.
+- id: zienkiewicz-1989
+  type: book
+  author: Zienkiewicz, O. C. and Taylor, R. L.
+  title: The Finite Element Method
+  volume: '1'
+  publisher: McGraw-Hill
+  year: 1989
+  address: London
+  edition: fourth
+  original_text: O. C. Zienkiewicz and R. L. Taylor. The Finite Element Method, volume
+    1. McGraw-Hill (London), fourth edition, 1989.
+- id: chien-1990
+  type: article
+  author: Chien, C. C., Rajiyah, H., and Atluri, S. N.
+  title: An effective method for solving the hypersingular integral equations in 3-d
+    acoustics
+  journal: Journal of the Acoustical Society of America
+  year: 1990
+  volume: '88'
+  number: '2'
+  pages: 918-936
+  original_text: "C. C. Chien, H. Rajiyah, and S. N. Atluri. An effective method for\
+    \ solving the hypersingular integral equations in 3-d acoustics. Journal of the\
+    \ Acoustical Society of America, 88(2):918\u2013936, 1990."
+- id: dokumaci-1990
+  type: article
+  author: Dokumaci, E.
+  title: A study of the failure of numerical solutions in boundary element analysis
+    of acoustic radiation problems
+  journal: Journal of Sound and Vibration
+  year: 1990
+  volume: '139'
+  number: '1'
+  pages: 83-97
+  original_text: "E. Dokumaci. A study of the failure of numerical solutions in boundary\
+    \ element analysis of acoustic radiation problems. Journal of Sound and Vibration,\
+    \ 139(1):83\u201397, 1990."
+- id: ginsberg-1990
+  type: article
+  author: Ginsberg, J.H., Chen, P., and Pierce, A.D.
+  title: Analysis using variational principles of the surface pressure and displacement
+    along an axisymmetrically excited disk in a baffle
+  journal: Journal of the Acoustical Society of America
+  year: 1990
+  volume: '88'
+  number: '1'
+  pages: 548-559
+  original_text: J. H. Ginsberg, P. Chen, and A. D. Pierce. Analysis using variational
+    principles of the surface pressure and displacement along an axisymmetrically
+    excited disk in a baffle. Journal of the Acoustical Society of America, 88(1):548-559,
+    July 1990.
+- id: jeans-1990
+  type: article
+  author: Jeans, R.A. and Mathews, I.C.
+  title: Solution of fluid-structure interaction problems using a coupled finite element
+    and variational boundary element technique
+  journal: Journal of the Acoustical Society of America
+  year: 1990
+  volume: '88'
+  number: '5'
+  pages: 2459-2466
+  original_text: R. A. Jeans and I. C. Mathews. Solution of fluid-structure interaction
+    problems using a coupled finite element and variational boundary element technique.
+    Journal of the Acoustical Society of America, 88(5):2459-2466, 1990.
+- id: moini-1990
+  type: techreport
+  author: Moini, S., Nour-Omid, B., and Carlsson, H.
+  title: Harmonic and transient analysis of fluid structure interaction problems using
+    lanczos coordinates
+  institution: IBM Scientific Center
+  year: 1990
+  original_text: S. Moini, B. Nour-Omid, and H. Carlsson. Harmonic and transient analysis
+    of fluid structure interaction problems using lanczos coordinates. Technical report,
+    IBM Scientific Center, 1990.
+- id: pinsky-1990
+  type: article
+  author: Pinsky, P. M. and Abboud, N. N.
+  title: Transient finite element analysis of the exterior structural acoustics problem
+  journal: Journal of Sound and Vibration
+  volume: '112'
+  pages: 245-256
+  year: 1990
+  original_text: P. M. Pinsky and N. N. Abboud. Transient finite element analysis
+    of the exterior structural acoustics problem. Journal of Sound and Vibration,
+    112:245-256, 1990.
+- id: wu-1990
+  type: phdthesis
+  author: Wu, S. W.
+  title: A fast robust and accurate procedure for radiation and scattering analyses
+    of submerged elastic axisymmetric bodies
+  school: Imperial College
+  year: 1990
+  address: London
+  original_text: S. W. Wu. A fast robust and accurate procedure for radiation and
+    scattering analyses of submerged elastic axisymmetric bodies. PhD thesis, Department
+    of Aeronautics, Imperial College, London, 1990.
+- id: ingber-1991
+  type: article
+  author: Ingber, M.S. and Ott, R.H.
+  title: An application of the boundary element method to the magnetic field integral
+    equation
+  journal: IEEE Transactions on Antennas and Propagation
+  year: 1991
+  volume: '39'
+  number: '5'
+  pages: 606-611
+  original_text: M. S. Ingber and R. H. Ott. An application of the boundary element
+    method to the magnetic field integral equation. IEEE Transactions on antennas
+    and propagation, 39(5):606-611, 1991.
+- id: jeans-1991
+  type: inproceedings
+  author: Jeans, R.A. and Mathews, I.C.
+  title: Comparison of the collocation and variational procedures for providing numerical
+    approximations to the hypersingular acoustic integral operator
+  booktitle: In proceedings of the Second Workshop on Reliability and Adaptive Methods
+    in Computational Mechanics
+  address: Cracow, Poland
+  year: 1991
+  original_text: R. A. Jeans and I. C. Mathews. Comparison of the collocation and
+    variational procedures for providing numerical approximations to the hypersingular
+    acoustic integral operator. In proceedings of the Second Workshop on Reliability
+    and Adaptive Methods in Computational Mechanics, Cracow, Poland, 1991.
+- id: jeans-1991b
+  type: inproceedings
+  author: Jeans, R.A. and Mathews, I.C.
+  title: Use of lanczos vectors in structural acoustics problems
+  booktitle: Structural Acoustics ASME/WAM NCA Vol. 12 /AMD-Vol. 128
+  publisher: ASME
+  address: New York
+  year: 1991
+  original_text: R. A. Jeans and I. C. Mathews. Use of lanczos vectors in structural
+    acoustics problems. In Structural Acoustics ASME/WAM NCA Vol. 12 /AMD-Vol. 128.
+    ASME, New York, 1991.
+- id: kirkup-1991
+  type: article
+  author: Kirkup, S.M.
+  title: The computational modeling of acoustic shields by the boundary and shell
+    element method
+  journal: Computers and Structures
+  year: 1991
+  volume: '40'
+  number: '5'
+  pages: 1177-1183
+  original_text: S. M. Kirkup. The computational modeling of acoustic shields by the
+    boundary and shell element method. Computers and Structures, 40(5):1177-1183,
+    1991.
+- id: martin-1991
+  type: article
+  author: Martin, P. A.
+  title: End-point behaviour of solutions to hypersingular integral equations
+  journal: Proceedings of the Royal Society of London Series A
+  year: 1991
+  volume: '432'
+  pages: 301-320
+  original_text: "P. A. Martin. End-point behaviour of solutions to hypersingular\
+    \ integral equations. Proceedings of the Royal Society of London Series A, 432:301\u2013\
+    320, 1991."
+- id: miller-1991
+  type: article
+  author: Miller, R. D., Moyer Jr., E. T., Huang, H., and Uberall, H.
+  title: A comparison between the boundary element method and the wave superposition
+    approach for the analysis of the scattered fields from rigid bodies and elastic
+    shells
+  journal: Journal of the Acoustical Society of America
+  year: 1991
+  volume: '89'
+  number: '5'
+  pages: 2185-2196
+  original_text: "R. D. Miller, E. T. Moyer Jr., H. Huang, and H. Uberall. A comparison\
+    \ between the boundary element method and the wave superposition approach for\
+    \ the analysis of the scattered fields from rigid bodies and elastic shells. Journal\
+    \ of the Acoustical Society of America, 89(5):2185\u20132196, 1991."
+- id: nour-omid-1991
+  type: article
+  author: Nour-Omid, B. and Dunbar, W. S. and Woodbury, A. D.
+  title: Lanczos and arnoldi methods for the solution of convection-diffusion equations
+  journal: Computer Methods in Applied Mechanics and Engineering
+  volume: '88'
+  pages: 75-95
+  year: 1991
+  original_text: B. Nour-Omid, W. S. Dunbar, and A. D. Woodbury. Lanczos and arnoldi
+    methods for the solution of convection-diffusion equations. Computer Methods in
+    Applied Mechanics and Engineering, 88:75-95, 1991.
+- id: rajakumar-1991
+  type: article
+  author: Rajakumar, C. and Rogers, C. R.
+  title: The lanczos algorithm applied to unsymmetric generalized eigenvalue problem
+  journal: International Journal for Numerical Methods in Engineering
+  volume: '32'
+  pages: 1009-1026
+  year: 1991
+  original_text: C. Rajakumar and C. R. Rogers. The lanczos algorithm applied to unsymmetric
+    generalized eigenvalue problem. International Journal for Numerical Methods in
+    Engineering, 32:1009-1026, 1991.
+- id: song-1991
+  type: article
+  author: Song, Limin and Koopmann, G. H. and Fahnline, J. B.
+  title: Numerical errors associated with the method of superposition for computing
+    acoustic fields
+  journal: Journal of the Acoustical Society of America
+  volume: '89'
+  number: '6'
+  pages: 2625-2633
+  year: 1991
+  original_text: Limin Song, G. H. Koopmann, and J. B. Fahnline. Numerical errors
+    associated with the method of superposition for computing acoustic fields. Journal
+    of the Acoustical Society of America, 89(6):2625-2633, 1991.
+- id: wu-1991
+  type: article
+  author: Wu, T. W., Seybert, A. F., and Wan, G. C.
+  title: On the numerical implementation of a cauchy principal value integral to insure
+    a unique solution for acoustic radiation and scattering
+  journal: Journal of the Acoustical Society of America
+  volume: '90'
+  number: '1'
+  pages: 554-560
+  year: 1991
+  original_text: T. W. Wu, A. F. Seybert, and G. C. Wan. On the numerical implementation
+    of a cauchy principal value integral to insure a unique solution for acoustic
+    radiation and scattering. Journal of the Acoustical Society of America, 90(1):554-560,
+    1991.
+- id: jeans-1992
+  type: article
+  author: Jeans, R.A. and Mathews, I.C.
+  title: The wave superposition method as a robust technique for computing acoustic
+    fields
+  journal: 'Submitted to: Journal of the Acoustical Society of America'
+  year: 1992
+  original_text: 'R. A. Jeans and I. C. Mathews. The wave superposition method as
+    a robust technique for computing acoustic fields. Submitted to: Journal of the
+    Acoustical Society of America, 1992.'
+bibtex_content: "@book{kellogg-1929,\n  author = {Kellogg, O.D.},\n  title = \"Foundations\
+  \ of potential theory\",\n  publisher = \"Springer-Verlag\",\n  year = {1929},\n\
+  }\n\n@phdthesis{bouwkamp-1941,\n  author = {Bouwkamp, C. J.},\n  title = \"Theoretische\
+  \ en numerieke behandeling van de buiging door ronde opening\",\n  school = \"University\
+  \ of Gronigen\",\n  year = {1941},\n  address = \"Holland\",\n}\n\n@book{lamb-1945,\n\
+  \  author = {Lamb, H.},\n  title = \"Hydrodynamics\",\n  publisher = \"Dover\",\n\
+  \  year = {1945},\n  address = \"New York\",\n}\n\n@article{leitner-1949,\n  author\
+  \ = {Leitner, A.},\n  title = \"Diffraction of sound by a circular disk\",\n  journal\
+  \ = \"Journal of the Acoustical Society of America\",\n  year = {1949},\n  volume\
+  \ = {21},\n  pages = {331-334},\n}\n\n@article{maue-1949,\n  author = {Maue, A.\
+  \ W.},\n  title = \"Zur formulierung eines allgemeinen beugungsproblems durch eine\
+  \ integralgleichung\",\n  journal = \"Z. Phys.\",\n  year = {1949},\n  volume =\
+  \ {126},\n  pages = {601-618},\n}\n\n@article{spence-1951,\n  author = {Spence,\
+  \ R. D. and Granger, S.},\n  title = \"The scattering of sound from a prolate spheroid\"\
+  ,\n  journal = \"Journal of the Acoustical Society of America\",\n  year = {1951},\n\
+  \  volume = {23},\n  number = {6},\n  pages = {701-706},\n}\n\n@article{wiener-1951,\n\
+  \  author = {Wiener, F. M.},\n  title = \"On the relationship between the sound\
+  \ fields radiated and diffracted by plane obstacles\",\n  journal = \"Journal of\
+  \ the Acoustical Society of America\",\n  year = {1951},\n  volume = {23},\n  number\
+  \ = {6},\n  pages = {697-700},\n}\n\n@book{morse-1953,\n  author = {Morse, P. M.\
+  \ and Feshbach, H.},\n  title = \"Methods of theoretical physics\",\n  publisher\
+  \ = \"McGraw-Hill\",\n  year = {1953},\n  edition = {International student edition},\n\
+  \  address = \"New York\",\n}\n\n@article{chen-1963,\n  author = {Chen, L. H. and\
+  \ Schweikert, D. G.},\n  title = \"Sound radiation from an arbitrary body\",\n \
+  \ journal = \"Journal of the Acoustical Society of America\",\n  year = {1963},\n\
+  \  volume = {35},\n  number = {10},\n  pages = {1626-1632},\n}\n\n@article{chertock-1964,\n\
+  \  author = {Chertock, G.},\n  title = \"Sound radiation from vibrating surfaces\"\
+  ,\n  journal = \"Journal of the Acoustical Society of America\",\n  year = {1964},\n\
+  \  volume = {36},\n  number = {7},\n  pages = {1305-1313},\n}\n\n@article{guyan-1965,\n\
+  \  author = {Guyan, R.J.},\n  title = \"Reduction of stiffness and mass matrices\"\
+  ,\n  journal = \"AIAA Journal\",\n  year = {1965},\n  volume = {3},\n  number =\
+  \ {380},\n}\n\n@article{mitzner-1966,\n  author = {Mitzner, K. M.},\n  title = \"\
+  Acoustic scattering from an interface between media of greatly different density\"\
+  ,\n  journal = \"Journal of Maths and Physics\",\n  year = {1966},\n  volume = {7},\n\
+  \  number = {11},\n  pages = {2053-2060},\n}\n\n@article{coply-1967,\n  author =\
+  \ {Coply, L. G.},\n  title = \"Fundamental results concerning integral representations\
+  \ in acoustic radiation\",\n  journal = \"Journal of the Acoustical Society of America\"\
+  ,\n  year = {1967},\n  volume = {44},\n  number = {1},\n  pages = {28-32},\n}\n\n\
+  @article{stallybrass-1967,\n  author = {Stallybrass, M. P.},\n  title = \"On a pointwise\
+  \ variational principle for the approximate solution of linear boundary value problems\"\
+  ,\n  journal = \"Journal of Maths and Mechanics\",\n  year = {1967},\n  volume =\
+  \ {16},\n  number = {11},\n  pages = {1247-1286},\n}\n\n@article{stallybrass-1967-2,\n\
+  \  author = {Stallybrass, M. P.},\n  title = \"On a pointwise variational principle\
+  \ for the approximate solution of linear boundary value problems\",\n  journal =\
+  \ \"Journal of Mathematics and Mechanics\",\n  year = {1967},\n  volume = {16},\n\
+  \  number = {11},\n  pages = {1247-1287},\n}\n\n@article{schenck-1968,\n  author\
+  \ = {Schenck, H. A.},\n  title = \"Improved integral formulation for acoustic radiation\
+  \ problems\",\n  journal = \"Journal of the Acoustical Society of America\",\n \
+  \ year = {1968},\n  volume = {44},\n  pages = {41-58},\n}\n\n@article{burton-1971,\n\
+  \  author = {Burton, J. A. and Miller, G. F.},\n  title = \"The application of integral\
+  \ equation methods to the numerical solution of some exterior boundary value problems\"\
+  ,\n  journal = \"Proceedings of the Royal Society of London Series A\",\n  year\
+  \ = {1971},\n  volume = {323},\n  pages = {201-210},\n}\n\n@article{kleinman-1974,\n\
+  \  author = {Kleinman, R. E. and Roach, G. F.},\n  title = \"Boundary integral equations\
+  \ for the three-dimensional helmholtz equations\",\n  journal = \"SIAM Review\"\
+  ,\n  year = {1974},\n  volume = {16},\n  number = {2},\n  pages = {214-235},\n}\n\
+  \n@incollection{miller-1974,\n  author = {Miller, G. F.},\n  title = \"Fredholm\
+  \ equations of the first kind\",\n  booktitle = \"Numerical solution of integral\
+  \ equations\",\n  publisher = \"Clarendon\",\n  year = {1974},\n  pages = {175-188},\n\
+  \  address = \"Oxford\",\n}\n\n@article{lachat-1976,\n  author = {Lachat, J. C.\
+  \ and Watson, J. O.},\n  title = \"Effective numerical treatment of boundary integral\
+  \ equations: A formulation for three-dimensional elastostatics\",\n  journal = \"\
+  International Journal for Numerical Methods in Engineering\",\n  year = {1976},\n\
+  \  volume = {10},\n  pages = {991-1005},\n}\n\n@article{filippi-1977,\n  author\
+  \ = {Filippi, P.J.T.},\n  title = \"Layer potentials and acoustic diffraction\"\
+  ,\n  journal = \"Journal of Sound and Vibration\",\n  year = {1977},\n  volume =\
+  \ {54},\n  pages = {473-500},\n}\n\n@book{jennings-1977,\n  author = {Jennings,\
+  \ A.},\n  title = \"Matrix computation for engineers and scientists\",\n  publisher\
+  \ = \"Wiley\",\n  year = {1977},\n  address = \"London\",\n}\n\n@article{zienkiewicz-1977,\n\
+  \  author = {Zienkiewicz, O. C., Kelly, D., and Bettess, P.},\n  title = \"The coupling\
+  \ of finite element and boundary solution procedures\",\n  journal = \"International\
+  \ Journal for Numerical Methods in Engineering\",\n  year = {1977},\n  volume =\
+  \ {11},\n  pages = {355-375},\n}\n\n@article{wilton-1978,\n  author = {Wilton, D.\
+  \ T.},\n  title = \"Acoustic radiation and scattering from elastic structures\"\
+  ,\n  journal = \"International Journal for Numerical Methods in Engineering\",\n\
+  \  year = {1978},\n  volume = {13},\n  pages = {123-138},\n}\n\n@phdthesis{mathews-1979,\n\
+  \  author = {Mathews, I. C.},\n  title = \"Sound radiation from vibrating elastic\
+  \ structures of arbitrary shape\",\n  institution = \"Imperial College\",\n  school\
+  \ = \"Department of Aeronautics, Imperial College\",\n  year = {1979},\n  address\
+  \ = \"London\",\n}\n\n@article{terai-1980,\n  author = {Terai, T.},\n  title = \"\
+  On calculation of sound fields around three dimensional objects by integral equation\
+  \ methods\",\n  journal = \"Journal of Sound and Vibration\",\n  year = {1980},\n\
+  \  volume = {69},\n  number = {1},\n  pages = {71-100},\n}\n\n@techreport{simon-1982,\n\
+  \  author = {Simon, H. D.},\n  title = \"The lanczos algorithm for solving symmetric\
+  \ linear systems\",\n  institution = \"Center for Pure and Applied Mathematics,\
+  \ University of California\",\n  year = {1982},\n  number = {Technical Report PAM-74},\n\
+  }\n\n@incollection{tullberg-1982,\n  author = {Tullberg, O. and Bolteus, S.},\n\
+  \  title = \"A critical study of different boundary element matrices\",\n  booktitle\
+  \ = \"Boundary Element Methods in Engineering, Proc. 4th Int. Seminar, Southampton\"\
+  ,\n  publisher = \"Springer-Verlag\",\n  year = {1982},\n  pages = {621-635},\n\
+  \  address = \"Berlin Heidelberg New York\",\n}\n\n@article{varadan-1982,\n  author\
+  \ = {Varadan, V. K. and Varadan, V. V.},\n  title = \"Computation of rigid body\
+  \ scattering by prolate spheroids using the t-matrix approach\",\n  journal = \"\
+  Journal of the Acoustical Society of America\",\n  year = {1982},\n  volume = {71},\n\
+  \  number = {1},\n  pages = {22-25},\n}\n\n@book{colton-1983,\n  author = {Colton,\
+  \ D. and Kress, R.},\n  title = \"Integral Equation Methods in Scattering Theory\"\
+  ,\n  publisher = \"John Wiley and Sons\",\n  year = {1983},\n  address = \"New York\"\
+  ,\n}\n\n@article{geers-1983,\n  author = {Geers, T.L. and Felippa, C.A.},\n  title\
+  \ = \"Doubly asymptotic approximations for vibration analysis of submerged structures\"\
+  ,\n  journal = \"Journal of the Acoustical Society of America\",\n  year = {1983},\n\
+  \  volume = {73},\n  pages = {1152-1159},\n}\n\n@book{golub-1983,\n  author = {Golub,\
+  \ G.H. and Van Loan, C.F.},\n  title = \"Matrix Computations\",\n  publisher = \"\
+  North Oxford Academic Publishing Co.\",\n  year = {1983},\n}\n\n@article{bayo-1984,\n\
+  \  author = {Bayo, E. P. and Wilson, E. L.},\n  title = \"Finite element and ritz\
+  \ vector techniques for the solution to three-dimensional soil structure interaction\
+  \ problems in the time domain\",\n  journal = \"Engineering with Computers\",\n\
+  \  year = {1984},\n  volume = {1},\n  note = \"December\",\n}\n\n@article{bayo-1984a,\n\
+  \  author = {Bayo, E. P. and Wilson, E. L.},\n  title = \"Use of ritz vectors in\
+  \ wave propagation and foundation response\",\n  journal = \"Earthquake Engineering\
+  \ and Structural Dynamics\",\n  year = {1984},\n  volume = {12},\n  pages = {499-505},\n\
+  }\n\n@incollection{huang-1984,\n  author = {Huang, H.},\n  title = \"Helmholtz integral\
+  \ equations for fluid structure interaction\",\n  booktitle = \"Advances in Fluid\
+  \ Structure Interaction AMD Vol 64\",\n  publisher = \"ASME\",\n  year = {1984},\n\
+  \  pages = {19-38},\n  address = \"New York\",\n}\n\n@article{nour-omid-1984,\n\
+  \  author = {Nour-Omid, B. and Clough, R. W.},\n  title = \"Dynamic analysis of\
+  \ structures using lanczos coordinates\",\n  journal = \"Earthquake Engineering\
+  \ and Structural Dynamics\",\n  year = {1984},\n  volume = {12},\n  pages = {565-577},\n\
+  }\n\n@book{arfken-1985,\n  author = {Arfken, G.},\n  title = \"Mathematical Methods\
+  \ for Physicists\",\n  publisher = \"Academic Press inc.\",\n  year = {1985},\n\
+  \  edition = {third},\n}\n\n@article{seybert-1985,\n  author = {Seybert, A. F. and\
+  \ Soenarko, B. and Rizzo, F. J. and Shippy, D. J.},\n  title = \"An advanced computational\
+  \ method for radiation and scattering of acoustic waves in three dimensions\",\n\
+  \  journal = \"Journal of the Acoustical Society of America\",\n  year = {1985},\n\
+  \  volume = {77},\n  pages = {362-368},\n}\n\n@article{amini-1986,\n  author = {Amini,\
+  \ S. and Wilton, D. T.},\n  title = \"An investigation of the boundary element method\
+  \ for the exterior acoustic problem\",\n  journal = \"Computer Methods in Applied\
+  \ Mechanical Engineering\",\n  year = {1986},\n  volume = {54},\n  pages = {49-65},\n\
+  }\n\n@techreport{james-1986,\n  author = {James, J.H.},\n  title = \"Fortran program\
+  \ for vibration and sound radiation of spherical shell\",\n  institution = \"Admiralty\
+  \ Research Establishment\",\n  year = {1986},\n  number = {ARE TM N1 86501},\n}\n\
+  \n@book{junger-1986,\n  author = {Junger, M.C. and Feit, D.},\n  title = \"Sound,\
+  \ structures and their interaction\",\n  publisher = \"MIT Press\",\n  year = {1986},\n\
+  \  edition = {second},\n  address = \"Cambridge\",\n}\n\n@article{mathews-1986,\n\
+  \  author = {Mathews, I. C.},\n  title = \"Numerical techniques for three-dimensional\
+  \ steady-state fluid-structure interaction\",\n  journal = \"Journal of the Acoustical\
+  \ Society of America\",\n  year = {1986},\n  volume = {79},\n  number = {5},\n \
+  \ pages = {1317-1325},\n}\n\n@inproceedings{katz-1987,\n  author = {Katz, C.},\n\
+  \  title = \"Murphy\u2019s law in boundary element implementations\",\n  booktitle\
+  \ = \"Proceedings of the 9th international conference on boundary element methods\"\
+  ,\n  publisher = \"Springer-Verlag\",\n  year = {1987},\n}\n\n@article{mariem-1987,\n\
+  \  author = {Mariem, J. B. and Hamdi, M. A.},\n  title = \"A new boundary finite\
+  \ element method for fluid-structure interaction problems\",\n  journal = \"International\
+  \ Journal for Numerical Methods in Engineering\",\n  year = {1987},\n  volume =\
+  \ {24},\n  pages = {1251-1267},\n}\n\n@article{pierce-1987,\n  author = {Pierce,\
+  \ A. D.},\n  title = \"Stationary variational expressions for radiated and scattered\
+  \ acoustic power and related quantities\",\n  journal = \"IEEE Journal of Oceanic\
+  \ Engineering\",\n  year = {1987},\n  volume = {OE-12},\n  number = {2},\n  pages\
+  \ = {404-411},\n}\n\n@article{werby-1987,\n  author = {Werby, M. F. and Evans, R.\
+  \ B.},\n  title = \"Scattering from objects submerged in unbounded and bounded oceans\"\
+  ,\n  journal = \"IEEE Journal of Oceanic Engineering\",\n  year = {1987},\n  volume\
+  \ = {OE-12},\n  number = {2},\n  pages = {380-394},\n}\n\n@article{wu-1987,\n  author\
+  \ = {Wu, X. F., Pierce, A. D., and Ginsberg, J. H.},\n  title = \"Variational method\
+  \ for computing surface acoustic pressure on vibrating bodies, applied to transversely\
+  \ oscillating disks\",\n  journal = \"IEEE Journal of Oceanic Engineering\",\n \
+  \ year = {1987},\n  volume = {OE-12},\n  number = {2},\n}\n\n@book{strang-1988,\n\
+  \  author = {Strang, G.},\n  title = \"Linear Algebra and its Applications\",\n\
+  \  publisher = \"Harcourt Brace Jovanovich\",\n  year = {1988},\n  edition = {third},\n\
+  }\n\n@techreport{warham-1988,\n  author = {Warham, A. G. P.},\n  title = \"The helmholtz\
+  \ integral equation for a thin shell\",\n  institution = \"National Physical Laboratories\"\
+  ,\n  year = {1988},\n  number = {DITC 129/88},\n}\n\n@techreport{benthien-1989,\n\
+  \  author = {Benthien, G. W.},\n  title = \"Application of frequency interpolation\
+  \ to acoustic-structure interaction problems\",\n  institution = \"Naval Ocean Systems\
+  \ Center\",\n  year = {1989},\n  number = {1323},\n}\n\n@article{chen-1989,\n  author\
+  \ = {Chen, H. C. and Taylor, R. L.},\n  title = \"Using lanczos vectors and ritz\
+  \ vectors for computing dynamic responses\",\n  journal = \"Engineering with Computers\"\
+  ,\n  year = {1989},\n  volume = {6},\n  pages = {151-157},\n}\n\n@inproceedings{coyette-1989,\n\
+  \  author = {Coyette, J. P.},\n  title = \"Ritz vectors synthesis versus modal synthesis\
+  \ for fluid-structure interaction modeling\",\n  booktitle = \"International congress\
+  \ on recent developments in air and structure borne sound and vibration\",\n  year\
+  \ = {1989},\n  address = \"Auburn University USA\",\n}\n\n@incollection{coyette-1989a,\n\
+  \  author = {Coyette, J. P. and Fyfe, K. R.},\n  title = \"Solution of elasto acoustic\
+  \ problems using variational finite element/boundary element technique\",\n  booktitle\
+  \ = \"Numerical techniques in acoustic radiation NCA-Vol 6\",\n  publisher = \"\
+  ASME\",\n  year = {1989},\n  address = \"New York\",\n}\n\n@article{cunefare-1989,\n\
+  \  author = {Cunefare, K. A., Koopmann, G. H., and Brod, K.},\n  title = \"A boundary\
+  \ element method for acoustic radiation valid for all wavenumbers\",\n  journal\
+  \ = \"Journal of the Acoustical Society of America\",\n  year = {1989},\n  volume\
+  \ = {85},\n  number = {1},\n  pages = {39-48},\n  note = \"January\",\n}\n\n@book{hartmann-1989,\n\
+  \  author = {Hartmann, F.},\n  title = \"Introduction to Boundary Elements\",\n\
+  \  publisher = \"Springer-Verlag\",\n  year = {1989},\n}\n\n@techreport{james-1989,\n\
+  \  author = {James, J.H.},\n  title = \"Calculation of transient response from time\
+  \ harmonic spectrum\",\n  institution = \"Admiralty Research Establishment\",\n\
+  \  year = {1989},\n  number = {ARE TR 89308},\n}\n\n@inproceedings{kirkup-1989,\n\
+  \  author = {Kirkup, S. M. and Henwood, D. J.},\n  title = \"Techniques for speeding\
+  \ up the boundary element solution of acoustic radiation problems\",\n  booktitle\
+  \ = \"Proceedings of the ASME winter meeting\",\n  year = {1989},\n  address = \"\
+  San Fransisco\",\n}\n\n@article{koopmann-1989,\n  author = {Koopmann, G. H., Song,\
+  \ L. and Fahnline, J. B.},\n  title = \"A method for computing acoustic fields based\
+  \ on the principle of wave superposition\",\n  journal = \"Journal of the Acoustical\
+  \ Society of America\",\n  year = {1989},\n  volume = {86},\n  number = {6},\n \
+  \ pages = {2433-2438},\n}\n\n@inproceedings{miller-1989,\n  author = {Miller, R.\
+  \ D., Huang, H., Moyer Jr., E. T., and Uberall, H.},\n  title = \"The analysis of\
+  \ the radiated and scattered acoustic fields from submerged shell structures using\
+  \ a modal finite element/boundary element formulation\",\n  booktitle = \"Proceedings\
+  \ of the ASME Winter Annual Meeting\",\n  publisher = \"ASME\",\n  year = {1989},\n\
+  \  address = \"New York\",\n}\n\n@article{nour-omid-1989,\n  author = {Nour-Omid,\
+  \ B. and Regelbrugge, M. E.},\n  title = \"Lanczos methods for dynamic analysis\
+  \ of damped structural systems\",\n  journal = \"Earthquake Engineering and Structural\
+  \ Dynamics\",\n  year = {1989},\n  volume = {18},\n  pages = {1091-1104},\n}\n\n\
+  @article{photiadis-1989,\n  author = {Photiadis, D. M.},\n  title = \"The scattering\
+  \ of sound from fluid loaded plates\",\n  journal = \"Journal of the Acoustical\
+  \ Society of America\",\n  year = {1989},\n  volume = {85},\n  number = {6},\n \
+  \ pages = {2440-2451},\n}\n\n@book{pierce-1989,\n  author = {Pierce, A. D.},\n \
+  \ title = \"Acoustics\",\n  publisher = \"Acoustical Society of America\",\n  year\
+  \ = {1989},\n}\n\n@incollection{schenck-1989,\n  author = {Schenck, H. A. and Benthien,\
+  \ G. W.},\n  title = \"The application of a coupled finite-element boundary-element\
+  \ technique to large scale structural acoustic problems\",\n  booktitle = \"Advances\
+  \ in boundary elements\",\n  publisher = \"Springer\",\n  year = {1989},\n  address\
+  \ = \"New York\",\n}\n\n@techreport{schenck-1989-2,\n  author = {Schenck, H. A.\
+  \ and Benthien, G. W.},\n  title = \"Numerical solution of acoustic-structure interaction\
+  \ problems\",\n  institution = \"Naval Ocean Systems Center\",\n  year = {1989},\n\
+  \  number = {Technical Report 1263},\n}\n\n@article{wu-1989,\n  author = {Wu, X.\
+  \ F.},\n  title = \"Faster calculations of sound radiation from vibrating cylinders\
+  \ using variational formulations\",\n  journal = \"Journal of Vibration, Acoustics,\
+  \ Stress and Reliability in Design\",\n  year = {1989},\n  volume = {111},\n  pages\
+  \ = {101-107},\n}\n\n@book{zienkiewicz-1989,\n  author = {Zienkiewicz, O. C. and\
+  \ Taylor, R. L.},\n  title = \"The Finite Element Method\",\n  publisher = \"McGraw-Hill\"\
+  ,\n  year = {1989},\n  volume = {1},\n  edition = {fourth},\n  address = \"London\"\
+  ,\n}\n\n@article{chien-1990,\n  author = {Chien, C. C., Rajiyah, H., and Atluri,\
+  \ S. N.},\n  title = \"An effective method for solving the hypersingular integral\
+  \ equations in 3-d acoustics\",\n  journal = \"Journal of the Acoustical Society\
+  \ of America\",\n  year = {1990},\n  volume = {88},\n  number = {2},\n  pages =\
+  \ {918-936},\n}\n\n@article{dokumaci-1990,\n  author = {Dokumaci, E.},\n  title\
+  \ = \"A study of the failure of numerical solutions in boundary element analysis\
+  \ of acoustic radiation problems\",\n  journal = \"Journal of Sound and Vibration\"\
+  ,\n  year = {1990},\n  volume = {139},\n  number = {1},\n  pages = {83-97},\n}\n\
+  \n@article{ginsberg-1990,\n  author = {Ginsberg, J.H., Chen, P., and Pierce, A.D.},\n\
+  \  title = \"Analysis using variational principles of the surface pressure and displacement\
+  \ along an axisymmetrically excited disk in a baffle\",\n  journal = \"Journal of\
+  \ the Acoustical Society of America\",\n  year = {1990},\n  volume = {88},\n  number\
+  \ = {1},\n  pages = {548-559},\n}\n\n@article{jeans-1990,\n  author = {Jeans, R.A.\
+  \ and Mathews, I.C.},\n  title = \"Solution of fluid-structure interaction problems\
+  \ using a coupled finite element and variational boundary element technique\",\n\
+  \  journal = \"Journal of the Acoustical Society of America\",\n  year = {1990},\n\
+  \  volume = {88},\n  number = {5},\n  pages = {2459-2466},\n}\n\n@techreport{moini-1990,\n\
+  \  author = {Moini, S., Nour-Omid, B., and Carlsson, H.},\n  title = \"Harmonic\
+  \ and transient analysis of fluid structure interaction problems using lanczos coordinates\"\
+  ,\n  institution = \"IBM Scientific Center\",\n  year = {1990},\n}\n\n@article{pinsky-1990,\n\
+  \  author = {Pinsky, P. M. and Abboud, N. N.},\n  title = \"Transient finite element\
+  \ analysis of the exterior structural acoustics problem\",\n  journal = \"Journal\
+  \ of Sound and Vibration\",\n  year = {1990},\n  volume = {112},\n  pages = {245-256},\n\
+  }\n\n@phdthesis{wu-1990,\n  author = {Wu, S. W.},\n  title = \"A fast robust and\
+  \ accurate procedure for radiation and scattering analyses of submerged elastic\
+  \ axisymmetric bodies\",\n  school = \"Imperial College\",\n  year = {1990},\n \
+  \ address = \"London\",\n}\n\n@article{ingber-1991,\n  author = {Ingber, M.S. and\
+  \ Ott, R.H.},\n  title = \"An application of the boundary element method to the\
+  \ magnetic field integral equation\",\n  journal = \"IEEE Transactions on Antennas\
+  \ and Propagation\",\n  year = {1991},\n  volume = {39},\n  number = {5},\n  pages\
+  \ = {606-611},\n}\n\n@inproceedings{jeans-1991,\n  author = {Jeans, R.A. and Mathews,\
+  \ I.C.},\n  title = \"Comparison of the collocation and variational procedures for\
+  \ providing numerical approximations to the hypersingular acoustic integral operator\"\
+  ,\n  booktitle = \"In proceedings of the Second Workshop on Reliability and Adaptive\
+  \ Methods in Computational Mechanics\",\n  year = {1991},\n  address = \"Cracow,\
+  \ Poland\",\n}\n\n@inproceedings{jeans-1991b,\n  author = {Jeans, R.A. and Mathews,\
+  \ I.C.},\n  title = \"Use of lanczos vectors in structural acoustics problems\"\
+  ,\n  booktitle = \"Structural Acoustics ASME/WAM NCA Vol. 12 /AMD-Vol. 128\",\n\
+  \  publisher = \"ASME\",\n  year = {1991},\n  address = \"New York\",\n}\n\n@article{kirkup-1991,\n\
+  \  author = {Kirkup, S.M.},\n  title = \"The computational modeling of acoustic\
+  \ shields by the boundary and shell element method\",\n  journal = \"Computers and\
+  \ Structures\",\n  year = {1991},\n  volume = {40},\n  number = {5},\n  pages =\
+  \ {1177-1183},\n}\n\n@article{martin-1991,\n  author = {Martin, P. A.},\n  title\
+  \ = \"End-point behaviour of solutions to hypersingular integral equations\",\n\
+  \  journal = \"Proceedings of the Royal Society of London Series A\",\n  year =\
+  \ {1991},\n  volume = {432},\n  pages = {301-320},\n}\n\n@article{miller-1991,\n\
+  \  author = {Miller, R. D., Moyer Jr., E. T., Huang, H., and Uberall, H.},\n  title\
+  \ = \"A comparison between the boundary element method and the wave superposition\
+  \ approach for the analysis of the scattered fields from rigid bodies and elastic\
+  \ shells\",\n  journal = \"Journal of the Acoustical Society of America\",\n  year\
+  \ = {1991},\n  volume = {89},\n  number = {5},\n  pages = {2185-2196},\n}\n\n@article{nour-omid-1991,\n\
+  \  author = {Nour-Omid, B. and Dunbar, W. S. and Woodbury, A. D.},\n  title = \"\
+  Lanczos and arnoldi methods for the solution of convection-diffusion equations\"\
+  ,\n  journal = \"Computer Methods in Applied Mechanics and Engineering\",\n  year\
+  \ = {1991},\n  volume = {88},\n  pages = {75-95},\n}\n\n@article{rajakumar-1991,\n\
+  \  author = {Rajakumar, C. and Rogers, C. R.},\n  title = \"The lanczos algorithm\
+  \ applied to unsymmetric generalized eigenvalue problem\",\n  journal = \"International\
+  \ Journal for Numerical Methods in Engineering\",\n  year = {1991},\n  volume =\
+  \ {32},\n  pages = {1009-1026},\n}\n\n@article{song-1991,\n  author = {Song, Limin\
+  \ and Koopmann, G. H. and Fahnline, J. B.},\n  title = \"Numerical errors associated\
+  \ with the method of superposition for computing acoustic fields\",\n  journal =\
+  \ \"Journal of the Acoustical Society of America\",\n  year = {1991},\n  volume\
+  \ = {89},\n  number = {6},\n  pages = {2625-2633},\n}\n\n@article{wu-1991,\n  author\
+  \ = {Wu, T. W., Seybert, A. F., and Wan, G. C.},\n  title = \"On the numerical implementation\
+  \ of a cauchy principal value integral to insure a unique solution for acoustic\
+  \ radiation and scattering\",\n  journal = \"Journal of the Acoustical Society of\
+  \ America\",\n  year = {1991},\n  volume = {90},\n  number = {1},\n  pages = {554-560},\n\
+  }\n\n@article{jeans-1992,\n  author = {Jeans, R.A. and Mathews, I.C.},\n  title\
+  \ = \"The wave superposition method as a robust technique for computing acoustic\
+  \ fields\",\n  journal = \"Submitted to: Journal of the Acoustical Society of America\"\
+  ,\n  year = {1992},\n}"
+extraction_metadata:
+  pages_processed: 5
+  total_references: 84
+  extraction_date: '2024-01-01'
+  tool_version: bibtex_converter_v1
