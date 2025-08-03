@@ -37,7 +37,7 @@ def get_mathematical_formatting_section():
 
 def get_figure_formatting_section():
     """Get figure formatting requirements section."""
-    return """**FIGURE FORMATTING**: Use HTML picture element format for dual theme support:
+    return """**FIGURE FORMATTING**: Use HTML picture element format with correct section-based naming:
 
 <a id="figure-x-y"></a>
 
@@ -48,6 +48,10 @@ def get_figure_formatting_section():
 </picture>
 Figure X.Y. Caption text here.
 
+**CRITICAL NAMING**: Use the actual section prefix in figure names:
+- For Chapter 2: figure-2-1.png, figure-2-2.png
+- For Appendix A2: figure-A2-1.png, figure-A2-2.png  
+- For Appendix A1: figure-A1-1.png, figure-A1-2.png
 **Requirements**: Anchor BEFORE picture element, both themes, full alt text, plain caption below"""
 
 
@@ -55,6 +59,7 @@ def get_table_formatting_section():
     """Get table formatting requirements section."""
     return """**TABLE FORMATTING**:
    - **CRITICAL**: Convert ALL tables to proper Markdown table format
+   - **PRESERVE ORIGINAL STRUCTURE**: Maintain the exact layout and orientation from the PDF
    - Add anchor before table: `<a id="table-a2-1"></a>`
    - Use pipe-separated format with proper alignment:
      ```
@@ -67,10 +72,13 @@ def get_table_formatting_section():
      
      **Table 2.1**: Caption text describing the table contents
      ```
+   - **CRITICAL**: If the table has column headers (like n=0, n=1, n=2...), use them as column headers
+   - **CRITICAL**: If the table has row labels, include them in the first column
    - Preserve all table data accurately, including numerical values and units
    - Maintain proper column alignment (left, center, right as appropriate)
    - Include complete table captions below the table
-   - **DO NOT SKIP TABLES** - they contain important data that must be preserved"""
+   - **DO NOT SKIP TABLES** - they contain important data that must be preserved
+   - **DO NOT TRANSPOSE**: Keep rows as rows and columns as columns as shown in the original"""
 
 
 def get_anchor_generation_section():

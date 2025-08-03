@@ -213,10 +213,11 @@ class SectionProcessor:
 
     def _format_section_heading(self, section_number: str, section_title: str, heading_level: str) -> str:
         """Format the section heading properly based on section type."""
-        # For top-level sections (F1, B1, A1, etc.), don't include the universal identifier in the title
-        if section_number.startswith(('F', 'B', 'A')):
+        # For top-level sections without dots (F1, B1, A1, A2, etc.), use only the title
+        # For subsections with dots (A2.1, A2.2, etc.), include the section number
+        if section_number.startswith(('F', 'B', 'A')) and '.' not in section_number:
             return f"{heading_level} {section_title} <a id=\"section-{section_number.lower()}\"></a>"
-        # For chapters and regular sections, include the number
+        # For all other sections (chapters and subsections), include the number
         else:
             return f"{heading_level} {section_number} {section_title} <a id=\"section-{section_number.replace('.', '-')}\"></a>"
 
@@ -276,6 +277,12 @@ CRITICAL CONTENT REQUIREMENTS:
    - Include complete mathematical derivations with explanatory context
    - Maintain academic writing conventions and technical precision
    - Preserve figure and table references within section context
+   - **SECTION-AWARE NAMING**: Use the correct section prefix for figures and tables:
+     * For Appendix A2: figure-A2-1.png, table-A2-1, etc.
+     * For Chapter 2: figure-2-1.png, table-2-1, etc.
+   - **HEADING FORMAT**: Include section numbers in subsection headings:
+     * Top-level: "# APPENDIX 2 Analytical Solutions" (no A2 prefix)
+     * Subsections: "## A2.1 Rigid Sphere", "## A2.2 Asymptotic Solutions" (include A2.1, A2.2 prefix)
    - **FOR PARENT SECTIONS ONLY**: Include introductory text that applies to the whole section, but stop before subsection headings or equations/content tagged with subsection numbers (e.g., stop before equations tagged A2.1.1, A2.1.2, or headings like "A2.1 Rigid Sphere")
 
 {get_output_requirements_section()}

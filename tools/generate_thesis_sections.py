@@ -131,22 +131,24 @@ def process_section(
     input_pdf: str, 
     output_dir: str, 
     structure_file: str,
+    thesis_dir: str,
     dry_run: bool = False,
     debug: bool = False
 ) -> Optional[str]:
     """
-    Process a high-level section using SectionProcessor class directly.
+    Process a high-level section and its subsections using SectionProcessor class directly.
     
     Args:
         section (dict): Section data from structure YAML
         input_pdf (str): Path to input PDF file
         output_dir (str): Directory for output files
         structure_file (str): Path to thesis structure YAML file
+        thesis_dir (str): Directory for thesis files
         dry_run (bool): If True, only show what would be done
         debug (bool): Whether to enable debug output
         
     Returns:
-        str: Path to generated markdown file, or None if failed
+        str: Path to generated markdown file for the top-level section, or None if failed
     """
     section_filename = get_section_filename(section)
     main_section_id = get_main_section_identifier(section)
@@ -159,6 +161,22 @@ def process_section(
     if dry_run:
         print_progress(f"  [DRY RUN] Would process section {main_section_id} with SectionProcessor")
         print_progress(f"  [DRY RUN] Would save output as: {section_filename}")
+        
+        # Show subsection processing in dry run
+        for subsection in subsections:
+            subsection_filename = get_section_filename(subsection)
+            subsection_id = get_main_section_identifier(subsection)
+            print_progress(f"  [DRY RUN] Would process subsection {subsection_id} -> {subsection_filename}")
+        
+        # Show concatenation step in dry run
+        if subsections:
+            print_progress(f"  [DRY RUN] Would concatenate files into thesis directory:")
+            print_progress(f"    - Main section: {section_filename}")
+            for subsection in subsections:
+                subsection_filename = get_section_filename(subsection)
+                print_progress(f"    - Subsection: {subsection_filename}")
+            print_progress(f"    → Final concatenated file: {Path(thesis_dir) / section_filename}")
+        
         return str(Path(output_dir) / section_filename)
     
     try:
@@ -172,22 +190,101 @@ def process_section(
         # Create the complete output file path
         output_file_path = str(Path(output_dir) / section_filename)
         
-        # Process the section
+        # Process the top-level section
         success = processor.process_section(main_section_id, output_file_path)
         
         if success:
-            print_progress(f"  ✓ Generated: {section_filename}")
-            return output_file_path
+            print_progress(f"  ✓ Generated: {output_file_path}")
         else:
-            print_progress(f"  ✗ Failed to generate {section_filename}")
+            print_progress(f"  ✗ Failed to generate {output_file_path}")
             return None
+        
+        # Process each subsection recursively
+        for subsection in subsections:
+            subsection_result = process_section(
+                subsection, 
+                input_pdf, 
+                output_dir, 
+                structure_file, 
+                thesis_dir,
+                dry_run, 
+                debug
+            )
+            if not subsection_result:
+                print_progress(f"  ✗ Failed to process subsection: {subsection.get('title', 'Unknown')}")
+        
+        return output_file_path if success else None
             
     except Exception as e:
         print_progress(f"  ✗ Exception processing {main_section_id}: {e}")
         return None
 
 
-# Note: stitch_thesis_sections function removed - now copying individual files instead
+def concatenate_section_markdown(
+    section: Dict,
+    output_dir: str,
+    thesis_dir: str,
+    debug: bool = False
+) -> Optional[str]:
+    """
+    Concatenate all markdown files for a high-level section and its subsections into a single file.
+
+    Args:
+        section (dict): Section data from structure YAML
+        output_dir (str): Directory containing individual markdown files
+        thesis_dir (str): Directory to save the concatenated markdown file
+        debug (bool): Whether to show detailed concatenation diagnostics
+
+    Returns:
+        str: Path to the concatenated markdown file, or None if failed
+    """
+    section_filename = get_section_filename(section)
+    subsections = section.get('subsections', [])
+
+    # Create the complete output file path for the concatenated file
+    concatenated_file_path = str(Path(thesis_dir) / section_filename)
+
+    if debug:
+        print_progress(f"  📋 Concatenating files for {section.get('title', 'Unknown')}:")
+        print_progress(f"     Output file: {concatenated_file_path}")
+
+    try:
+        with open(concatenated_file_path, 'w', encoding='utf-8') as outfile:
+            # Add the main section markdown file
+            main_section_file = Path(output_dir) / section_filename
+            if main_section_file.exists():
+                if debug:
+                    print_progress(f"     ✓ Adding main section: {main_section_file}")
+                with open(main_section_file, 'r', encoding='utf-8') as infile:
+                    content = infile.read()
+                    outfile.write(content + '\n\n')
+                    if debug:
+                        print_progress(f"       Added {len(content)} characters")
+            else:
+                if debug:
+                    print_progress(f"     ✗ Main section file missing: {main_section_file}")
+
+            # Add all subsection markdown files recursively
+            for subsection in subsections:
+                subsection_file = Path(output_dir) / get_section_filename(subsection)
+                if subsection_file.exists():
+                    if debug:
+                        print_progress(f"     ✓ Adding subsection: {subsection_file}")
+                    with open(subsection_file, 'r', encoding='utf-8') as infile:
+                        content = infile.read()
+                        outfile.write(content + '\n\n')
+                        if debug:
+                            print_progress(f"       Added {len(content)} characters")
+                else:
+                    if debug:
+                        print_progress(f"     ✗ Subsection file missing: {subsection_file}")
+
+        print_progress(f"  ✓ Concatenated file created: {concatenated_file_path}")
+        return concatenated_file_path
+
+    except Exception as e:
+        print_progress(f"  ✗ Failed to concatenate markdown files for section {section.get('title', 'Unknown')}: {e}")
+        return None
 
 
 def generate_thesis_sections(
@@ -202,7 +299,7 @@ def generate_thesis_sections(
 ) -> bool:
     """
     Generate all thesis sections and create complete thesis document.
-    
+
     Args:
         input_pdf (str): Path to input PDF file
         structure_file (str): Path to thesis structure YAML file
@@ -212,7 +309,7 @@ def generate_thesis_sections(
         section_numbers (list, optional): List of specific section numbers to process (e.g., ['F1', '2', 'A1'])
         dry_run (bool): If True, only show what would be done
         debug (bool): If True, enable debug output from SectionProcessor
-        
+
     Returns:
         bool: True if generation succeeded, False otherwise
     """
@@ -221,99 +318,79 @@ def generate_thesis_sections(
     print_progress(f"Structure file: {structure_file}")
     print_progress(f"Output directory: {output_dir}")
     print_progress(f"Thesis directory: {thesis_dir}")
-    
+
     # Load structure data
     contents_file = Path(structure_file)
     if not contents_file.exists():
         print_progress(f"✗ Structure file not found: {contents_file}")
         return False
-    
+
     try:
         with open(contents_file, 'r', encoding='utf-8') as f:
             structure_data = yaml.safe_load(f)
     except Exception as e:
         print_progress(f"✗ Error loading structure file: {e}")
         return False
-    
+
     sections = structure_data.get('sections', [])
     if not sections:
         print_progress("✗ No sections found in structure file")
         return False
-    
+
     # Filter sections if requested
     if sections_filter:
         sections = [s for s in sections if s.get('type') in sections_filter]
         print_progress(f"Filtered by type to {len(sections)} sections: {sections_filter}")
-    
+
     # Filter by section numbers if requested
     if section_numbers:
         sections = [s for s in sections if s.get('section_number') in section_numbers]
         print_progress(f"Filtered by section number to {len(sections)} sections: {section_numbers}")
-    
+
     print_progress(f"Found {len(sections)} sections to process")
-    
+
     # Validate output directories exist
     if not Path(output_dir).exists():
         print_progress(f"✗ Output directory does not exist: {output_dir}")
         return False
-    
+
     if not Path(thesis_dir).exists():
         print_progress(f"✗ Thesis directory does not exist: {thesis_dir}")
         return False
-    
+
     # Process each section
     successful_files = []
     failed_sections = []
-    
+
     for i, section in enumerate(sections, 1):
         section_title = section.get('title', 'Unknown')
         print_progress(f"\n[{i}/{len(sections)}] Processing: {section_title}")
-        
+
         result_file = process_section(
-            section, input_pdf, output_dir, structure_file, dry_run, debug
+            section, input_pdf, output_dir, structure_file, thesis_dir, dry_run, debug
         )
-        
+
         if result_file:
             successful_files.append(result_file)
+
+            # Concatenate markdown files for the section and its subsections
+            if not dry_run:
+                concatenated_file = concatenate_section_markdown(section, output_dir, thesis_dir, debug)
+                if not concatenated_file:
+                    print_progress(f"  ✗ Failed to concatenate markdown for section: {section_title}")
         else:
             failed_sections.append(section_title)
-    
+
     # Report processing results
     print_progress(f"\nProcessing complete:")
     print_progress(f"  ✓ Successful: {len(successful_files)} sections")
     print_progress(f"  ✗ Failed: {len(failed_sections)} sections")
-    
+
     if failed_sections:
         print_progress("Failed sections:")
         for failed in failed_sections:
             print_progress(f"  - {failed}")
-    
-    # Copy individual section files to thesis directory
-    if successful_files and not dry_run:
-        import shutil
-        print_progress(f"Copying {len(successful_files)} section files to thesis directory...")
-        
-        copied_files = []
-        for section_file in successful_files:
-            source_path = Path(section_file)
-            dest_path = Path(thesis_dir) / source_path.name
-            
-            try:
-                shutil.copy2(source_path, dest_path)
-                copied_files.append(str(dest_path))
-                print_progress(f"  ✓ Copied: {source_path.name}")
-            except Exception as e:
-                print_progress(f"  ✗ Failed to copy {source_path.name}: {e}")
-        
-        if copied_files:
-            print_completion_summary(
-                thesis_dir, 
-                len(copied_files), 
-                "section files copied"
-            )
-        
-        return len(copied_files) > 0
-    
+
     return len(successful_files) > 0
 
 
