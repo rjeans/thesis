@@ -2,12 +2,12 @@ Convert this individual section from a 1992 LaTeX academic thesis PDF to markdow
 
 INDIVIDUAL SECTION INFORMATION:
 - Context: Top-level chapter
-- Section: A2 APPENDIX 2 Analytical Solutions
-- Processing: individual chapter (pages 205-205)
+- Section: 1 CHAPTER 1. Introduction
+- Processing: individual chapter (pages 18-18)
 - Content Type: Complete chapter with logical boundaries
 
 EXPECTED SECTION STRUCTURE:
-A2 APPENDIX 2 Analytical Solutions (parent section content only)
+1 CHAPTER 1. Introduction (parent section content only)
 
 CRITICAL CONTENT REQUIREMENTS:
 1. **COMPLETE TEXT TRANSCRIPTION**: Read entire PDF content without missing any text
@@ -20,7 +20,7 @@ CRITICAL CONTENT REQUIREMENTS:
 2. **INDIVIDUAL SECTION PROCESSING** (PARENT_SECTION_ONLY):
    - This is a complete chapter from a larger chapter
    - **CRITICAL HEADING LEVEL**: Use # for the main section header
-   - Start with: # APPENDIX 2 Analytical Solutions <a id="section-a2"></a>
+   - Start with: # 1 CHAPTER 1. Introduction <a id="section-1"></a>
    - **PARENT SECTION CONTENT**: Extract only the main section heading (e.g., # APPENDIX 2 Analytical Solutions <a id="section-a2"></a>), and do not include any surrounding or subsequent paragraph text, unless it clearly precedes any subsection heading. If the very next content after the heading is a subsection (e.g., A2.1), then treat the parent section as heading only, with no body content.
 
 3. **MATHEMATICAL FORMATTING**:
@@ -41,7 +41,7 @@ CRITICAL CONTENT REQUIREMENTS:
 - Correct complex subscript/superscript: $\lambda_N^{{e_p}}$
 - Wrong complex subscript/superscript: $\lambda_N^e_p$
 
-4. **FIGURE FORMATTING**: Use HTML picture element format for dual theme support:
+4. **FIGURE FORMATTING**: Use HTML picture element format with correct section-based naming:
 
 <a id="figure-x-y"></a>
 
@@ -52,10 +52,15 @@ CRITICAL CONTENT REQUIREMENTS:
 </picture>
 Figure X.Y. Caption text here.
 
+**CRITICAL NAMING**: Use the actual section prefix in figure names:
+- For Chapter 2: figure-2-1.png, figure-2-2.png
+- For Appendix A2: figure-A2-1.png, figure-A2-2.png  
+- For Appendix A1: figure-A1-1.png, figure-A1-2.png
 **Requirements**: Anchor BEFORE picture element, both themes, full alt text, plain caption below
 
 5. **TABLE FORMATTING**:
    - **CRITICAL**: Convert ALL tables to proper Markdown table format
+   - **PRESERVE ORIGINAL STRUCTURE**: Maintain the exact layout and orientation from the PDF
    - Add anchor before table: `<a id="table-a2-1"></a>`
    - Use pipe-separated format with proper alignment:
      ```
@@ -68,10 +73,13 @@ Figure X.Y. Caption text here.
      
      **Table 2.1**: Caption text describing the table contents
      ```
+   - **CRITICAL**: If the table has column headers (like n=0, n=1, n=2...), use them as column headers
+   - **CRITICAL**: If the table has row labels, include them in the first column
    - Preserve all table data accurately, including numerical values and units
    - Maintain proper column alignment (left, center, right as appropriate)
    - Include complete table captions below the table
    - **DO NOT SKIP TABLES** - they contain important data that must be preserved
+   - **DO NOT TRANSPOSE**: Keep rows as rows and columns as columns as shown in the original
 
 6. **ANCHOR GENERATION AND HEADING HIERARCHY**:
    - **Chapter headers (level 1)**: # Chapter Title <a id="chapter-X"></a>
@@ -96,38 +104,40 @@ Figure X.Y. Caption text here.
 
 8. **PDF TEXT GUIDANCE**: Use this extracted text to verify accuracy and completeness:
 
-Analytical Series Solution for the Sphere.
-APPENDIX 2.
-Analytical Series Solution for the Sphere
-A2.1 Rigid sphere
-Throughout this study the spherical radiator is used to validate the acoustic numerical
-methods since an analytical solution for the spherical problem is easily available. These results
-are covered in great depth by Junger and Feit [1986], and they are summarized in this appendix.
-The SHIE for the exterior problem is given by,
-where w is the radial displacement. If the coordinate system of the problem allows variable
-separation of the Greens free space function, then an analytical solution is available. In spherical
-polar coordinates the Greens free space function can be written in terms of spherical Bessel
-functions and Legendre polynomials,
-The coordinate system (T, 0,Ф) describes the exterior domain and (ro, Go, do) describes the
-surface of the sphere. For coordinate systems where an analytical solution exists, the Green's
-function in Eq. (A2.1.1) can be written as,
-where l' is a solution to the homogeneous Helmholtz' equation and the normal derivative of I'
-cancels the normal derivative of Ge on S. Consequently Eg. (A2.1.1) can be rewritten as,
-page 205
-TEE,
-(A2.1.1)
-Gk (7, 0, Ф/то, До,Фо) = -ік Г (п - т).
-n=0m=-n (7 + m) (2n + 1) CO5 m(ф-40)
-Pm (cost) Pm (cost.)in(kro)hn(kr),
-(A2.1.2)
-raro
-9(T, ro) = Gk (T, ro) + I (т, ro),
-(A2.1.3)
-т ≥ то.
-(A2.1.4)
+Introduction.
+CHAPTER 1.
+Introduction
+1.1 Background
+The acoustic analysis of submerged three dimensional structures is of great interest to en-
+gineers. Such an elasto-acoustic analysis can be applied to a variety of engineering problems;
+for example the determination of the sound fields generated by aircraft or underwater vehicles
+and the design of transducers and acoustic shielding. The potential theory behind the acoustic
+problem is also directly applicable to elasto-statics, electromagnetism, hydrodynamics, inviscid
+flow and so on. In general the analysis involves solving the dynamic structural response simul-
+taneously with the acoustic response, where the two are coupled by a fluid structure interaction.
+Standard texts in acoustics (e.g. Junger and Feit [1986], Pierce [1989]) present well estab-
+lished analytical solutions for simple structures. Morse and Feshbach (1953] list eleven coordinate
+systems which allow analytical treatment and Kellog [1929) presents the classical theory behind
+such analysis. Early work in acoustics concentrated on such analytical results. As an example
+Wiener (1951] published results for thin plate problems and Spence and Granger [1951] presented
+analytical results for rigid spheroids.
+However analytical results are restricted to a narrow range of geometries. For the vast
+majority of realistic problems, a closed form analytical solution does not exist. Before the advent
+of digital computers, experimental testing and asymptotic approximations were the only analysis
+tools available for arbitrary structures. The availability of high speed computers meant that
+complex acoustic problems could be solved efficiently and accurately using numerical methods.
+The finite element method (FEM) is recognized as a extremely powerful analytical tool
+that can be used to solve most well defined continuum problems. It is strongly associated with
+structural analysis, but its application to other areas is wide spread. Consequently it was only
+natural that it should be applied to the full elasto acoustic problem and indeed much work has
+been done in that area. A modern application of the FEM in acoustics is given by Pinsky and
+Abboud [1990), who consider the transient analysis of the exterior acoustics problem.
+A FEM analysis of the acoustic problem is hampered by a number of difficulties. The acous-
+tic problems of greatest interest are often those involving a fluid of infinite extent. Discretization
+page 18
 
 
---- Page 205 ---
+--- Page 18 ---
 
 This text should help you understand the content structure and ensure nothing is missed.
 
@@ -137,6 +147,12 @@ This text should help you understand the content structure and ensure nothing is
    - Include complete mathematical derivations with explanatory context
    - Maintain academic writing conventions and technical precision
    - Preserve figure and table references within section context
+   - **SECTION-AWARE NAMING**: Use the correct section prefix for figures and tables:
+     * For Appendix A2: figure-A2-1.png, table-A2-1, etc.
+     * For Chapter 2: figure-2-1.png, table-2-1, etc.
+   - **HEADING FORMAT**: Include section numbers in subsection headings:
+     * Top-level: "# APPENDIX 2 Analytical Solutions" (no A2 prefix)
+     * Subsections: "## A2.1 Rigid Sphere", "## A2.2 Asymptotic Solutions" (include A2.1, A2.2 prefix)
    - **FOR PARENT SECTIONS ONLY**: Include introductory text that applies to the whole section, but stop before subsection headings or equations/content tagged with subsection numbers (e.g., stop before equations tagged A2.1.1, A2.1.2, or headings like "A2.1 Rigid Sphere")
 
 **OUTPUT REQUIREMENTS**:

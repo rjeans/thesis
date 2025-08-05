@@ -1,0 +1,39 @@
+Acoustic Problem.
+2.4.4 Boundary layer formulations
+The boundary layer formulations for the exterior acoustic problem also exhibit similar non-
+uniqueness properties at the critical wavenumbers described above. A similar argument to show
+this non-uniqueness to that for the SHIE and DSHIE can be used. However another argument
+is illustrated in figures (2.3) and (2.4). These arguments use the jump properties of the integral
+operators derived in section (1.2.2),
+Single layer:
+Double layer:
+The single layer formulation proves to be non-unique at eigenvalues of the interior Dirichlet
+problem and the double layer formulation proves to be non-unique at eigenvalues of the interior
+Neumann problem.
+2.4.5 Hybrid boundary layer formulation
+The established technique for overcoming the problem of uniqueness in a boundary layer
+formulation is to express the surface velocity potential in terms of a hybrid combination of a
+single and double layer surface distribution. The exterior velocity potential is defined by,
+Consequently the boundary integral equations defining the acoustic problem are,
+If the coupling constant, a is constrained to be imaginary, then the numerical solution of
+this hybrid formulation is unique at all frequencies. Again the disadvantage of this formulation
+is that it requires the integration of the hypersingular kernel in the Ne operator.
+page 39
+- + (1 - c(P))H = M%H H=-до- - c(P)M.
+(2.4.5)
+(2.4.6)
+4+ - (1 - c(p))0=1140=0+c(p)o,
+(2.4.7)
+дф+
+др-
+_= Nko=an
+(2.4.8)
+Ф(P) = [Ck + aMk](2](P),
+РЕЕ.
+(2.4.9)
+0= fLk taMk+ (1-c(P))$0,
+(2.4.10)
+(2.4.11)
+
+
+--- Page 39 ---

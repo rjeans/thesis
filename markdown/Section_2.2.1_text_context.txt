@@ -1,0 +1,69 @@
+Acoustic Problem.
+The consequence of this condition is that it allows outward travelling waves to be the only valid
+physical solution for a radiated or scattered wave from a surface.
+Eq. (2.1.10), Eq. (2.1.11) and Eq (2.1.13) uniquely define the acoustic problem. For
+some simple geometries it is possible to solve the acoustic problem analytically, however for the
+majority of realistic problems a numerical solution technique is needed. Analytical solutions for
+certain problems are useful in establishing the accuracy of various numerical strategies used to
+solve the acoustic problem.
+At this stage the concept of a velocity potential function will be defined. This function
+enables the fluid velocity and pressure fields to be evaluated from one potential function. The
+function is defined by,
+with,
+2.2 Integral Operators
+This work is concerned with various methods of numerical solution by means of boundary
+element methods. Later in this chapter the appropriate integral equations will be derived that
+form the basis of any BEM. The integral operators that will combine to give an integral for-
+mulation of the acoustic problem are introduced in this section and a brief discussion of their
+numerical properties is presented in isolation from the physical problem.
+2.2.1 Green's Function
+In general when a differential equation is transformed into an integral equation, the form of
+the integral equation not only depends on the governing differential equation, but the boundary
+conditions specific to the problem. An integral equation not only relates an unknown function
+page 28
+- ilp) ds=0
+(2.1.13)
+Т ф + к'ф =0,
+(2.1.14)
+i = Пф,
+₽ = iwp.
+(2.1.15)
+
+
+--- Page 28 ---
+
+Acoustic Problem.
+to its derivatives; ie values at neighbouring points, but also to its values at the boundary. The
+boundary conditions are built into an integral equation through the form of its ernel, but for
+a differential equation the boundary conditions are imposed at the final stage of solution. This
+kernel is the Green's function for the problem.
+For the acoustic problem, the Green's function is the fundamental solution of the inhomo
+geneous Helmholtz' equation.
+where S(P, Q) is the delta-dirac function. Also the Green's function must satisfy Sommerfeld's
+radiation condition, Eq. (1.1.13). The appropriate solution in three dimensions is given by,
+In this equation r is the Euclidean distance between the field points P and Q.
+2.2.2 Discontinuities
+The integral operators that are of interest are defined by.
+The function & is assumed to be a continuous function over S. For completeness there is also
+the identity operator,
+An important property of these operators defined in Eq. (2.2.3-6) is that they are all solutions of
+the original acoustic differential equation. Each can be thought of as the result of a continuous
+distribution of sources, magnitude d(Q), over the surface of S.
+page 29
+(72+42) Gk(P, Q) = -8(P.Q).
+(2.2.1)
+r=P-QI.
+(2.2.2)
+ME lo(P) = / *GK(P,Q)
+ang
+дпр
+2n, дпр
+(2.2.3)
+(2.2.4)
+(2.2.5)
+(2.2.6)
+[[Ф)(Р) = ф(Р).
+(2.2.7)
+
+
+--- Page 29 ---

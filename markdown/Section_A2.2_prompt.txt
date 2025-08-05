@@ -1,0 +1,273 @@
+Convert this individual section from a 1992 LaTeX academic thesis PDF to markdown format.
+
+INDIVIDUAL SECTION INFORMATION:
+- Context: APPENDIX 2 Analytical Solutions
+- Section: A2.2 Asymptotic Solutions
+- Processing: individual chapter (pages 210-213)
+- Content Type: Complete chapter with logical boundaries
+
+EXPECTED SECTION STRUCTURE:
+A2.2 Asymptotic Solutions
+
+CRITICAL CONTENT REQUIREMENTS:
+1. **COMPLETE TEXT TRANSCRIPTION**: Read entire PDF content without missing any text
+   - Include ALL sentences and paragraphs, especially transitional text between sections
+   - Pay attention to continuation text that may appear before section headers
+   - Do NOT skip connector sentences that provide context or bridge between topics
+   - SPECIFICALLY INCLUDE: Any sentences that reference technical methods, formulations, or comparisons
+   - Look for partial sentences or paragraphs that continue from the previous page
+
+2. **INDIVIDUAL SECTION PROCESSING** (COMPLETE_SECTION):
+   - This is a complete chapter from a larger chapter
+   - **CRITICAL HEADING LEVEL**: Use # for the main section header
+   - Start with: # Asymptotic Solutions <a id="section-a2.2"></a>
+   - Process the complete section content
+
+3. **MATHEMATICAL FORMATTING**:
+   - **CRITICAL**: Inline equations: $variable$ (NOT \(variable\))
+   - **CRITICAL**: Display equations (unnumbered): $$equation$$ (NOT \[equation\])
+   - **CRITICAL**: Display equations (numbered): $$equation \tag{2.5.1}$$ or $$\begin{align*} equation \tag{2.5.1} \end{align*}$$
+   - **CRITICAL**: ALL numbered equations MUST use \tag{} inside the $$ block
+   - **CRITICAL**: NEVER put equation numbers outside $$ like: $$equation$$ (2.5.1)
+   - **CRITICAL**: NEVER use \(variable\) or \[equation\] - these are forbidden
+   - **CRITICAL**: Complex superscripts/subscripts must use braces: $\lambda_N^{{e_p}}$ NOT $\lambda_N^e_p$
+   - Use proper LaTeX notation for mathematical symbols and operators
+
+**EXAMPLES:**
+- Correct inline: The $N_i^k$ operator can be...
+- Wrong inline: The \(N_i^k\) operator can be...
+- Correct display: $$equation content \tag{4.4.1}$$
+- Wrong display: \[equation content\]
+- Correct complex subscript/superscript: $\lambda_N^{{e_p}}$
+- Wrong complex subscript/superscript: $\lambda_N^e_p$
+
+4. **FIGURE FORMATTING**: Use HTML picture element format with correct section-based naming:
+
+<a id="figure-x-y"></a>
+
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="assets/figure-x-y-dark.png">
+  <source media="(prefers-color-scheme: light)" srcset="assets/figure-x-y.png">
+  <img alt="Figure X.Y. Caption text here." src="assets/figure-x-y.png">
+</picture>
+Figure X.Y. Caption text here.
+
+**CRITICAL NAMING**: Use the actual section prefix in figure names:
+- For Chapter 2: figure-2-1.png, figure-2-2.png
+- For Appendix A2: figure-A2-1.png, figure-A2-2.png  
+- For Appendix A1: figure-A1-1.png, figure-A1-2.png
+**Requirements**: Anchor BEFORE picture element, both themes, full alt text, plain caption below
+
+5. **TABLE FORMATTING**:
+   - **CRITICAL**: Convert ALL tables to proper Markdown table format
+   - **PRESERVE ORIGINAL STRUCTURE**: Maintain the exact layout and orientation from the PDF
+   - Add anchor before table: `<a id="table-a2-1"></a>`
+   - Use pipe-separated format with proper alignment:
+     ```
+     <a id="table-2-1"></a>
+     
+     | Column 1 | Column 2 | Column 3 |
+     |----------|----------|----------|
+     | Value 1  | Value 2  | Value 3  |
+     | Value 4  | Value 5  | Value 6  |
+     
+     **Table 2.1**: Caption text describing the table contents
+     ```
+   - **CRITICAL**: If the table has column headers (like n=0, n=1, n=2...), use them as column headers
+   - **CRITICAL**: If the table has row labels, include them in the first column
+   - Preserve all table data accurately, including numerical values and units
+   - Maintain proper column alignment (left, center, right as appropriate)
+   - Include complete table captions below the table
+   - **DO NOT SKIP TABLES** - they contain important data that must be preserved
+   - **DO NOT TRANSPOSE**: Keep rows as rows and columns as columns as shown in the original
+
+6. **ANCHOR GENERATION AND HEADING HIERARCHY**:
+   - **Chapter headers (level 1)**: # Chapter Title <a id="chapter-X"></a>
+   - **Main sections (level 1)**: ## 2.1 Section Title <a id="section-2-1"></a>
+   - **Subsections (level 2)**: ### 2.1.1 Subsection Title <a id="section-2-1-1"></a>
+   - **Sub-subsections (level 3)**: #### 2.1.1.1 Sub-subsection Title <a id="section-2-1-1-1"></a>
+   - **CRITICAL**: Use correct heading depth based on section numbering depth
+   - Figures: <a id="figure-2-1"></a> before figure elements
+   - Equations: <a id="equation-2-1"></a> before equation blocks
+   - Tables: <a id="table-2-1"></a> before table content
+
+7. **CROSS-REFERENCES**:
+   - Figures: [Figure 2.1](#figure-2-1), [Fig. 2.1](#figure-2-1)
+   - Equations: [equation (2.1)](#equation-2-1), [Eq. (2.1)](#equation-2-1)
+   - Tables: [Table 2.1](#table-2-1), [Tab. 2.1](#table-2-1)
+   - Sections: [Section 2.1](#section-2-1), [Sec. 2.1](#section-2-1)
+   - **Literature References**: Convert ALL citation patterns to markdown links:
+     * "Author [Year]" → [Author [Year]](#bib-author-year) e.g., [Jennings [1977]](#bib-jennings-1977)
+     * "Author (Year)" → [Author (Year)](#bib-author-year) e.g., [Smith (1990)](#bib-smith-1990)
+     * "Author et al. [Year]" → [Author et al. [Year]](#bib-author-et-al-year) e.g., [Jones et al. [1985]](#bib-jones-et-al-1985)
+     * "Author and Author [Year]" → [Author and Author [Year]](#bib-author-author-year) e.g., [Burton and Miller [1971]](#bib-burton-miller-1971)
+
+8. **PDF TEXT GUIDANCE**: Use this extracted text to verify accuracy and completeness:
+
+Analytical Series Solution for the Sphere.
+The external pressure distribution is given by,
+solutions
+The frequency dependence of the far field scattered pressure for an arbitrary geometry can
+be approximated by asymptotic solutions. Consider Eq. (A2.1.17) in the far field,
+At low frequencies the first two terms of this series expansion are O((ka)?) and the n = 2 term
+is only O((ka)5). Taking the first two terms gives the far field pressure at low frequencies,
+The commensurate influence of monopole and dipole radiation in the far field, and the
+consequent k° dependence of the radiation amplitude is typical of Rayleigh Scatterers. A more
+general consideration of such scatterers shows that at low frequencies the far field pressure
+amplitude has the form,
+where V is the volume and L is the characteristic dimension of the scatterer.
+In the high frequency regime an approximation due to Kirchoff is appropriate. In this plane
+wave approximation it is assumed that each surface element radiates as if it were in an plane
+page 210
+Tis (ka)
+(.12.1.17)
+P|r, 0) = po +P; = P. [(2n + 1) ' Pa(cost) in(er) -
+h, (kr)
+h's (ka)5(7) .
+(A2.1.18)
+A2.2 Asymptotic
+iPieskR o
+PS' (R, 0) =
+- [(20 + 1) Pa(cost) in (kr)
+k' (ka)'
+kR »n? + 1.
+(A2.2.1)
+PieskR
+PS' (R, 0) =
+k3a3 « 1,
+kR > 1.
+(A2.2.2)
+k2V
+1313 «1,
+kR > 1.
+(42.2.3)
+baffle,
+
+
+--- Page 210 ---
+
+Analytical Series Solution for the Sphere.
+The far field back scattered pressure is given by integrating Eq. (A2.2.4) over the illuminated
+surface of the scatterer,
+In Eq. (A2.2.5) the plane wave is incident along the direction of ez. Consider now the case of
+a spheroid shown in figure (A2.1). For end on incidence the problem is axysymmetric and so
+the cylindrical coordinate system, (M, @, Z) is appropriate to form the Kirchoff integral. In this
+coordinate system, Eq. (A2.2.5) becomes,
+where,
+Eq. (A2.2.6) now becomes,
+where for the spheroid,
+page 211
+dp' (R) = pu(ro)eap|k|RR-Tol)ds,
+kro » 1.
+(A2.2.4)
+kro » 1.
+(A2.2.5)
+(A2.2.6)
+a-=(1+ (82) 42.
+= on 1+ (02))
+§(Z) = 2ikZ.
+(A2.2.7)
+(A2.2.8)
+(A2.2.9)
+kL» 1,
+(A2.2.10)
+p'S (R)R|= 61226242, 16»1,
+(.12.2.11)
+
+
+--- Page 211 ---
+
+Analytical Series Solution for the Sphere.
+Incident Wave
+Figure (A2.2). Geometry for the spheroidal Kirchoff problem.
+The integral in Eq. (A2.2.11) can be done in parts, and neglecting the terms of O (kb) -1
+or higher the high frequency far field back scattering amplitude is given by,
+This is the result used in Chapter 4, and for the special case of the sphere, with b = a, it
+reduces to the spherical result used in Chapter 3. If higher frequency terms are included an
+interference pattern is introduced into the farfield result. This interference corresponds to a
+path difference of 2b; ie the path difference between a specular wave at Z = -b and one at
+Z = 0. The numerical results contained in this thesis show such an interfence pattern, however
+the period of the fluctuations are much less than those predicted by the Kirchoff approximation.
+The accepted explanation for the interference pattern (eg Varadan et al (1982]) is that they are
+a result of the interference between the specular reflection at Z = -b and a Franz or creeping
+wave originating at the circular cross section at b = 0. The predicted period of the interference
+is given by,
+where D is one half the perimeter of the spheroid in the X = 0 plane. For the various aspect
+ratios used in this study this period is,
+page 212
+n
+dS
+Z
+P/S (R)R
+Pi
+a?
+kb » 1.
+(A2.2.12)
+2 т
+A(kb) = D + 2'
+(A2.2.13)
+
+
+--- Page 212 ---
+
+Analytical Series Solution for the Sphere.
+A2.3 Elastic sphere
+For axisymmetric boundary conditions, there is a readily accessible analytical solution for
+the dynamic elastic response of the spherical elastic shell. This solution is described in greater
+depth in many standard texts, and is summarized in this appendix. Membrane and flexural
+effects are included in the analytical model which can be derived from Hamilton's variational
+principle. Many of the thin shell approximations used for the finite element derivation are
+used for the analytical result; ie the deformation can be described in terms of the mid-shell
+displacements and the mid-shell normal is remains straight after deformation.
+Axisymmetric, nontortional motions are considered and the shell displacements can be
+described in terms of the tangential and radial components; u, and ue. A free dynamic analysis
+of the shell results in an expression for the dimensionless natural frequencies, (sh) and (5(2)?,
+which are roots of a quadratic in 522,
+where,
+The radial or normal and the tangential displacements can be expanded in terms of Legendre
+page 213
+a /b = 0.5,
+a/b = 1,
+a /b = 2,
+4(kb) = 1.42,
+A(kb) = 1.22,
+A(кb) = 2.84,
+1(ka) = 0.71,
+A(ka) = 1.22,
+A(ka) = 1.42.
+(A2.2.14)
+st-(1 50+117-2)(1-03)+
+39113-443+1015-03-211-03)1=0,
+(A2.3.1)
+33 = 12az)
+17 = n(n+1).
+(A2.3.2)
+polynomials,
+00
+Ur = [Wn Pn (K),
+n=0
+10 = EV (1 - 43) 12 PA(H),
+n =0
+(A2.3.3)
+
+
+--- Page 213 ---
+
+This text should help you understand the content structure and ensure nothing is missed.
+
+9. **SECTION PROCESSING GUIDELINES**:
+   - Focus on this specific section's content only
+   - Ensure the heading level matches the section numbering depth
+   - Include complete mathematical derivations with explanatory context
+   - Maintain academic writing conventions and technical precision
+   - Preserve figure and table references within section context
+   - **SECTION-AWARE NAMING**: Use the correct section prefix for figures and tables:
+     * For Appendix A2: figure-A2-1.png, table-A2-1, etc.
+     * For Chapter 2: figure-2-1.png, table-2-1, etc.
+   - **FOR PARENT SECTIONS ONLY**: Include introductory text that applies to the whole section, but stop before subsection headings or equations/content tagged with subsection numbers (e.g., stop before equations tagged A2.1.1, A2.1.2, or headings like "A2.1 Rigid Sphere")
+
+**OUTPUT REQUIREMENTS**:
+- Provide clean markdown without code block markers
+- Focus on creating complete, coherent content
+- Skip page headers, footers, or page numbers
+- Maintain academic writing conventions and technical precision

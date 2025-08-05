@@ -1,0 +1,167 @@
+Convert this individual section from a 1992 LaTeX academic thesis PDF to markdown format.
+
+INDIVIDUAL SECTION INFORMATION:
+- Context: CHAPTER 2. Acoustic Problem
+- Section: 2.5 Thin shell formulation
+- Processing: individual main section (pages 39-39)
+- Content Type: Complete main section with logical boundaries
+
+EXPECTED SECTION STRUCTURE:
+2.5 Thin shell formulation (parent section content only)
+
+CRITICAL CONTENT REQUIREMENTS:
+1. **COMPLETE TEXT TRANSCRIPTION**: Read entire PDF content without missing any text
+   - Include ALL sentences and paragraphs, especially transitional text between sections
+   - Pay attention to continuation text that may appear before section headers
+   - Do NOT skip connector sentences that provide context or bridge between topics
+   - SPECIFICALLY INCLUDE: Any sentences that reference technical methods, formulations, or comparisons
+   - Look for partial sentences or paragraphs that continue from the previous page
+
+2. **INDIVIDUAL SECTION PROCESSING** (PARENT_SECTION_ONLY):
+   - This is a complete main section from a larger chapter
+   - **CRITICAL HEADING LEVEL**: Use ## for the main section header
+   - Start with: ## 2.5 Thin shell formulation <a id="section-2-5"></a>
+   - **PARENT SECTION CONTENT**: Extract only the main section heading (e.g., # APPENDIX 2 Analytical Solutions <a id="section-a2"></a>), and do not include any surrounding or subsequent paragraph text, unless it clearly precedes any subsection heading. If the very next content after the heading is a subsection (e.g., A2.1), then treat the parent section as heading only, with no body content.
+
+3. **MATHEMATICAL FORMATTING**:
+   - **CRITICAL**: Inline equations: $variable$ (NOT \(variable\))
+   - **CRITICAL**: Display equations (unnumbered): $$equation$$ (NOT \[equation\])
+   - **CRITICAL**: Display equations (numbered): $$equation \tag{2.5.1}$$ or $$\begin{align*} equation \tag{2.5.1} \end{align*}$$
+   - **CRITICAL**: ALL numbered equations MUST use \tag{} inside the $$ block
+   - **CRITICAL**: NEVER put equation numbers outside $$ like: $$equation$$ (2.5.1)
+   - **CRITICAL**: NEVER use \(variable\) or \[equation\] - these are forbidden
+   - **CRITICAL**: Complex superscripts/subscripts must use braces: $\lambda_N^{{e_p}}$ NOT $\lambda_N^e_p$
+   - Use proper LaTeX notation for mathematical symbols and operators
+
+**EXAMPLES:**
+- Correct inline: The $N_i^k$ operator can be...
+- Wrong inline: The \(N_i^k\) operator can be...
+- Correct display: $$equation content \tag{4.4.1}$$
+- Wrong display: \[equation content\]
+- Correct complex subscript/superscript: $\lambda_N^{{e_p}}$
+- Wrong complex subscript/superscript: $\lambda_N^e_p$
+
+4. **FIGURE FORMATTING**: Use HTML picture element format with correct section-based naming:
+
+<a id="figure-x-y"></a>
+
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="assets/figure-x-y-dark.png">
+  <source media="(prefers-color-scheme: light)" srcset="assets/figure-x-y.png">
+  <img alt="Figure X.Y. Caption text here." src="assets/figure-x-y.png">
+</picture>
+Figure X.Y. Caption text here.
+
+**CRITICAL NAMING**: Use the actual section prefix in figure names:
+- For Chapter 2: figure-2-1.png, figure-2-2.png
+- For Appendix A2: figure-A2-1.png, figure-A2-2.png  
+- For Appendix A1: figure-A1-1.png, figure-A1-2.png
+**Requirements**: Anchor BEFORE picture element, both themes, full alt text, plain caption below
+
+5. **TABLE FORMATTING**:
+   - **CRITICAL**: Convert ALL tables to proper Markdown table format
+   - **PRESERVE ORIGINAL STRUCTURE**: Maintain the exact layout and orientation from the PDF
+   - Add anchor before table: `<a id="table-a2-1"></a>`
+   - Use pipe-separated format with proper alignment:
+     ```
+     <a id="table-2-1"></a>
+     
+     | Column 1 | Column 2 | Column 3 |
+     |----------|----------|----------|
+     | Value 1  | Value 2  | Value 3  |
+     | Value 4  | Value 5  | Value 6  |
+     
+     **Table 2.1**: Caption text describing the table contents
+     ```
+   - **CRITICAL**: If the table has column headers (like n=0, n=1, n=2...), use them as column headers
+   - **CRITICAL**: If the table has row labels, include them in the first column
+   - Preserve all table data accurately, including numerical values and units
+   - Maintain proper column alignment (left, center, right as appropriate)
+   - Include complete table captions below the table
+   - **DO NOT SKIP TABLES** - they contain important data that must be preserved
+   - **DO NOT TRANSPOSE**: Keep rows as rows and columns as columns as shown in the original
+
+6. **ANCHOR GENERATION AND HEADING HIERARCHY**:
+   - **Chapter headers (level 1)**: # Chapter Title <a id="chapter-X"></a>
+   - **Main sections (level 1)**: ## 2.1 Section Title <a id="section-2-1"></a>
+   - **Subsections (level 2)**: ### 2.1.1 Subsection Title <a id="section-2-1-1"></a>
+   - **Sub-subsections (level 3)**: #### 2.1.1.1 Sub-subsection Title <a id="section-2-1-1-1"></a>
+   - **CRITICAL**: Use correct heading depth based on section numbering depth
+   - Figures: <a id="figure-2-1"></a> before figure elements
+   - Equations: <a id="equation-2-1"></a> before equation blocks
+   - Tables: <a id="table-2-1"></a> before table content
+
+7. **CROSS-REFERENCES**:
+   - Figures: [Figure 2.1](#figure-2-1), [Fig. 2.1](#figure-2-1)
+   - Equations: [equation (2.1)](#equation-2-1), [Eq. (2.1)](#equation-2-1)
+   - Tables: [Table 2.1](#table-2-1), [Tab. 2.1](#table-2-1)
+   - Sections: [Section 2.1](#section-2-1), [Sec. 2.1](#section-2-1)
+   - **Literature References**: Convert ALL citation patterns to markdown links:
+     * "Author [Year]" → [Author [Year]](#bib-author-year) e.g., [Jennings [1977]](#bib-jennings-1977)
+     * "Author (Year)" → [Author (Year)](#bib-author-year) e.g., [Smith (1990)](#bib-smith-1990)
+     * "Author et al. [Year]" → [Author et al. [Year]](#bib-author-et-al-year) e.g., [Jones et al. [1985]](#bib-jones-et-al-1985)
+     * "Author and Author [Year]" → [Author and Author [Year]](#bib-author-author-year) e.g., [Burton and Miller [1971]](#bib-burton-miller-1971)
+
+8. **PDF TEXT GUIDANCE**: Use this extracted text to verify accuracy and completeness:
+
+Acoustic Problem.
+2.4.4 Boundary layer formulations
+The boundary layer formulations for the exterior acoustic problem also exhibit similar non-
+uniqueness properties at the critical wavenumbers described above. A similar argument to show
+this non-uniqueness to that for the SHIE and DSHIE can be used. However another argument
+is illustrated in figures (2.3) and (2.4). These arguments use the jump properties of the integral
+operators derived in section (1.2.2),
+Single layer:
+Double layer:
+The single layer formulation proves to be non-unique at eigenvalues of the interior Dirichlet
+problem and the double layer formulation proves to be non-unique at eigenvalues of the interior
+Neumann problem.
+2.4.5 Hybrid boundary layer formulation
+The established technique for overcoming the problem of uniqueness in a boundary layer
+formulation is to express the surface velocity potential in terms of a hybrid combination of a
+single and double layer surface distribution. The exterior velocity potential is defined by,
+Consequently the boundary integral equations defining the acoustic problem are,
+If the coupling constant, a is constrained to be imaginary, then the numerical solution of
+this hybrid formulation is unique at all frequencies. Again the disadvantage of this formulation
+is that it requires the integration of the hypersingular kernel in the Ne operator.
+page 39
+- + (1 - c(P))H = M%H H=-до- - c(P)M.
+(2.4.5)
+(2.4.6)
+4+ - (1 - c(p))0=1140=0+c(p)o,
+(2.4.7)
+дф+
+др-
+_= Nko=an
+(2.4.8)
+Ф(P) = [Ck + aMk](2](P),
+РЕЕ.
+(2.4.9)
+0= fLk taMk+ (1-c(P))$0,
+(2.4.10)
+(2.4.11)
+
+
+--- Page 39 ---
+
+This text should help you understand the content structure and ensure nothing is missed.
+
+9. **SECTION PROCESSING GUIDELINES**:
+   - Focus on this specific section's content only
+   - Ensure the heading level matches the section numbering depth
+   - Include complete mathematical derivations with explanatory context
+   - Maintain academic writing conventions and technical precision
+   - Preserve figure and table references within section context
+   - **SECTION-AWARE NAMING**: Use the correct section prefix for figures and tables:
+     * For Appendix A2: figure-A2-1.png, table-A2-1, etc.
+     * For Chapter 2: figure-2-1.png, table-2-1, etc.
+   - **HEADING FORMAT**: Include section numbers in subsection headings:
+     * Top-level: "# APPENDIX 2 Analytical Solutions" (no A2 prefix)
+     * Subsections: "## A2.1 Rigid Sphere", "## A2.2 Asymptotic Solutions" (include A2.1, A2.2 prefix)
+   - **FOR PARENT SECTIONS ONLY**: Include introductory text that applies to the whole section, but stop before subsection headings or equations/content tagged with subsection numbers (e.g., stop before equations tagged A2.1.1, A2.1.2, or headings like "A2.1 Rigid Sphere")
+
+**OUTPUT REQUIREMENTS**:
+- Provide clean markdown without code block markers
+- Focus on creating complete, coherent content
+- Skip page headers, footers, or page numbers
+- Maintain academic writing conventions and technical precision

@@ -1,0 +1,194 @@
+Convert this individual section from a 1992 LaTeX academic thesis PDF to markdown format.
+
+INDIVIDUAL SECTION INFORMATION:
+- Context: CHAPTER 2. Acoustic Problem
+- Section: 2.1.4 Sommerfeld’s radiation condition
+- Processing: individual subsection (pages 27-28)
+- Content Type: Complete subsection with logical boundaries
+
+EXPECTED SECTION STRUCTURE:
+2.1.4 Sommerfeld’s radiation condition
+
+CRITICAL CONTENT REQUIREMENTS:
+1. **COMPLETE TEXT TRANSCRIPTION**: Read entire PDF content without missing any text
+   - Include ALL sentences and paragraphs, especially transitional text between sections
+   - Pay attention to continuation text that may appear before section headers
+   - Do NOT skip connector sentences that provide context or bridge between topics
+   - SPECIFICALLY INCLUDE: Any sentences that reference technical methods, formulations, or comparisons
+   - Look for partial sentences or paragraphs that continue from the previous page
+
+2. **INDIVIDUAL SECTION PROCESSING** (COMPLETE_SECTION):
+   - This is a complete subsection from a larger chapter
+   - **CRITICAL HEADING LEVEL**: Use ### for the main section header
+   - Start with: ### 2.1.4 Sommerfeld’s radiation condition <a id="section-2-1-4"></a>
+   - Process the complete section content
+
+3. **MATHEMATICAL FORMATTING**:
+   - **CRITICAL**: Inline equations: $variable$ (NOT \(variable\))
+   - **CRITICAL**: Display equations (unnumbered): $$equation$$ (NOT \[equation\])
+   - **CRITICAL**: Display equations (numbered): $$equation \tag{2.5.1}$$ or $$\begin{align*} equation \tag{2.5.1} \end{align*}$$
+   - **CRITICAL**: ALL numbered equations MUST use \tag{} inside the $$ block
+   - **CRITICAL**: NEVER put equation numbers outside $$ like: $$equation$$ (2.5.1)
+   - **CRITICAL**: NEVER use \(variable\) or \[equation\] - these are forbidden
+   - **CRITICAL**: Complex superscripts/subscripts must use braces: $\lambda_N^{{e_p}}$ NOT $\lambda_N^e_p$
+   - Use proper LaTeX notation for mathematical symbols and operators
+
+**EXAMPLES:**
+- Correct inline: The $N_i^k$ operator can be...
+- Wrong inline: The \(N_i^k\) operator can be...
+- Correct display: $$equation content \tag{4.4.1}$$
+- Wrong display: \[equation content\]
+- Correct complex subscript/superscript: $\lambda_N^{{e_p}}$
+- Wrong complex subscript/superscript: $\lambda_N^e_p$
+
+4. **FIGURE FORMATTING**: Use HTML picture element format with correct section-based naming:
+
+<a id="figure-x-y"></a>
+
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="assets/figure-x-y-dark.png">
+  <source media="(prefers-color-scheme: light)" srcset="assets/figure-x-y.png">
+  <img alt="Figure X.Y. Caption text here." src="assets/figure-x-y.png">
+</picture>
+Figure X.Y. Caption text here.
+
+**CRITICAL NAMING**: Use the actual section prefix in figure names:
+- For Chapter 2: figure-2-1.png, figure-2-2.png
+- For Appendix A2: figure-A2-1.png, figure-A2-2.png  
+- For Appendix A1: figure-A1-1.png, figure-A1-2.png
+**Requirements**: Anchor BEFORE picture element, both themes, full alt text, plain caption below
+
+5. **TABLE FORMATTING**:
+   - **CRITICAL**: Convert ALL tables to proper Markdown table format
+   - **PRESERVE ORIGINAL STRUCTURE**: Maintain the exact layout and orientation from the PDF
+   - Add anchor before table: `<a id="table-a2-1"></a>`
+   - Use pipe-separated format with proper alignment:
+     ```
+     <a id="table-2-1"></a>
+     
+     | Column 1 | Column 2 | Column 3 |
+     |----------|----------|----------|
+     | Value 1  | Value 2  | Value 3  |
+     | Value 4  | Value 5  | Value 6  |
+     
+     **Table 2.1**: Caption text describing the table contents
+     ```
+   - **CRITICAL**: If the table has column headers (like n=0, n=1, n=2...), use them as column headers
+   - **CRITICAL**: If the table has row labels, include them in the first column
+   - Preserve all table data accurately, including numerical values and units
+   - Maintain proper column alignment (left, center, right as appropriate)
+   - Include complete table captions below the table
+   - **DO NOT SKIP TABLES** - they contain important data that must be preserved
+   - **DO NOT TRANSPOSE**: Keep rows as rows and columns as columns as shown in the original
+
+6. **ANCHOR GENERATION AND HEADING HIERARCHY**:
+   - **Chapter headers (level 1)**: # Chapter Title <a id="chapter-X"></a>
+   - **Main sections (level 1)**: ## 2.1 Section Title <a id="section-2-1"></a>
+   - **Subsections (level 2)**: ### 2.1.1 Subsection Title <a id="section-2-1-1"></a>
+   - **Sub-subsections (level 3)**: #### 2.1.1.1 Sub-subsection Title <a id="section-2-1-1-1"></a>
+   - **CRITICAL**: Use correct heading depth based on section numbering depth
+   - Figures: <a id="figure-2-1"></a> before figure elements
+   - Equations: <a id="equation-2-1"></a> before equation blocks
+   - Tables: <a id="table-2-1"></a> before table content
+
+7. **CROSS-REFERENCES**:
+   - Figures: [Figure 2.1](#figure-2-1), [Fig. 2.1](#figure-2-1)
+   - Equations: [equation (2.1)](#equation-2-1), [Eq. (2.1)](#equation-2-1)
+   - Tables: [Table 2.1](#table-2-1), [Tab. 2.1](#table-2-1)
+   - Sections: [Section 2.1](#section-2-1), [Sec. 2.1](#section-2-1)
+   - **Literature References**: Convert ALL citation patterns to markdown links:
+     * "Author [Year]" → [Author [Year]](#bib-author-year) e.g., [Jennings [1977]](#bib-jennings-1977)
+     * "Author (Year)" → [Author (Year)](#bib-author-year) e.g., [Smith (1990)](#bib-smith-1990)
+     * "Author et al. [Year]" → [Author et al. [Year]](#bib-author-et-al-year) e.g., [Jones et al. [1985]](#bib-jones-et-al-1985)
+     * "Author and Author [Year]" → [Author and Author [Year]](#bib-author-author-year) e.g., [Burton and Miller [1971]](#bib-burton-miller-1971)
+
+8. **PDF TEXT GUIDANCE**: Use this extracted text to verify accuracy and completeness:
+
+Acoustic Problem.
+Since the fluid velocity and pressure are given by a linear differential equation, it is possible
+to assume an harmonic time dependency of the form eur, where a is the circular frequency of
+the pressure field. The time independent fluid variables are,
+Substituting Eq. (2.1.9) into Eq. (2.1.8) results in the expression,
+where the wave number k is w/c. This equation is linown as the reduced wave equation or
+Helmholtz' equation
+2.1.3 Neumann boundary condition
+The reduced wave equation is solved in terms of the Neumann boundary condition which
+relates the fluid velocity to the normal velocity prescribed on S. This boundary condition is
+defined by,
+where the subscript notation for the ambient density, p, is dropped and,
+This boundary condition is sufficient for the solution of Helmholtz' equation for a finite
+body of fluid. For unbounded fluid problems another boundary condition is needed to uniquely
+specify the solution to Helmholtz' equation.
+2.1.4 Sommerfeld's radiation condition
+For unbounded acoustic problems the pressure field must obey some boundary condition
+in the far field. This boundary condition is given by Sommerfeld's radiation condition. This is
+defined by,
+page 27
+p = peiwt,
+d=ve-iwt.
+(2.1.9)
+(2.1.10)
+OP = iwpon,
+(2.1.11)
+др=n. Vp,
+ûr = n• û.
+(2.1.12)
+
+
+--- Page 27 ---
+
+Acoustic Problem.
+The consequence of this condition is that it allows outward travelling waves to be the only valid
+physical solution for a radiated or scattered wave from a surface.
+Eq. (2.1.10), Eq. (2.1.11) and Eq (2.1.13) uniquely define the acoustic problem. For
+some simple geometries it is possible to solve the acoustic problem analytically, however for the
+majority of realistic problems a numerical solution technique is needed. Analytical solutions for
+certain problems are useful in establishing the accuracy of various numerical strategies used to
+solve the acoustic problem.
+At this stage the concept of a velocity potential function will be defined. This function
+enables the fluid velocity and pressure fields to be evaluated from one potential function. The
+function is defined by,
+with,
+2.2 Integral Operators
+This work is concerned with various methods of numerical solution by means of boundary
+element methods. Later in this chapter the appropriate integral equations will be derived that
+form the basis of any BEM. The integral operators that will combine to give an integral for-
+mulation of the acoustic problem are introduced in this section and a brief discussion of their
+numerical properties is presented in isolation from the physical problem.
+2.2.1 Green's Function
+In general when a differential equation is transformed into an integral equation, the form of
+the integral equation not only depends on the governing differential equation, but the boundary
+conditions specific to the problem. An integral equation not only relates an unknown function
+page 28
+- ilp) ds=0
+(2.1.13)
+Т ф + к'ф =0,
+(2.1.14)
+i = Пф,
+₽ = iwp.
+(2.1.15)
+
+
+--- Page 28 ---
+
+This text should help you understand the content structure and ensure nothing is missed.
+
+9. **SECTION PROCESSING GUIDELINES**:
+   - Focus on this specific section's content only
+   - Ensure the heading level matches the section numbering depth
+   - Include complete mathematical derivations with explanatory context
+   - Maintain academic writing conventions and technical precision
+   - Preserve figure and table references within section context
+   - **SECTION-AWARE NAMING**: Use the correct section prefix for figures and tables:
+     * For Appendix A2: figure-A2-1.png, table-A2-1, etc.
+     * For Chapter 2: figure-2-1.png, table-2-1, etc.
+   - **HEADING FORMAT**: Include section numbers in subsection headings:
+     * Top-level: "# APPENDIX 2 Analytical Solutions" (no A2 prefix)
+     * Subsections: "## A2.1 Rigid Sphere", "## A2.2 Asymptotic Solutions" (include A2.1, A2.2 prefix)
+   - **FOR PARENT SECTIONS ONLY**: Include introductory text that applies to the whole section, but stop before subsection headings or equations/content tagged with subsection numbers (e.g., stop before equations tagged A2.1.1, A2.1.2, or headings like "A2.1 Rigid Sphere")
+
+**OUTPUT REQUIREMENTS**:
+- Provide clean markdown without code block markers
+- Focus on creating complete, coherent content
+- Skip page headers, footers, or page numbers
+- Maintain academic writing conventions and technical precision

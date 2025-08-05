@@ -1,0 +1,112 @@
+Analytical Series Solution for the Sphere.
+A2.3 Elastic sphere
+For axisymmetric boundary conditions, there is a readily accessible analytical solution for
+the dynamic elastic response of the spherical elastic shell. This solution is described in greater
+depth in many standard texts, and is summarized in this appendix. Membrane and flexural
+effects are included in the analytical model which can be derived from Hamilton's variational
+principle. Many of the thin shell approximations used for the finite element derivation are
+used for the analytical result; ie the deformation can be described in terms of the mid-shell
+displacements and the mid-shell normal is remains straight after deformation.
+Axisymmetric, nontortional motions are considered and the shell displacements can be
+described in terms of the tangential and radial components; u, and ue. A free dynamic analysis
+of the shell results in an expression for the dimensionless natural frequencies, (sh) and (5(2)?,
+which are roots of a quadratic in 522,
+where,
+The radial or normal and the tangential displacements can be expanded in terms of Legendre
+page 213
+a /b = 0.5,
+a/b = 1,
+a /b = 2,
+4(kb) = 1.42,
+A(kb) = 1.22,
+A(кb) = 2.84,
+1(ka) = 0.71,
+A(ka) = 1.22,
+A(ka) = 1.42.
+(A2.2.14)
+st-(1 50+117-2)(1-03)+
+39113-443+1015-03-211-03)1=0,
+(A2.3.1)
+33 = 12az)
+17 = n(n+1).
+(A2.3.2)
+polynomials,
+00
+Ur = [Wn Pn (K),
+n=0
+10 = EV (1 - 43) 12 PA(H),
+n =0
+(A2.3.3)
+
+
+--- Page 213 ---
+
+Analytical Series Solution for the Sphere.
+For forced vibration of the spherical shell, the modal radial amplitude is related to the
+modal force amplitude by,
+where the modal excitation force is given by,
+Finally the modal radial and tangential amplitudes are related by,
+For a spherical shell vibrating in an acoustic fluid, the excitation force in Eq. (A2.3.5)
+consists of the apllied force, f", modified by the fluid-structure interaction force, f". The modal
+normal velocity of the submerged spherical shell is given by,
+where,
+Therefore by combining Eq. (A2.3.7) and Eq. (A2.3.8) the surface pressure and velocity
+fields for the excited spherical shell are given by,
+For the point excited spherical shell the modal excitation force is defined by,
+page 214
+En =--iw Wr
+(A2.3.4)
+5a1522-(1-82)(4+17-1))
+(.12.3.5)
+Wn 102-(1+33)(4+1n-1))
+(A2.3.6)
+En Wn = fa- fi,
+(A2.3.7)
+= →
+(A2.3.8)
+in a 9=28-7-319 081.
+(A2.3.9)
+
+
+--- Page 214 ---
+
+Analytical Series Solution for the Sphere.
+and the resulting far field pressure field is,
+The case of scattering from an elastic spherical shell is more complicated. It is necessary
+to consider both the rigid body scattering component and the elastic radiated component. The
+surface pressure on the rigid body due to an incident plane wave is given in Eg. (A2.1.18) with
+r = a. This expression may be transformed by means of a Wronskian relationship to give,
+Taking this to be the excitation force, the corresponding surface velocity distribution is arrived
+at by means of the modal impedances,
+The radiated far field pressure can be obtained from Eq. (A2.1.8),
+The far field scattered pressure is obtained when this result is combined with the rigid-body
+scattered pressure distribution, Eq. (A2.2.1). This can be expressed as a form function,
+=
+The analytical results presented in this study were calculated using FORTRAN code written
+by the author, J. James (1986) and I. L. Geers and C. A. Felippa (1983].
+page 215
+$ = (2n + 1)F
+Ara?
+(A2.3.10)
+p'' (R, 0) = Fpce kR
+4та3kR /.
+(-i)" (2n + 1) Pn(cost)
+)(ка)'
+kR » 1.
+(42.3.11)
+int1(2n + 1) Pi
+p(a,0) = (ka) k', (ka)..
+(A2.3.12)
+int (2n + 1) Pn (cost)
+(A2.3.13)
+pt' (R, 0) = -ipceiRpi ≤
+int1 (2n + 1) Pn (cost)
+kR »n+ 1.
+—)ka;(ka))3
+(A2.3.14)
+1(0)1 = 12p (R, 0)R
+aPi
+(A2.3.15)
+
+
+--- Page 215 ---

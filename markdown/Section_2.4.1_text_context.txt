@@ -1,0 +1,70 @@
+Acoustic Problem.
+2.3.3 Boundary Layer Formulations
+It was stated in Section 2.2 that the result of the integral operators on a continuous function
+defined on the surface S, was a solution of the acoustic wave equation. Further more with the
+correct definition of the Green's function the solution satisfies the radiation condition. Conse-
+quently it is possible to define the velocity potential in the exterior domain, E. in terms of a
+single layer distribution, u,
+By differentiating with respect to some normal vector, defined in the exterior domain, an ex-
+pression for the dimensionless velocity field is obtained.
+When the field point, P, is taken to the surface S, the boundary layer formulation for the
+acoustic problem is defined by,
+Eq. (2.3.15) can be solved to obtain the single layer density i, and then Eg. (2.3.13) can be
+used to evaluate the exterior and surface velocity potentials.
+In a similar way the exterior velocity potential can be defined in terms of a double layer
+distribution, o,
+The differentiated form is given by,
+Since the Ne operator is continuous across the surface S, then Eq. (2.3.17) can be solved for
+P ES and the surface velocity potential is defined by,
+page 36
+o(P) = Lk(e)(P),
+PEE.
+(2.3.13)
+Q$(P) = MEW(P),
+дпр
+РЕЕ.
+(2.3.14)
+дф
+an=M% - (1 - c(p))| M,
+PES.
+(2.3.15)
+d(P) = MA(o](P), PEE.
+(2.3.16)
+PEE.
+(2.3.17)
+дпр
+
+
+--- Page 36 ---
+
+Acoustic Problem.
+The exterior velocity potential is given by Eq. (2.3.16) .
+2.4 Uniqueness of Boundary Integral Formulations
+2.4.1 SHIE and DSHIE formulations
+For given boundary conditions the velocity potential for the exterior problem is unique.
+However it has long been recognized that when expressed in terms of a boundary integral
+formulation the solution to the exterior problem may not be unique. Non-uniqueness of the
+solution occurs at critical wavenumbers kn, and for the acoustic problem these wavenumbers
+correspond to interior resonant frequencies.It needs to be emphasized that this problem of
+non-uniqueness does not imply non-uniqueness of a physical solution, but a breakdown of the
+theoretical formulation at critical frequencies. A numerical implementation of an unmodified
+exterior boundary integral formulation will result in ill-conditioning of the matrices at a range
+of frequencies, centered around the critical frequency.
+The problem of non-uniqueness can be illustrated by considering the exterior Neumann
+problem, Eq. (2.3.11), for a 'smooth surface'. There will be a unique solution as long as there
+are no non-trivial solutions to the homogeneous equation,
+The non-trivial solutions to this equation occur at the eigenvalues kn. By the Fredholm Alter-
+native theorems, the eigenvalue spectrum of this equation is the same as that of the transpose
+The eigenvalues of this equation correspond to the eigenvalues for the unrelated interior Neu-
+mann problem, Eq (2.3.9). Simiarly the critical wavenumbers for the exterior Dirichlet problem
+correspond to the eigenvalues of the interior Dirichlet problem.
+page 37
+0 = 11k + (1 - c(p))|0.
+(2.3.18)
+(2.4.1)
+of,
++ MA) =0.
+(2.4.2)
+
+
+--- Page 37 ---

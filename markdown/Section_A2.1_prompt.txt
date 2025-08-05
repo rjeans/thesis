@@ -1,0 +1,399 @@
+Convert this individual section from a 1992 LaTeX academic thesis PDF to markdown format.
+
+INDIVIDUAL SECTION INFORMATION:
+- Context: APPENDIX 2 Analytical Solutions
+- Section: A2.1 Rigid Sphere
+- Processing: individual chapter (pages 205-210)
+- Content Type: Complete chapter with logical boundaries
+
+EXPECTED SECTION STRUCTURE:
+A2.1 Rigid Sphere
+
+CRITICAL CONTENT REQUIREMENTS:
+1. **COMPLETE TEXT TRANSCRIPTION**: Read entire PDF content without missing any text
+   - Include ALL sentences and paragraphs, especially transitional text between sections
+   - Pay attention to continuation text that may appear before section headers
+   - Do NOT skip connector sentences that provide context or bridge between topics
+   - SPECIFICALLY INCLUDE: Any sentences that reference technical methods, formulations, or comparisons
+   - Look for partial sentences or paragraphs that continue from the previous page
+
+2. **INDIVIDUAL SECTION PROCESSING** (COMPLETE_SECTION):
+   - This is a complete chapter from a larger chapter
+   - **CRITICAL HEADING LEVEL**: Use # for the main section header
+   - Start with: # Rigid Sphere <a id="section-a2.1"></a>
+   - Process the complete section content
+
+3. **MATHEMATICAL FORMATTING**:
+   - **CRITICAL**: Inline equations: $variable$ (NOT \(variable\))
+   - **CRITICAL**: Display equations (unnumbered): $$equation$$ (NOT \[equation\])
+   - **CRITICAL**: Display equations (numbered): $$equation \tag{2.5.1}$$ or $$\begin{align*} equation \tag{2.5.1} \end{align*}$$
+   - **CRITICAL**: ALL numbered equations MUST use \tag{} inside the $$ block
+   - **CRITICAL**: NEVER put equation numbers outside $$ like: $$equation$$ (2.5.1)
+   - **CRITICAL**: NEVER use \(variable\) or \[equation\] - these are forbidden
+   - **CRITICAL**: Complex superscripts/subscripts must use braces: $\lambda_N^{{e_p}}$ NOT $\lambda_N^e_p$
+   - Use proper LaTeX notation for mathematical symbols and operators
+
+**EXAMPLES:**
+- Correct inline: The $N_i^k$ operator can be...
+- Wrong inline: The \(N_i^k\) operator can be...
+- Correct display: $$equation content \tag{4.4.1}$$
+- Wrong display: \[equation content\]
+- Correct complex subscript/superscript: $\lambda_N^{{e_p}}$
+- Wrong complex subscript/superscript: $\lambda_N^e_p$
+
+4. **FIGURE FORMATTING**: Use HTML picture element format with correct section-based naming:
+
+<a id="figure-x-y"></a>
+
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="assets/figure-x-y-dark.png">
+  <source media="(prefers-color-scheme: light)" srcset="assets/figure-x-y.png">
+  <img alt="Figure X.Y. Caption text here." src="assets/figure-x-y.png">
+</picture>
+Figure X.Y. Caption text here.
+
+**CRITICAL NAMING**: Use the actual section prefix in figure names:
+- For Chapter 2: figure-2-1.png, figure-2-2.png
+- For Appendix A2: figure-A2-1.png, figure-A2-2.png  
+- For Appendix A1: figure-A1-1.png, figure-A1-2.png
+**Requirements**: Anchor BEFORE picture element, both themes, full alt text, plain caption below
+
+5. **TABLE FORMATTING**:
+   - **CRITICAL**: Convert ALL tables to proper Markdown table format
+   - **PRESERVE ORIGINAL STRUCTURE**: Maintain the exact layout and orientation from the PDF
+   - Add anchor before table: `<a id="table-a2-1"></a>`
+   - Use pipe-separated format with proper alignment:
+     ```
+     <a id="table-2-1"></a>
+     
+     | Column 1 | Column 2 | Column 3 |
+     |----------|----------|----------|
+     | Value 1  | Value 2  | Value 3  |
+     | Value 4  | Value 5  | Value 6  |
+     
+     **Table 2.1**: Caption text describing the table contents
+     ```
+   - **CRITICAL**: If the table has column headers (like n=0, n=1, n=2...), use them as column headers
+   - **CRITICAL**: If the table has row labels, include them in the first column
+   - Preserve all table data accurately, including numerical values and units
+   - Maintain proper column alignment (left, center, right as appropriate)
+   - Include complete table captions below the table
+   - **DO NOT SKIP TABLES** - they contain important data that must be preserved
+   - **DO NOT TRANSPOSE**: Keep rows as rows and columns as columns as shown in the original
+
+6. **ANCHOR GENERATION AND HEADING HIERARCHY**:
+   - **Chapter headers (level 1)**: # Chapter Title <a id="chapter-X"></a>
+   - **Main sections (level 1)**: ## 2.1 Section Title <a id="section-2-1"></a>
+   - **Subsections (level 2)**: ### 2.1.1 Subsection Title <a id="section-2-1-1"></a>
+   - **Sub-subsections (level 3)**: #### 2.1.1.1 Sub-subsection Title <a id="section-2-1-1-1"></a>
+   - **CRITICAL**: Use correct heading depth based on section numbering depth
+   - Figures: <a id="figure-2-1"></a> before figure elements
+   - Equations: <a id="equation-2-1"></a> before equation blocks
+   - Tables: <a id="table-2-1"></a> before table content
+
+7. **CROSS-REFERENCES**:
+   - Figures: [Figure 2.1](#figure-2-1), [Fig. 2.1](#figure-2-1)
+   - Equations: [equation (2.1)](#equation-2-1), [Eq. (2.1)](#equation-2-1)
+   - Tables: [Table 2.1](#table-2-1), [Tab. 2.1](#table-2-1)
+   - Sections: [Section 2.1](#section-2-1), [Sec. 2.1](#section-2-1)
+   - **Literature References**: Convert ALL citation patterns to markdown links:
+     * "Author [Year]" → [Author [Year]](#bib-author-year) e.g., [Jennings [1977]](#bib-jennings-1977)
+     * "Author (Year)" → [Author (Year)](#bib-author-year) e.g., [Smith (1990)](#bib-smith-1990)
+     * "Author et al. [Year]" → [Author et al. [Year]](#bib-author-et-al-year) e.g., [Jones et al. [1985]](#bib-jones-et-al-1985)
+     * "Author and Author [Year]" → [Author and Author [Year]](#bib-author-author-year) e.g., [Burton and Miller [1971]](#bib-burton-miller-1971)
+
+8. **PDF TEXT GUIDANCE**: Use this extracted text to verify accuracy and completeness:
+
+Analytical Series Solution for the Sphere.
+APPENDIX 2.
+Analytical Series Solution for the Sphere
+A2.1 Rigid sphere
+Throughout this study the spherical radiator is used to validate the acoustic numerical
+methods since an analytical solution for the spherical problem is easily available. These results
+are covered in great depth by Junger and Feit [1986], and they are summarized in this appendix.
+The SHIE for the exterior problem is given by,
+where w is the radial displacement. If the coordinate system of the problem allows variable
+separation of the Greens free space function, then an analytical solution is available. In spherical
+polar coordinates the Greens free space function can be written in terms of spherical Bessel
+functions and Legendre polynomials,
+The coordinate system (T, 0,Ф) describes the exterior domain and (ro, Go, do) describes the
+surface of the sphere. For coordinate systems where an analytical solution exists, the Green's
+function in Eq. (A2.1.1) can be written as,
+where l' is a solution to the homogeneous Helmholtz' equation and the normal derivative of I'
+cancels the normal derivative of Ge on S. Consequently Eg. (A2.1.1) can be rewritten as,
+page 205
+TEE,
+(A2.1.1)
+Gk (7, 0, Ф/то, До,Фо) = -ік Г (п - т).
+n=0m=-n (7 + m) (2n + 1) CO5 m(ф-40)
+Pm (cost) Pm (cost.)in(kro)hn(kr),
+(A2.1.2)
+raro
+9(T, ro) = Gk (T, ro) + I (т, ro),
+(A2.1.3)
+т ≥ то.
+(A2.1.4)
+
+
+--- Page 205 ---
+
+Analytical Series Solution for the Sphere.
+Taking the general case of r. = a the correct expression for g(r, ro), satisfying the homoge-
+neous Neumann boundary condition and the radiation condition, is given by,
+The exterior pressure field given in Eq. (A2.1.4) can now be written in terms of this modified
+Green's function,
+The radial displacement in Eq. (A2.1.6) can also be written as a summation of modal
+displacements,
+When the modal expansion of w is substituted into Eq (A2.1.7), the orthogonality of the func-
+tions simplifies the expression for the exterior pressure field,
+where,
+The pressure on the surface of the sphere can be expressed in terms of the modal impedance,
+page 206
+9(r, 0, ф/а,00, Фо) =
+1=0m=- (n+ m) (27+1) 0517(8-80)
+(.12.1.5)
+r=d.
+р(г, 0, Ф) = -
+h, (kr)
+4m kn=0m=-n (7 + m)i (21+1) F4ka)
+т> a..
+(A2.1.6)
+Wm'n' Pm' (cost.) cos m'ф.
+(A2.1.7)
+p(r, 0, 9) = - t
+WET 5Wmn Pm (cost) cos md.
+n=0m=-n
+t's (ка)'
+r=a.,
+(A2.1.8)
+Wrn ==
+
+
+--- Page 206 ---
+
+Analytical Series Solution for the Sphere.
+with,
+The acoustic problem interior to the spherical shell can be analyzed in a similar way.
+The modified Green's function in Eq. (A2.1.5) must be constructed so that it satisfies the
+homogeneous Neumann boundary condition and be finite as r → O. The corresponding surface
+pressure on the interior surface is,
+with,
+A comparison of Eg. (A2.1.11) and Eq. (A2.1.13) shows that whilst the exterior pressure
+distribution is composed of a superposition of traveling waves, the interior pressure distribution is
+a superposition of standing waves. The eigenvalues of the interior spherical problem correspond
+to the solutions to,
+The interior eigenvalues for the spherical problem are tabulated in Table (A1.1) and the
+frequency dependence of in and in is shown in figure (A2.1).
+page 207
+(.12.1.10)
+nn (ka)
+(A2.1.11)
+(A2.1.12)
+nь =0 m=-n.
+in (ka)
+(A2.1.13)
+37 (KD) = 0,
+En (AN) = 0.
+(A2.1.14)
+
+
+--- Page 207 ---
+
+Analytical Series Solution for the Sphere.
+1.0
+0.5
+0.0
+-0.5
+0.000
+0.4
+3.142
+6.284
+9.426
+0.2
+0.0
+-0.2
+-0.4
+-0.6
+0.0000
+3.1416
+6.2832
+ka
+9.4248
+Figure (2.1). Plot of the first four spherical Bessel's functions and the deriva-
+page 208
+j3
+nazisterone
+ka
+1
+•..-..-d
+tives.
+
+
+--- Page 208 ---
+
+Analytical Series Solution for the Sphere.
+3.141593
+4.493409
+5.763459
+6.283185
+7.725252
+9.095011
+9.424778
+10.904122
+12.322941
+12.566371
+14.066194
+15.514603
+6.987932
+10.417119
+13.698023
+16.923621
+8.182561
+11.704907
+15.039665
+18.301256
+9.355812
+12.966530
+16.354710
+19.653152
+10.512835
+14.207392
+17.647975
+20.983463
+4.493409
+2.081576
+3.342094
+7.725252
+5.940370
+7.289932
+10.904122
+9.205840
+10.613855
+14.066194
+12.404445
+13.846112
+4.514100
+8.583755
+11.972730
+15.244514
+5.646704
+9.840446
+13.295564
+16.609346
+6.756456
+11.070207
+14.590552
+17.947179
+7.851078
+12.279334
+15.863222
+19.262710
+Table (A2.1). The resonant frequencies for the interior spherical Dirichlet and
+Neumann acoustic problems.
+For any prescribed velocity distribution on the surface of the sphere the surface pressure
+distribution may be calculated using Eq. (A2.1.10). For scattering from rigid spheres the surface
+velocity must be equal to zero. Therefore the fluid particle velocity of the incident wave must
+cancel that of the scattered wave. From the uniqueness of the external acoustic problem, the
+scattered pressure field is obtained by solving the Helmholtz' reduced wave equation with the
+virtual acceleration boundary condition,
+An incident plane wave can be expanded in terms of spherical harmonics by using an addition
+Substituting Eq (A2.1.16) into Eq. (A2.1.15), Eq. (A2.1.8) gives an expression for the axisym-
+metric scattered pressure field,
+page 209
+1
+1
+2
+3
+4
+Dirichlet eigenvalues kD where ja (KD),) = 0.
+n = 0
+7 = 1
+n =2
+n = 3
+1 = 4
+n = 5
+n = 6
+Neumann eigenvalues kn where Ö((kN),) = 0.
+n = 0
+n = 1
+7 = 2
+1
+2
+3
+4
+n = 3
+n = 4
+n = 5
+n = 6
+1 дрі
+i, = —ü; = =par
+on S.
+(42.1.15)
+theorem,
+00
+Pir,O) = Pi [(2n + 1)i" Pa (cose) in (kr).
+(A2.1.16)
+
+
+--- Page 209 ---
+
+Analytical Series Solution for the Sphere.
+The external pressure distribution is given by,
+solutions
+The frequency dependence of the far field scattered pressure for an arbitrary geometry can
+be approximated by asymptotic solutions. Consider Eq. (A2.1.17) in the far field,
+At low frequencies the first two terms of this series expansion are O((ka)?) and the n = 2 term
+is only O((ka)5). Taking the first two terms gives the far field pressure at low frequencies,
+The commensurate influence of monopole and dipole radiation in the far field, and the
+consequent k° dependence of the radiation amplitude is typical of Rayleigh Scatterers. A more
+general consideration of such scatterers shows that at low frequencies the far field pressure
+amplitude has the form,
+where V is the volume and L is the characteristic dimension of the scatterer.
+In the high frequency regime an approximation due to Kirchoff is appropriate. In this plane
+wave approximation it is assumed that each surface element radiates as if it were in an plane
+page 210
+Tis (ka)
+(.12.1.17)
+P|r, 0) = po +P; = P. [(2n + 1) ' Pa(cost) in(er) -
+h, (kr)
+h's (ka)5(7) .
+(A2.1.18)
+A2.2 Asymptotic
+iPieskR o
+PS' (R, 0) =
+- [(20 + 1) Pa(cost) in (kr)
+k' (ka)'
+kR »n? + 1.
+(A2.2.1)
+PieskR
+PS' (R, 0) =
+k3a3 « 1,
+kR > 1.
+(A2.2.2)
+k2V
+1313 «1,
+kR > 1.
+(42.2.3)
+baffle,
+
+
+--- Page 210 ---
+
+This text should help you understand the content structure and ensure nothing is missed.
+
+9. **SECTION PROCESSING GUIDELINES**:
+   - Focus on this specific section's content only
+   - Ensure the heading level matches the section numbering depth
+   - Include complete mathematical derivations with explanatory context
+   - Maintain academic writing conventions and technical precision
+   - Preserve figure and table references within section context
+   - **SECTION-AWARE NAMING**: Use the correct section prefix for figures and tables:
+     * For Appendix A2: figure-A2-1.png, table-A2-1, etc.
+     * For Chapter 2: figure-2-1.png, table-2-1, etc.
+   - **FOR PARENT SECTIONS ONLY**: Include introductory text that applies to the whole section, but stop before subsection headings or equations/content tagged with subsection numbers (e.g., stop before equations tagged A2.1.1, A2.1.2, or headings like "A2.1 Rigid Sphere")
+
+**OUTPUT REQUIREMENTS**:
+- Provide clean markdown without code block markers
+- Focus on creating complete, coherent content
+- Skip page headers, footers, or page numbers
+- Maintain academic writing conventions and technical precision

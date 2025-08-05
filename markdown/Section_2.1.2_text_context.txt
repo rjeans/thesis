@@ -1,0 +1,65 @@
+Acoustic Problem.
+This equation represents an example of Reynolds' transport theorem.
+The relationship between the pressure field and density in the fluid is obtained by making the
+assumption that the acoustic radiation is adiabatic in the linear approximation. Consequently
+it is possible to write,
+The real constant c is refered to as the speed of sound in the particular fluid medium and
+the subscript s in Eq. (2.1.4), indicates that the differential is evaluated at constant entropy.
+Writing the pressure, density and velocity as small perturbations of the ambient state,
+the linear differential equations governing these perturbations are defined as,
+2.1.2 Wave Equation
+The wave equation results when ' is eliminated from Eq. (2.1.6) and Eq. (2.1.7) . From
+now on the prime notation will be neglected when indicating ambient state perturbations. The
+wave equation is given by,
+page 26
+• (8)
+(2.1.3)
+ОР = С ОР
+at it'
+(2.1.4)
+p=Po+p',
+p= potp,
+V=0.
+(2.1.5)
+др'
+(2.1.6)
+• = 0.
+(2.1.7)
+122р = 0.
+(2.1.8)
+
+
+--- Page 26 ---
+
+Acoustic Problem.
+Since the fluid velocity and pressure are given by a linear differential equation, it is possible
+to assume an harmonic time dependency of the form eur, where a is the circular frequency of
+the pressure field. The time independent fluid variables are,
+Substituting Eq. (2.1.9) into Eq. (2.1.8) results in the expression,
+where the wave number k is w/c. This equation is linown as the reduced wave equation or
+Helmholtz' equation
+2.1.3 Neumann boundary condition
+The reduced wave equation is solved in terms of the Neumann boundary condition which
+relates the fluid velocity to the normal velocity prescribed on S. This boundary condition is
+defined by,
+where the subscript notation for the ambient density, p, is dropped and,
+This boundary condition is sufficient for the solution of Helmholtz' equation for a finite
+body of fluid. For unbounded fluid problems another boundary condition is needed to uniquely
+specify the solution to Helmholtz' equation.
+2.1.4 Sommerfeld's radiation condition
+For unbounded acoustic problems the pressure field must obey some boundary condition
+in the far field. This boundary condition is given by Sommerfeld's radiation condition. This is
+defined by,
+page 27
+p = peiwt,
+d=ve-iwt.
+(2.1.9)
+(2.1.10)
+OP = iwpon,
+(2.1.11)
+др=n. Vp,
+ûr = n• û.
+(2.1.12)
+
+
+--- Page 27 ---

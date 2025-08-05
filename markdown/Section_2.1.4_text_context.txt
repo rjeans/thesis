@@ -1,0 +1,66 @@
+Acoustic Problem.
+Since the fluid velocity and pressure are given by a linear differential equation, it is possible
+to assume an harmonic time dependency of the form eur, where a is the circular frequency of
+the pressure field. The time independent fluid variables are,
+Substituting Eq. (2.1.9) into Eq. (2.1.8) results in the expression,
+where the wave number k is w/c. This equation is linown as the reduced wave equation or
+Helmholtz' equation
+2.1.3 Neumann boundary condition
+The reduced wave equation is solved in terms of the Neumann boundary condition which
+relates the fluid velocity to the normal velocity prescribed on S. This boundary condition is
+defined by,
+where the subscript notation for the ambient density, p, is dropped and,
+This boundary condition is sufficient for the solution of Helmholtz' equation for a finite
+body of fluid. For unbounded fluid problems another boundary condition is needed to uniquely
+specify the solution to Helmholtz' equation.
+2.1.4 Sommerfeld's radiation condition
+For unbounded acoustic problems the pressure field must obey some boundary condition
+in the far field. This boundary condition is given by Sommerfeld's radiation condition. This is
+defined by,
+page 27
+p = peiwt,
+d=ve-iwt.
+(2.1.9)
+(2.1.10)
+OP = iwpon,
+(2.1.11)
+др=n. Vp,
+ûr = n• û.
+(2.1.12)
+
+
+--- Page 27 ---
+
+Acoustic Problem.
+The consequence of this condition is that it allows outward travelling waves to be the only valid
+physical solution for a radiated or scattered wave from a surface.
+Eq. (2.1.10), Eq. (2.1.11) and Eq (2.1.13) uniquely define the acoustic problem. For
+some simple geometries it is possible to solve the acoustic problem analytically, however for the
+majority of realistic problems a numerical solution technique is needed. Analytical solutions for
+certain problems are useful in establishing the accuracy of various numerical strategies used to
+solve the acoustic problem.
+At this stage the concept of a velocity potential function will be defined. This function
+enables the fluid velocity and pressure fields to be evaluated from one potential function. The
+function is defined by,
+with,
+2.2 Integral Operators
+This work is concerned with various methods of numerical solution by means of boundary
+element methods. Later in this chapter the appropriate integral equations will be derived that
+form the basis of any BEM. The integral operators that will combine to give an integral for-
+mulation of the acoustic problem are introduced in this section and a brief discussion of their
+numerical properties is presented in isolation from the physical problem.
+2.2.1 Green's Function
+In general when a differential equation is transformed into an integral equation, the form of
+the integral equation not only depends on the governing differential equation, but the boundary
+conditions specific to the problem. An integral equation not only relates an unknown function
+page 28
+- ilp) ds=0
+(2.1.13)
+Т ф + к'ф =0,
+(2.1.14)
+i = Пф,
+₽ = iwp.
+(2.1.15)
+
+
+--- Page 28 ---

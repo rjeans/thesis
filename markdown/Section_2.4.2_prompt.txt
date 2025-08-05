@@ -1,0 +1,193 @@
+Convert this individual section from a 1992 LaTeX academic thesis PDF to markdown format.
+
+INDIVIDUAL SECTION INFORMATION:
+- Context: CHAPTER 2. Acoustic Problem
+- Section: 2.4.2 The CHIEF method
+- Processing: individual subsection (pages 37-38)
+- Content Type: Complete subsection with logical boundaries
+
+EXPECTED SECTION STRUCTURE:
+2.4.2 The CHIEF method
+
+CRITICAL CONTENT REQUIREMENTS:
+1. **COMPLETE TEXT TRANSCRIPTION**: Read entire PDF content without missing any text
+   - Include ALL sentences and paragraphs, especially transitional text between sections
+   - Pay attention to continuation text that may appear before section headers
+   - Do NOT skip connector sentences that provide context or bridge between topics
+   - SPECIFICALLY INCLUDE: Any sentences that reference technical methods, formulations, or comparisons
+   - Look for partial sentences or paragraphs that continue from the previous page
+
+2. **INDIVIDUAL SECTION PROCESSING** (COMPLETE_SECTION):
+   - This is a complete subsection from a larger chapter
+   - **CRITICAL HEADING LEVEL**: Use ### for the main section header
+   - Start with: ### 2.4.2 The CHIEF method <a id="section-2-4-2"></a>
+   - Process the complete section content
+
+3. **MATHEMATICAL FORMATTING**:
+   - **CRITICAL**: Inline equations: $variable$ (NOT \(variable\))
+   - **CRITICAL**: Display equations (unnumbered): $$equation$$ (NOT \[equation\])
+   - **CRITICAL**: Display equations (numbered): $$equation \tag{2.5.1}$$ or $$\begin{align*} equation \tag{2.5.1} \end{align*}$$
+   - **CRITICAL**: ALL numbered equations MUST use \tag{} inside the $$ block
+   - **CRITICAL**: NEVER put equation numbers outside $$ like: $$equation$$ (2.5.1)
+   - **CRITICAL**: NEVER use \(variable\) or \[equation\] - these are forbidden
+   - **CRITICAL**: Complex superscripts/subscripts must use braces: $\lambda_N^{{e_p}}$ NOT $\lambda_N^e_p$
+   - Use proper LaTeX notation for mathematical symbols and operators
+
+**EXAMPLES:**
+- Correct inline: The $N_i^k$ operator can be...
+- Wrong inline: The \(N_i^k\) operator can be...
+- Correct display: $$equation content \tag{4.4.1}$$
+- Wrong display: \[equation content\]
+- Correct complex subscript/superscript: $\lambda_N^{{e_p}}$
+- Wrong complex subscript/superscript: $\lambda_N^e_p$
+
+4. **FIGURE FORMATTING**: Use HTML picture element format with correct section-based naming:
+
+<a id="figure-x-y"></a>
+
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="assets/figure-x-y-dark.png">
+  <source media="(prefers-color-scheme: light)" srcset="assets/figure-x-y.png">
+  <img alt="Figure X.Y. Caption text here." src="assets/figure-x-y.png">
+</picture>
+Figure X.Y. Caption text here.
+
+**CRITICAL NAMING**: Use the actual section prefix in figure names:
+- For Chapter 2: figure-2-1.png, figure-2-2.png
+- For Appendix A2: figure-A2-1.png, figure-A2-2.png  
+- For Appendix A1: figure-A1-1.png, figure-A1-2.png
+**Requirements**: Anchor BEFORE picture element, both themes, full alt text, plain caption below
+
+5. **TABLE FORMATTING**:
+   - **CRITICAL**: Convert ALL tables to proper Markdown table format
+   - **PRESERVE ORIGINAL STRUCTURE**: Maintain the exact layout and orientation from the PDF
+   - Add anchor before table: `<a id="table-a2-1"></a>`
+   - Use pipe-separated format with proper alignment:
+     ```
+     <a id="table-2-1"></a>
+     
+     | Column 1 | Column 2 | Column 3 |
+     |----------|----------|----------|
+     | Value 1  | Value 2  | Value 3  |
+     | Value 4  | Value 5  | Value 6  |
+     
+     **Table 2.1**: Caption text describing the table contents
+     ```
+   - **CRITICAL**: If the table has column headers (like n=0, n=1, n=2...), use them as column headers
+   - **CRITICAL**: If the table has row labels, include them in the first column
+   - Preserve all table data accurately, including numerical values and units
+   - Maintain proper column alignment (left, center, right as appropriate)
+   - Include complete table captions below the table
+   - **DO NOT SKIP TABLES** - they contain important data that must be preserved
+   - **DO NOT TRANSPOSE**: Keep rows as rows and columns as columns as shown in the original
+
+6. **ANCHOR GENERATION AND HEADING HIERARCHY**:
+   - **Chapter headers (level 1)**: # Chapter Title <a id="chapter-X"></a>
+   - **Main sections (level 1)**: ## 2.1 Section Title <a id="section-2-1"></a>
+   - **Subsections (level 2)**: ### 2.1.1 Subsection Title <a id="section-2-1-1"></a>
+   - **Sub-subsections (level 3)**: #### 2.1.1.1 Sub-subsection Title <a id="section-2-1-1-1"></a>
+   - **CRITICAL**: Use correct heading depth based on section numbering depth
+   - Figures: <a id="figure-2-1"></a> before figure elements
+   - Equations: <a id="equation-2-1"></a> before equation blocks
+   - Tables: <a id="table-2-1"></a> before table content
+
+7. **CROSS-REFERENCES**:
+   - Figures: [Figure 2.1](#figure-2-1), [Fig. 2.1](#figure-2-1)
+   - Equations: [equation (2.1)](#equation-2-1), [Eq. (2.1)](#equation-2-1)
+   - Tables: [Table 2.1](#table-2-1), [Tab. 2.1](#table-2-1)
+   - Sections: [Section 2.1](#section-2-1), [Sec. 2.1](#section-2-1)
+   - **Literature References**: Convert ALL citation patterns to markdown links:
+     * "Author [Year]" → [Author [Year]](#bib-author-year) e.g., [Jennings [1977]](#bib-jennings-1977)
+     * "Author (Year)" → [Author (Year)](#bib-author-year) e.g., [Smith (1990)](#bib-smith-1990)
+     * "Author et al. [Year]" → [Author et al. [Year]](#bib-author-et-al-year) e.g., [Jones et al. [1985]](#bib-jones-et-al-1985)
+     * "Author and Author [Year]" → [Author and Author [Year]](#bib-author-author-year) e.g., [Burton and Miller [1971]](#bib-burton-miller-1971)
+
+8. **PDF TEXT GUIDANCE**: Use this extracted text to verify accuracy and completeness:
+
+Acoustic Problem.
+The exterior velocity potential is given by Eq. (2.3.16) .
+2.4 Uniqueness of Boundary Integral Formulations
+2.4.1 SHIE and DSHIE formulations
+For given boundary conditions the velocity potential for the exterior problem is unique.
+However it has long been recognized that when expressed in terms of a boundary integral
+formulation the solution to the exterior problem may not be unique. Non-uniqueness of the
+solution occurs at critical wavenumbers kn, and for the acoustic problem these wavenumbers
+correspond to interior resonant frequencies.It needs to be emphasized that this problem of
+non-uniqueness does not imply non-uniqueness of a physical solution, but a breakdown of the
+theoretical formulation at critical frequencies. A numerical implementation of an unmodified
+exterior boundary integral formulation will result in ill-conditioning of the matrices at a range
+of frequencies, centered around the critical frequency.
+The problem of non-uniqueness can be illustrated by considering the exterior Neumann
+problem, Eq. (2.3.11), for a 'smooth surface'. There will be a unique solution as long as there
+are no non-trivial solutions to the homogeneous equation,
+The non-trivial solutions to this equation occur at the eigenvalues kn. By the Fredholm Alter-
+native theorems, the eigenvalue spectrum of this equation is the same as that of the transpose
+The eigenvalues of this equation correspond to the eigenvalues for the unrelated interior Neu-
+mann problem, Eq (2.3.9). Simiarly the critical wavenumbers for the exterior Dirichlet problem
+correspond to the eigenvalues of the interior Dirichlet problem.
+page 37
+0 = 11k + (1 - c(p))|0.
+(2.3.18)
+(2.4.1)
+of,
++ MA) =0.
+(2.4.2)
+
+
+--- Page 37 ---
+
+Acoustic Problem.
+For all but simple boundary geometries it is impossible to predict the values of kn. There-
+fore it is highly desirable to implement a strategy that will eliminate the problem of the ill-
+conditioning of the numerical formulation in the region of critical wavenumbers. Several strate-
+gies have been proposed all of which unfortunately increase the computational burden of the
+problem.
+2.4.2 The CHIEF method
+One of the first methods proposed to remove the problem of non-uniqueness was that of
+Schenck (1968]. In this method the algebraic equations generated from the SHIE are combined
+with additional equations generated from the interior Helmholtz' relationship,
+evaluated at a number of interior points. The resulting overdetermined set of equations can be
+solved by a least squares method.
+There are several problems with this method. When some of the interior points lie on
+nodal surfaces it has been shown that this method may not remove the problem of uniqueness.
+Consequently, at high frequencies when the density of interior nodal surfaces is high, the choice
+of interior nodal position is difficult. Several methods for choosing these nodal points have been
+proposed but this adds to the complexity of the solution. For an arbitrary selection of interior
+points this method cannot be relied on to remove the problem of non-uniqueness.
+2.4.3 Burton and Miller's Formulation
+Burton and Miller proposed (1971] that the problem of uniqueness could be overcome by
+forming a linear combination of the SHIE and DSHIE. This linear combination is given by,
+Burton and Miller demonstrated that for an imaginary coupling constant a, this formulation
+should yield a unique solution for all wavenumbers.
+The disadvantage of this formulation is that the kernel of the Ne operator is highly singular
+and a method needs to be used in order to integrate this operator numerically.
+page 38
+(de (P) - B(P).
+PED,
+(2.4.3)
+(2.4.4)
+
+
+--- Page 38 ---
+
+This text should help you understand the content structure and ensure nothing is missed.
+
+9. **SECTION PROCESSING GUIDELINES**:
+   - Focus on this specific section's content only
+   - Ensure the heading level matches the section numbering depth
+   - Include complete mathematical derivations with explanatory context
+   - Maintain academic writing conventions and technical precision
+   - Preserve figure and table references within section context
+   - **SECTION-AWARE NAMING**: Use the correct section prefix for figures and tables:
+     * For Appendix A2: figure-A2-1.png, table-A2-1, etc.
+     * For Chapter 2: figure-2-1.png, table-2-1, etc.
+   - **HEADING FORMAT**: Include section numbers in subsection headings:
+     * Top-level: "# APPENDIX 2 Analytical Solutions" (no A2 prefix)
+     * Subsections: "## A2.1 Rigid Sphere", "## A2.2 Asymptotic Solutions" (include A2.1, A2.2 prefix)
+   - **FOR PARENT SECTIONS ONLY**: Include introductory text that applies to the whole section, but stop before subsection headings or equations/content tagged with subsection numbers (e.g., stop before equations tagged A2.1.1, A2.1.2, or headings like "A2.1 Rigid Sphere")
+
+**OUTPUT REQUIREMENTS**:
+- Provide clean markdown without code block markers
+- Focus on creating complete, coherent content
+- Skip page headers, footers, or page numbers
+- Maintain academic writing conventions and technical precision

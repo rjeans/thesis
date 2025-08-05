@@ -1,0 +1,101 @@
+Acoustic Problem.
+Using these relationships, the SHIE formulation for the thin shell problem may be written as
+By using the relationships in Eq. (2.5.1) and by setting @(p) = (p+) - d(P), the SHIE
+and DSHIE formulations for the thin shell become,
+The surface domain S is now the surface of one side of the thin shell. Since S has been
+redefined the domains D and E need also to be redefined. The domain D becomes the domain
+whose interface with S contains the points p, and E becomes the domain whose interface with
+S contains the points pt. Both D and E are sub-domains of the exterior domain surrounding
+S. Taking the limit of P to p in Eq. (2.5.3) and Eq. (2.5.4);
+2.5.2 Edge conditions
+When considering thin shells which do not enclose an interior volume it is important to
+consider the behaviour of the integral equations at the edge of this shell. It has been proposed
+in previous work (Warham (1988]) that by taking the limit of P to p in from D and E, results
+in two equations that give a condition on &. However if the limits are taken correctly then,
+page 43
++15 (015) 36618-92
+öng+
+0019) Ga(P. gt)) d5p.
+ang-
+(2.5.2)
+4(P) = MA@(P) + Q(P), PEE,
+do(P) = NA|@(P) + 20. (P)
+PEE.
+(2.5.3)
+(2.5.4)
+с(р) Ф+(Р) + (1 - с(р))Ф-(р) = Мк[®|(P) + Фі(р),
+2фі(р)
+2пр
+PES,
+PES.
+(2.5.5)
+(2.5.6)
+Pip+ MK.®/(P) =Q-(P) = MA@(P) +(1-C+(P)(@+(P) -Q-(P),
+lim. Mk(Ф)(P) =Ф-(p) =Mk[@](P) - (1 - c- (P))(Ф+(р) -Ф-(P)),
+(2.5.7)
+(2.5.8)
+
+
+--- Page 43 ---
+
+Acoustic Problem.
+which leads to the identity,
+This equation simply states the fact that c-(P) = 1 - c+(p) and gives no condition on @. A
+more sophisticated argument is needed to define the edge conditions for the open plate problem.
+When the thickness of the plate is taken to zero the edge around the plate becomes an
+additional boundary. Consequently there needs to be a supplementary boundary condition
+specified on this boundary.In his recent paper Martin (1991) discusses the behaviour of one-
+dimensional hypersingular integral equations over finite intervals and this idea is discussed in
+more detail. This edge boundary condition is arbitrary in the mathematical sense, but for this
+case is governed by the original physical problem. Continuity of the pressure difference across
+the plate means that & must be zero at the edge of the shell;
+p on the edge.
+In past work (eg. Pierce [1987]), this edge boundary condition has been satisfied by the
+choice of appropriate fluid basis functions. In most numerical work for arbitrary thin plates (e.g.
+Terai (1981) and Warham (1988]) the edge boundary condition is essentially ignored since there
+are no nodes on the edge of the plate. In the numerical work described in later chapters, the
+presence of nodes on the edge of the plate means that this boundary condition must be imposed
+upon the numerical formulation.
+page 44
+(c+(p) + c-(p) - 1)Ф(p) = 0.
+(2.5.9)
+® (p) = 0,
+(2.5.10)
+
+
+--- Page 44 ---
+
+Collocation Method.
+CHAPTER 3.
+Collocation Method
+3.1 Introduction
+In this chapter a collocation method is described for the solution of radiation and scattering
+problems for a submerged body of arbitrary geometry. A new way of numerically integrating
+the hyper-singular kernels that occur in the boundary integral formulation is presented, and
+the method is shown to be independent of the interpolation used for the fluid and geometrical
+variables. Results for a selection of scattering and radiation problems show the validity and
+accuracy of the method.
+The problem of uniqueness at critical wavenumbers is circumvented by implementing the
+method of Burton and Miller, described in the previous chapter. High order quadrilateral
+elements are used to interpolate for the acoustic and geometric variables.
+3.2 Discretization
+3.2.1 Interpolation
+A number of connecting elements are defined on the surface domain. The nodal points
+defined by these elements form the set of collocation points at which the boundary integral
+equations are satisfied. Within the elements, the approximate fluid and geometric variables are
+related to the element nodal values in terms of element shape functions. The nodal positions
+of the element are defined in terms of the global Cartesian axes (X,Y,Z), the local Cartesian
+axes, (2,y,z), define the normal and tangential planes at the Gauss integration points and the
+curvilinear axes, (§,n,§) define the element.
+The approximations of global position and fluid variables are given in terms of the elemental
+shape functions and element nodal values by,
+In the definitions above, m represents the number of nodes per element.
+page 45
+* (E, n) = IN(E, n) X1,
+2(8,n) = [N(E, n)21. (3.2.1)
+¢(8, 1) = IN, (8, 1)Ф,
+₴ф(8, n)
+(3.2.2)
+
+
+--- Page 45 ---

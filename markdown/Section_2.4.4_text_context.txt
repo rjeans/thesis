@@ -1,0 +1,73 @@
+Acoustic Problem.
+For all but simple boundary geometries it is impossible to predict the values of kn. There-
+fore it is highly desirable to implement a strategy that will eliminate the problem of the ill-
+conditioning of the numerical formulation in the region of critical wavenumbers. Several strate-
+gies have been proposed all of which unfortunately increase the computational burden of the
+problem.
+2.4.2 The CHIEF method
+One of the first methods proposed to remove the problem of non-uniqueness was that of
+Schenck (1968]. In this method the algebraic equations generated from the SHIE are combined
+with additional equations generated from the interior Helmholtz' relationship,
+evaluated at a number of interior points. The resulting overdetermined set of equations can be
+solved by a least squares method.
+There are several problems with this method. When some of the interior points lie on
+nodal surfaces it has been shown that this method may not remove the problem of uniqueness.
+Consequently, at high frequencies when the density of interior nodal surfaces is high, the choice
+of interior nodal position is difficult. Several methods for choosing these nodal points have been
+proposed but this adds to the complexity of the solution. For an arbitrary selection of interior
+points this method cannot be relied on to remove the problem of non-uniqueness.
+2.4.3 Burton and Miller's Formulation
+Burton and Miller proposed (1971] that the problem of uniqueness could be overcome by
+forming a linear combination of the SHIE and DSHIE. This linear combination is given by,
+Burton and Miller demonstrated that for an imaginary coupling constant a, this formulation
+should yield a unique solution for all wavenumbers.
+The disadvantage of this formulation is that the kernel of the Ne operator is highly singular
+and a method needs to be used in order to integrate this operator numerically.
+page 38
+(de (P) - B(P).
+PED,
+(2.4.3)
+(2.4.4)
+
+
+--- Page 38 ---
+
+Acoustic Problem.
+2.4.4 Boundary layer formulations
+The boundary layer formulations for the exterior acoustic problem also exhibit similar non-
+uniqueness properties at the critical wavenumbers described above. A similar argument to show
+this non-uniqueness to that for the SHIE and DSHIE can be used. However another argument
+is illustrated in figures (2.3) and (2.4). These arguments use the jump properties of the integral
+operators derived in section (1.2.2),
+Single layer:
+Double layer:
+The single layer formulation proves to be non-unique at eigenvalues of the interior Dirichlet
+problem and the double layer formulation proves to be non-unique at eigenvalues of the interior
+Neumann problem.
+2.4.5 Hybrid boundary layer formulation
+The established technique for overcoming the problem of uniqueness in a boundary layer
+formulation is to express the surface velocity potential in terms of a hybrid combination of a
+single and double layer surface distribution. The exterior velocity potential is defined by,
+Consequently the boundary integral equations defining the acoustic problem are,
+If the coupling constant, a is constrained to be imaginary, then the numerical solution of
+this hybrid formulation is unique at all frequencies. Again the disadvantage of this formulation
+is that it requires the integration of the hypersingular kernel in the Ne operator.
+page 39
+- + (1 - c(P))H = M%H H=-до- - c(P)M.
+(2.4.5)
+(2.4.6)
+4+ - (1 - c(p))0=1140=0+c(p)o,
+(2.4.7)
+дф+
+др-
+_= Nko=an
+(2.4.8)
+Ф(P) = [Ck + aMk](2](P),
+РЕЕ.
+(2.4.9)
+0= fLk taMk+ (1-c(P))$0,
+(2.4.10)
+(2.4.11)
+
+
+--- Page 39 ---

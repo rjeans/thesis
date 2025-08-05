@@ -1,0 +1,3 @@
+## 2.2 Integral Operators <a id="section-2-2"></a>
+
+This work is concerned with various methods of numerical solution by means of boundary element methods. Later in this chapter, the appropriate integral equations will be derived that form the basis of any BEM. The integral operators that will combine to give an integral formulation of the acoustic problem are introduced in this section, and a brief discussion of their numerical properties is presented in isolation from the physical problem.
