@@ -8,8 +8,8 @@
 
 <figure id="fig-a2-1">
   <picture>
-    <source media="(prefers-color-scheme: dark)" srcset="assets/figure-a2-1-dark.png">
-    <source media="(prefers-color-scheme: light)" srcset="assets/figure-a2-1.png">
+    <source media="(prefers-color-scheme: dark)" srcset="assets/figure-A2-1-dark.png">
+    <source media="(prefers-color-scheme: light)" srcset="assets/figure-A2-1.png">
     <img 
       src="assets/figure-A2-1.png" 
       alt="Plot of the first four spherical Bessel functions and their derivatives."
