@@ -13,7 +13,7 @@ $$p(r) = \int_S \left( p(r_0) \frac{\partial G_k(r, r_0)}{\partial n_{r_0}} - \o
 where $w$ is the radial displacement. If the coordinate system of the problem allows variable separation of the Green's free space function, then an analytical solution is available. In spherical polar coordinates, the Green's free space function can be written in terms of **spherical Bessel functions and Legendre polynomials**,
 
 $$
-G_k(r, \theta, \phi | r_0, \theta_0, \phi_0) = -\frac{ik}{4\pi} \sum_{n=0}^{\infty} \sum_{m=-n}^{n} \frac{(n-m)!}{(n+m)!} (2n + 1) \cos m(\phi - \phi_0) P_n^m(\cos \theta) P_n^m(\cos \theta_0) j_n(kr_0) h_n(kr), \quad r \geq r_0. \tag{A2.1.2}
+G_k(r, \theta, \phi | r_0, \theta_0, \phi_0) = -\frac{ik}{4\pi} \sum_{n=0}^{\infty} \sum_{m=-n}^{n} \frac{(n-m)!}{(n+m)!} (2n + 1) \cos m(\phi - \phi_0) P_n^m(\cos \theta) P_n^m(\cos \theta_0) j_n(kr_0) h_n(kr), \quad r \geq r_0. 
 $$
 
 The coordinate system $(r, \theta, \phi)$ describes the exterior domain and $(r_0, \theta_0, \phi_0)$ describes the surface of the sphere. For coordinate systems where an analytical solution exists, the Green's function in [Eq. (A2.1.1)](#equation-a2.1.1) can be written as,
