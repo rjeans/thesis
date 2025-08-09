@@ -6,9 +6,7 @@ Throughout this study, the spherical radiator is used to validate the acoustic n
 
 The SHIE for the exterior problem is given by,
 
-$$
-p(r) = \int_S \left( p(r_0) \frac{\partial G_k(r, r_0)}{\partial n_{r_0}} - \omega^2 \rho w G_k(r, r_0) \right) dS_{r_0} \quad r \in E
-$$
+$$p(r) = \int_S \left( p(r_0) \frac{\partial G_k(r, r_0)}{\partial n_{r_0}} - \omega^2 \rho w G_k(r, r_0) \right) dS_{r_0} \quad r \in E$$
 
 *(A2.1.1)*
 
