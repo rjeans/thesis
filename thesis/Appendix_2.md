@@ -18,7 +18,7 @@ $$
 
 The coordinate system $(r, \theta, \phi)$ describes the exterior domain and $(r_0, \theta_0, \phi_0)$ describes the surface of the sphere. For coordinate systems where an analytical solution exists, the Green's function in [Eq. (A2.1.1)](#equation-a2.1.1) can be written as,
 
-$$g(r, r_0) = G_k(r, r_0) + \Gamma(r, r_0), \tag{A2.1.3}$$
+$$g(r, r_0) = G_k(r, r_0) + \Gamma(r, r_0), $$
 
 where $\Gamma$ is a solution to the homogeneous Helmholtz' equation and the normal derivative of $\Gamma$ cancels the normal derivative of $G_k$ on $S$. Consequently, [Eq. (A2.1.1)](#equation-a2.1.1) can be rewritten as,
 
