@@ -97,7 +97,9 @@ $$z_n^- = i \rho c \frac{j_n(ka)}{j_n'(ka)}. \tag{A2.1.13}$$
 
 A comparison of [Eq. (A2.1.11)](#equation-a2.1.11) and [Eq. (A2.1.13)](#equation-a2.1.13) shows that whilst the exterior pressure distribution is composed of a superposition of traveling waves, the interior pressure distribution is a superposition of standing waves. The eigenvalues of the interior spherical problem correspond to the solutions to,
 
-$$z_n^-(k_D) = 0,$$ $\frac{1}{z_n^-(k_N)} = 0. $$ 
+$$z_n^-(k_D) = 0,$$ 
+
+$$\frac{1}{z_n^-(k_N)} = 0. $$ 
 
 The interior eigenvalues for the spherical problem are tabulated in [Table A2.1](#table-a2-1) and the frequency dependence of $j_n$ and $j_n'$ is shown in [Figure A2.1](#figure-a2-1).
 
