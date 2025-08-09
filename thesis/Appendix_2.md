@@ -75,6 +75,19 @@ $$z_n^-(k_D) = 0,$$ $\frac{1}{z_n^-(k_N)} = 0. \tag{A2.1.14}$ The interior eigen
 </picture>
 **Figure A2.1**: Plot of the first four spherical Bessel's functions and the derivatives.
 
+<figure id="fig-a2-1">
+  <picture>
+    <source media="(prefers-color-scheme: dark)" srcset="assets/figure-a2-1-dark.png">
+    <source media="(prefers-color-scheme: light)" srcset="assets/figure-a2-1.png">
+    <img 
+      src="assets/figure-a2-1.png" 
+      alt="Plot of the first four spherical Bessel functions and their derivatives."
+      width="800">
+  </picture>
+  <figcaption><strong>Figure A2.1.</strong> Plot of the first four spherical Bessel functions and their derivatives.</figcaption>
+</figure>
+
+
 <a id="table-a2-1"></a>
 
 | Dirichlet eigenvalues $k_D$ where $j_n((k_D)) = 0$. |
