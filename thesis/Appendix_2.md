@@ -13,7 +13,7 @@
     <img 
       src="assets/figure-A2-1.png" 
       alt="Plot of the first four spherical Bessel functions and their derivatives."
-      width="800">
+      width="400">
   </picture>
   
   **Figure A2.1:** Plot of the first four spherical Bessel functions and their derivatives.
