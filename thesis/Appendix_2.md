@@ -6,7 +6,9 @@ Throughout this study, the spherical radiator is used to validate the acoustic n
 
 The SHIE for the exterior problem is given by,
 
-$$p(r) = \int_S \left( p(r_0) \frac{\partial G_k(r, r_0)}{\partial n_{r_0}} - \omega^2 \rho w G_k(r, r_0) \right) dS_{r_0}, \quad r \in E, \tag{A2.1.1}$$
+$$
+p(r) = \int_S \left( p(r_0) \frac{\partial G_k(r, r_0)}{\partial n_{r_0}} - \omega^2 \rho w G_k(r, r_0) \right) dS_{r_0}, \quad r \in E, \tag{A2.1.1}
+$$
 
 where $w$ is the radial displacement. If the coordinate system of the problem allows variable separation of the Green's free space function, then an analytical solution is available. In spherical polar coordinates, the Green's free space function can be written in terms of **spherical Bessel functions and Legendre polynomials**,
 
