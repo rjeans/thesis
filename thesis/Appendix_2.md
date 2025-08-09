@@ -2,6 +2,23 @@
 
 # Rigid Sphere <a id="section-a2.1"></a>
 
+
+<a id="figure-a2-1"></a>
+
+
+<figure id="fig-a2-1">
+  <picture>
+    <source media="(prefers-color-scheme: dark)" srcset="assets/figure-a2-1-dark.png">
+    <source media="(prefers-color-scheme: light)" srcset="assets/figure-a2-1.png">
+    <img 
+      src="assets/figure-A2-1.png" 
+      alt="Plot of the first four spherical Bessel functions and their derivatives."
+      width="800">
+  </picture>
+  <figcaption><strong>Figure A2.1.</strong> Plot of the first four spherical Bessel functions and their derivatives.</figcaption>
+</figure>
+
+
 Throughout this study, the spherical radiator is used to validate the acoustic numerical methods since an analytical solution for the spherical problem is easily available. These results are covered in great depth by [Junger and Feit [1986]](#bib-junger-feit-1986), and they are summarized in this appendix.
 
 The SHIE for the exterior problem is given by,
@@ -66,20 +83,6 @@ A comparison of [Eq. (A2.1.11)](#equation-a2.1.11) and [Eq. (A2.1.13)](#equation
 
 $$z_n^-(k_D) = 0,$$ $\frac{1}{z_n^-(k_N)} = 0. \tag{A2.1.14}$ The interior eigenvalues for the spherical problem are tabulated in [Table A2.1](#table-a2-1) and the frequency dependence of $j_n$ and $j_n'$ is shown in [Figure A2.1](#figure-a2-1).
 
-<a id="figure-a2-1"></a>
-
-
-<figure id="fig-a2-1">
-  <picture>
-    <source media="(prefers-color-scheme: dark)" srcset="assets/figure-a2-1-dark.png">
-    <source media="(prefers-color-scheme: light)" srcset="assets/figure-a2-1.png">
-    <img 
-      src="assets/figure-A2-1.png" 
-      alt="Plot of the first four spherical Bessel functions and their derivatives."
-      width="800">
-  </picture>
-  <figcaption><strong>Figure A2.1.</strong> Plot of the first four spherical Bessel functions and their derivatives.</figcaption>
-</figure>
 
 
 <a id="table-a2-1"></a>
