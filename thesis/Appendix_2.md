@@ -74,7 +74,7 @@ $$z_n^-(k_D) = 0,$$ $\frac{1}{z_n^-(k_N)} = 0. \tag{A2.1.14}$ The interior eigen
     <source media="(prefers-color-scheme: dark)" srcset="assets/figure-a2-1-dark.png">
     <source media="(prefers-color-scheme: light)" srcset="assets/figure-a2-1.png">
     <img 
-      src="assets/figure-a2-1.png" 
+      src="assets/figure-A2-1.png" 
       alt="Plot of the first four spherical Bessel functions and their derivatives."
       width="800">
   </picture>
