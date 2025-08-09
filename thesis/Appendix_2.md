@@ -15,7 +15,8 @@
       alt="Plot of the first four spherical Bessel functions and their derivatives."
       width="800">
   </picture>
-  <figcaption><strong>Figure A2.1.</strong> Plot of the first four spherical Bessel functions and their derivatives.</figcaption>
+  
+  **Figure A2.1:** Plot of the first four spherical Bessel functions and their derivatives.
 </figure>
 
 
